@@ -1,0 +1,56 @@
+package com.stanford.guatemedic;
+
+public class UploadChildVisit {
+	
+	private boolean mUploaded;
+	private String mVisit_id;
+	private String mTemp_child_id;
+	private String mChild_id;
+	private String mData;
+	
+	public UploadChildVisit() {
+		mUploaded = false;
+	}
+	
+	public void setData(String data) {
+		mData = data;
+	}
+	
+	public String getData() {
+		return mData;
+	}
+	
+	public void setUploaded(boolean uploaded) {
+		mUploaded = uploaded;
+	}
+	
+	public boolean isUploaded() {
+		return mUploaded;
+	}
+	
+	public void setVisitId(String visit_id) {
+		mVisit_id = visit_id;
+	}
+	
+	public String getVisitId() {
+		return mVisit_id;
+	}
+	
+	public void setTempChildId(String temp_child_id) {
+		mTemp_child_id = temp_child_id;
+	}
+	
+	public String getTempChildId() {
+		return mTemp_child_id;
+	}
+	
+	public void setChildId(String child_id) {
+		mChild_id = child_id;
+	}
+	
+	public String getChildId() {
+		return mChild_id;
+	}
+	
+
+}

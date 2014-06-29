@@ -1,0 +1,31 @@
+package com.example.guatemedic;
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+public class AddFamilyFragment extends Fragment {
+	
+	String village;
+	
+	public static AddFamilyFragment newInstance(int index) {
+	    AddFamilyFragment f = new AddFamilyFragment();
+	    // Supply index input as an argument.
+	    Bundle args = new Bundle();
+	    args.putInt("index", index);
+	    f.setArguments(args);
+	    return f;
+	}
+
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		//Inflate the layout for this fragment
+		View v = inflater.inflate(R.layout.add_family_fragment, container, false);
+		TextView tv = (TextView)v.findViewById(R.id.add_family_header);
+		tv.setText(village);
+		return v;
+	}
+
+}

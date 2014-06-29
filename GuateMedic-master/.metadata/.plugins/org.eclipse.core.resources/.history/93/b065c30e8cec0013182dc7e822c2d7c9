@@ -1,0 +1,39 @@
+package com.stanford.guatemedic;
+
+import java.util.ArrayList;
+
+public class Village {
+	
+	private String mName; //This is the key
+	private ArrayList<String> mFamilies; //This is a list of the Family IDs
+	private boolean mCheckboxSelected;
+
+	public Village() {
+		mCheckboxSelected = false;
+	}
+
+	public String getName() {
+		return mName;
+	}
+
+	public void setName(String name) {
+		mName = name;
+	}
+
+	public ArrayList<String> getFamilies() {
+		return mFamilies;
+	}
+
+	public void setFamilies(ArrayList<String> families) {
+		mFamilies = families;
+	}
+	
+	public boolean isCheckboxSelected() {
+		return mCheckboxSelected;
+	}
+
+	public void setCheckboxSelected(boolean checkboxSelected) {
+		mCheckboxSelected = checkboxSelected;
+	}
+
+}

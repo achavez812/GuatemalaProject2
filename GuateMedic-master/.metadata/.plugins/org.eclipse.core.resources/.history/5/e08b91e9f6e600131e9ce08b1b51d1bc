@@ -1,0 +1,54 @@
+package com.example.guatemedic;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+
+import android.content.Context;
+
+public class GuatemedicWriter {
+	
+	private Context mContext;
+	
+	public GuatemedicWriter(Context c) {
+		mContext = c;
+	}
+	
+	//Generates a unique filename by using timestamp and random number generator
+	//Timestamp of file is found by ignoring last 6 characters of String
+	private String generateFilename() {
+		Long tsLong = System.currentTimeMillis()/1000;
+		String ts = tsLong.toString();
+		
+		int min = 100000;
+		int max = 999999;
+		int randomNum = (int) (min + (Math.random() * (max - min)));
+		
+		return ts + randomNum; 
+	}
+	
+	
+	public void saveDownloadedRecords(String data) {
+		Writer writer = null;
+		try {			
+			Log.i("WTF", "Writing data : " + data);
+			String filename = "Downloads" + generateFilename();
+			OutputStream out = mContext.openFileOutput(filename, Context.MODE_PRIVATE);
+			writer = new OutputStreamWriter(out);
+			writer.write(data);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (writer != null)
+				try {
+					writer.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
+	}
+	
+}

@@ -1,0 +1,11 @@
+package com.example.guatemedic;
+
+public class UploadFamily {
+	
+	boolean uploaded;
+	String temp_family_id;
+	String family_id;
+	ArrayList<String> child_ids;
+	ArrayList<String> visit_ids;
+
+}

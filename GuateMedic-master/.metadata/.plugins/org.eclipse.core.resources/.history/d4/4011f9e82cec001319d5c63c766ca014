@@ -1,0 +1,77 @@
+package com.example.guatemedic;
+
+import java.util.UUID;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+public class AddFamilyFragment extends Fragment {
+	
+	String village;
+	
+	public AddFamilyFragment() {
+		village = DetailedRecordsStore.get(getActivity()).getAddVillage();
+	}
+	
+	
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		//Inflate the layout for this fragment
+		View v = inflater.inflate(R.layout.add_family_fragment, container, false);
+		TextView tv = (TextView)v.findViewById(R.id.add_family_header);
+		tv.setText(village);
+		
+		Button b = (Button)v.findViewById(R.id.make_family_button);
+		b.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				EditText parent1_first_name = (EditText)getActivity().findViewById(R.id.parent1_first_name);
+				EditText parent1_middle_name = (EditText)getActivity().findViewById(R.id.parent1_middle_name);
+				EditText parent1_last_name = (EditText)getActivity().findViewById(R.id.parent1_last_name);
+				EditText parent1_dob = (EditText)getActivity().findViewById(R.id.parent1_dob);
+				
+				EditText parent2_first_name = (EditText)getActivity().findViewById(R.id.parent2_first_name);
+				EditText parent2_middle_name = (EditText)getActivity().findViewById(R.id.parent2_middle_name);
+				EditText parent2_last_name = (EditText)getActivity().findViewById(R.id.parent2_last_name);
+				EditText parent2_dob = (EditText)getActivity().findViewById(R.id.parent2_dob);
+				try {
+					JSONObject obj = new JSONObject();
+					obj.put("village", village);
+					obj.put("parent1_first_name", parent1_first_name.toString());
+					obj.put("parent1_middle_name", parent1_middle_name.toString());
+					obj.put("parent1_last_name", parent1_last_name.toString());
+					obj.put("parent1_dob", parent1_dob);
+					obj.put("parent2_first_name", parent2_first_name.toString());
+					obj.put("parent2_middle_name", parent2_middle_name.toString());
+					obj.put("parent2_last_name", parent2_last_name.toString());
+					obj.put("parent2_dob", parent2_dob);
+					
+					String id = UUID.randomUUID().toString();
+					
+					obj.put("family_id", id);
+					obj.put("temp_family_id", id);
+					obj.put("uploaded", "0");
+					
+					GuatemedicWriter gw = new GuatemedicWriter(getActivity());
+					
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+				
+				//Need to write to file
+				//
+
+			}
+		});
+		return v;
+	}
+
+}

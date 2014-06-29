@@ -1,0 +1,36 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="20dp" >
+    
+    <TextView 
+        android:id="@+id/main_page_textview"
+        android:textSize="30sp"
+        android:layout_marginBottom="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome Promoter" />
+    
+    <Button
+        android:id="@+id/main_view_button"
+        android:textSize="30sp"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp"
+        android:layout_marginBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+		android:text="VIEW" />
+    
+    <Button
+        android:id="@+id/main_download_button"
+        android:textSize="30sp"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="DOWNLOAD" />
+
+</LinearLayout>

@@ -1,0 +1,86 @@
+package com.example.guatemedic;
+
+import java.util.ArrayList;
+
+public class UploadChild {
+	
+	boolean mUploaded;
+	String mTemp_child_id;
+	String mChild_id;
+	String mTemp_family_id;
+	String mFamily_id;
+	ArrayList<String> mVisit_ids;
+	ArrayList<String> mModification_ids;
+	String mData;
+	
+	public UploadChild() {
+		mUploaded = false;
+	}
+	
+	public void setData(String data) {
+		mData = data;
+	}
+	
+	public String getData() {
+		return mData;
+	}
+	
+	public void setUploaded(boolean uploaded) {
+		mUploaded = uploaded;
+	}
+	
+	public boolean isUploaded() {
+		return mUploaded;
+	}
+	
+	public void setTempChildId(String temp_child_id) {
+		mTemp_child_id = temp_child_id;
+	}
+	
+	public String getTempChildId() {
+		return mTemp_child_id;
+	}
+	
+	public void setChildId(String child_id) {
+		mChild_id = child_id;
+	}
+	
+	public String getChildId() {
+		return mChild_id;
+	}
+	
+	public void setTempFamilyId(String temp_family_id) {
+		mTemp_family_id = temp_family_id;
+	}
+	
+	public String getTempFamilyId() {
+		return mTemp_family_id;
+	}
+	
+	public void setFamilyId(String family_id) {
+		mFamily_id = family_id;
+	}
+	
+	public String getFamilyId() {
+		return mFamily_id;
+	}
+	
+	public void setVisitIds(ArrayList<String> visit_ids) {
+		mVisit_ids = visit_ids;
+	}
+	
+	public ArrayList<String> getVisitIds() {
+		return mVisit_ids;
+	}
+	
+	public void setModificationIds(ArrayList<String> modification_ids) {
+		mModification_ids = modification_ids;
+	}
+	
+	public ArrayList<String> getModificationIds() {
+		return mVisit_ids;
+	}
+
+	
+
+}

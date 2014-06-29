@@ -1,0 +1,93 @@
+package com.example.guatemedic;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+
+import android.content.Context;
+
+public class GuatemedicWriter {
+	
+	public final String download_prefix = "Downloads";
+	public final String newFamily_prefix = "NewFamily";
+	public final String newChild_prefix = "NewChild";
+	public final String newFamilyVisit_prefix = "NewFamilyVisit";
+	public final String newChildVisit_prefix = "NewChildVist";
+	public final String newVisit_prefix = "NewVisit";
+	public final String newFamilyModification_prefix = "NewFamilyModification";
+	public final String newChildModification_prefix = "NewChildModification";
+	
+	private Context mContext;
+	
+	public GuatemedicWriter(Context c) {
+		mContext = c;
+	}
+	
+	//Generates a unique filename by using timestamp and random number generator
+	//Timestamp of file is found by ignoring last 6 characters of String
+	private String generateFilename() {
+		Long tsLong = System.currentTimeMillis()/1000;
+		String ts = tsLong.toString();
+		
+		int min = 100000;
+		int max = 999999;
+		int randomNum = (int) (min + (Math.random() * (max - min)));
+		
+		return ts + randomNum; 
+	}
+	
+	public void saveData(String prefix, String data) {
+		Writer writer = null;
+		try {			
+			String filename = prefix + generateFilename();
+			OutputStream out = mContext.openFileOutput(filename, Context.MODE_PRIVATE);
+			writer = new OutputStreamWriter(out);
+			writer.write(data);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (writer != null) {
+				try {
+					writer.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} 
+		}
+	}
+	
+	
+	public void saveDownloadedRecords(String data) {
+		saveData(download_prefix, data);	
+		DetailedRecordsStore.update(mContext); //Updates database
+	}
+	
+	//ALL OF THESE NEED TO UPDATE DetailedRecordsStore
+	//Could just include all this in update call for now
+	//More efficient to make specific ones though
+	
+	public void saveNewFamily(String data) {
+		saveData(newFamily_prefix, data);
+	}
+	
+	public void saveNewChild(String data) {
+		saveData(newChild_prefix, data);
+	}
+	
+	public void saveNewFamilyVisit(String data) {
+		saveData(newFamilyVisit_prefix, data);
+	}
+	
+	public void saveNewChildVisit(String data) {
+		saveData(newChildVisit_prefix, data);
+	}
+	
+	public void saveModification(String data) {
+		saveData(newModification_prefix, data);
+	}
+	
+	
+}

@@ -1,0 +1,158 @@
+package com.example.guatemedic;
+
+import java.util.ArrayList;
+
+public class DetailedFamily {
+	//Basic Info
+	private String mId; //This is the key
+	private String mTemp_id;
+	private String mVillage;
+	private String mParent1_first_name;
+	private String mParent1_middle_name;
+	private String mParent1_last_name;
+	private ArrayList<String> mChildren;
+	
+	//Extended Info
+	private String mParent1_date_of_birth;
+	private String mParent2_first_name;
+	private String mParent2_middle_name;
+	private String mParent2_last_name;
+	private String mParent2_date_of_birth;
+	private String mLast_visit_date;
+	private String mDate_created;
+	private String mDate_last_modified;
+	
+	private ArrayList<FamilyVisit> mFamilyVisits;
+		
+	public DetailedFamily() {
+	}
+
+	public String getId() {
+		return mId;
+	}
+
+	public void setId(String id) {
+		mId = id;
+	}
+	
+	public String getTempId() {
+		return mTemp_id;
+	}
+	
+	
+
+	public String getVillage() {
+		return mVillage;
+	}
+
+	public void setVillage(String village) {
+		mVillage = village;
+	}
+
+	public String getParent1_first_name() {
+		return mParent1_first_name;
+	}
+
+	public void setParent1_first_name(String parent1_first_name) {
+		mParent1_first_name = parent1_first_name;
+	}
+
+	public String getParent1_middle_name() {
+		return mParent1_middle_name;
+	}
+
+	public void setParent1_middle_name(String parent1_middle_name) {
+		mParent1_middle_name = parent1_middle_name;
+	}
+
+	public String getParent1_last_name() {
+		return mParent1_last_name;
+	}
+
+	public void setParent1_last_name(String parent1_last_name) {
+		mParent1_last_name = parent1_last_name;
+	}
+
+	public ArrayList<String> getChildren() {
+		return mChildren;
+	}
+
+	public void setChildren(ArrayList<String> children) {
+		mChildren = children;
+	}
+
+	public String getParent1_date_of_birth() {
+		return mParent1_date_of_birth;
+	}
+
+	public void setParent1_date_of_birth(String parent1_date_of_birth) {
+		mParent1_date_of_birth = parent1_date_of_birth;
+	}
+
+	public String getParent2_first_name() {
+		return mParent2_first_name;
+	}
+
+	public void setParent2_first_name(String parent2_first_name) {
+		mParent2_first_name = parent2_first_name;
+	}
+
+	public String getParent2_middle_name() {
+		return mParent2_middle_name;
+	}
+
+	public void setParent2_middle_name(String parent2_middle_name) {
+		mParent2_middle_name = parent2_middle_name;
+	}
+
+	public String getParent2_last_name() {
+		return mParent2_last_name;
+	}
+
+	public void setParent2_last_name(String parent2_last_name) {
+		mParent2_last_name = parent2_last_name;
+	}
+
+	public String getParent2_date_of_birth() {
+		return mParent2_date_of_birth;
+	}
+
+	public void setParent2_date_of_birth(String parent2_date_of_birth) {
+		mParent2_date_of_birth = parent2_date_of_birth;
+	}
+
+	public String getLast_visit_date() {
+		return mLast_visit_date;
+	}
+
+	public void setLast_visit_date(String last_visit_date) {
+		mLast_visit_date = last_visit_date;
+	}
+
+	public ArrayList<FamilyVisit> getFamilyVisits() {
+		return mFamilyVisits;
+	}
+
+	public void setFamilyVisits(ArrayList<FamilyVisit> familyVisits) {
+		mFamilyVisits = familyVisits;
+	}
+
+	public String getDate_created() {
+		return mDate_created;
+	}
+
+	public void setDate_created(String date_created) {
+		mDate_created = date_created;
+	}
+
+	public String getDate_last_modified() {
+		return mDate_last_modified;
+	}
+
+	public void setDate_last_modified(String date_last_modified) {
+		mDate_last_modified = date_last_modified;
+	}
+	
+	
+
+}

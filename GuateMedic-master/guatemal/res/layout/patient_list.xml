@@ -1,0 +1,26 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#FFFFFF" >
+
+    <EditText
+        android:id="@+id/view_patient_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:hint="Enter Patient Name"
+        android:drawableRight="@drawable/ic_action_search"
+        />
+
+ 
+
+    <ListView
+        android:id="@+id/patient_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_below="@+id/view_patient_name"
+        android:scrollbars="none">
+     </ListView>
+
+</RelativeLayout>

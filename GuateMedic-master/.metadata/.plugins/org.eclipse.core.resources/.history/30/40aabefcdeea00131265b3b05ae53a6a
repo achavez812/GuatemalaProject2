@@ -1,0 +1,159 @@
+package com.example.guatemedic;
+
+import java.util.ArrayList;
+
+public class DetailedChild {
+	//Basic Info
+	private String mId; //This is the key
+	private String mFamilyId;
+	private String mFirst_name;
+	private String mMiddle_name;
+	private String mLast_name;
+	
+	//Extended Info
+	private String mGender; // 0=Female, 1=Male
+	private String mDate_of_birth; //This will be a timestamp format
+	private Double mMonths_gestated;
+	private String mType_of_birth; 
+	private String mPrenatal_control;
+	private Double mBirth_weight; //Kilograms?
+	private Double mZ_score;
+	private String mLast_visit_date;
+	private String mDate_created;
+	private String mDate_last_modified;
+	
+	private ArrayList<ChildVisit> mChildVisits;
+		
+	public DetailedChild() {
+	}
+
+	public String getId() {
+		return mId;
+	}
+
+	public void setId(String id) {
+		mId = id;
+	}
+
+	public String getFamilyId() {
+		return mFamilyId;
+	}
+
+	public void setFamilyId(String familyId) {
+		mFamilyId = familyId;
+	}
+
+	public String getFirst_name() {
+		return mFirst_name;
+	}
+
+	public void setFirst_name(String first_name) {
+		mFirst_name = first_name;
+	}
+
+	public String getMiddle_name() {
+		return mMiddle_name;
+	}
+
+	public void setMiddle_name(String middle_name) {
+		mMiddle_name = middle_name;
+	}
+
+	public String getLast_name() {
+		return mLast_name;
+	}
+
+	public void setLast_name(String last_name) {
+		mLast_name = last_name;
+	}
+
+	public String getGender() {
+		return mGender;
+	}
+
+	public void setGender(String gender) {
+		mGender = gender;
+	}
+
+	public String getDate_of_birth() {
+		return mDate_of_birth;
+	}
+
+	public void setDate_of_birth(String date_of_birth) {
+		mDate_of_birth = date_of_birth;
+	}
+
+	public Double getMonths_gestated() {
+		return mMonths_gestated;
+	}
+
+	public void setMonths_gestated(Double months_gestated) {
+		mMonths_gestated = months_gestated;
+	}
+
+	public String getType_of_birth() {
+		return mType_of_birth;
+	}
+
+	public void setType_of_birth(String type_of_birth) {
+		mType_of_birth = type_of_birth;
+	}
+
+	public String getPrenatal_control() {
+		return mPrenatal_control;
+	}
+
+	public void setPrenatal_control(String prenatal_control) {
+		mPrenatal_control = prenatal_control;
+	}
+
+	public Double getBirth_weight() {
+		return mBirth_weight;
+	}
+
+	public void setBirth_weight(Double birth_weight) {
+		mBirth_weight = birth_weight;
+	}
+
+	public Double getZ_score() {
+		return mZ_score;
+	}
+
+	public void setZ_score(Double z_score) {
+		mZ_score = z_score;
+	}
+
+	public String getLast_visit_date() {
+		return mLast_visit_date;
+	}
+
+	public void setLast_visit_date(String last_visit_date) {
+		mLast_visit_date = last_visit_date;
+	}
+
+	public ArrayList<ChildVisit> getChildVisits() {
+		return mChildVisits;
+	}
+
+	public void setChildVisits(ArrayList<ChildVisit> childVisits) {
+		mChildVisits = childVisits;
+	}
+
+	public String getDate_created() {
+		return mDate_created;
+	}
+
+	public void setDate_created(String date_created) {
+		mDate_created = date_created;
+	}
+
+	public String getDate_last_modified() {
+		return mDate_last_modified;
+	}
+
+	public void setDate_last_modified(String date_last_modified) {
+		mDate_last_modified = date_last_modified;
+	}
+	
+
+}

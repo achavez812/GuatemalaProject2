@@ -1,0 +1,176 @@
+package com.stanford.guatemedic;
+
+import java.io.FileOutputStream;
+
+import android.app.ActionBar;
+import android.app.ActionBar.Tab;
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.ImageView;
+
+public class ChildRecordForm extends Activity {
+	private static final int NEW_IMG_REQUEST = 1888;
+	private static final String CHILD_RECORD = "CHILD_RECORD";
+	String childID;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_survey_form);
+		childID = getIntent().getStringExtra("childID");
+		DetailedChild child = DetailedRecordsStore.get(getApplication()).getChild(childID);
+		if (child  == null) {
+			Log.i("WTF", childID);
+		}
+		String childName = child.getFirst_name();
+		// ActionBar
+		ActionBar actionbar = getActionBar();
+		actionbar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+		// create new tabs and set up the titles of the tabs
+		ActionBar.Tab mProfile = actionbar.newTab().setText("Profile");
+		ActionBar.Tab mFamily = actionbar.newTab().setText("Family");
+		ActionBar.Tab mVisitHistory = actionbar.newTab().setText("Visit History");
+
+
+		// create the fragments
+		Fragment mProfileFragment = ProfileFragment.newInstance(childID); //Altered by Alejandro Chavez (NOT SURE IF RIGHT)
+		Fragment mFamilyFragment = new FamilyInformationFragment();
+		Fragment mVisitHistoryFragment = new VisitHistoryFragment();
+
+		//		MenuItem submitButton = (MenuItem) findViewById(R.id.submit_button_activity);
+		// bind the fragments to the tabs - set up tabListeners for each tab
+		mProfile.setTabListener(new MyTabsListener(mProfileFragment,
+				getApplicationContext()));
+
+		mFamily.setTabListener(new MyTabsListener(mFamilyFragment,
+				getApplicationContext()));
+
+		mVisitHistory.setTabListener(new MyTabsListener(mVisitHistoryFragment,
+				getApplicationContext()));
+
+
+		// add the tabs to the action bar
+		actionbar.addTab(mProfile);
+		actionbar.addTab(mFamily);
+		actionbar.addTab(mVisitHistory);
+
+		//actionbar.addTab(mVisits);
+
+		//actionbar.addTab(mFamily);
+	}
+	
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.survey_form, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+		if (id == R.id.action_new_visit_survey) {
+			Intent intent = new Intent(this, TakeSurvey.class);
+			intent.putExtra("childID",childID);
+			startActivity(intent);
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+	
+	public void supplementsClicked(View v){
+		CheckBox cb1 = (CheckBox) findViewById(R.id.checkBox_ReceivingFood);
+		CheckBox cb2 = (CheckBox) findViewById(R.id.checkBox_ReceivingSupplements);
+		EditText why_supplements = (EditText) findViewById(R.id.editText_why_supplements);
+		if (cb1.isChecked() || cb2.isChecked()){
+			why_supplements.setVisibility(View.VISIBLE);
+		}else{
+			why_supplements.setVisibility(View.INVISIBLE);
+		}
+	}
+	public void vaccinationsClicked(View v){
+		CheckBox cb = (CheckBox) v;
+		EditText vaccinations_edittext = (EditText) findViewById(R.id.editText_vaccinations);
+		if (cb.isChecked()){
+			vaccinations_edittext.setVisibility(View.VISIBLE);
+		}else{
+			vaccinations_edittext.setVisibility(View.INVISIBLE);
+		}
+
+	}
+
+
+	/* CALLBACK FUNCTIONS */
+	public void takePicture(View v){
+		Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		startActivityForResult(takePictureIntent, NEW_IMG_REQUEST);
+	}
+	
+
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == NEW_IMG_REQUEST && resultCode == RESULT_OK) { 
+			Log.d(CHILD_RECORD, "Photo result processing");
+			Bitmap photo = (Bitmap) data.getExtras().get("data"); 
+
+			ImageView iv = (ImageView) findViewById(R.id.ImageView_kid_picture);
+			iv.setImageBitmap(photo);
+			
+			try{
+				
+				FileOutputStream outputStream = openFileOutput("photo_"+childID+".png", Context.MODE_PRIVATE);
+				photo.compress(Bitmap.CompressFormat.PNG, 90, outputStream);
+				outputStream.flush();
+				outputStream.close();
+				Log.d(CHILD_RECORD, "Saved.");
+			}catch (Exception e){
+				Log.e(CHILD_RECORD, "error while saving file: " + e.getMessage());
+			}
+		}  
+	} 
+
+
+	static class MyTabsListener implements ActionBar.TabListener {
+		public Fragment fragment;
+		public Context context;
+
+		public MyTabsListener(Fragment fragment, Context context) {
+			this.fragment = fragment;
+			this.context = context;
+		}
+
+		@Override
+		public void onTabReselected(Tab tab, FragmentTransaction ft) {
+
+		}
+
+		@Override
+		public void onTabSelected(Tab tab, FragmentTransaction ft) {
+			ft.replace(R.id.survey_tab_container, fragment);
+		}
+
+		@Override
+		public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+			ft.remove(fragment);
+		}
+
+	}
+
+
+}

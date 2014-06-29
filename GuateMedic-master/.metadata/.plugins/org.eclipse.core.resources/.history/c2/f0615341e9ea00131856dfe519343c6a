@@ -1,0 +1,7 @@
+package com.example.guatemedic;
+
+public class UploadFamilyVisit {
+	
+	private boolean mUploaded;
+	private String mVisit_id;
+}

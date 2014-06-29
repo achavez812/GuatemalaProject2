@@ -1,0 +1,13 @@
+package com.example.guatemedic;
+
+import android.support.v4.app.Fragment;
+
+public class AddFamilyActivity extends SingleFragmentActivity {
+	
+	@Override
+	protected Fragment createFragment() {
+		String village = getIntent().getStringExtra("village");
+		return new SelectDataFragment(village);
+	}
+
+}

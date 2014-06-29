@@ -1,0 +1,13 @@
+package com.example.guatemedic;
+
+import android.support.v4.app.Fragment;
+
+public class AddChildFragment extends Fragment{
+	
+	String family;
+	
+	public AddChildFragment() {
+		family = DetailedRecordsStore.get(getActivity()).getAddFamily();
+	}
+
+}

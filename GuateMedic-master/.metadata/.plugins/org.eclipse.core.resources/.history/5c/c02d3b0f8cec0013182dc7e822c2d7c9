@@ -1,0 +1,18 @@
+package com.stanford.guatemedic;
+
+import android.support.v4.app.Fragment;
+import android.util.Log;
+
+public class SelectDataActivity extends SelectDataSingleFragmentActivity {
+	
+	@Override
+	protected Fragment createFragment() {
+		Fragment villageList = new SelectVillageListFragment();
+		villageList.setHasOptionsMenu(true);
+		return villageList;
+	}
+	
+	
+
+
+}

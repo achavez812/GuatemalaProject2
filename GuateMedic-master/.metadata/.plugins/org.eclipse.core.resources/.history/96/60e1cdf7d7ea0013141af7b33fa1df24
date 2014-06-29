@@ -1,0 +1,181 @@
+package com.example.guatemedic;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.content.Context;
+import android.os.AsyncTask;
+import android.util.Log;
+
+
+public class BasicRecordsStore {
+		
+	private ArrayList<Village> mVillages; //An array of all the villages
+	private Map<String, ArrayList<BasicFamily>> mFamilies; //A mapping from village name to an array of the families in that village
+	private Map<Integer, ArrayList<BasicChild>> mChildren; //A mapping from the family_id to an array of all the children in that family
+	private String mAuthKey;
+	
+	private static BasicRecordsStore sBasicRecordsStore;
+	private Context mAppContext;
+	
+	private BasicRecordsStore(Context appContext) {
+		mAppContext = appContext;
+		mVillages = new ArrayList<Village>();
+		mFamilies = new HashMap<String, ArrayList<BasicFamily>>(); //The String key is the village name
+		mChildren = new HashMap<Integer, ArrayList<BasicChild>>(); //The Integer key is the family id
+
+	}
+	
+	//This is what actually performs GET http request
+	//must be called after calling get() and setAuthKey()
+	//HOW TO HANDLE THIS??
+	//CURRENTLY WILL NOT UPDATE DATA UNTIL APP IS QUIT AND THEY LOGIN AGAIN
+	//SHOULD I RELOAD DATA EVERYTIME (Just get rid of if and set objects to be empty)
+	public void setData() {
+		if (mVillages.isEmpty()) {
+			try {
+				new FetchRecordsTask().execute().get();
+			} catch (InterruptedException | ExecutionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+		}
+	}
+	
+	public static BasicRecordsStore get(Context c) {
+		if (sBasicRecordsStore == null) {
+			sBasicRecordsStore = new BasicRecordsStore(c.getApplicationContext());
+		}
+		return sBasicRecordsStore;
+	}
+	
+	public ArrayList<Village> getVillages() {
+		return mVillages;
+	}
+	
+	public Village getVillage(String name) {
+		for (Village v : mVillages) {
+			if (v.getName().equals(name))
+				return v;
+		}
+		return null;
+	}
+	
+	public ArrayList<BasicFamily> getFamilies(String villageName) {
+		return mFamilies.get(villageName);
+	}
+	
+	public BasicFamily getFamily(UUID id) {
+		for (String key : mFamilies.keySet()) {
+			for (BasicFamily f : mFamilies.get(key)) {
+				if (f.getId() == id) 
+					return f;
+			}
+		}
+		return null;
+	}
+	
+	//Fix
+	public ArrayList<BasicChild> getChildren(Integer familyId) {
+		return mChildren.get(familyId);
+	}
+	
+	public void setAuthKey(String str) {
+		mAuthKey = str;
+	}
+	
+	public String getAuthKey() {
+		return mAuthKey;
+	}
+	
+	private class FetchRecordsTask extends AsyncTask<Void, Void, Void> {
+		@Override
+		protected Void doInBackground(Void... params) {
+			try {
+				Map<String,String> headerMap = new HashMap<String, String>();
+				headerMap.put("Authorization", mAuthKey);
+				String result = new HttpGetRequest().getUrl("https://guatemedic.herokuapp.com/profiles", headerMap);
+				JSONArray theVillages = new JSONArray(result); //Data as an array of village objects
+				//Iterating over each village
+				for (int i = 0; i < theVillages.length(); i++) {
+					Village village = new Village(); //Creates a new instance of the Village class
+					
+					JSONObject aVillage = theVillages.getJSONObject(i); //Data for a specific village object
+					
+					String villageName = aVillage.getString("city"); //THIS SHOULD BE CHANGED TO VILLAGE IN DB
+					village.setName(villageName);
+					
+					JSONArray theFamilies = aVillage.getJSONArray("families"); //Data for specific village as an array of family objects
+					ArrayList<BasicFamily> familyArray = new ArrayList<BasicFamily>(); //Array of Family instances for mFamilies Map
+					ArrayList<Integer> familyIDs = new ArrayList<Integer>(); //Array of family_id Integers for Village instance
+					for (int j = 0; j < theFamilies.length(); j++) {
+						JSONObject aFamily = theFamilies.getJSONObject(j); //Data for a specific family object
+						
+						BasicFamily family = new BasicFamily();
+						family.setVillage(villageName); //Required field
+						int family_id = Integer.parseInt(aFamily.getString("family_id"));
+						family.setId(family_id); //Required field
+						if (aFamily.has("parent1_first_name"))
+							family.setParent1_first_name(aFamily.getString("parent1_first_name"));
+						if (aFamily.has("parent1_middle_name"))
+							family.setParent1_middle_name(aFamily.getString("parent1_middle_name"));
+						if (aFamily.has("parent1_last_name"))
+							family.setParent1_last_name(aFamily.getString("parent1_last_name"));
+						
+						familyIDs.add(family_id);
+						
+						JSONArray theChildren = aFamily.getJSONArray("children"); //Data for specific family as an array of child objects
+						ArrayList<BasicChild> childArray = new ArrayList<BasicChild>(); //Array of Child instances for mChildren map
+						ArrayList<Integer> childIDs = new ArrayList<Integer>(); //Array of child_id integers for Family instance
+						for (int k = 0; k < theChildren.length(); k++) {
+							JSONObject aChild = theChildren.getJSONObject(k); //Data for a specific child object
+							
+							BasicChild child = new BasicChild();
+							child.setFamilyId(family_id); //Required field
+							int child_id = Integer.parseInt(aChild.getString("child_id"));
+							child.setId(child_id); //Required field
+							if (aChild.has("first_name"))
+								child.setFirst_name(aChild.getString("first_name"));
+							if (aChild.has("middle_name"))
+								child.setMiddle_name(aChild.getString("middle_name"));
+							if (aChild.has("last_name"))
+								child.setLast_name(aChild.getString("last_name"));
+								
+							childIDs.add(child_id);
+							
+							childArray.add(child);
+						}
+						mChildren.put(family_id, childArray);
+						family.setChildren(childIDs);
+						
+						familyArray.add(family);
+					}
+					mFamilies.put(villageName, familyArray);
+					village.setFamilies(familyIDs);
+					
+					mVillages.add(village);
+				}
+				
+			} catch (IOException | JSONException ioe) {
+			}
+			return null;
+		}
+		
+		@Override
+		protected void onPreExecute() {
+			
+		}
+		
+		@Override
+		protected void onPostExecute(Void result) {
+		}
+		
+	}
+}

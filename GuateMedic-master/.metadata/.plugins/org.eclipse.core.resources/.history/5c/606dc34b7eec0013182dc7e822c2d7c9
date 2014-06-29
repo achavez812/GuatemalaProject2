@@ -1,0 +1,79 @@
+package com.example.guatemedic;
+
+import java.util.UUID;
+
+import org.json.JSONObject;
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+public class AddChildFragment extends Fragment{
+	
+	String family;
+	
+	public AddChildFragment() {
+		family = DetailedRecordsStore.get(getActivity()).getAddFamily();
+	}
+	
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		//Inflate the layout for this fragment
+		View v = inflater.inflate(R.layout.add_child_fragment, container, false);
+		
+		TextView tv = (TextView)v.findViewById(R.id.add_child_header);
+		String text = DetailedRecordsStore.get(getActivity()).getFamily(family).getParent1_last_name();
+		tv.setText(text + " Family");
+		
+		Button b = (Button)v.findViewById(R.id.make_child_button);
+		b.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				EditText child_first_name = (EditText)getActivity().findViewById(R.id.child_first_name);
+				EditText child_middle_name = (EditText)getActivity().findViewById(R.id.child_middle_name);
+				EditText child_last_name = (EditText)getActivity().findViewById(R.id.child_last_name);
+				EditText child_dob = (EditText)getActivity().findViewById(R.id.child_dob);
+				
+				EditText child_gender = (EditText)getActivity().findViewById(R.id.child_gender);
+				EditText child_type_of_birth = (EditText)getActivity().findViewById(R.id.child_type_of_birth);
+				EditText child_months_gestated = (EditText)getActivity().findViewById(R.id.child_months_gestated);
+				EditText child_prenatal_control = (EditText)getActivity().findViewById(R.id.child_prenatal_control);
+				EditText child_birth_weight = (EditText)getActivity().findViewById(R.id.child_birth_weight);
+				
+				try {
+					JSONObject obj = new JSONObject();
+					obj.put("family_id", family);
+					obj.put("temp_family_id", family);
+					
+					obj.put("first_name", child_first_name.getText().toString());
+					obj.put("middle_name", child_middle_name.getText().toString());
+					obj.put("last_name", child_last_name.getText().toString());
+					obj.put("dob", child_dob.getText().toString());
+					obj.put("gender", child_gender.getText().toString());
+					obj.put("type_of_birth",child_type_of_birth.getText().toString());
+					obj.put("months_gestated", child_months_gestated.getText().toString());
+					obj.put("prenatal_control", child_prenatal_control.getText().toString());
+					obj.put("birth_weight", child_birth_weight.getText().toString());
+					
+					String id = UUID.randomUUID().toString();
+					
+					obj.put("child_id", id);
+					obj.put("temp_child_id", id);
+					obj.put("uploaded", "0");
+					
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		
+		});
+		
+		return v;
+	}
+				
+
+}

@@ -1,0 +1,121 @@
+package com.stanford.guatemedic;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.util.Log;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+
+public abstract class SelectDataSingleFragmentActivity extends FragmentActivity {
+	protected abstract Fragment createFragment();
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main_activity);
+		FragmentManager fm = getSupportFragmentManager();
+		Fragment fragment = fm.findFragmentById(R.id.fragmentContainer);
+		
+		if (fragment == null) {
+			fragment = createFragment();
+			//Create a new fragment transaction
+			//Include one add operation in it
+			//Commit it
+			fm.beginTransaction().add(R.id.fragmentContainer, fragment).commit();
+		}
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(android.view.Menu menu) {
+		MenuInflater menu_infaltor = getMenuInflater();
+		menu_infaltor.inflate(R.menu.download_button, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.action_download:			
+			new HandlePostRecords().execute();
+			return true;
+		default:
+			return false;	
+		}
+	}
+	
+	private class HandlePostRecords extends AsyncTask<Void, Void, Void> {
+		
+		@Override
+		protected Void doInBackground(Void... params) {	
+			try {
+				Map<String, String> headerMap = new HashMap<String, String>();
+				headerMap.put("Authorization", BasicRecordsStore.get(getApplication()).getAuthKey());
+				String jsonBody = makeJsonBody();
+				String response = new HttpPostRequest().postUrl("https://guatemedic.herokuapp.com/records", headerMap, jsonBody);
+				if (response == null) 
+					return null;
+				//THIS IS HOW YOU WRITE TO FILE
+				GuatemedicWriter gw = new GuatemedicWriter(getApplication());
+				gw.saveDownloadedRecords(response);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			return null;	
+				
+		}
+		
+		//FIX TO ACCOUNT FOR PHOTOS
+		private String makeJsonBody() {
+			ArrayList<String> childIds = new ArrayList<String>();
+			ArrayList<Village> villages = BasicRecordsStore.get(getApplication()).getVillages();
+			for (Village village : villages) {
+				if (village.isCheckboxSelected()) {
+					ArrayList<BasicFamily> families = BasicRecordsStore.get(getApplication()).getFamilies(village.getName());
+					for (BasicFamily family : families) {
+						if (family.isCheckboxSelected()) {
+							ArrayList<BasicChild> children = BasicRecordsStore.get(getApplication()).getChildren(family.getId());
+							for (BasicChild child : children) {
+								if (child.isCheckboxSelected()) {
+									String childId = child.getId();
+									childIds.add(childId);
+								}
+							}
+						}
+					}
+				}
+			}
+			String[] arr = childIds.toArray(new String[childIds.size()]);
+			String str = "{\"child_ids\":" + Arrays.toString(arr) + ",\"photos\":false}";
+			return str;
+		}
+		
+		@Override
+		protected void onPreExecute() {
+			
+		}
+		
+		@Override
+		protected void onPostExecute(Void result) {
+			Intent intent = new Intent(getApplication(), MainActivity.class);
+			startActivity(intent);
+		}
+		
+	}
+}

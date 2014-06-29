@@ -1,0 +1,35 @@
+package com.example.guatemedic;
+
+import android.app.ListFragment;
+import android.os.Bundle;
+import android.provider.ContactsContract.Profile;
+import android.widget.ArrayAdapter;
+
+public class VisitHistoryFragment extends ListFragment {
+	/**
+	 * Returns a new instance of this fragment for the given section number.
+	 */
+
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		String[] values = new String[] { "2014/05/13" };
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+				android.R.layout.simple_list_item_1, values);
+		setListAdapter(adapter);
+	};
+	
+
+	public static VisitHistoryFragment newInstance(Profile p) {
+		VisitHistoryFragment fragment = new VisitHistoryFragment();
+		Bundle args = new Bundle();
+		if (p != null){
+
+		}
+		fragment.setArguments(args);
+		return fragment;
+	}
+
+
+
+}

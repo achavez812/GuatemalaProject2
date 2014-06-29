@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.guatemal"
+    android:versionCode="1"
+    android:versionName="2.1" >
+
+    <uses-sdk
+        android:minSdkVersion="13"
+        android:targetSdkVersion="19" />
+    <!-- android:label="@string/app_name" -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="Guatemala"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.example.guatemal.MainActivity"
+            android:label="Guatemala"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.guatemal.home"
+            android:icon="@drawable/ic_launcher"
+            android:label="Guatemala"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="q.w.e.qwe" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!--  
+        <activity
+            android:name="com.example.guatemal.patient_list"
+            android:icon="@drawable/ic_launcher"
+            android:label="Guatemala"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="q.w.e.qwe" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>-->
+        
+        <activity
+            android:name="com.example.guatemal.add_patient"
+            android:icon="@drawable/ic_launcher"
+            android:label="Guatemala"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="q.w.e.qwe" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.guatemal.edit_patient"
+            android:icon="@drawable/ic_launcher"
+            android:label="Guatemala"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="q.w.e.qwe" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.guatemal.view_patient"
+            android:icon="@drawable/ic_launcher"
+            android:label="Guatemala"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="q.w.e.qwe" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.guatemal.about_us"
+            android:icon="@drawable/ic_launcher"
+            android:label="Guatemala"
+            android:screenOrientation="portrait"
+           
+             >
+            <intent-filter>
+                <action android:name="q.w.e.qwe" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+       
+    </application>
+
+</manifest>

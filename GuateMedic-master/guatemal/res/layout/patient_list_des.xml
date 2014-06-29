@@ -1,0 +1,62 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <ImageView
+        android:id="@+id/patient_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/patient" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/patient_image"
+        android:layout_alignLeft="@+id/patient_name"
+        android:layout_marginBottom="31dp"
+        android:text="Age : " />
+
+    <TextView
+        android:id="@+id/patient_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView2"
+        android:layout_marginBottom="14dp"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/patient_image"
+        android:text="TextView" />
+
+    <ImageView
+        android:id="@+id/edit_patient_detail"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/patient_name"
+        android:layout_marginRight="15dp"
+        android:src="@drawable/flag" />
+
+    <TextView
+        android:id="@+id/patient_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/patient_image"
+        android:layout_toLeftOf="@+id/patient_age"
+        android:text="TextView"
+        android:textColor="@android:color/transparent"
+        android:textSize="0sp" />
+
+    <TextView
+        android:id="@+id/patient_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView2"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/textView2"
+        android:text="TextView"
+        android:textSize="12sp" />
+
+</RelativeLayout>

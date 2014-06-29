@@ -1,0 +1,10 @@
+package com.example.guatemedic;
+
+public class AddFamilyActivity extends SingleFragmentActivity {
+	
+	@Override
+	protected Fragment createFragment() {
+		
+	}
+
+}

@@ -1,0 +1,105 @@
+package com.example.guatemedic;
+
+import java.util.ArrayList;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.ListFragment;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.ListView;
+import android.widget.TextView;
+
+public class ViewChildListFragment extends ListFragment{
+	
+public static final String EXTRA_VILLAGE_NAME = "com.example.guatemedic.village_name";
+	
+	private static final String TAG = "ChildListFragment";
+	
+	private ArrayList<DetailedChild> mChildren;
+	
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+	
+	   inflater.inflate(R.menu.addchild_button, menu);
+	
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		((ChildAdapter)getListAdapter()).notifyDataSetChanged();
+		int familyId = getArguments().getInt("familyId", 0);
+		DetailedFamily f = DetailedRecordsStore.get(getActivity().getApplication()).getFamily(familyId);
+		getActivity().setTitle("Children in " + f.getParent1_last_name() + " Family");
+	}
+	
+	public static ViewChildListFragment newInstance(int familyId) {
+		ViewChildListFragment f = new ViewChildListFragment();
+		
+		Bundle args = new Bundle();
+        args.putInt("familyId", familyId);
+        f.setArguments(args);
+        
+		return f;
+		
+	}
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setHasOptionsMenu(true);
+
+		int familyId = getArguments().getInt("familyId", 0);
+		DetailedFamily f = DetailedRecordsStore.get(getActivity().getApplication()).getFamily(familyId);
+		DetailedRecordsStore.get(getActivity().getApplication()).setCurrentFamily(familyId);
+		getActivity().setTitle("Children in " + f.getParent1_last_name() + " Family");
+		mChildren = DetailedRecordsStore.get(getActivity().getApplication()).getChildren(familyId);
+		ChildAdapter adapter = new ChildAdapter(mChildren);
+		setListAdapter(adapter);
+	}
+	
+	@Override
+	public void onListItemClick(ListView l, View v, int position, long id) {
+		DetailedChild child = ((ChildAdapter)getListAdapter()).getItem(position);
+		Intent intent = new Intent(getActivity(), ChildRecordForm.class);
+		intent.putExtra("childID", child.getId());
+		startActivity(intent);
+		
+		
+		
+	}
+	
+	private class ChildAdapter extends ArrayAdapter<DetailedChild>  {
+		public ChildAdapter(ArrayList<DetailedChild> children) {
+			super(getActivity(), 0, children);
+		}
+		
+		@Override
+		public View getView(final int position, View convertView, ViewGroup parent) {
+			if (convertView == null) {
+				convertView = getActivity().getLayoutInflater().inflate(R.layout.list_item_fragment, null);
+			}
+			
+			DetailedChild child = getItem(position);
+			
+			CheckBox checkbox = (CheckBox)convertView.findViewById(R.id.list_item_checkbox);
+			checkbox.setVisibility(View.GONE);
+			
+			//Assign values for view
+			TextView titleTextView = (TextView)convertView.findViewById(R.id.list_item_title);
+			titleTextView.setText("" + child.getFirst_name() + " " + child.getMiddle_name() + child.getLast_name());
+			
+			
+			
+			return convertView;
+		}
+	}
+
+
+}

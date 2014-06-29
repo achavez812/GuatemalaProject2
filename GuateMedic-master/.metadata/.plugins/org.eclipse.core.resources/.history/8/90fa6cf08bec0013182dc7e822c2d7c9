@@ -1,0 +1,102 @@
+package com.example.guatemedic;
+
+import java.util.ArrayList;
+
+public class UploadFamily {
+	
+	private boolean mUploaded;
+	private String mTemp_family_id;
+	private String mFamily_id;
+	private String mDate_created;
+	private String mDate_last_modified;
+	private ArrayList<String> mChild_ids;
+	private ArrayList<String> mVisit_ids;
+	private ArrayList<String> mModification_ids;
+	private String mData;
+	private String mFilename;
+	
+	public UploadFamily() {
+		mUploaded = false;
+	}
+	
+	public void setData(String data) {
+		mData = data;
+	}
+	
+	public String getData() {
+		return mData;
+	}
+	
+	public void setFilename(String filename) {
+		mFilename = filename;
+	}
+	
+	public String getFilename() {
+		return mFilename;
+	}
+	
+	public void setUploaded(boolean uploaded) {
+		mUploaded = uploaded;
+	}
+	
+	public boolean isUploaded() {
+		return mUploaded;
+	}
+	
+	public void setTempFamilyId(String temp_family_id) {
+		mTemp_family_id = temp_family_id;
+	}
+	
+	public String getTempFamilyId() {
+		return mTemp_family_id;
+	}
+	
+	public void setFamilyId(String family_id) {
+		mFamily_id = family_id;
+	}
+	
+	public String getFamilyId() {
+		return mFamily_id;
+	}
+	
+	public void setChildIds(ArrayList<String> child_ids) {
+		mChild_ids = child_ids;
+	}
+	
+	public ArrayList<String> getChildIds() {
+		return mChild_ids;
+	}
+	
+	public void setVisitIds(ArrayList<String> visit_ids) {
+		mVisit_ids = visit_ids;
+	}
+	
+	public ArrayList<String> getVisitIds() {
+		return mVisit_ids;
+	}
+	
+	public void setModificationIds(ArrayList<String> modification_ids) {
+		mModification_ids = modification_ids;
+	}
+	
+	public ArrayList<String> getModificationIds() {
+		return mModification_ids;
+	}
+	
+	public void setDateCreated(String date_created) {
+		mDate_created = date_created;
+	}
+	
+	public String getDateCreated() {
+		return mDate_created;
+	}
+	
+	public void setDateLastModified(String date_last_modified) {
+		mDate_last_modified = date_last_modified;
+	}
+	
+	public String getDateLastModified() {
+		return mDate_last_modified;
+	}
+
+}

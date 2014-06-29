@@ -1,0 +1,47 @@
+package com.example.guatemedic;
+
+public class UploadFamilyModification {
+
+	private boolean mUploaded;
+	private String mModification_id;
+	private String mTemp_family_id;
+	private String mFamily_id;
+	private String mData;
+	
+	public UploadFamilyModification() {
+		mUploaded = false;
+	}
+	
+	public void setData(String data) {
+		mData = data;
+	}
+	
+	public String getData() {
+		return mData;
+	}
+	
+	public void setUploaded(boolean uploaded) {
+		mUploaded = uploaded;
+	}
+	
+	public boolean isUploaded() {
+		return mUploaded;
+	}
+	
+	
+	public void setTempFamilyId(String temp_family_id) {
+		mTemp_family_id = temp_family_id;
+	}
+	
+	public String getTempFamilyId() {
+		return mTemp_family_id;
+	}
+	
+	public void setFamilyId(String family_id) {
+		mFamily_id = family_id;
+	}
+	
+	public String getFamilyId() {
+		return mFamily_id;
+	}
+}

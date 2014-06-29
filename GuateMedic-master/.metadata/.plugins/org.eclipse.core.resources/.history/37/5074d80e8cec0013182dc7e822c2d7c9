@@ -1,0 +1,27 @@
+package com.stanford.guatemedic;
+
+import android.app.Fragment;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+
+public class FamilyInformationFragment extends Fragment {
+	public static FamilyInformationFragment newInstance(){
+		FamilyInformationFragment fragment = new FamilyInformationFragment();
+		Bundle args = new Bundle();
+		fragment.setArguments(args);
+		return fragment;
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View family_view = inflater.inflate(R.layout.family_information_layout,
+				container, false);
+
+		return family_view;
+	}
+}
+

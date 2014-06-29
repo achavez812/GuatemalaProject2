@@ -1,0 +1,21 @@
+package com.example.guatemedic;
+
+public class UploadFamilyModification {
+
+	private boolean mUploaded;
+	private String modification_id;
+	private String temp_family_id;
+	private String family_id;
+	
+	public UploadFamilyModification() {
+		mUploaded = false;
+	}
+	
+	public void setTempFamilyId(String temp_family_id) {
+		mTemp_family_id = temp_family_id;
+	}
+	
+	public String getTempFamilyId() {
+		return mTemp_family_id;
+	}
+}

@@ -1,0 +1,14 @@
+package com.example.guatemedic;
+
+import java.util.ArrayList;
+
+public class UploadFamily {
+	
+	boolean uploaded;
+	String temp_family_id;
+	String family_id;
+	ArrayList<String> child_ids;
+	ArrayList<String> visit_ids;
+	ArrayList<String> modification_ids;
+
+}

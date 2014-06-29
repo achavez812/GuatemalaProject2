@@ -1,0 +1,38 @@
+package com.example.guatemedic;
+
+
+public abstract class ViewDataSingleFragmentActivity extends FragmentActivity {
+	protected abstract Fragment createFragment();
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main_activity);
+		FragmentManager fm = getSupportFragmentManager();
+		Fragment fragment = fm.findFragmentById(R.id.fragmentContainer);
+		
+		if (fragment == null) {
+			fragment = createFragment();
+			//Create a new fragment transaction
+			//Include one add operation in it
+			//Commit it
+			fm.beginTransaction().add(R.id.fragmentContainer, fragment).commit();
+		}
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.action_addchild:	
+			
+			break;
+		case R.id.action_addfamily:
+			
+			break;
+		default:
+			return false;	
+		}
+	}
+	
+
+}

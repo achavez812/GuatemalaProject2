@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+  
+        <item
+        android:id="@+id/action_addchild"
+        android:title="@string/add_child_button_text"/>
+        <item
+        android:id="@+id/viewfamilyinfor2"
+        android:text="VIEW FAMILY INFO"
+        android:layout_height="wrap_content"/>
+        <item
+        android:id="@+id/family_visit"
+        android:text="ADD FAMILY VISIT"
+        />
+</menu>

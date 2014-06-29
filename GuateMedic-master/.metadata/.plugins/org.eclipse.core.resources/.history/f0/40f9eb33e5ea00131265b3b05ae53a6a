@@ -1,0 +1,516 @@
+package com.example.guatemedic;
+
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.util.Log;
+
+
+@SuppressLint("SimpleDateFormat")
+public class DetailedRecordsStore {
+		
+	//DECLARE DATA STRUCTURES
+	private ArrayList<Village> mVillages;
+	private Map<String, ArrayList<DetailedFamily>> mFamilies;
+	private Map<String, ArrayList<DetailedChild>> mChildren;
+	
+	private String mCurrentVillage;
+	private String mCurrentFamily;
+	
+	private static DetailedRecordsStore sDetailedRecordsStore;
+	private Context mAppContext;
+	
+	private DetailedRecordsStore(Context appContext) {
+		mAppContext = appContext;
+		//INITIALIZE DATA STRUCTURES
+		mVillages = new ArrayList<Village>();
+		mFamilies = new HashMap<String, ArrayList<DetailedFamily>>(); //The String key is the village name
+		mChildren = new HashMap<String, ArrayList<DetailedChild>>(); //The Integer key is the family id
+		processData();
+
+	}
+	
+	//Figure out how to detect if there have been uploads or other changes and then reload store
+	public static DetailedRecordsStore get(Context c) {
+		
+		if (sDetailedRecordsStore == null) {
+			sDetailedRecordsStore = new DetailedRecordsStore(c.getApplicationContext());
+		} 
+		return sDetailedRecordsStore;
+		
+	}
+	
+	public static void update(Context c) {
+		sDetailedRecordsStore = new DetailedRecordsStore(c.getApplicationContext());
+	}
+	
+	public void setCurrentVillage(String currentVillage) {
+		mCurrentVillage = currentVillage;
+	}
+	
+	public String getCurrentVillage() {
+		return mCurrentVillage;
+	}
+	
+	public void setCurrentFamily(String currentFamily) {
+		mCurrentFamily = currentFamily;
+	}
+	
+	public String getCurrentFamily() {
+		return mCurrentFamily;
+	}
+	
+	public ArrayList<Village> getVillages() {
+		return mVillages;
+	}
+	
+	public Village getVillage(String villageName) {
+		for (Village v : mVillages) {
+			if (v.getName().equals(villageName))
+				return v;
+		}
+		return null;
+	}
+	
+	public ArrayList<DetailedFamily> getFamilies(String villageName) {
+		return mFamilies.get(villageName);
+	}
+	
+	
+	public DetailedFamily getFamily(String familyId) {
+		for (String key : mFamilies.keySet()) {
+			for (DetailedFamily f : mFamilies.get(key)) {
+				if (f.getId().equals(familyId)) 
+					return f;
+			}
+		}
+		return null;
+	}
+	
+	//Faster search
+	public DetailedFamily getFamily(String villageName, String familyId) {
+		for (DetailedFamily f : mFamilies.get(villageName)) {
+			if (f.getId().equals(familyId))
+				return f;
+		}
+		return null;
+	}
+	
+	public ArrayList<DetailedChild> getChildren(String familyId) {
+		return mChildren.get(familyId);
+	}
+	
+	public DetailedChild getChild(String childId) {
+		for (String key : mChildren.keySet()) {
+			for (DetailedChild c : mChildren.get(key)) {
+				if (c.getId().equals(childId)) {
+					return c;
+				}
+			}
+		}
+		return null;
+	}
+	
+	//Faster search
+	public DetailedChild getChild(String familyId, String childId) {
+		for (DetailedChild c : mChildren.get(familyId)) {
+			if (c.getId().equals(childId))
+				return c;
+		}
+		return null;
+	}
+	
+	public void addNewFamily(String data) {
+		try {
+			JSONObject family_data = new JSONObject(data);
+			String family_id = family_data.getString("family_id"); 
+			String villageName = family_data.getString("village");
+			DetailedFamily df = new DetailedFamily();
+			
+			Village v = getVillage(villageName);
+			v.getFamilies().add(family_id);
+			
+			mFamilies.get(villageName).add(df);
+			mChildren.put(family_id, new ArrayList<DetailedChild>());
+			
+			df.setId(family_id);
+			df.setVillage(villageName);
+			df.setChildren(new ArrayList<String>());
+			parseFamily(family_data, df);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void addNewChild(String data) {
+		try {
+			JSONObject child_data = new JSONObject(data);
+			String family_id = child_data.getString("family_id");
+			String child_id = child_data.getString("child_id"); //Generated upon creation
+			DetailedChild dc = new DetailedChild();
+			
+			DetailedFamily df = getFamily(family_id);
+			df.getChildren().add(child_id);
+			
+			mChildren.get(family_id).add(dc);
+			
+			dc.setId(child_id);
+			dc.setFamilyId(family_id);
+			parseChild(child_data, dc);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	//Simply overwriting existing data
+	//Should I do it differently??
+	//Original data is still stored in Downloads
+	public void addModification(String data) {
+		try {
+			JSONObject record = new JSONObject(data);
+			String family_id = record.getString("family_id");
+			if (record.has("child_id")) { //child
+				String child_id = record.getString("child_id");
+				DetailedChild child = getChild(family_id, child_id);
+				parseChild(record, child);
+			} else if (record.has("village")) { //family
+				String village_name = record.getString("village");
+				DetailedFamily family = getFamily(village_name, family_id);
+				parseFamily(record, family);
+			} else {
+				//ISSUE
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void addNewVisit(String data) {
+		try {
+			JSONObject record = new JSONObject(data);
+			if (record.has("child_id")) { //child
+				DetailedChild child = getChild(record.getString("child_id"));
+				parseChildVisits(new JSONArray("[" + data + "]"), child.getChildVisits());
+			} else if (record.has("family_id")) { //family
+				DetailedFamily family = getFamily(record.getString("family_id"));
+				parseFamilyVisits(new JSONArray("[" + data + "]"), family.getFamilyVisits());
+			} else {
+				//ISSUE
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	//Could definitely be made more efficient
+	//Only add the visits that have not been added
+	private void parseChildVisits(JSONArray childVisits, ArrayList<ChildVisit> theChildVisits) {
+		theChildVisits.clear(); //Remove this and fix code to make more efficient
+		for (int i = 0; i < childVisits.length(); i++) {
+			try {
+				JSONObject obj = childVisits.getJSONObject(i);
+				ChildVisit cv = new ChildVisit();
+				theChildVisits.add(cv);
+				
+				cv.setChild_id(Integer.parseInt(obj.getString("child_id"))); 
+				cv.setVisit_date(obj.getString("visit_date"));
+				
+				if (obj.has("vaccinated")) //UPDATE THIS
+					cv.setNewVaccinations(obj.getString("vaccinated"));
+				if (obj.has("fed_only_by_breast"))
+					cv.setFed_only_by_breast(1 == Integer.parseInt(obj.getString("fed_only_by_breast")));
+				if (obj.has("currently_fed_supplementary_food"))
+					cv.setCurrently_fed_supplementary_food(1 == Integer.parseInt(obj.getString("currently_fed_supplementary_food")));
+				if (obj.has("num_siblings_older_than_5"))
+					cv.setNum_sibilings_older_than_5(Integer.parseInt(obj.getString("num_siblings_older_than_5")));
+				if (obj.has("new_child"))  //WHAT IS THIS????
+					cv.setNew_child(1 == Integer.parseInt(obj.getString("new_child")));
+				if (obj.has("weight_in_kilos"))
+					cv.setWeight_in_kilos(Double.parseDouble(obj.getString("weight_in_kilos")));
+				if (obj.has("height_in_centimeters"))
+					cv.setHeight_in_centimeters(Double.parseDouble(obj.getString("height_in_centimeters")));
+				if (obj.has("currently_breastfed"))
+					cv.setCurrently_breastfed(1 == Integer.parseInt(obj.getString("currently_breastfed")));
+				if (obj.has("receiving_nutritional_supplement"))
+					cv.setReceiving_nutritional_supplement(1 == Integer.parseInt(obj.getString("receiving_nutritional_supplement")));
+				if (obj.has("num_times_vegetables_past_week"))
+					cv.setNum_times_vegetables_past_week(Integer.parseInt(obj.getString("num_times_vegetables_past_week")));
+				if (obj.has("num_times_herbs_past_week"))
+					cv.setNum_times_herbs_past_week(Integer.parseInt(obj.getString("num_times_herbs_past_week")));
+				if (obj.has("num_times_diarrhea_past_week"))
+					cv.setNum_times_diarrhea_past_week(Integer.parseInt(obj.getString("num_times_diarrhea_past_week")));
+				if (obj.has("num_times_vomit_past_week"))
+					cv.setNum_times_vomit_past_week(Integer.parseInt(obj.getString("num_times_vomit_past_week")));
+				if (obj.has("num_times_cough_past_week"))
+					cv.setNum_times_cough_past_week(Integer.parseInt(obj.getString("num_times_cough_past_week")));
+				if (obj.has("num_times_fever_past_week"))
+					cv.setNum_times_fever_past_week(Integer.parseInt(obj.getString("num_times_fever_past_week")));
+				if (obj.has("other_illness")) //FIGURE THIS OUT
+					cv.setOther_illness(obj.getString("other_illness"));
+				if (obj.has("illness_description")) //THIS COULD BE USED AS GENERAL NOTES
+					cv.setIllness_description("illness_description");
+				if (obj.has("other_medicine_provided"))
+					cv.setOther_medicine_provided(obj.getString("other_medicine_provided"));
+				if (obj.has("malnutrition_grade_guatemala_scale"))
+					cv.setMalnutrition_grade_guatemala_scale(Double.parseDouble(obj.getString("malnutrition_grade_guatemala_scale")));
+				if (obj.has("malnutrition_grade_world_scale"))
+					cv.setMalnutrition_grade_world_scale(Double.parseDouble(obj.getString("malnutrition_grade_world_scale")));
+				if (obj.has("malnutrition_grade_height_for_age"))
+					cv.setMalnutrition_grade_height_for_age(Double.parseDouble(obj.getString("malnutrition_grade_height_for_age")));
+				if (obj.has("receiving_supplements"))
+					cv.setReceiving_supplements(1 == Integer.parseInt(obj.getString("receiving_supplements")));
+				if (obj.has("why_receiving_supplements"))
+					cv.setWhy_receiving_supplements(obj.getString("why_receiving_supplements"));
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+	}
+	
+	private void parseChild(JSONObject child_record, DetailedChild child) {
+		try {						
+			String date_created = child_record.getString("date_created");
+			String date_last_modified = child_record.getString("date_last_modified");
+			
+			child.setDate_created(date_created);
+			child.setDate_last_modified(date_last_modified);
+			
+			if (child_record.has("first_name"))
+				child.setFirst_name(child_record.getString("first_name"));
+			if (child_record.has("middle_name"))
+				child.setMiddle_name(child_record.getString("middle_name"));
+			if (child_record.has("last_name"))
+				child.setLast_name(child_record.getString("last_name"));
+			if (child_record.has("gender"))
+				child.setGender(child_record.getString("gender"));
+			if (child_record.has("dob"))
+				child.setDate_of_birth(child_record.getString("dob"));
+			if (child_record.has("type_of_birth"))
+				child.setType_of_birth(child_record.getString("type_of_birth"));
+			if (child_record.has("months_gestated"))
+				child.setMonths_gestated(Double.parseDouble(child_record.getString("months_gestated")));
+			if (child_record.has("prenatal_control")) 
+				child.setPrenatal_control(child_record.getString("prenatal_control"));
+			if (child_record.has("birth_weight"))
+				child.setBirth_weight(Double.parseDouble(child_record.getString("birth_weight")));
+			if (child_record.has("z_score"))
+				child.setZ_score(Double.parseDouble(child_record.getString("z_score")));
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+	
+		
+	}
+	
+	//Could definitely be made more efficient
+	//Only add the visits that have not been added
+	private void parseFamilyVisits(JSONArray familyVisits, ArrayList<FamilyVisit> theFamilyVisits) {
+		theFamilyVisits.clear(); //Remove this and fix code to make more efficient
+		for (int i = 0; i < familyVisits.length(); i++) {
+			try {
+				JSONObject obj = familyVisits.getJSONObject(i);
+				FamilyVisit fv = new FamilyVisit();
+				fv.setFamily_id(Integer.parseInt(obj.getString("family_id"))); 
+				fv.setVisit_date(obj.getString("visit_date"));
+				if (obj.has("father_lives_with"))
+					fv.setFather_lives_with(obj.getString("father_lives_with"));
+				if (obj.has("num_pregnancies_mother"))
+					fv.setNum_pregnancies_mother(Integer.parseInt(obj.getString("num_pregnancies_mother")));
+				if (obj.has("num_babies_alive"))
+					fv.setNum_babies_alive(Integer.parseInt(obj.getString("num_babies_alive")));
+				if (obj.has("num_babies_dead"))
+					fv.setNum_babies_dead(Integer.parseInt(obj.getString("num_babies_dead")));
+				if (obj.has("how_died"))
+					fv.setHow_died(obj.getString("how_died"));
+				if (obj.has("num_children_under_5"))
+					fv.setNum_children_under_5(obj.getString("num_children_under_5"));
+				if (obj.has("num_people_in_household"))
+					fv.setNum_people_in_household(obj.getString("num_people_in_household"));
+				if (obj.has("fathers_job"))
+					fv.setFathers_job(obj.getString("fathers_job"));
+				if (obj.has("igss"))
+					fv.setIgss(obj.getString("igss"));
+				theFamilyVisits.add(fv);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private void parseFamily(JSONObject record, DetailedFamily df) {
+		try {
+
+			String date_created = record.getString("date_created");
+			String date_last_modified = record.getString("date_last_modified");
+			if (record.has("child_ids")) {
+				String[] child_ids = record.getString("child_ids").trim().split(" ");
+				df.setChildren(new ArrayList<String>(Arrays.asList(child_ids)));
+			}
+
+			df.setDate_created(date_created);
+			df.setDate_last_modified(date_last_modified);
+			
+			
+			if (record.has("parent1_first_name")) 
+				df.setParent1_first_name(record.getString("parent1_first_name"));
+			if (record.has("parent1_middle_name"))
+				df.setParent1_middle_name(record.getString("parent1_middle_name"));
+			if (record.has("parent1_last_name"))
+				df.setParent1_last_name(record.getString("parent1_last_name"));
+			if (record.has("parent1_dob"))
+				df.setParent1_date_of_birth(record.getString("parent1_dob"));
+			if (record.has("parent2_first_name")) 
+				df.setParent2_first_name(record.getString("parent2_first_name"));
+			if (record.has("parent2_middle_name"))
+				df.setParent2_middle_name(record.getString("parent2_middle_name"));
+			if (record.has("parent2_last_name"))
+				df.setParent2_last_name(record.getString("parent2_last_name"));
+			if (record.has("parent2_dob"))
+				df.setParent2_date_of_birth(record.getString("parent2_dob"));	
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	//How should this be handled?
+	//Currently just overrides all children visits if the size/length doesn't match
+	private void processChildVisits(JSONArray dataChildVisits, ArrayList<ChildVisit> storedChildVisits) {
+		if (storedChildVisits.size() < dataChildVisits.length()) 
+			parseChildVisits(dataChildVisits, storedChildVisits);
+	}
+	
+	private void processChildren(JSONObject record) {
+		try {
+			String family_id = record.getString("family_id");
+			JSONArray children = record.getJSONArray("children");
+			for (int i = 0; i < children.length(); i++) {
+				JSONObject child_record = children.getJSONObject(i);
+				String child_id = child_record.getString("child_id");
+				DetailedChild child = getChild(family_id, child_id);
+				if (child != null) { //Need to check timestamps
+					String existing_timestamp = child.getDate_last_modified().replace('T', ' ');
+					String this_timestamp = child_record.getString("date_last_modified").replace('T', ' ');
+					
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+					Date existing_date = sdf.parse(existing_timestamp);
+					Date this_date = sdf.parse(this_timestamp);
+					
+					if (this_date.compareTo(existing_date) > 0)  //Need to update child object
+						parseChild(child_record, child);
+				} else {
+					child = new DetailedChild();
+					mChildren.get(family_id).add(child);
+					child.setId(child_id);
+					child.setFamilyId(family_id);
+					child.setChildVisits(new ArrayList<ChildVisit>());
+					parseChild(child_record, child);
+				}
+				processChildVisits(child_record.getJSONArray("visits"), child.getChildVisits());
+			}
+		} catch (JSONException | ParseException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	//How should this be handled?
+	//Currently just overrides all family visits if the size/length doesn't match
+	private void processFamilyVisits(JSONArray dataFamilyVisits, ArrayList<FamilyVisit> storedFamilyVisits) {
+		if (storedFamilyVisits.size() < dataFamilyVisits.length()) 
+			parseFamilyVisits(dataFamilyVisits, storedFamilyVisits);
+	}
+	
+	private void processFamily(JSONObject record) {
+		try {
+			String family_id = record.getString("family_id");
+			String villageName = record.getString("village");
+			DetailedFamily family = getFamily(villageName, family_id);
+			if (family != null) { //Need to check timestamps
+				String existing_timestamp = family.getDate_last_modified().replace('T', ' ');
+				String this_timestamp = record.getString("date_last_modified").replace('T', ' ');
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+				Date existing_date = sdf.parse(existing_timestamp);
+				Date this_date = sdf.parse(this_timestamp);
+				if (this_date.compareTo(existing_date) > 0)  //Need to update family object
+					parseFamily(record, family);
+				
+			} else {
+				family = new DetailedFamily();
+				mFamilies.get(villageName).add(family);
+				mChildren.put(family_id, new ArrayList<DetailedChild>());
+				family.setId(family_id);
+				family.setVillage(villageName);
+				family.setFamilyVisits(new ArrayList<FamilyVisit>());
+				parseFamily(record, family);
+			}
+			processFamilyVisits(record.getJSONArray("family_visits"), family.getFamilyVisits());
+			processChildren(record);
+		} catch (JSONException | ParseException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void processVillage(JSONObject record) {
+		try {
+			String villageName = record.getString("village");
+			String family_id = record.getString("family_id");
+			if (getVillage(villageName) != null) { 
+				Village v = getVillage(villageName);
+				if (!v.getFamilies().contains(family_id))
+					v.getFamilies().add(family_id);
+			} else { 
+				Village v = new Village();
+				mVillages.add(v);
+				v.setName(villageName);
+				v.setFamilies(new ArrayList<String>());
+				v.getFamilies().add(family_id);
+				mFamilies.put(villageName, new ArrayList<DetailedFamily>());
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void processData() {
+		try {
+			GuatemedicReader gr = new GuatemedicReader(mAppContext);
+
+			File[] files = gr.getFiles("Downloads");
+			for (File f : files) {
+				String content = gr.getStringData(f);
+				JSONObject obj = new JSONObject(content);
+				JSONArray records = new JSONArray(obj.getString("records"));
+				for (int i = 0; i < records.length(); i++) { 
+					JSONObject record = records.getJSONObject(i);
+					processVillage(record);
+					processFamily(record); //This processes family, children, and visits
+				}
+			} 
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+}
+

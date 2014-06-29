@@ -1,0 +1,9 @@
+package com.example.guatemedic;
+
+public class AddChildFragment extends Fragment{
+	
+	public AddChildFragment(String family) {
+		
+	}
+
+}
