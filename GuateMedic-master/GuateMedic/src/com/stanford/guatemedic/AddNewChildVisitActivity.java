@@ -1,5 +1,7 @@
 package com.stanford.guatemedic;
 
-public class AddNewChildVisitActivity {
+import android.support.v7.app.ActionBarActivity;
+
+public class AddNewChildVisitActivity extends ActionBarActivity{
 
 }
