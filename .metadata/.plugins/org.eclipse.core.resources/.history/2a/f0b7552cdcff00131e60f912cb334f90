@@ -77,7 +77,6 @@ public class view_patient extends Activity{
 			public void onClick(View v) {
 				Intent intent = new Intent(getApplication(), AddNewChildVisitActivity.class);
 				intent.putExtra("child_id", patientId);
-				startActivity(intent);
 				/*
 				final Dialog dialog = new Dialog(context);
 				dialog.setContentView(R.layout.add_exam_det);

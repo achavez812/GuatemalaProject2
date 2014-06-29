@@ -4,7 +4,10 @@
 <stringAttribute key="com.android.ide.eclipse.adt.commandline" value=""/>
 <intAttribute key="com.android.ide.eclipse.adt.delay" value="0"/>
 <booleanAttribute key="com.android.ide.eclipse.adt.nobootanim" value="false"/>
+<<<<<<< HEAD
 <booleanAttribute key="com.android.ide.eclipse.adt.reuse.last.used.device" value="false"/>
+=======
+>>>>>>> f37fad6c3e411aa6183141ab25d25110e961dd72
 <intAttribute key="com.android.ide.eclipse.adt.speed" value="0"/>
 <stringAttribute key="com.android.ide.eclipse.adt.target" value="AUTO"/>
 <booleanAttribute key="com.android.ide.eclipse.adt.wipedata" value="false"/>
@@ -16,6 +19,9 @@
 <listEntry value="4"/>
 <listEntry value="1"/>
 </listAttribute>
+<<<<<<< HEAD
 <booleanAttribute key="org.eclipse.jdt.launching.ALLOW_TERMINATE" value="true"/>
+=======
+>>>>>>> f37fad6c3e411aa6183141ab25d25110e961dd72
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="GuateMedic"/>
 </launchConfiguration>
