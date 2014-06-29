@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:yourapp="http://schemas.android.com/apk/res-auto" >
+  
+        <item
+        android:id="@+id/action_addchild"
+        android:title="@string/add_child_button_text"
+        yourapp:showAsAction="always"/>
+        <item
+        android:id="@+id/viewfamilyinfor2"
+        android:title="VIEW FAMILY INFO"
+        yourapp:showAsAction="always"/>
+        <item
+        android:id="@+id/familyvist"
+        android:title="ADD FAMILY VISIT"
+        yourapp:showAsAction="always"
+        />
+</menu>

@@ -16,7 +16,8 @@ public class DBController  extends SQLiteOpenHelper {
 	public DBController(Context applicationcontext) {
         super(applicationcontext, "doctor.db", null, 2);
     }
-
+//hihihihihihi
+	//hihihi
 	
 	
 // This function will be called on load and will create database and its tables
