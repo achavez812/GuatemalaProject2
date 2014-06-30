@@ -149,8 +149,6 @@ public class view_patient extends Activity{
         TextView patient_dob = (TextView)findViewById(R.id.dob);
         TextView no_siblings_birth=(TextView)findViewById(R.id.no_siblings_birth);
 		TextView youngest_sibling_dob=(TextView)findViewById(R.id.youngest_sibling_dob);
-		TextView patient_birth_weight= (TextView)findViewById(R.id.birth_weight);
-		TextView patient_birth_height= (TextView)findViewById(R.id.birth_height);
 		DetailedChild child = DetailedRecordsStore.get(getApplication()).getChild(getIntent().getStringExtra("child_id"));
 		
 		
@@ -223,21 +221,38 @@ public class view_patient extends Activity{
 		if(YoungDOB.toString().trim().equals("") || YoungDOB.toString().trim().equals("null")){
 			((TextView)findViewById(R.id.youngest_sibling_dob)).setText("Not Set");
 		}
+		((TextView)findViewById(R.id.birth_weight)).setText(child.getBirth_weight()+"");
+		/*ArrayList <ChildVisit> childer=child.getChildVisits();
+		for(ChildVisit vis: childer){
+			
+		}*/
 		
-		String patient_birth_weight_string=child.getBirth_weight()+"";
-		if(patient_birth_weight_string.toString().trim().equals("") || patient_birth_weight_string.toString().trim().equals("null")){
-			patient_birth_weight.setText("Not Set");
-		}else {
-			patient_birth_weight.setText(patient_birth_weight_string+" kg(s)");
-		}
 		
-		String patient_birth_height_string=child.getBirth_height()+"";
-		if(patient_birth_height_string.toString().trim().equals("") || patient_birth_height_string.toString().trim().equals("null")){
-			patient_birth_height.setText("Not Set");
-		}else {
-			patient_birth_height.setText(patient_birth_height_string+" cm(s)");
-		}		
-	
+		
+		// setting up the patient values in appropriate text view   		
+		/*if(patientdata.size()!=0) {
+
+			patient_name.setText(getIntent().getStringExtra("childID"));
+			//patient_rec_no.setText(patientdata.get("id"));
+			patient_gender.setText(patientdata.get("gender"));
+			String newdate = patientdata.get("dob");
+			String[] expdate = newdate.split("-"); 
+			int day = Integer.parseInt(expdate[1].trim());
+	        int month = Integer.parseInt(expdate[2].trim());
+	        int year = Integer.parseInt(expdate[0].trim());
+	        getAge(year, month, day);
+			patient_gestation.setText(patientdata.get("gestation"));
+			//patient_household.setText(patientdata.get("household_no"));
+			//patient_sib_info.setText(patientdata.get("sib_info"));
+			//patient_breastfeeding.setText(patientdata.get("breast_info"));
+			//patient_father_occu.setText(patientdata.get("father_occu"));
+			if(patientdata.get("image")!=null && !(patientdata.get("image").trim().length()==0)) {
+			//view_pati_image.setImageBitmap(decodeSampledBitmapFromResource(patientdata.get("image"), 100, 100));
+			}
+		}*/
+		
+		
+		
 		Button makeedit = (Button)findViewById(R.id.edit_patient_detail);
 		makeedit.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {

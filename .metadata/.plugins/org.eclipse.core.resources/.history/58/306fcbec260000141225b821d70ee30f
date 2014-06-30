@@ -235,7 +235,7 @@ public class view_patient extends Activity{
 		if(patient_birth_height_string.toString().trim().equals("") || patient_birth_height_string.toString().trim().equals("null")){
 			patient_birth_height.setText("Not Set");
 		}else {
-			patient_birth_height.setText(patient_birth_height_string+" cm(s)");
+			patient_birth_weight.setText(patient_birth_weight_string+" kg(s)");
 		}		
 	
 		Button makeedit = (Button)findViewById(R.id.edit_patient_detail);

@@ -70,7 +70,7 @@
         	android:layout_below="@+id/view_patient_name"
         	android:layout_toRightOf="@+id/edit_patient_detail"
         	android:text="Gender: " />
-
+  		
     	<TextView
         	android:id="@+id/textView3"
         	android:layout_width="wrap_content"
@@ -115,21 +115,7 @@
     	    android:layout_alignLeft="@+id/textView5"
     	    android:text="Date of Birth of Youngest Sibling: "
     	    />
-    	
-    	<TextView 
-    	    android:id="@+id/birth_weight_text"
-    	    android:layout_width="wrap_content"
-    	    android:layout_height="wrap_content"
-    	    android:layout_below="@+id/youngest_sibling_dob_text"
-    	    android:text="Birth Weight: "/>
-    	
-    	<TextView 
-    	    android:id="@+id/birth_height_text"
-    	    android:layout_width="wrap_content"
-    	    android:layout_height="wrap_content"
-    	    android:layout_below="@+id/birth_weight_text"
-    	    android:text="Birth Height: "/>
-    	
+    
     	
 	    <TextView
 	        android:id="@+id/gestation_time"
@@ -161,38 +147,13 @@
         	android:layout_toRightOf="@+id/youngest_sibling_dob_text"
 	        android:layout_below="@+id/no_siblings_birth"
 	        android:text="TextView" />
-	     
 	    <TextView 
 	        android:id="@+id/birth_weight"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_toRightOf="@+id/birth_weight_text"
-	        android:layout_below="@+id/youngest_sibling_dob_text"
-	        android:text="TextView"
-	        /> 
-	        
-	    <TextView 
-	        android:id="@+id/birth_height"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_toRightOf="@+id/birth_height_text"
-	        android:layout_below="@+id/birth_weight"
-	        android:text="TextView"
+	        android:layout_below="@+id/youngest_sibling_dob"
 	        />
-	    <Button 
-	        android:id="@+id/view_family_info_cont"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_below="@+id/birth_height"
-	        android:text="VIEW FAMILY INFO"
-	        android:layout_alignParentRight="true"/>
-	    <Button 
-	        android:id="@+id/add_family_visits_cont"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_below="@+id/view_family_info_cont"
-	        android:text="ADD FAMILY VIST"
-	        android:layout_alignParentRight="true"/>
     </RelativeLayout>
     	<TextView
         android:id="@+id/clickfordetails_text"
@@ -202,7 +163,7 @@
         android:layout_alignParentTop="true"
         android:text="Click Box For More Details"
         />
-  	
+  
 <!-- 
     	<TextView
         	android:id="@+id/textView5"
