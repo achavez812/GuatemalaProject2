@@ -622,7 +622,7 @@ public class DetailedRecordsStore {
 	
 	private void processDownloadedFiles() {
 		ArrayList<File> files = getDummyData(); //REMOVE LATER
-		//ArrayList<File> files = gfr.getDownloadedFiles();
+		ArrayList<File> files = gfr.getDownloadedFiles();
 		for (File f : files) {
 			String data = getDummyStringData(f); //REMOVE LATER
 			//String data = gfr.getStringData(f);

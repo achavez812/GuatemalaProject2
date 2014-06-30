@@ -56,6 +56,9 @@
             android:name="com.stanford.guatemedic.AddNewFamilyActivity"
             android:label="Add Family" />
         <activity
+            android:name="com.stanford.guatemedic.AddNewFamilyVisitActivity"
+            android:label="Add Family Visit" />
+        <activity
             android:name="com.stanford.guatemedic.AddNewChildActivity"
             android:label="Add Child" />
         <activity
@@ -63,8 +66,8 @@
             android:label="Add Child Visit" />
         <activity
             android:name="com.stanford.guatemedic.ViewFamily"
-            android:label="@string/title_activity_view_family" >
-        </activity>
+            android:label="@string/title_activity_view_family" />
+        
     </application>
 
 </manifest>
