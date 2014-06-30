@@ -49,7 +49,7 @@
 			android:layout_centerVertical="true"
         	android:text="EDIT"/>
     	
-    	
+    	<!--  
     	<TextView
         	android:id="@+id/edit_image_url"
         	android:layout_width="wrap_content"
@@ -58,15 +58,18 @@
         	android:layout_below="@+id/view_patient_name"
         	android:layout_marginLeft="14dp"
         	android:layout_toRightOf="@+id/edit_patient_detail"
-        	android:text="Record No:" />
+        	android:text="Record No:"
+        	/>-->
   		
   		<TextView
         	android:id="@+id/textView2"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
-        	android:layout_alignLeft="@+id/edit_image_url"
-        	android:layout_below="@+id/edit_image_url"
-        	android:text="Gender:" />
+        	android:layout_marginTop="14dp"
+        	android:layout_marginLeft="14dp"
+        	android:layout_below="@+id/view_patient_name"
+        	android:layout_toRightOf="@+id/edit_patient_detail"
+        	android:text="Gender: " />
   		
     	<TextView
         	android:id="@+id/textView3"
@@ -74,7 +77,7 @@
         	android:layout_height="wrap_content"
         	android:layout_below="@+id/textView2"
         	android:layout_alignLeft="@+id/textView2"
-        	android:text="Date of Birth:" />
+        	android:text="Date of Birth: " />
 
 	<RelativeLayout
 	    android:id="@+id/collapse_info"
@@ -95,14 +98,14 @@
         	android:layout_height="wrap_content"
         	android:layout_below="@+id/textView4"
         	android:layout_alignLeft="@+id/textView4"
-        	android:text="Type of Birth:"/>
+        	android:text="Type of Birth: "/>
     	<TextView 
     	    android:id="@+id/no_siblings_birth_text"
     	    android:layout_width="wrap_content"
     	    android:layout_height="wrap_content"
     	    android:layout_below="@+id/textView5" 
     	    android:layout_alignLeft="@+id/textView5"
-    	    android:text="Number of Siblings at Birth:"
+    	    android:text="Number of Children in Same Pregnancy: "
     	    />
     	<TextView 
     	    android:id="@+id/youngest_sibling_dob_text"
@@ -110,7 +113,7 @@
     	    android:layout_height="wrap_content"
     	    android:layout_below="@+id/no_siblings_birth_text" 
     	    android:layout_alignLeft="@+id/textView5"
-    	    android:text="Date of Birth of Youngest Sibling:"
+    	    android:text="Date of Birth of Youngest Sibling: "
     	    />
     
     	
@@ -192,21 +195,21 @@
 		<!-- Labels End Here -->
 
 		<!-- Information Fields Start here -->
-    	<TextView
+    	<!--  <TextView
         	android:id="@+id/record_no"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
         	android:layout_above="@+id/textView2"
      		android:layout_marginRight="10dp"
         	android:layout_toRightOf="@+id/edit_image_url"
-        	android:text="TextView" />
+        	android:text="TextView" />-->
 
     	<TextView
         	android:id="@+id/gender"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
+        	android:layout_alignBottom="@+id/textView2"
         	android:layout_toRightOf="@+id/textView2"
-        	android:layout_below="@+id/record_no"
         	android:text="TextView" />
 
 	    <TextView

@@ -133,11 +133,11 @@ public class view_patient extends Activity{
 		
 	
 		// Selecting patient information
-		HashMap<String, String> patientdata = controller.getPatientInfo(patientId);
+		//HashMap<String, String> patientdata = controller.getPatientInfo(patientId);
 		
 		// Creating object of all text views		
 		TextView patient_name = (TextView)findViewById(R.id.view_patient_name);
-		TextView patient_rec_no = (TextView)findViewById(R.id.record_no);
+		//TextView patient_rec_no = (TextView)findViewById(R.id.record_no);
 		TextView patient_gender = (TextView)findViewById(R.id.gender);
 		TextView patient_gestation = (TextView)findViewById(R.id.gestation_time);
 		TextView patient_t_of_b=(TextView)findViewById(R.id.type_of_birth);
@@ -150,20 +150,78 @@ public class view_patient extends Activity{
         TextView no_siblings_birth=(TextView)findViewById(R.id.no_siblings_birth);
 		TextView youngest_sibling_dob=(TextView)findViewById(R.id.youngest_sibling_dob);
 		DetailedChild child = DetailedRecordsStore.get(getApplication()).getChild(getIntent().getStringExtra("child_id"));
-		patient_name.setText(child.getName());
-		patient_rec_no.setText(child.getChild_id());
-		patient_gender.setText("F");
-		patient_gestation.setText(child.getMonths_gestated()+"");
-		patient_t_of_b.setText("Normal");
-		patient_dob.setText(child.getDob());
-		no_siblings_birth.setText(child.getNum_children_in_same_pregnancy()+"");
-		String YoungDOB=child.getYoungest_sibling_dob()+ " ";
-		youngest_sibling_dob.setText(YoungDOB);
 		
+		
+		
+		
+		String patient_name_string=child.getName()+"";
+		patient_name.setText(patient_name_string);
+		if(patient_name_string.toString().trim().equals("") || patient_name_string.toString().trim().equals("null")){
+			patient_name.setText("Not Set");
+		}
+		
+		
+		/*String patient_rec_no_string=child.getChild_id()+"";
+		patient_rec_no.setText(patient_rec_no_string);
+		if(patient_rec_no_string.toString().trim().equals("") || patient_rec_no_string.toString().trim().equals("null")){
+			patient_rec_no.setText("Not Set");
+		}
+		*/
+		
+		
+		String patient_gender_string=child.getGender()+"";
+		//patient_gender.setText(patient_gender_string);
+		if(patient_gender_string.toString().trim().equals("") || patient_gender_string.toString().trim().equals("null")){
+			patient_gender.setText("Not Set");
+		}else if(child.getGender()==0){
+			patient_gender.setText("Male");
+		}else if(child.getGender()==1){
+			patient_gender.setText("Female");
+		}
+		
+		String patient_gestation_string=child.getMonths_gestated()+"";
+		//patient_gestation.setText(patient_gestation_string);
+		if(patient_gestation_string.toString().trim().equals("") || patient_gestation_string.toString().trim().equals("null")){
+			patient_gestation.setText("Not Set");
+		}else{
+			patient_gestation.setText(patient_gestation_string+ " weeks");
+		}
+		
+		String patient_t_of_b_string=child.getType_of_birth()+"";
+		//patient_t_of_b.setText(patient_t_of_b_string);
+		if(patient_t_of_b_string.toString().trim().equals("") || patient_t_of_b_string.toString().trim().equals("null")){
+			patient_t_of_b.setText("Not Set");
+		}else if (child.getType_of_birth()==0){
+			patient_t_of_b.setText("Normal");
+		}else if (child.getType_of_birth()==1){
+			patient_t_of_b.setText("Cesarean");
+		}
+		
+		
+		String patient_dob_string=child.getDob()+"";
+		patient_dob.setText(patient_dob_string);
+		if(patient_dob_string.toString().trim().equals("") || patient_dob_string.toString().trim().equals("null")){
+			patient_dob.setText("Not Set");
+		}
+		
+		String patient_no_siblings_birth_string=child.getNum_children_in_same_pregnancy()+"";
+		//no_siblings_birth.setText(patient_no_siblings_birth_string);
+		if(patient_no_siblings_birth_string.toString().trim().equals("") || patient_no_siblings_birth_string.toString().trim().equals("null") || (child.getNum_children_in_same_pregnancy()==0)){
+			no_siblings_birth.setText("Not Set");
+		}else if(child.getNum_children_in_same_pregnancy()==1){
+			no_siblings_birth.setText("Single");
+		}else if(child.getNum_children_in_same_pregnancy()==2){
+			no_siblings_birth.setText("Twins");
+		}else if(child.getNum_children_in_same_pregnancy()==3){
+			no_siblings_birth.setText("Triplets");
+		}
+		
+		String YoungDOB=child.getYoungest_sibling_dob()+ "";
+		youngest_sibling_dob.setText(YoungDOB);
 		if(YoungDOB.toString().trim().equals("") || YoungDOB.toString().trim().equals("null")){
-			//Log.d("youngdobempty","youngdobempty");
 			((TextView)findViewById(R.id.youngest_sibling_dob)).setText("Not Set");
 		}
+		
 		/*ArrayList <ChildVisit> childer=child.getChildVisits();
 		for(ChildVisit vis: childer){
 			
@@ -172,10 +230,10 @@ public class view_patient extends Activity{
 		
 		
 		// setting up the patient values in appropriate text view   		
-		if(patientdata.size()!=0) {
+		/*if(patientdata.size()!=0) {
 
 			patient_name.setText(getIntent().getStringExtra("childID"));
-			patient_rec_no.setText(patientdata.get("id"));
+			//patient_rec_no.setText(patientdata.get("id"));
 			patient_gender.setText(patientdata.get("gender"));
 			String newdate = patientdata.get("dob");
 			String[] expdate = newdate.split("-"); 
@@ -191,7 +249,7 @@ public class view_patient extends Activity{
 			if(patientdata.get("image")!=null && !(patientdata.get("image").trim().length()==0)) {
 			//view_pati_image.setImageBitmap(decodeSampledBitmapFromResource(patientdata.get("image"), 100, 100));
 			}
-		}
+		}*/
 		
 		
 		
