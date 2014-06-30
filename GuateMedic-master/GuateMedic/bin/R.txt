@@ -4,7 +4,6 @@ int anim abc_slide_in_bottom 0x7f040002
 int anim abc_slide_in_top 0x7f040003
 int anim abc_slide_out_bottom 0x7f040004
 int anim abc_slide_out_top 0x7f040005
-int anim slide_down 0x7f040006
 int array br_array 0x7f0c0001
 int array employment_array 0x7f0c0000
 int array t_of_b_array 0x7f0c0002

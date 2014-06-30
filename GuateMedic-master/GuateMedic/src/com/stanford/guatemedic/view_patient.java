@@ -1,5 +1,5 @@
 package com.stanford.guatemedic;
-
+import android.view.ViewGroup.LayoutParams;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-
+import android.view.animation.Transformation;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -211,7 +211,7 @@ public class view_patient extends Activity{
 		});
 		getexaminfo();
 		if(!isExpanded)
-			findViewById(R.id.collapse_info).setVisibility(View.GONE);
+			findViewById(R.id.collapse_info).setVisibility(View.INVISIBLE);
 	}
 /*	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -320,6 +320,7 @@ public class view_patient extends Activity{
 	}
 	
 	public void toggle_contents(View v){
+		
 		TextView gestation_descy=(TextView)findViewById(R.id.textView4);
 		TextView t_of_b_desc=(TextView)findViewById(R.id.textView5);
 		TextView gestation_val=(TextView)findViewById(R.id.gestation_time);
@@ -334,31 +335,72 @@ public class view_patient extends Activity{
 			
 			findViewById(R.id.collapse_info).setVisibility(View.VISIBLE);
 			findViewById(R.id.clickfordetails_text).setVisibility(View.GONE);
-			slide_down(this, findViewById(R.id.collapse_info));
+			expand(findViewById(R.id.collapse_info));
+			//slide_down(this, findViewById(R.id.collapse_info));
+			findViewById(android.R.id.content).invalidate();
 		}else if(!isExpanded) {
 			findViewById(R.id.collapse_info).setVisibility(View.GONE);
 			findViewById(R.id.clickfordetails_text).setVisibility(View.VISIBLE);
+			findViewById(android.R.id.content).invalidate();
+			//expand(findViewById(R.id.collapse_info));
+			
 		}
 		
 	}
 	
+	public static void expand(final View v) {
+	    v.measure(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+	    final int targtetHeight = v.getMeasuredHeight();
 
-	//...
-	/**
-	*
-	* @param ctx
-	* @param v
-	*/
-	public static void slide_down(Context ctx, View v){
-		Animation a = AnimationUtils.loadAnimation(ctx, R.anim.slide_down);
-		if(a != null){
-			a.reset();
-			if(v != null){
-				v.clearAnimation();
-				v.startAnimation(a);
-			}
-		}
+	    v.getLayoutParams().height = 0;
+	    v.setVisibility(View.VISIBLE);
+	    Animation a = new Animation()
+	    {
+	        @Override
+	        protected void applyTransformation(float interpolatedTime, Transformation t) {
+	            v.getLayoutParams().height = interpolatedTime == 1
+	                    ? LayoutParams.WRAP_CONTENT
+	                    : (int)(targtetHeight * interpolatedTime);
+	            v.requestLayout();
+	        }
+
+	        @Override
+	        public boolean willChangeBounds() {
+	            return true;
+	        }
+	    };
+
+	    // 1dp/ms
+	    a.setDuration((int)(targtetHeight / v.getContext().getResources().getDisplayMetrics().density));
+	    v.startAnimation(a);
 	}
+
+	public static void collapse(final View v) {
+	    final int initialHeight = v.getMeasuredHeight();
+
+	    Animation a = new Animation()
+	    {
+	        @Override
+	        protected void applyTransformation(float interpolatedTime, Transformation t) {
+	            if(interpolatedTime == 1){
+	                v.setVisibility(View.GONE);
+	            }else{
+	                v.getLayoutParams().height = initialHeight - (int)(initialHeight * interpolatedTime);
+	                v.requestLayout();
+	            }
+	        }
+
+	        @Override
+	        public boolean willChangeBounds() {
+	            return true;
+	        }
+	    };
+
+	    // 1dp/ms
+	    a.setDuration((int)(initialHeight / v.getContext().getResources().getDisplayMetrics().density));
+	    v.startAnimation(a);
+	}
+
 	 public static Bitmap decodeSampledBitmapFromResource(String picturePath, int reqWidth, int reqHeight) {
 
 		    // First decode with inJustDecodeBounds=true to check dimensions
