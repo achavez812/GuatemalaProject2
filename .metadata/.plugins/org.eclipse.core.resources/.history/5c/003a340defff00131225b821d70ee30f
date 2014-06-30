@@ -43,7 +43,6 @@ public class view_patient extends Activity{
     private int mYear;
     private int mMonth;
     private int mDay;
-    private boolean isExpanded=false;
     
     static final int DATE_DIALOG_ID = 0;
     AlertDialogManager alert = new AlertDialogManager();
@@ -130,7 +129,8 @@ public class view_patient extends Activity{
 		});
 		
 		
-	
+		
+		
 		// Selecting patient information
 		HashMap<String, String> patientdata = controller.getPatientInfo(patientId);
 		
@@ -315,33 +315,6 @@ public class view_patient extends Activity{
 			});
 		}
 	}
-	
-	public void toggle_contents(View v){
-		TextView gestation_descy=(TextView)findViewById(R.id.textView4);
-		TextView t_of_b_desc=(TextView)findViewById(R.id.textView5);
-		TextView gestation_val=(TextView)findViewById(R.id.gestation_time);
-		TextView t_of_b_val=(TextView)findViewById(R.id.type_of_birth);
-		
-		if (!isExpanded){
-			isExpanded=true;
-		}else{
-			isExpanded=false;
-		}
-		if(isExpanded){
-			gestation_descy.setVisibility(View.VISIBLE);
-			t_of_b_desc.setVisibility(View.VISIBLE);
-			gestation_val.setVisibility(View.VISIBLE);
-			t_of_b_val.setVisibility(View.VISIBLE);
-		}else if(!isExpanded) {
-			gestation_descy.setVisibility(View.GONE);
-			t_of_b_desc.setVisibility(View.GONE);
-			gestation_val.setVisibility(View.GONE);
-			t_of_b_val.setVisibility(View.GONE);
-		}
-		
-	}
-	
-	
 	 public static Bitmap decodeSampledBitmapFromResource(String picturePath, int reqWidth, int reqHeight) {
 
 		    // First decode with inJustDecodeBounds=true to check dimensions

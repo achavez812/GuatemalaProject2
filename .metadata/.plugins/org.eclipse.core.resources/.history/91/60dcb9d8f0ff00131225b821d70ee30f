@@ -574,11 +574,11 @@ public class DetailedRecordsStore {
 	}
 	
 	private void processDownloadedFiles() {
-		//ArrayList<File> files = getDummyData(); //REMOVE LATER
-		ArrayList<File> files = gfr.getDownloadedFiles();
+		ArrayList<File> files = getDummyData(); //REMOVE LATER
+		//ArrayList<File> files = gfr.getDownloadedFiles();
 		for (File f : files) {
-			//String data = getDummyStringData(f); //REMOVE LATER
-			String data = gfr.getStringData(f);
+			String data = getDummyStringData(f); //REMOVE LATER
+			//String data = gfr.getStringData(f);
 			try {
 				JSONObject json_data = new JSONObject(data);
 				JSONArray records = json_data.getJSONArray("records");

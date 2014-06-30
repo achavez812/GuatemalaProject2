@@ -316,7 +316,7 @@ public class view_patient extends Activity{
 		}
 	}
 	
-	public void toggle_contents(View v){
+	public void toggle_contents(){
 		TextView gestation_descy=(TextView)findViewById(R.id.textView4);
 		TextView t_of_b_desc=(TextView)findViewById(R.id.textView5);
 		TextView gestation_val=(TextView)findViewById(R.id.gestation_time);

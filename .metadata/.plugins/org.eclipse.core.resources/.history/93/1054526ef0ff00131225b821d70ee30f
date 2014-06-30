@@ -316,28 +316,13 @@ public class view_patient extends Activity{
 		}
 	}
 	
-	public void toggle_contents(View v){
+	public void toggle_contents(){
 		TextView gestation_descy=(TextView)findViewById(R.id.textView4);
 		TextView t_of_b_desc=(TextView)findViewById(R.id.textView5);
 		TextView gestation_val=(TextView)findViewById(R.id.gestation_time);
 		TextView t_of_b_val=(TextView)findViewById(R.id.type_of_birth);
 		
-		if (!isExpanded){
-			isExpanded=true;
-		}else{
-			isExpanded=false;
-		}
-		if(isExpanded){
-			gestation_descy.setVisibility(View.VISIBLE);
-			t_of_b_desc.setVisibility(View.VISIBLE);
-			gestation_val.setVisibility(View.VISIBLE);
-			t_of_b_val.setVisibility(View.VISIBLE);
-		}else if(!isExpanded) {
-			gestation_descy.setVisibility(View.GONE);
-			t_of_b_desc.setVisibility(View.GONE);
-			gestation_val.setVisibility(View.GONE);
-			t_of_b_val.setVisibility(View.GONE);
-		}
+		
 		
 	}
 	
