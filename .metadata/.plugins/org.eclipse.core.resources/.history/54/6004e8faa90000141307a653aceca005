@@ -508,278 +508,6 @@ public class AddNewChildVisitActivity extends ActionBarActivity{
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_add_new_child_visit4, container, false);
 			final String child_id = getArguments().getString("child_id");
-			
-			final DetailedChildVisit dcv = ((AddNewChildVisitActivity)getActivity()).dcv;
-			
-			EditText num_times_incaparina_past_week_field = (EditText)rootView.findViewById(R.id.child_visit4_num_times_incaparina_past_week);
-			if (dcv.getNum_times_incaparina_past_week() != 0) num_times_incaparina_past_week_field.setText("" + dcv.getNum_times_incaparina_past_week());
-			num_times_incaparina_past_week_field.addTextChangedListener(new TextWatcher() {
-
-				@Override
-				public void afterTextChanged(Editable arg0) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void beforeTextChanged(CharSequence s, int start,
-						int count, int after) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void onTextChanged(CharSequence s, int start,
-						int before, int count) {
-					// TODO Auto-generated method stub
-					if (s.length() > 0)
-						dcv.setNum_times_incaparina_past_week(Integer.parseInt(s.toString()));
-					else
-						dcv.setNum_times_incaparina_past_week(0);
-					
-				}
-				
-			});
-			
-			EditText num_times_vegetables_or_fruits_past_week_field = (EditText)rootView.findViewById(R.id.child_visit4_num_times_vegetables_or_fruits_past_week);
-			if (dcv.getNum_times_vegetables_or_fruits_past_week() != 0) num_times_vegetables_or_fruits_past_week_field.setText("" + dcv.getNum_times_vegetables_or_fruits_past_week());
-			num_times_vegetables_or_fruits_past_week_field.addTextChangedListener(new TextWatcher() {
-
-				@Override
-				public void afterTextChanged(Editable arg0) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void beforeTextChanged(CharSequence s, int start,
-						int count, int after) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void onTextChanged(CharSequence s, int start,
-						int before, int count) {
-					// TODO Auto-generated method stub
-					if (s.length() > 0)
-						dcv.setNum_times_vegetables_or_fruits_past_week(Integer.parseInt(s.toString()));
-					else
-						dcv.setNum_times_vegetables_or_fruits_past_week(0);
-					
-				}
-				
-			});
-			
-			EditText num_times_herbs_past_week_field = (EditText)rootView.findViewById(R.id.child_visit4_num_times_herbs_past_week);
-			if (dcv.getNum_times_herbs_past_week() != 0) num_times_herbs_past_week_field.setText("" + dcv.getNum_times_herbs_past_week());
-			num_times_herbs_past_week_field.addTextChangedListener(new TextWatcher() {
-
-				@Override
-				public void afterTextChanged(Editable arg0) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void beforeTextChanged(CharSequence s, int start,
-						int count, int after) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void onTextChanged(CharSequence s, int start,
-						int before, int count) {
-					// TODO Auto-generated method stub
-					if (s.length() > 0)
-						dcv.setNum_times_herbs_past_week(Integer.parseInt(s.toString()));
-					else
-						dcv.setNum_times_herbs_past_week(0);
-					
-				}
-				
-			});
-			
-			EditText num_times_diarrhea_past_week_field = (EditText)rootView.findViewById(R.id.child_visit4_num_times_diarrhea_past_week);
-			if (dcv.getNum_times_diarrhea_past_week() != 0) num_times_diarrhea_past_week_field.setText("" + dcv.getNum_times_diarrhea_past_week());
-			num_times_diarrhea_past_week_field.addTextChangedListener(new TextWatcher() {
-
-				@Override
-				public void afterTextChanged(Editable arg0) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void beforeTextChanged(CharSequence s, int start,
-						int count, int after) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void onTextChanged(CharSequence s, int start,
-						int before, int count) {
-					// TODO Auto-generated method stub
-					if (s.length() > 0)
-						dcv.setNum_times_diarrhea_past_week(Integer.parseInt(s.toString()));
-					else
-						dcv.setNum_times_diarrhea_past_week(0);
-					
-				}
-				
-			});
-			
-			EditText num_times_vomit_past_week_field = (EditText)rootView.findViewById(R.id.child_visit4_num_times_vomit_past_week);
-			if (dcv.getNum_times_vomit_past_week() != 0) num_times_vomit_past_week_field.setText("" + dcv.getNum_times_vomit_past_week());
-			num_times_vomit_past_week_field.addTextChangedListener(new TextWatcher() {
-
-				@Override
-				public void afterTextChanged(Editable arg0) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void beforeTextChanged(CharSequence s, int start,
-						int count, int after) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void onTextChanged(CharSequence s, int start,
-						int before, int count) {
-					// TODO Auto-generated method stub
-					if (s.length() > 0)
-						dcv.setNum_times_vomit_past_week(Integer.parseInt(s.toString()));
-					else
-						dcv.setNum_times_vomit_past_week(0);
-					
-				}
-				
-			});
-			
-			EditText num_times_cough_past_week_field = (EditText)rootView.findViewById(R.id.child_visit4_num_times_cough_past_week);
-			if (dcv.getNum_times_cough_past_week() != 0) num_times_cough_past_week_field.setText("" + dcv.getNum_times_cough_past_week());
-			num_times_cough_past_week_field.addTextChangedListener(new TextWatcher() {
-
-				@Override
-				public void afterTextChanged(Editable arg0) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void beforeTextChanged(CharSequence s, int start,
-						int count, int after) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void onTextChanged(CharSequence s, int start,
-						int before, int count) {
-					// TODO Auto-generated method stub
-					if (s.length() > 0)
-						dcv.setNum_times_cough_past_week(Integer.parseInt(s.toString()));
-					else
-						dcv.setNum_times_cough_past_week(0);
-					
-				}
-				
-			});
-			
-			EditText num_times_fever_past_week_field = (EditText)rootView.findViewById(R.id.child_visit4_num_times_fever_past_week);
-			if (dcv.getNum_times_fever_past_week() != 0) num_times_fever_past_week_field.setText("" + dcv.getNum_times_fever_past_week());
-			num_times_fever_past_week_field.addTextChangedListener(new TextWatcher() {
-
-				@Override
-				public void afterTextChanged(Editable arg0) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void beforeTextChanged(CharSequence s, int start,
-						int count, int after) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void onTextChanged(CharSequence s, int start,
-						int before, int count) {
-					// TODO Auto-generated method stub
-					if (s.length() > 0)
-						dcv.setNum_times_fever_past_week(Integer.parseInt(s.toString()));
-					else
-						dcv.setNum_times_fever_past_week(0);
-					
-				}
-				
-			});
-			
-			EditText num_times_other_illness_past_week_field = (EditText)rootView.findViewById(R.id.child_visit4_num_times_other_illness_past_week);
-			if (dcv.getNum_times_other_illness_past_week() != 0) num_times_other_illness_past_week_field.setText("" + dcv.getNum_times_other_illness_past_week());
-			num_times_other_illness_past_week_field.addTextChangedListener(new TextWatcher() {
-
-				@Override
-				public void afterTextChanged(Editable arg0) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void beforeTextChanged(CharSequence s, int start,
-						int count, int after) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void onTextChanged(CharSequence s, int start,
-						int before, int count) {
-					// TODO Auto-generated method stub
-					if (s.length() > 0)
-						dcv.setNum_times_other_illness_past_week(Integer.parseInt(s.toString()));
-					else
-						dcv.setNum_times_other_illness_past_week(0);
-					
-				}
-				
-			});
-			
-			EditText other_illness_information_field = (EditText)rootView.findViewById(R.id.child_visit4_other_illness_information);
-			if (dcv.getIllness_description() != null) other_illness_information_field.setText("" + dcv.getIllness_description());
-			other_illness_information_field.addTextChangedListener(new TextWatcher() {
-
-				@Override
-				public void afterTextChanged(Editable arg0) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void beforeTextChanged(CharSequence s, int start,
-						int count, int after) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void onTextChanged(CharSequence s, int start,
-						int before, int count) {
-					// TODO Auto-generated method stub
-					if (s.length() > 0)
-						dcv.setIllness_description(s.toString());
-					else
-						dcv.setIllness_description(null);
-					
-				}
-				
-			});
 
 			return rootView;
 		}
@@ -802,6 +530,278 @@ public class AddNewChildVisitActivity extends ActionBarActivity{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_add_new_child_visit5, container, false);
 		final String child_id = getArguments().getString("child_id");
+		
+		final DetailedChildVisit dcv = ((AddNewChildVisitActivity)getActivity()).dcv;
+		
+		EditText num_times_incaparina_past_week_field = (EditText)rootView.findViewById(R.id.child_visit4_num_times_incaparina_past_week);
+		if (dcv.getNum_times_incaparina_past_week() != 0) num_times_incaparina_past_week_field.setText("" + dcv.getNum_times_incaparina_past_week());
+		num_times_incaparina_past_week_field.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void afterTextChanged(Editable arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start,
+					int count, int after) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start,
+					int before, int count) {
+				// TODO Auto-generated method stub
+				if (s.length() > 0)
+					dcv.setNum_times_incaparina_past_week(Integer.parseInt(s.toString()));
+				else
+					dcv.setNum_times_incaparina_past_week(0);
+				
+			}
+			
+		});
+		
+		EditText num_times_vegetables_or_fruits_past_week_field = (EditText)rootView.findViewById(R.id.child_visit4_num_times_vegetables_or_fruits_past_week);
+		if (dcv.getNum_times_vegetables_or_fruits_past_week() != 0) num_times_vegetables_or_fruits_past_week_field.setText("" + dcv.getNum_times_vegetables_or_fruits_past_week());
+		num_times_vegetables_or_fruits_past_week_field.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void afterTextChanged(Editable arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start,
+					int count, int after) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start,
+					int before, int count) {
+				// TODO Auto-generated method stub
+				if (s.length() > 0)
+					dcv.setNum_times_vegetables_or_fruits_past_week(Integer.parseInt(s.toString()));
+				else
+					dcv.setNum_times_vegetables_or_fruits_past_week(0);
+				
+			}
+			
+		});
+		
+		EditText num_times_herbs_past_week_field = (EditText)rootView.findViewById(R.id.child_visit4_num_times_herbs_past_week);
+		if (dcv.getNum_times_herbs_past_week() != 0) num_times_herbs_past_week_field.setText("" + dcv.getNum_times_herbs_past_week());
+		num_times_herbs_past_week_field.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void afterTextChanged(Editable arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start,
+					int count, int after) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start,
+					int before, int count) {
+				// TODO Auto-generated method stub
+				if (s.length() > 0)
+					dcv.setNum_times_herbs_past_week(Integer.parseInt(s.toString()));
+				else
+					dcv.setNum_times_herbs_past_week(0);
+				
+			}
+			
+		});
+		
+		EditText num_times_diarrhea_past_week_field = (EditText)rootView.findViewById(R.id.child_visit4_num_times_diarrhea_past_week);
+		if (dcv.getNum_times_diarrhea_past_week() != 0) num_times_diarrhea_past_week_field.setText("" + dcv.getNum_times_diarrhea_past_week());
+		num_times_diarrhea_past_week_field.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void afterTextChanged(Editable arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start,
+					int count, int after) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start,
+					int before, int count) {
+				// TODO Auto-generated method stub
+				if (s.length() > 0)
+					dcv.setNum_times_diarrhea_past_week(Integer.parseInt(s.toString()));
+				else
+					dcv.setNum_times_diarrhea_past_week(0);
+				
+			}
+			
+		});
+		
+		EditText num_times_vomit_past_week_field = (EditText)rootView.findViewById(R.id.child_visit4_num_times_vomit_past_week);
+		if (dcv.getNum_times_vomit_past_week() != 0) num_times_vomit_past_week_field.setText("" + dcv.getNum_times_vomit_past_week());
+		num_times_vomit_past_week_field.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void afterTextChanged(Editable arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start,
+					int count, int after) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start,
+					int before, int count) {
+				// TODO Auto-generated method stub
+				if (s.length() > 0)
+					dcv.setNum_times_vomit_past_week(Integer.parseInt(s.toString()));
+				else
+					dcv.setNum_times_vomit_past_week(0);
+				
+			}
+			
+		});
+		
+		EditText num_times_cough_past_week_field = (EditText)rootView.findViewById(R.id.child_visit4_num_times_cough_past_week);
+		if (dcv.getNum_times_cough_past_week() != 0) num_times_cough_past_week_field.setText("" + dcv.getNum_times_cough_past_week());
+		num_times_cough_past_week_field.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void afterTextChanged(Editable arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start,
+					int count, int after) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start,
+					int before, int count) {
+				// TODO Auto-generated method stub
+				if (s.length() > 0)
+					dcv.setNum_times_cough_past_week(Integer.parseInt(s.toString()));
+				else
+					dcv.setNum_times_cough_past_week(0);
+				
+			}
+			
+		});
+		
+		EditText num_times_fever_past_week_field = (EditText)rootView.findViewById(R.id.child_visit4_num_times_fever_past_week);
+		if (dcv.getNum_times_fever_past_week() != 0) num_times_fever_past_week_field.setText("" + dcv.getNum_times_fever_past_week());
+		num_times_fever_past_week_field.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void afterTextChanged(Editable arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start,
+					int count, int after) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start,
+					int before, int count) {
+				// TODO Auto-generated method stub
+				if (s.length() > 0)
+					dcv.setNum_times_fever_past_week(Integer.parseInt(s.toString()));
+				else
+					dcv.setNum_times_fever_past_week(0);
+				
+			}
+			
+		});
+		
+		EditText num_times_other_illness_past_week_field = (EditText)rootView.findViewById(R.id.child_visit4_num_times_other_illness_past_week);
+		if (dcv.getNum_times_other_illness_past_week() != 0) num_times_other_illness_past_week_field.setText("" + dcv.getNum_times_other_illness_past_week());
+		num_times_other_illness_past_week_field.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void afterTextChanged(Editable arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start,
+					int count, int after) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start,
+					int before, int count) {
+				// TODO Auto-generated method stub
+				if (s.length() > 0)
+					dcv.setNum_times_other_illness_past_week(Integer.parseInt(s.toString()));
+				else
+					dcv.setNum_times_other_illness_past_week(0);
+				
+			}
+			
+		});
+		
+		EditText other_illness_information_field = (EditText)rootView.findViewById(R.id.child_visit4_other_illness_information);
+		if (dcv.getIllness_description() != null) other_illness_information_field.setText("" + dcv.getIllness_description());
+		other_illness_information_field.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void afterTextChanged(Editable arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start,
+					int count, int after) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start,
+					int before, int count) {
+				// TODO Auto-generated method stub
+				if (s.length() > 0)
+					dcv.setIllness_description(s.toString());
+				else
+					dcv.setIllness_description(null);
+				
+			}
+			
+		});
 
 
 		return rootView;
