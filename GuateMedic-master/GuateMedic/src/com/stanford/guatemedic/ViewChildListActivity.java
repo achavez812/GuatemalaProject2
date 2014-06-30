@@ -54,6 +54,10 @@ public class ViewChildListActivity extends ActionBarActivity {
 			i.putExtra("family_id", family_id);
 			startActivity(i);
 			return true;
+		}else if(id== R.id.viewfamilyinfor2) {
+			Intent i= new Intent(getApplication(), view_family.class);
+			i.putExtra("family_id", family_id);
+			startActivity(i);
 		}
 		return super.onOptionsItemSelected(item);
 	}
