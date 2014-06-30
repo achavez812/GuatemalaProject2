@@ -4,8 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
+    <!-- Add in basic information about child (at least name) -->
+    
     <Spinner
 	    android:id="@+id/child_visit_spinner"
+	    android:layout_marginTop="10dp"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content" />
     
