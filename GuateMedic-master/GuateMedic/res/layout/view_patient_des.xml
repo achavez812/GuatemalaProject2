@@ -5,7 +5,7 @@
 
 <RelativeLayout
     android:layout_width="fill_parent"
-    android:layout_height="1200dp">
+    android:layout_height="wrap_content">
  
 
 
@@ -31,7 +31,7 @@
 	    
 	    <!-- Labels start here -->
 		
-
+<!-- 
     	<ImageView
         	android:id="@+id/view_patient_image"
         	android:layout_width="100dp"
@@ -40,24 +40,24 @@
         	android:layout_below="@+id/view_patient_name"
         	android:layout_marginTop="14dp"
         	android:layout_margin="10dp"
-        	android:src="@drawable/add" />
+        	android:src="@drawable/add" /> -->
     	<Button
         	android:id="@+id/edit_patient_detail"
         	android:layout_width="100dp"
         	android:layout_height="wrap_content"
-        	android:layout_alignLeft="@+id/view_patient_image"
-        	android:layout_below="@+id/view_patient_image"   
+			android:layout_alignParentLeft="true"
+			android:layout_centerVertical="true"
         	android:text="EDIT"/>
-    	
     	
     	
     	<TextView
         	android:id="@+id/edit_image_url"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
-        	android:layout_alignTop="@+id/view_patient_image"
+        	android:layout_marginTop="14dp"
+        	android:layout_below="@+id/view_patient_name"
         	android:layout_marginLeft="14dp"
-        	android:layout_toRightOf="@+id/view_patient_image"
+        	android:layout_toRightOf="@+id/edit_patient_detail"
         	android:text="Record No:" />
   		
   		<TextView
@@ -76,14 +76,18 @@
         	android:layout_alignLeft="@+id/textView2"
         	android:text="Date of Birth:" />
 
-  
-
+	<RelativeLayout
+	    android:id="@+id/collapse_info"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/textView3"
+	    android:layout_alignLeft="@+id/textView3"
+	    >
     	<TextView
         	android:id="@+id/textView4"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
-        	android:layout_below="@+id/textView3"
-        	android:layout_alignLeft="@+id/textView3"
+        	android:layout_alignParentLeft="true"
         	android:text="Gestation Time: " />
     	<TextView 
     	    android:id="@+id/textView5"
@@ -92,7 +96,64 @@
         	android:layout_below="@+id/textView4"
         	android:layout_alignLeft="@+id/textView4"
         	android:text="Type of Birth:"/>
+    	<TextView 
+    	    android:id="@+id/no_siblings_birth_text"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"
+    	    android:layout_below="@+id/textView5" 
+    	    android:layout_alignLeft="@+id/textView5"
+    	    android:text="Number of Siblings at Birth:"
+    	    />
+    	<TextView 
+    	    android:id="@+id/youngest_sibling_dob_text"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"
+    	    android:layout_below="@+id/no_siblings_birth_text" 
+    	    android:layout_alignLeft="@+id/textView5"
+    	    android:text="Date of Birth of Youngest Sibling:"
+    	    />
+    
     	
+	    <TextView
+	        android:id="@+id/gestation_time"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+        	android:layout_toRightOf="@+id/textView4"
+	        android:text="TextView" />
+	    
+	    <TextView
+	        android:id="@+id/type_of_birth"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+        	android:layout_toRightOf="@+id/textView5"
+	        android:layout_below="@+id/gestation_time"
+	        android:text="TextView" />
+	   
+	    <TextView
+	        android:id="@+id/no_siblings_birth"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+        	android:layout_toRightOf="@+id/no_siblings_birth_text"
+	        android:layout_below="@+id/type_of_birth"
+	        android:text="TextView" />
+
+	    <TextView
+	        android:id="@+id/youngest_sibling_dob"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+        	android:layout_toRightOf="@+id/youngest_sibling_dob_text"
+	        android:layout_below="@+id/no_siblings_birth"
+	        android:text="TextView" />
+    </RelativeLayout>
+    	<TextView
+        android:id="@+id/clickfordetails_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="Click Box For More Details"
+        />
+  
 <!-- 
     	<TextView
         	android:id="@+id/textView5"
@@ -157,21 +218,7 @@
 	        android:text="TextView" />
 	    
 	
-	    <TextView
-	        android:id="@+id/gestation_time"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-        	android:layout_toRightOf="@+id/textView4"
-	        android:layout_below="@+id/dob"
-	        android:text="TextView" />
-	    
-	    <TextView
-	        android:id="@+id/type_of_birth"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-        	android:layout_toRightOf="@+id/textView5"
-	        android:layout_below="@+id/gestation_time"
-	        android:text="TextView" />
+
 
        <!--<TextView
         	android:id="@+id/household_no"

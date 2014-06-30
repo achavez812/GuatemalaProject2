@@ -6,7 +6,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
-
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -144,7 +145,7 @@ public class view_patient extends Activity{
 		//TextView patient_sib_info = (TextView)findViewById(R.id.sibling_info);
 		//TextView patient_breastfeeding = (TextView)findViewById(R.id.breastfeed_info);
 		//TextView patient_father_occu = (TextView)findViewById(R.id.father_occupation);
-		ImageView view_pati_image = (ImageView)findViewById(R.id.view_patient_image);
+		//ImageView view_pati_image = (ImageView)findViewById(R.id.view_patient_image);
         TextView patient_dob = (TextView)findViewById(R.id.dob);
 		
 		DetailedChild child = DetailedRecordsStore.get(getApplication()).getChild(getIntent().getStringExtra("child_id"));
@@ -180,7 +181,7 @@ public class view_patient extends Activity{
 			//patient_breastfeeding.setText(patientdata.get("breast_info"));
 			//patient_father_occu.setText(patientdata.get("father_occu"));
 			if(patientdata.get("image")!=null && !(patientdata.get("image").trim().length()==0)) {
-			view_pati_image.setImageBitmap(decodeSampledBitmapFromResource(patientdata.get("image"), 100, 100));
+			//view_pati_image.setImageBitmap(decodeSampledBitmapFromResource(patientdata.get("image"), 100, 100));
 			}
 		}
 		
@@ -209,6 +210,8 @@ public class view_patient extends Activity{
 			}
 		});
 		getexaminfo();
+		if(!isExpanded)
+			findViewById(R.id.collapse_info).setVisibility(View.GONE);
 	}
 /*	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -328,20 +331,34 @@ public class view_patient extends Activity{
 			isExpanded=false;
 		}
 		if(isExpanded){
-			gestation_descy.setVisibility(View.VISIBLE);
-			t_of_b_desc.setVisibility(View.VISIBLE);
-			gestation_val.setVisibility(View.VISIBLE);
-			t_of_b_val.setVisibility(View.VISIBLE);
+			
+			findViewById(R.id.collapse_info).setVisibility(View.VISIBLE);
+			findViewById(R.id.clickfordetails_text).setVisibility(View.GONE);
+			slide_down(this, findViewById(R.id.collapse_info));
 		}else if(!isExpanded) {
-			gestation_descy.setVisibility(View.GONE);
-			t_of_b_desc.setVisibility(View.GONE);
-			gestation_val.setVisibility(View.GONE);
-			t_of_b_val.setVisibility(View.GONE);
+			findViewById(R.id.collapse_info).setVisibility(View.GONE);
+			findViewById(R.id.clickfordetails_text).setVisibility(View.VISIBLE);
 		}
 		
 	}
 	
-	
+
+	//...
+	/**
+	*
+	* @param ctx
+	* @param v
+	*/
+	public static void slide_down(Context ctx, View v){
+		Animation a = AnimationUtils.loadAnimation(ctx, R.anim.slide_down);
+		if(a != null){
+			a.reset();
+			if(v != null){
+				v.clearAnimation();
+				v.startAnimation(a);
+			}
+		}
+	}
 	 public static Bitmap decodeSampledBitmapFromResource(String picturePath, int reqWidth, int reqHeight) {
 
 		    // First decode with inJustDecodeBounds=true to check dimensions
