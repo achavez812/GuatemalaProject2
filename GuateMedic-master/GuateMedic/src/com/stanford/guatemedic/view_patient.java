@@ -147,7 +147,8 @@ public class view_patient extends Activity{
 		//TextView patient_father_occu = (TextView)findViewById(R.id.father_occupation);
 		//ImageView view_pati_image = (ImageView)findViewById(R.id.view_patient_image);
         TextView patient_dob = (TextView)findViewById(R.id.dob);
-		
+        TextView no_siblings_birth=(TextView)findViewById(R.id.no_siblings_birth);
+		TextView youngest_sibling_dob=(TextView)findViewById(R.id.youngest_sibling_dob);
 		DetailedChild child = DetailedRecordsStore.get(getApplication()).getChild(getIntent().getStringExtra("child_id"));
 		patient_name.setText(child.getName());
 		patient_rec_no.setText(child.getChild_id());
@@ -155,7 +156,14 @@ public class view_patient extends Activity{
 		patient_gestation.setText(child.getMonths_gestated()+"");
 		patient_t_of_b.setText("Normal");
 		patient_dob.setText(child.getDob());
+		no_siblings_birth.setText(child.getNum_children_in_same_pregnancy()+"");
+		String YoungDOB=child.getYoungest_sibling_dob()+ " ";
+		youngest_sibling_dob.setText(YoungDOB);
 		
+		if(YoungDOB.toString().trim().equals("") || YoungDOB.toString().trim().equals("null")){
+			//Log.d("youngdobempty","youngdobempty");
+			((TextView)findViewById(R.id.youngest_sibling_dob)).setText("Not Set");
+		}
 		/*ArrayList <ChildVisit> childer=child.getChildVisits();
 		for(ChildVisit vis: childer){
 			
