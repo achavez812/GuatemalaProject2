@@ -1,5 +1,10 @@
 package com.stanford.guatemedic;
 
+import java.lang.reflect.Field;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class DetailedChildVisit {
 	
 	private String child_id;
@@ -17,7 +22,7 @@ public class DetailedChildVisit {
 	private float how_long_only_breastfed;
 	private float child_age_when_stopped_breastfeeding; //Could be String date_when_stopped breastfeeding
 	
-	private float weight; //in kilogramss
+	private float weight; //in kilograms
 	private float height; //in centimeters
 	private int num_times_incaparina_past_week;
 	private int num_times_vegetables_or_fruits_past_week;
@@ -36,7 +41,7 @@ public class DetailedChildVisit {
 	
 	public DetailedChildVisit(String child_id) {
 		this.child_id = child_id;
-		this.child_id = child_id;
+		this.temp_child_id = child_id;
 	}
 
 	public String getChild_id() {
@@ -247,6 +252,20 @@ public class DetailedChildVisit {
 
 	public String getTemp_child_id() {
 		return temp_child_id;
+	}
+	
+	public JSONObject toJSONObject() {
+		JSONObject obj = new JSONObject();
+		try {
+			Field[] fields = DetailedChildVisit.class.getDeclaredFields();
+			for (Field field : fields) {
+				if (field.get(this) != null)
+					obj.put(field.getName(), field.get(this).toString());
+			}
+		} catch (JSONException | IllegalAccessException | IllegalArgumentException e) {
+			e.printStackTrace();
+		}
+		return obj;
 	}
 
 }

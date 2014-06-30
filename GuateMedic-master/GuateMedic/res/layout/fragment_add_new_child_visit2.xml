@@ -17,7 +17,7 @@
         />
     
       <EditText
-        android:id="@+id/child_visit2_is_only_breasted"
+        android:id="@+id/child_visit2_is_only_breastfed"
         android:textSize="30sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

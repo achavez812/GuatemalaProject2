@@ -92,7 +92,7 @@
         />
 		
 			<EditText
-        android:id="@+id/child_visit4_illness_description"
+        android:id="@+id/child_visit4_other_illness_information"
         android:textSize="30sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -1160,13 +1160,12 @@ containing a value of this type.
         public static final int child_visit2_age_when_stopped_breastfeeding=0x7f05006b;
         public static final int child_visit2_how_long_only_breastfed=0x7f05006a;
         public static final int child_visit2_is_currently_breastfed=0x7f050068;
-        public static final int child_visit2_is_only_breasted=0x7f050069;
+        public static final int child_visit2_is_only_breastfed=0x7f050069;
         public static final int child_visit3_age_last_received_deparasiting_medicine=0x7f050070;
         public static final int child_visit3_chronic_disease_or_disability_information=0x7f05006f;
         public static final int child_visit3_did_receive_vaccinations=0x7f05006c;
         public static final int child_visit3_has_chronic_disease_or_disability=0x7f05006e;
         public static final int child_visit3_vaccination_information=0x7f05006d;
-        public static final int child_visit4_illness_description=0x7f050079;
         public static final int child_visit4_num_times_cough_past_week=0x7f050076;
         public static final int child_visit4_num_times_diarrhea_past_week=0x7f050074;
         public static final int child_visit4_num_times_fever_past_week=0x7f050077;
@@ -1175,6 +1174,7 @@ containing a value of this type.
         public static final int child_visit4_num_times_other_illness_past_week=0x7f050078;
         public static final int child_visit4_num_times_vegetables_or_fruits_past_week=0x7f050072;
         public static final int child_visit4_num_times_vomit_past_week=0x7f050075;
+        public static final int child_visit4_other_illness_information=0x7f050079;
         public static final int child_visit_spinner=0x7f050040;
         public static final int clickfordetails_text=0x7f05009c;
         public static final int collapseActionView=0x7f05000d;
