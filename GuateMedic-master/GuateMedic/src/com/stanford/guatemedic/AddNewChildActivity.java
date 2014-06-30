@@ -58,7 +58,7 @@ public class AddNewChildActivity extends ActionBarActivity{
 		}
 		
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_add_new_child, container,false);
+			View rootView = inflater.inflate(R.layout.fragment_add_new_child, container, false);
 			final String family_id = getArguments().getString("family_id");
 			
 			TextView textview = (TextView)rootView.findViewById(R.id.add_new_child_textview1);

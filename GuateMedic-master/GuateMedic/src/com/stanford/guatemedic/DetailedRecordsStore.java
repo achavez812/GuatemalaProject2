@@ -39,7 +39,6 @@ public class DetailedRecordsStore {
 		gfr = new GuatemedicReader(c);
 		processDownloadedFiles();
 		processNewFiles();
-
 	}
 	
 	public static void load(Context c) {
@@ -162,6 +161,52 @@ public class DetailedRecordsStore {
 				Log.i("WTF", "Child save successful");
 			
 			parseChild(family_id, obj);			
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void addNewChildVisit(JSONObject obj) {
+		try {
+			String child_id = obj.getString("child_id");
+			String random_id = generateRandomId();
+			String current_date = Utilities.getTodayString();
+			
+			DetailedChildVisit dcv = new DetailedChildVisit(child_id);
+			
+			obj.put("temp_child_id", child_id);
+			obj.put("visit_id", random_id);
+			obj.put("visit_date", current_date);
+			obj.put("promoter_id", "NULL"); //Figure this out
+			
+			GuatemedicWriter gw = new GuatemedicWriter(context);
+			if (gw.saveNewChildVisit(obj.toString()))
+				Log.i("WTF", "Child Visit save successful");
+			parseChildVisit(dcv, obj);
+			getChild(child_id).addChild_visit(dcv);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void addNewFamilyVisit(JSONObject obj) {
+		try {
+			String family_id = obj.getString("child_id");
+			String random_id = generateRandomId();
+			String current_date = Utilities.getTodayString();
+			
+			DetailedFamilyVisit dfv = new DetailedFamilyVisit(family_id);
+			
+			obj.put("temp_family_id", family_id);
+			obj.put("visit_id", random_id);
+			obj.put("visit_date", current_date);
+			obj.put("promoter_id", "NULL");
+			
+			GuatemedicWriter gw = new GuatemedicWriter(context);
+			if (gw.saveNewFamilyVisit(obj.toString()))
+				Log.i("WTF", "Family Visit save successful");
+			parseFamilyVisit(dfv, obj);
+			getFamily(family_id).addFamily_visit(dfv);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -511,6 +556,7 @@ public class DetailedRecordsStore {
 			String data = gfr.getStringData(f);
 			try {
 				JSONObject obj = new JSONObject(data);
+				addFamilyVisit(getFamily(obj.getString("family_id")), obj);
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
@@ -523,6 +569,7 @@ public class DetailedRecordsStore {
 			String data = gfr.getStringData(f);
 			try {
 				JSONObject obj = new JSONObject(data);
+				addChildVisit(getChild(obj.getString("child_id")), obj);
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
