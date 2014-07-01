@@ -49,7 +49,7 @@
         android:hint="Date of Birth"
         />
         
-    
+    </RadioGroup>
     <RadioGroup
         android:id="@+id/add_new_child_gender"
         android:textSize="30sp"

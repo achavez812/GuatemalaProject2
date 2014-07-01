@@ -48,8 +48,9 @@
         android:layout_marginRight="20dp"
         android:hint="Date of Birth"
         />
+    <RadioGroup >
         
-    
+    </RadioGroup>
     <RadioGroup
         android:id="@+id/add_new_child_gender"
         android:textSize="30sp"
@@ -58,7 +59,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:tag="Gender"
+        android:hint="Gender"
         >
         <RadioButton 
             android:id="@+id/male"
@@ -66,11 +67,11 @@
             android:layout_height="wrap_content"
             android:text="Male"/>
         <RadioButton 
-            android:id="@+id/female"
+            android:id="@+id/male"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Female"/>
-    </RadioGroup>
+            android:text="Male"/>
+        </RadioGroup>
     
     <TextView
         android:id="@+id/add_new_child_textview3"

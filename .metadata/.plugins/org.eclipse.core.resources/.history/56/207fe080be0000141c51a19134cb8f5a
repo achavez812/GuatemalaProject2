@@ -48,9 +48,8 @@
         android:layout_marginRight="20dp"
         android:hint="Date of Birth"
         />
-        
     
-    <RadioGroup
+    <EditText
         android:id="@+id/add_new_child_gender"
         android:textSize="30sp"
         android:layout_width="match_parent"
@@ -58,19 +57,8 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:tag="Gender"
-        >
-        <RadioButton 
-            android:id="@+id/male"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Male"/>
-        <RadioButton 
-            android:id="@+id/female"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Female"/>
-    </RadioGroup>
+        android:hint="Gender"
+        />
     
     <TextView
         android:id="@+id/add_new_child_textview3"
@@ -81,7 +69,7 @@
         android:layout_height="wrap_content" 
         android:text="Extended Information"/>
     
-    <Spinner
+    <EditText
         android:id="@+id/add_new_child_type_of_birth"
         android:textSize="30sp"
         android:layout_width="match_parent"
@@ -92,7 +80,7 @@
         android:hint="Type of Birth"
         />
     
-    <Spinner
+    <EditText
         android:id="@+id/add_new_child_num_children_in_same_pregnancy"
         android:textSize="30sp"
         android:layout_width="match_parent"
@@ -111,11 +99,10 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:inputType="numberDecimal"
         android:hint="Months Gestated"
         />
     
-    <Spinner
+    <EditText
         android:id="@+id/add_new_child_prenatal_care"
         android:textSize="30sp"
         android:layout_width="match_parent"
@@ -134,7 +121,6 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:inputType="numberDecimal"
         android:hint="Birth Weight"
         />
     
@@ -146,7 +132,6 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:inputType="numberDecimal"
         android:hint="Birth Height"
         />
     
@@ -167,6 +152,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:paddingTop="15dp"
+        android:paddingRight="15dp"
+        android:paddingLeft="25dp"
+        android:paddingBottom="25dp"
         android:text="Add Child"
         />
         

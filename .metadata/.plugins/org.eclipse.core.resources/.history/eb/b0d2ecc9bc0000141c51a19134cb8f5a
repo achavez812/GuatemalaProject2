@@ -185,7 +185,6 @@
 	        android:layout_height="wrap_content"
 	        android:layout_below="@+id/birth_height"
 	        android:text="VIEW FAMILY INFO"
-	        android:layout_marginTop="10dp"
 	        android:layout_alignParentRight="true"/>
 	    <Button 
 	        android:id="@+id/add_family_visits_cont"
