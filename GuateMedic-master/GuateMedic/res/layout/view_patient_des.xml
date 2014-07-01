@@ -181,15 +181,16 @@
 	        />
 	    <Button 
 	        android:id="@+id/view_family_info_cont"
-	        android:layout_width="wrap_content"
+	        android:layout_width="250dp"
 	        android:layout_height="wrap_content"
 	        android:layout_below="@+id/birth_height"
 	        android:text="VIEW FAMILY INFO"
 	        android:layout_alignParentRight="true"/>
 	    <Button 
 	        android:id="@+id/add_family_visits_cont"
-	        android:layout_width="wrap_content"
+	        android:layout_width="250dp"
 	        android:layout_height="wrap_content"
+	        android:layout_marginTop="10dp"
 	        android:layout_below="@+id/view_family_info_cont"
 	        android:text="ADD FAMILY VIST"
 	        android:layout_alignParentRight="true"/>

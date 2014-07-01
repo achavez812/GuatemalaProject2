@@ -3,6 +3,7 @@ package com.stanford.guatemedic;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,8 +13,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class AddNewChildActivity extends ActionBarActivity{
@@ -27,7 +32,7 @@ public class AddNewChildActivity extends ActionBarActivity{
 					.add(R.id.container, AddNewChildFragment.newInstance(family_id)).commit();
 		}
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		//getMenuInflater().inflate(R.menu.main, menu);
@@ -74,20 +79,27 @@ public class AddNewChildActivity extends ActionBarActivity{
 					EditText dob_field = (EditText)getActivity().findViewById(R.id.add_new_child_dob);
 					String dob = dob_field.getText().toString();
 					
-					EditText gender_field = (EditText)getActivity().findViewById(R.id.add_new_child_gender);
+					RadioGroup radioGenderGroup = (RadioGroup) getView().findViewById(R.id.add_new_child_gender);
+					int selectedId=radioGenderGroup.getCheckedRadioButtonId();
+					RadioButton gender_field=(RadioButton)getView().findViewById(selectedId);
+					//EditText gender_field = (EditText)getActivity().findViewById(R.id.add_new_child_gender);
 					String gender = gender_field.getText().toString();
 					
-					EditText type_of_birth_field = (EditText)getActivity().findViewById(R.id.add_new_child_type_of_birth);
-					String type_of_birth = type_of_birth_field.getText().toString();
 					
-					EditText num_children_in_same_pregnancy_field = (EditText)getActivity().findViewById(R.id.add_new_child_num_children_in_same_pregnancy);
-					String num_children_in_same_pregnancy = num_children_in_same_pregnancy_field.getText().toString();
+					Spinner type_of_birth_field=(Spinner)getView().findViewById(R.id.add_new_child_type_of_birth);
+					//EditText type_of_birth_field = (EditText)getActivity().findViewById(R.id.add_new_child_type_of_birth);
+					String type_of_birth = type_of_birth_field.getSelectedItem().toString();
+					
+					Spinner num_children_in_same_pregrancy_field=(Spinner)getView().findViewById(R.id.add_new_child_num_children_in_same_pregnancy);
+					//EditText num_children_in_same_pregnancy_field = (EditText)getActivity().findViewById(R.id.add_new_child_num_children_in_same_pregnancy);
+					String num_children_in_same_pregnancy = num_children_in_same_pregrancy_field.getSelectedItem().toString();
 					
 					EditText months_gestated_field = (EditText)getActivity().findViewById(R.id.add_new_child_months_gestated);
 					String months_gestated = months_gestated_field.getText().toString();
 					
-					EditText prenatal_care_field = (EditText)getActivity().findViewById(R.id.add_new_child_prenatal_care);
-					String prenatal_care = prenatal_care_field.getText().toString();
+					Spinner prenatal_care_field = (Spinner)getActivity().findViewById(R.id.add_new_child_prenatal_care);
+					//EditText prenatal_care_field = (EditText)getActivity().findViewById(R.id.add_new_child_prenatal_care);
+					String prenatal_care = prenatal_care_field.getSelectedItem().toString();
 					
 					EditText birth_weight_field = (EditText)getActivity().findViewById(R.id.add_new_child_birth_weight);
 					String birth_weight = birth_weight_field.getText().toString();
