@@ -16,6 +16,9 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
 
 
@@ -53,6 +56,16 @@ public class Utilities {
 		String date = year + "-" + month + "-" + day + "T" + hour + ":" + minute + ":" + second;
 		return date;
 	}
+	
+	public static boolean hasInternetConnection(Context context) {
+		ConnectivityManager cm =
+		        (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+		    NetworkInfo netInfo = cm.getActiveNetworkInfo();
+		    if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+		        return true;
+		    }
+		    return false;
+	}
 
 	/**
 	 * Performs an HTTP GET Request.
@@ -69,9 +82,7 @@ public class Utilities {
 		try {
 			URL url = new URL(urlString);
 			HttpURLConnection connection = (HttpURLConnection)url.openConnection();
-			int milliseconds = 10 * 60 * 1000; //10 represent minutes
-			connection.setConnectTimeout(milliseconds);
-			connection.setReadTimeout(milliseconds);
+		
 			if (headerMap != null) {
 				for (String key : headerMap.keySet()) {
 					connection.addRequestProperty(key, headerMap.get(key));

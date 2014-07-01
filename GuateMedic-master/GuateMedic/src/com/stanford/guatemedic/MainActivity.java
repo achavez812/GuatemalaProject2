@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nativecss.NativeCSS;
@@ -24,6 +25,8 @@ public class MainActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		if (getIntent().getStringExtra("toast") != null)
+			Toast.makeText(getApplication(), "Successful Download", Toast.LENGTH_LONG).show();
 
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
@@ -38,6 +41,11 @@ public class MainActivity extends ActionBarActivity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	public void onBackPressed() {
+		
 	}
 
 	@Override
@@ -74,24 +82,51 @@ public class MainActivity extends ActionBarActivity {
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_main, container,false);
 			
-			//TextView info = (TextView)rootView.findViewById(R.id.main_page_textview);
+			final GuatemedicReader gmr = new GuatemedicReader(getActivity().getApplication());
 			
-			
+			TextView notes = (TextView)rootView.findViewById(R.id.main_page_notes);
+						
 			Button view_button = (Button)rootView.findViewById(R.id.main_view_button);
 			view_button.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Intent intent = new Intent(getActivity().getApplication(), ViewVillageListActivity.class);
-					startActivity(intent);
+					if (gmr.hasDownloadedData()) {
+						Intent intent = new Intent(getActivity().getApplication(), ViewVillageListActivity.class);
+						startActivity(intent);
+					} else {
+						Toast.makeText(getActivity(), "NO RECORDS", Toast.LENGTH_LONG).show();
+					}
 				}
 			});
 			
-			Button download_button = (Button)rootView.findViewById(R.id.main_download_button);
-			download_button.setOnClickListener(new View.OnClickListener() {
+			final Button upload_download_button = (Button)rootView.findViewById(R.id.main_upload_download_button);
+			if (gmr.hasDownloadedData()) {
+				if (gmr.isUploadNeeded()) {
+					upload_download_button.setText("UPLOAD");
+					notes.setText("There have been records created. Please upload when possible.");
+				} else {
+					upload_download_button.setText("DOWNLOAD");
+					notes.setText("There are downloaded records. You are free to download more when you have an internet connection.");
+				}
+			} else {
+				upload_download_button.setText("DOWNLOAD");
+				notes.setText("No records are currently downloaded. You are free to download when you have an internet connection.");
+			}
+			
+			upload_download_button.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Intent intent = new Intent(getActivity().getApplication(), DownloadLoginActivity.class);
-					startActivity(intent);
+					if (Utilities.hasInternetConnection(getActivity().getApplication())) {
+						if (upload_download_button.getText().equals("DOWNLOAD")) {
+							Intent intent = new Intent(getActivity().getApplication(), DownloadLoginActivity.class);
+							startActivity(intent);
+						} else {
+							Intent intent = new Intent(getActivity().getApplication(), UploadLoginActivity.class);
+							startActivity(intent);
+						}
+					} else {
+						Toast.makeText(getActivity(), "NO INTERNET", Toast.LENGTH_LONG).show();
+					}
 				}
 			});
 			

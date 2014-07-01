@@ -32,6 +32,12 @@ public class ViewVillageListActivity extends ActionBarActivity {
 					.add(R.id.container, new ViewVillageListFragment()).commit();
 		}
 	}
+	
+	@Override
+	public void onBackPressed() {
+		Intent i = new Intent(getApplication(), MainActivity.class);
+		startActivity(i);
+	}
 
 	
 	@Override

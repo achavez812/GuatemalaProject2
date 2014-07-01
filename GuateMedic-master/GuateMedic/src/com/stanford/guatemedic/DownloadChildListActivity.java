@@ -1,34 +1,29 @@
 package com.stanford.guatemedic;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class DownloadChildListActivity extends ActionBarActivity {
+	
+	private static String family_id;
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_download_village_list);
-		String family_id = getIntent().getStringExtra("family_id");
+		family_id = getIntent().getStringExtra("family_id");
+		setTitle("Children of " + BasicRecordsStore.get().getFamily(family_id).getParent1_name());
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, DownloadChildListFragment.newInstance(family_id)).commit();
@@ -39,7 +34,7 @@ public class DownloadChildListActivity extends ActionBarActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.download_button, menu);
 		return true;
 	}
 
@@ -50,89 +45,25 @@ public class DownloadChildListActivity extends ActionBarActivity {
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_download) {
-			try {
-				new HandleDownloadRecordsTask(true).execute().get();
-				Intent i = new Intent(this, MainActivity.class);
-				startActivity(i);
-			} catch (InterruptedException | ExecutionException e) {
-				e.printStackTrace();
-			}
+			BasicRecordsStore.get().DownloadData(DownloadChildListActivity.this, getApplication());
 			return true;
+		}
+		if (id == R.id.action_selectall) {
+			for (BasicChild bc : BasicRecordsStore.get().getChildren(family_id))
+				bc.setCheckboxSelected(true);
+			getSupportFragmentManager().beginTransaction().replace(R.id.container, DownloadChildListFragment.newInstance(family_id)).commit();
+
+		}
+		if (id == R.id.action_unselectall) {
+			for (BasicChild bc : BasicRecordsStore.get().getChildren(family_id))
+				bc.setCheckboxSelected(false);
+			getSupportFragmentManager().beginTransaction().replace(R.id.container, DownloadChildListFragment.newInstance(family_id)).commit();
+
 		}
 		return super.onOptionsItemSelected(item);
 	}
 	
-	private class HandleDownloadRecordsTask extends AsyncTask<Void, Void, Void> {
-		private boolean showLoading;
-		private boolean success;
-		
-		public HandleDownloadRecordsTask(boolean showLoading) {
-			super();
-			this.showLoading = showLoading;
-		}
 
-		@Override
-		protected Void doInBackground(Void... params) {
-			try {
-				JSONArray json_array = new JSONArray();
-				for (BasicVillage village : BasicRecordsStore.get().getVillages()) {
-					if (village.isCheckboxSelected()) {
-						for (BasicFamily family : BasicRecordsStore.get().getFamilies(village.getName())) {
-							if (family.isCheckboxSelected()) {
-								for (BasicChild child :BasicRecordsStore.get().getChildren(family.getFamily_id())) {
-									if (child.isCheckboxSelected()) {
-										json_array.put(child.getChild_id());
-									}
-								}
-							}
-						}
-					}
-				}
-				JSONObject obj = new JSONObject();
-				obj.put("child_ids", json_array);
-				Map<String, String> headerMap = new HashMap<String, String>();
-				headerMap.put("Authorization", BasicRecordsStore.get().getAuthKey());
-				String response = Utilities.postRequest("https://guatemedic.herokuapp.com/records", headerMap, obj.toString());
-				if (response == null) {
-					success = false;
-				} else {
-					GuatemedicWriter gfw = new GuatemedicWriter(getApplication());
-					if (gfw.saveDownloads(response)) {
-						DetailedRecordsStore.load(getApplication());
-						success = true;
-					} else {
-
-						success = false;
-					}
-				}
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-			return null;
-		}
-		
-		@Override
-		protected void onPreExecute() {
-			if (showLoading) {
-				//Display loading bar
-			
-			}
-		}
-
-		
-		@Override
-		protected void onPostExecute(Void result) {
-			if (showLoading) {
-				//Dismiss loading bar
-			}
-			if (success) {
-				Toast.makeText(getApplication(), "Success", Toast.LENGTH_LONG).show();
-			} else {
-				Toast.makeText(getApplication(), "Failure", Toast.LENGTH_LONG).show();
-
-			}
-		}
-	}
 
 	public static class DownloadChildListFragment extends ListFragment {
 		
@@ -174,8 +105,7 @@ public class DownloadChildListActivity extends ActionBarActivity {
 		
 		@Override
 		public void onListItemClick(ListView l, View v, int position, long id) {
-			Intent intent = new Intent(getActivity().getApplication(), DownloadFamilyListActivity.class);
-			startActivity(intent);
+
 		}
 		
 		private class ChildAdapter extends ArrayAdapter<BasicChild>  {
@@ -193,11 +123,21 @@ public class DownloadChildListActivity extends ActionBarActivity {
 				String child_id = child.getChild_id();
 				
 				TextView childTitle = (TextView)convertView.findViewById(R.id.list_item_title);
-				childTitle.setText(child_id);
+				childTitle.setText(child.getName());
 				
 				CheckBox checkbox = (CheckBox)convertView.findViewById(R.id.list_item_checkbox);
-				checkbox.setVisibility(View.GONE);
-				
+				checkbox.setChecked(child.isCheckboxSelected());
+				checkbox.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View buttonView) {
+						boolean isChecked = ((CheckBox)buttonView).isChecked();
+						View v = (View)buttonView.getParent();
+						BasicChild theChild = children.get(position);
+						String child_id = theChild.getChild_id();
+						theChild.setCheckboxSelected(isChecked);
+					}
+				});
 
 				return convertView;
 				

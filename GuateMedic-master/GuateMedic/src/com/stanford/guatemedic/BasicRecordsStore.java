@@ -9,8 +9,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 public class BasicRecordsStore {
 	
@@ -22,16 +26,15 @@ public class BasicRecordsStore {
 	
 	private String authKey;
 	
-	private BasicRecordsStore(String authKey) {
+	static Context context;
+	
+	
+	private BasicRecordsStore(String authKey) throws InterruptedException, ExecutionException {
 		this.authKey = authKey;
 		villages = new ArrayList<BasicVillage>();
 		families = new HashMap<String, ArrayList<BasicFamily>>();
 		children = new HashMap<String, ArrayList<BasicChild>>();
-		try {
-			new FetchBasicRecordsTask(true).execute(authKey).get();
-		} catch (InterruptedException | ExecutionException e) {
-			e.printStackTrace();
-		}
+		new FetchBasicRecordsTask(true).execute(authKey);
 	}
 	
 	
@@ -41,8 +44,14 @@ public class BasicRecordsStore {
 	 *
 	 * @param authKey Authentication key must be passed in
 	 */
-	public static void load(String authKey) {
-		sBasicRecordsDatabase = new BasicRecordsStore(authKey);
+	public static void load(Context c, String authKey) {
+		context = c;
+		try {
+			sBasicRecordsDatabase = new BasicRecordsStore(authKey);
+		} catch (InterruptedException | ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -85,6 +94,16 @@ public class BasicRecordsStore {
 		return null;
 	}
 	
+	public BasicFamily getFamily(String family_id) {
+		for (String village :families.keySet()) {
+			for(BasicFamily family : families.get(village)) {
+				if (family.getFamily_id().equals(family_id))
+					return family;
+			}
+		}
+		return null;
+	}
+	
 	public ArrayList<BasicChild> getChildren(String family_id) {
 		if (children.containsKey(family_id))
 			return children.get(family_id);
@@ -105,9 +124,15 @@ public class BasicRecordsStore {
 		private boolean showLoading;
 		private boolean success;
 		
+		private ProgressDialog dialog;
+		
+
+		
 		public FetchBasicRecordsTask(boolean showLoading) {
 			super();
 			this.showLoading = showLoading;
+			dialog = new ProgressDialog(context);
+			dialog.setMessage("Loading");
 		}
 		
 		private void setFamilyInfo(BasicFamily f, JSONObject family) {
@@ -180,6 +205,7 @@ public class BasicRecordsStore {
 		protected void onPreExecute() {
 			if (showLoading) {
 				//Display loading bar
+				dialog.show();
 			}
 		}
 		
@@ -187,11 +213,102 @@ public class BasicRecordsStore {
 		protected void onPostExecute(Void result) {
 			if (showLoading) {
 				//Dismiss loading bar
+				dialog.dismiss();
 			}
-			if (!success) {
-				
+			if (success) {
+				Intent intent = new Intent(context, DownloadVillageListActivity.class);
+				context.startActivity(intent);
+			} else {
+				Toast.makeText(context, "Failure Downloading", Toast.LENGTH_LONG).show();
 			}
 		}
+	}
+	
+	public void DownloadData(Context context1, Context context2) {
+		new HandleDownloadRecordsTask(true, context1, context2).execute();
+	}
+	
+	private class HandleDownloadRecordsTask extends AsyncTask<Void, Void, Void> {
+		
+		ProgressDialog dialog;
+		
+		private boolean showLoading;
+		private boolean success;
+		
+		private Context context1;
+		private Context context2;
+		
+		public HandleDownloadRecordsTask(boolean showLoading, Context context1, Context context2) {
+			super();
+			this.showLoading = showLoading;
+			this.context1 = context1;
+			this.context2 = context2;
+			dialog = new ProgressDialog(context1);
+			dialog.setMessage("Loading");
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			try {
+				JSONArray json_array = new JSONArray();
+				for (BasicVillage village : BasicRecordsStore.get().getVillages()) {
+					if (village.isCheckboxSelected()) {
+						for (BasicFamily family : BasicRecordsStore.get().getFamilies(village.getName())) {
+							if (family.isCheckboxSelected()) {
+								for (BasicChild child :BasicRecordsStore.get().getChildren(family.getFamily_id())) {
+									if (child.isCheckboxSelected()) {
+										json_array.put(child.getChild_id());
+									}
+								}
+							}
+						}
+					}
+				}
+				JSONObject obj = new JSONObject();
+				obj.put("child_ids", json_array);
+				Map<String, String> headerMap = new HashMap<String, String>();
+				headerMap.put("Authorization", BasicRecordsStore.get().getAuthKey());
+				String response = Utilities.postRequest("https://guatemedic.herokuapp.com/records", headerMap, obj.toString());
+				if (response == null) {
+					success = false;
+				} else {
+					GuatemedicWriter gfw = new GuatemedicWriter(context2);
+					if (gfw.saveDownloads(response)) {
+						DetailedRecordsStore.load(context2);
+						success = true;
+					} else {
+
+						success = false;
+					}
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
+		@Override
+		protected void onPreExecute() {
+			if (showLoading) {
+				//Display loading bar
+				dialog.show();
+			}
+		}
+		
+		@Override
+		protected void onPostExecute(Void result) {
+			if (showLoading) {
+				//Dismiss loading bar
+				dialog.dismiss();
+			}
+			if (success) {
+				Intent i = new Intent(context1, MainActivity.class);
+				i.putExtra("toast", "success");
+				context1.startActivity(i);
+			} 
+		}
+
+	
 	}
 	
 }

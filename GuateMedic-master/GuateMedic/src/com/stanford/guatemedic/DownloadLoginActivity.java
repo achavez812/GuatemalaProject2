@@ -46,8 +46,7 @@ public class DownloadLoginActivity extends ActionBarActivity {
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_download) {
-			Toast.makeText(getApplicationContext(), "Settings Click", Toast.LENGTH_LONG).show();
-			return true;
+
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -59,6 +58,12 @@ public class DownloadLoginActivity extends ActionBarActivity {
 
 		public DownloadLoginFragment() {
 			
+		}
+		
+		@Override
+		public void onCreate(Bundle savedInstanceState) {
+			super.onCreate(savedInstanceState);
+			setRetainInstance(true);
 		}
 
 		@Override
@@ -90,19 +95,14 @@ public class DownloadLoginActivity extends ActionBarActivity {
 		}
 		
 		private class HandleDownloadLoginTask extends AsyncTask<String, Void, Void> {
-			
-			private ProgressDialog dialog;
 
-			
 			private boolean showLoading;
 			private String auth_key;
 			
 			public HandleDownloadLoginTask(boolean showLoading) {
 				super();
 				this.showLoading = showLoading;
-				dialog = new ProgressDialog(getActivity());
-				dialog.setMessage("Loading");
-
+		
 			}
 
 			@Override
@@ -123,28 +123,16 @@ public class DownloadLoginActivity extends ActionBarActivity {
 			
 			@Override
 			protected void onPreExecute() {
-				if (showLoading) {
-					//Display loading bar
-					//dialog.show();
-					
-				}
+
 			}
 			
 			@Override
 			protected void onPostExecute(Void result) {
-				if (showLoading) {
-					//Dismiss loading bar
-					//dialog.dismiss();
-
-				}
 				if (auth_key != null) { //Success
 					//Toast.makeText(getActivity(), "Success: " + auth_key, Toast.LENGTH_LONG).show();
-					BasicRecordsStore.load(auth_key);
-					//dialog.dismiss();
-					Intent intent = new Intent(getActivity().getApplication(), DownloadVillageListActivity.class);
-					startActivity(intent);
+					BasicRecordsStore.load(getActivity(), auth_key);
 				} else { //Failure
-					Toast.makeText(getActivity(), "Failure", Toast.LENGTH_LONG).show();
+					Toast.makeText(getActivity(), "Invalid Login", Toast.LENGTH_LONG).show();
 				}
 			}
 		

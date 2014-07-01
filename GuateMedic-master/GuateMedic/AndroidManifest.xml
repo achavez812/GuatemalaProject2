@@ -27,25 +27,27 @@
         </activity>
         <activity
             android:name="com.stanford.guatemedic.DownloadLoginActivity"
+            android:screenOrientation="portrait" 
+            android:configChanges="keyboardHidden|orientation"
             android:label="DOWNLOAD" />
         <activity
             android:name="com.stanford.guatemedic.DownloadVillageListActivity"
-            android:label="VILLAGE" />
+            android:label="Villages" />
         <activity
             android:name="com.stanford.guatemedic.DownloadFamilyListActivity"
-            android:label="FAMILY" />
+            android:label="Families" />
         <activity
             android:name="com.stanford.guatemedic.DownloadChildListActivity"
-            android:label="CHILD" />
+            android:label="Children" />
         <activity
             android:name="com.stanford.guatemedic.ViewVillageListActivity"
-            android:label="VILLAGE" />
+            android:label="Villages" />
         <activity
             android:name="com.stanford.guatemedic.ViewFamilyListActivity"
-            android:label="FAMILY" />
+            android:label="Families" />
         <activity
             android:name="com.stanford.guatemedic.ViewChildListActivity"
-            android:label="CHILD" />
+            android:label="Children" />
         <activity
             android:name="com.stanford.guatemedic.view_patient"
             android:label="View Patient" />
@@ -67,6 +69,14 @@
         <activity
             android:name="com.stanford.guatemedic.ViewFamily"
             android:label="@string/title_activity_view_family" />
+        
+        <activity
+            android:name="com.stanford.guatemedic.UploadLoginActivity"
+            android:label="UPLOAD" />
+        
+        <activity
+            android:name="com.stanford.guatemedic.UploadResultsActivity"
+            android:label="UPLOAD" />
         
     </application>
 

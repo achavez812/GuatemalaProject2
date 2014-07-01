@@ -21,7 +21,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 public class ViewChildListActivity extends ActionBarActivity {
 	
-	String family_id;
+	private static String family_id;
+	private static String village;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -29,12 +30,21 @@ public class ViewChildListActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_view_child_list);
 		
 		family_id = getIntent().getStringExtra("family_id");
+		village = getIntent().getStringExtra("village");
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, ViewChildListFragment.newInstance(family_id)).commit();
 		}
 	
 	}
+	
+	@Override
+	public void onBackPressed() {
+		Intent i = new Intent(getApplication(), ViewFamilyListActivity.class);
+		i.putExtra("village_name", village);
+		startActivity(i);
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 

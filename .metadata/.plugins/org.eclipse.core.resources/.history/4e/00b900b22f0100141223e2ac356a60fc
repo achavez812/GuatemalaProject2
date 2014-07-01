@@ -1,0 +1,32 @@
+package com.stanford.guatemedic;
+
+import java.util.ArrayList;
+
+import android.content.Context;
+
+public class UploadRecordsStore {
+	
+	private static UploadRecordsStore sUploadRecordsStore;
+	
+	private ArrayList<UploadFamily> families;
+	private ArrayList<UploadFamilyVisit> family_visits;
+	private ArrayList<UploadChild> children;
+	private ArrayList<UploadChildVisit> child_visits;
+	
+	private Context context;
+	
+	private GuatemedicReader gmr;
+	private GuatemedicWriter gmw;
+	
+	private UploadRecordsStore(Context c) {
+		context = c;
+		
+		families= new ArrayList<UploadFamily>();
+		family_visits = new ArrayList<UploadFamilyVisit>();
+		children = new ArrayList<UploadChild>();
+		child_visits = new ArrayList<UploadChildVisit>();
+		gmr = new GuatemedicReader(context);
+		gfr = new GuatemedicWriter(context);
+	}
+
+}

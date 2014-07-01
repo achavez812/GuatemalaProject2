@@ -22,17 +22,24 @@ import android.widget.TextView;
 
 public class ViewFamilyListActivity extends ActionBarActivity {
 	
-	String village;
+	private static String village;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_view_family_list);
 		String village_name = getIntent().getStringExtra("village_name");
+		setTitle("Families in " + village_name);
 		village = village_name;
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, ViewFamilyListFragment.newInstance(village_name)).commit();
 		}
+	}
+	
+	@Override
+	public void onBackPressed() {
+		Intent i = new Intent(getApplication(), ViewVillageListActivity.class);
+		startActivity(i);
 	}
 
 	@Override
@@ -126,6 +133,7 @@ public class ViewFamilyListActivity extends ActionBarActivity {
 			String family_id=((TextView)(v.findViewById(R.id.list_item_title))).getText().toString();
 			Intent intent = new Intent(getActivity().getApplication(), ViewChildListActivity.class);
 			intent.putExtra("family_id", family_id);
+			intent.putExtra("village", village);
 			startActivity(intent);
 		}
 		@Override

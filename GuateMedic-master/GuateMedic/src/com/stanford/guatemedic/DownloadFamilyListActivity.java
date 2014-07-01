@@ -14,10 +14,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -27,10 +29,13 @@ import android.widget.Toast;
 
 public class DownloadFamilyListActivity extends ActionBarActivity {
 	
+	private static String village_name;
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_download_village_list);
-		String village_name = getIntent().getStringExtra("village_name");
+		village_name = getIntent().getStringExtra("village_name");
+		setTitle("Families in " + village_name);
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, DownloadFamilyListFragment.newInstance(village_name)).commit();
@@ -41,7 +46,7 @@ public class DownloadFamilyListActivity extends ActionBarActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.download_button, menu);
 		return true;
 	}
 
@@ -52,90 +57,34 @@ public class DownloadFamilyListActivity extends ActionBarActivity {
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_download) {
-			try {
-				new HandleDownloadRecordsTask(true).execute().get();
-				Intent i = new Intent(this, MainActivity.class);
-				startActivity(i);
-			} catch (InterruptedException | ExecutionException e) {
-				e.printStackTrace();
-			}
+			BasicRecordsStore.get().DownloadData(DownloadFamilyListActivity.this, getApplication());
 			return true;
+		}
+		if (id == R.id.action_selectall) {
+			
+			for (BasicFamily bf : BasicRecordsStore.get().getFamilies(village_name)) {
+				bf.setCheckboxSelected(true);
+				for (BasicChild bc : BasicRecordsStore.get().getChildren(bf.getFamily_id()))
+					bc.setCheckboxSelected(true);
+			}
+			getSupportFragmentManager().beginTransaction().replace(R.id.container, DownloadFamilyListFragment.newInstance(village_name)).commit();
+
+		}
+		if (id == R.id.action_unselectall) {
+
+			for (BasicFamily bf : BasicRecordsStore.get().getFamilies(village_name)) {
+				if (bf.isCheckboxSelected()) {
+					bf.setCheckboxSelected(false);
+					for (BasicChild bc : BasicRecordsStore.get().getChildren(bf.getFamily_id()))
+						bc.setCheckboxSelected(false);
+				}
+			}
+			getSupportFragmentManager().beginTransaction().replace(R.id.container, DownloadFamilyListFragment.newInstance(village_name)).commit();
+
 		}
 		return super.onOptionsItemSelected(item);
 	}
 	
-	private class HandleDownloadRecordsTask extends AsyncTask<Void, Void, Void> {
-		
-		private boolean showLoading;
-		private boolean success;
-		
-		public HandleDownloadRecordsTask(boolean showLoading) {
-			super();
-			this.showLoading = showLoading;
-		}
-
-		@Override
-		protected Void doInBackground(Void... params) {
-			try {
-				JSONArray json_array = new JSONArray();
-				for (BasicVillage village : BasicRecordsStore.get().getVillages()) {
-					if (village.isCheckboxSelected()) {
-						for (BasicFamily family : BasicRecordsStore.get().getFamilies(village.getName())) {
-							if (family.isCheckboxSelected()) {
-								for (BasicChild child :BasicRecordsStore.get().getChildren(family.getFamily_id())) {
-									if (child.isCheckboxSelected()) {
-										json_array.put(child.getChild_id());
-									}
-								}
-							}
-						}
-					}
-				}
-				JSONObject obj = new JSONObject();
-				obj.put("child_ids", json_array);
-				Map<String, String> headerMap = new HashMap<String, String>();
-				headerMap.put("Authorization", BasicRecordsStore.get().getAuthKey());
-				String response = Utilities.postRequest("https://guatemedic.herokuapp.com/records", headerMap, obj.toString());
-				if (response == null) {
-					success = false;
-				} else {
-					GuatemedicWriter gfw = new GuatemedicWriter(getApplication());
-					if (gfw.saveDownloads(response)) {
-						DetailedRecordsStore.load(getApplication());
-						success = true;
-					} else {
-
-						success = false;
-					}
-				}
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-			return null;
-		}
-		
-		@Override
-		protected void onPreExecute() {
-			if (showLoading) {
-				//Display loading bar
-			}
-		}
-
-		
-		@Override
-		protected void onPostExecute(Void result) {
-			if (showLoading) {
-				//Dismiss loading bar
-			}
-			if (success) {
-				Toast.makeText(getApplication(), "Success", Toast.LENGTH_LONG).show();
-			} else {
-				Toast.makeText(getApplication(), "Failure", Toast.LENGTH_LONG).show();
-
-			}
-		}
-	}
-
 	public static class DownloadFamilyListFragment extends ListFragment {
 		
 		private String village_name;
@@ -182,10 +131,13 @@ public class DownloadFamilyListActivity extends ActionBarActivity {
 			startActivity(intent);
 		}
 		
+		
 		private class FamilyAdapter extends ArrayAdapter<BasicFamily>  {
 			public FamilyAdapter(ArrayList<BasicFamily> families) {
 				super(getActivity(), 0, families);
 			}
+			
+
 			
 			@Override
 			public View getView(final int position, View convertView, ViewGroup parent) {
@@ -197,7 +149,7 @@ public class DownloadFamilyListActivity extends ActionBarActivity {
 				String family_id = family.getFamily_id();
 				
 				TextView familyTitle = (TextView)convertView.findViewById(R.id.list_item_title);
-				familyTitle.setText(family_id);
+				familyTitle.setText(family.getParent1_name());
 				
 				CheckBox checkbox = (CheckBox)convertView.findViewById(R.id.list_item_checkbox);
 				
@@ -218,8 +170,11 @@ public class DownloadFamilyListActivity extends ActionBarActivity {
 					
 					
 					checkbox.setChecked(family.isCheckboxSelected());
-					checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					checkbox.setOnClickListener(new OnClickListener() {
+						
+						@Override
+						public void onClick(View buttonView) {
+							boolean isChecked = ((CheckBox)buttonView).isChecked();
 							View v = (View)buttonView.getParent();
 							BasicFamily theFamily = families.get(position);
 							theFamily.setCheckboxSelected(isChecked);

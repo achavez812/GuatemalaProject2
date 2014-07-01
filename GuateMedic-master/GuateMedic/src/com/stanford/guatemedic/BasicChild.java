@@ -1,5 +1,6 @@
 package com.stanford.guatemedic;
 
+
 public class BasicChild {
 	
 	private String child_id;

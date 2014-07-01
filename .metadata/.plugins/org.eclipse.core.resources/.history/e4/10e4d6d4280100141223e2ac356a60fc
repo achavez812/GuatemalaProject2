@@ -1,0 +1,10 @@
+package com.stanford.guatemedic;
+
+public class UploadLoginActivity extends ActionBarActivity{
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+	}
+
+}

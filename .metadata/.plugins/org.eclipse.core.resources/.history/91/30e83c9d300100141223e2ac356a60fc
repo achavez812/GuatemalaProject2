@@ -1,0 +1,18 @@
+package com.stanford.guatemedic;
+
+import java.util.ArrayList;
+
+public class UploadFamilyVisit {
+	
+	String visit_id;
+	String family_id;
+	String temp_family_id;
+	String data;
+	
+	public UploadFamilyVisit(String family_id, String data) {
+		this.family_id = family_id;
+		temp_family_id = family_id;
+		this.data = data;
+	}
+
+}
