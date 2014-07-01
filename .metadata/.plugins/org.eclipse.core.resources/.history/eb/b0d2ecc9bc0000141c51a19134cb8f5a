@@ -1,0 +1,468 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="wrap_content"
+    android:layout_height="fill_parent"
+    android:scrollbars="none">
+
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+ 
+
+
+    
+	<RelativeLayout
+    	android:id="@+id/patientdetails"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content" 
+    	android:padding="30dp"
+    	android:layout_margin="20dp"
+    	android:onClick="toggle_contents">
+    
+
+
+
+    	<TextView
+        	android:id="@+id/view_patient_name"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_alignLeft="@+id/textView2"
+        	android:layout_alignParentTop="true"
+        	android:text="TextView" />
+	    
+	    <!-- Labels start here -->
+		
+<!-- 
+    	<ImageView
+        	android:id="@+id/view_patient_image"
+        	android:layout_width="100dp"
+        	android:layout_height="100dp"
+        	android:layout_alignParentLeft="true"
+        	android:layout_below="@+id/view_patient_name"
+        	android:layout_marginTop="14dp"
+        	android:layout_margin="10dp"
+        	android:src="@drawable/add" /> -->
+    	<Button
+        	android:id="@+id/edit_patient_detail"
+        	android:layout_width="100dp"
+        	android:layout_height="wrap_content"
+			android:layout_alignParentLeft="true"
+			android:layout_centerVertical="true"
+        	android:text="EDIT"/>
+    	
+    	<!--  
+    	<TextView
+        	android:id="@+id/edit_image_url"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_marginTop="14dp"
+        	android:layout_below="@+id/view_patient_name"
+        	android:layout_marginLeft="14dp"
+        	android:layout_toRightOf="@+id/edit_patient_detail"
+        	android:text="Record No:"
+        	/>-->
+  		
+  		<TextView
+        	android:id="@+id/textView2"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_marginTop="14dp"
+        	android:layout_marginLeft="14dp"
+        	android:layout_below="@+id/view_patient_name"
+        	android:layout_toRightOf="@+id/edit_patient_detail"
+        	android:text="Gender: " />
+
+    	<TextView
+        	android:id="@+id/textView3"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_below="@+id/textView2"
+        	android:layout_alignLeft="@+id/textView2"
+        	android:text="Date of Birth: " />
+
+	<RelativeLayout
+	    android:id="@+id/collapse_info"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/textView3"
+	    android:layout_alignLeft="@+id/textView3"
+	    >
+    	<TextView
+        	android:id="@+id/textView4"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_alignParentLeft="true"
+        	android:text="Gestation Time: " />
+    	<TextView 
+    	    android:id="@+id/textView5"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_below="@+id/textView4"
+        	android:layout_alignLeft="@+id/textView4"
+        	android:text="Type of Birth: "/>
+    	<TextView 
+    	    android:id="@+id/no_siblings_birth_text"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"
+    	    android:layout_below="@+id/textView5" 
+    	    android:layout_alignLeft="@+id/textView5"
+    	    android:text="Number of Children in Same Pregnancy: "
+    	    />
+    	<TextView 
+    	    android:id="@+id/youngest_sibling_dob_text"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"
+    	    android:layout_below="@+id/no_siblings_birth_text" 
+    	    android:layout_alignLeft="@+id/textView5"
+    	    android:text="Date of Birth of Youngest Sibling: "
+    	    />
+    	
+    	<TextView 
+    	    android:id="@+id/birth_weight_text"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"
+    	    android:layout_below="@+id/youngest_sibling_dob_text"
+    	    android:text="Birth Weight: "/>
+    	
+    	<TextView 
+    	    android:id="@+id/birth_height_text"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"
+    	    android:layout_below="@+id/birth_weight_text"
+    	    android:text="Birth Height: "/>
+    	
+    	
+	    <TextView
+	        android:id="@+id/gestation_time"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+        	android:layout_toRightOf="@+id/textView4"
+	        android:text="TextView" />
+	    
+	    <TextView
+	        android:id="@+id/type_of_birth"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+        	android:layout_toRightOf="@+id/textView5"
+	        android:layout_below="@+id/gestation_time"
+	        android:text="TextView" />
+	   
+	    <TextView
+	        android:id="@+id/no_siblings_birth"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+        	android:layout_toRightOf="@+id/no_siblings_birth_text"
+	        android:layout_below="@+id/type_of_birth"
+	        android:text="TextView" />
+
+	    <TextView
+	        android:id="@+id/youngest_sibling_dob"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+        	android:layout_toRightOf="@+id/youngest_sibling_dob_text"
+	        android:layout_below="@+id/no_siblings_birth"
+	        android:text="TextView" />
+	     
+	    <TextView 
+	        android:id="@+id/birth_weight"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_toRightOf="@+id/birth_weight_text"
+	        android:layout_below="@+id/youngest_sibling_dob_text"
+	        android:text="TextView"
+	        /> 
+	        
+	    <TextView 
+	        android:id="@+id/birth_height"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_toRightOf="@+id/birth_height_text"
+	        android:layout_below="@+id/birth_weight"
+	        android:text="TextView"
+	        />
+	    <Button 
+	        android:id="@+id/view_family_info_cont"
+	        android:layout_width="250dp"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/birth_height"
+	        android:text="VIEW FAMILY INFO"
+	        android:layout_alignParentRight="true"/>
+	    <Button 
+	        android:id="@+id/add_family_visits_cont"
+	        android:layout_width="250dp"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="10dp"
+	        android:layout_below="@+id/view_family_info_cont"
+	        android:text="ADD FAMILY VIST"
+	        android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+    	<TextView
+        android:id="@+id/clickfordetails_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="Click Box For More Details"
+        />
+  	
+<!-- 
+    	<TextView
+        	android:id="@+id/textView5"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_alignLeft="@id/textView4"
+        	android:layout_below="@+id/textView4"
+        	android:text="Number in Household: " />
+    	
+    	
+
+    	<TextView
+        	android:id="@+id/textView6"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_alignLeft="@id/textView5"   
+        	android:layout_below="@+id/textView5"
+        	android:text="Sibling Information: " />
+
+    	<TextView
+        	android:id="@+id/textView7"
+        	android:layout_width="wrap_content"
+       		android:layout_height="wrap_content"
+        	android:layout_alignLeft="@id/textView6"   
+        	android:layout_below="@+id/textView6"
+        	android:text="Breastfeeding Information: " />
+
+    	<TextView
+        	android:id="@+id/textView8"
+       		android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_alignLeft="@id/textView7"   
+        	android:layout_below="@+id/textView7"
+        	android:text="Fathers Occupation: " /> -->
+        	
+		<!-- Labels End Here -->
+
+		<!-- Information Fields Start here -->
+    	<!--  <TextView
+        	android:id="@+id/record_no"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_above="@+id/textView2"
+     		android:layout_marginRight="10dp"
+        	android:layout_toRightOf="@+id/edit_image_url"
+        	android:text="TextView" />-->
+
+    	<TextView
+        	android:id="@+id/gender"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_alignBottom="@+id/textView2"
+        	android:layout_toRightOf="@+id/textView2"
+        	android:text="TextView" />
+
+	    <TextView
+	        android:id="@+id/dob"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+        	android:layout_toRightOf="@+id/textView3"
+	        android:layout_below="@+id/gender"
+	        android:text="TextView" />
+	    
+	
+
+
+       <!--<TextView
+        	android:id="@+id/household_no"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_below="@+id/gestation_time"
+        	android:layout_toRightOf="@+id/textView5"
+        	android:text="TextView" />
+    
+	    <TextView
+	        android:id="@+id/sibling_info"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+        	android:layout_toRightOf="@+id/textView6"
+	        android:layout_below="@+id/household_no"
+	        android:text="TextView" />
+	
+	    <TextView
+	        android:id="@+id/breastfeed_info"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+        	android:layout_toRightOf="@+id/textView7"
+	        android:layout_below="@+id/sibling_info"
+	        android:text="TextView" />
+	
+	    <TextView
+	        android:id="@+id/father_occupation"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+        	android:layout_toRightOf="@+id/textView8"
+	        android:layout_below="@+id/breastfeed_info"
+	        android:text="TextView" />-->
+	</RelativeLayout>
+
+	
+
+    
+	
+	<LinearLayout
+	    android:background="#004d6b" 
+	    android:id="@+id/charts_bar"
+	    android:paddingTop="10dp"
+	    android:paddingBottom="10dp"
+	    android:paddingRight="30dp"
+	    android:paddingLeft="30dp"
+	    android:layout_margin="20dp"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/patientdetails">
+	
+		<TextView
+	    	android:id="@+id/charts_title"
+	    	android:layout_weight="7"
+	    	android:layout_width="0dp"
+	    	android:layout_height="wrap_content"
+	    	android:text="Charts"
+	    	android:layout_centerVertical="true"/>
+		
+	    <Button
+        	android:id="@+id/add_exam_info"
+	    	android:layout_weight="4"
+	    	android:layout_width="0dp"
+        	android:layout_height="wrap_content"
+        	android:layout_toRightOf="@+id/charts_title"
+        	android:text="ADD EXAM VISIT"
+        	
+        	/>
+	    
+	</LinearLayout>
+	
+	
+	
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/charts_bar"
+        android:layout_marginTop="21dp"
+        android:text="Weight"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp"
+    	android:layout_margin="20dp"/>
+
+    <LinearLayout
+        android:id="@+id/weight_chart"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/textView9"
+        android:layout_marginTop="16dp"
+        android:background="#ffffff"
+        android:orientation="horizontal"
+       	android:layout_margin="20dp"
+       	android:padding="20dp" >
+    </LinearLayout>
+    
+    
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/weight_chart"
+        android:layout_marginTop="19dp"
+        android:background="@drawable/cell_shape"
+        android:gravity="center"
+    	android:layout_margin="20dp"
+        android:text="Height"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp"
+        android:textColor="#000000" />
+
+    <LinearLayout
+        android:id="@+id/height_chart"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/textView10"
+        android:layout_marginTop="14dp"
+        android:background="#ffffff"
+        android:orientation="horizontal"
+        android:layout_margin="20dp"
+       	android:padding="20dp" >
+    </LinearLayout>
+    
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/height_chart"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp"
+        android:text="Exam Visit Information"
+        android:textColor="#000000" />
+     
+    
+	<RelativeLayout
+	    android:layout_below="@+id/textView11"
+	    android:padding="30dp"
+	    android:layout_margin="20dp"
+		android:id="@+id/examvisitinfo"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="40dp">
+	    
+	    <LinearLayout
+	        android:id="@+id/examinfotitle"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content">
+	       	
+	       	<TextView
+        		android:id="@+id/textView12"
+        		android:layout_weight="1.5"
+        		android:layout_width="0dp"
+        		android:layout_height="wrap_content"
+        		android:text="ID" />
+	       	
+	       	<TextView
+        		android:id="@+id/textView13"
+        		android:layout_weight="3"
+        		android:layout_width="0dp"
+        		android:layout_height="wrap_content"
+        		android:text="Exam Date" />
+   
+    		<TextView
+        		android:id="@+id/textView14"
+        		android:layout_weight="3"
+        		android:layout_width="0dp"
+        		android:layout_height="wrap_content"
+        		android:text="Weight" />
+
+    		<TextView
+        		android:id="@+id/textView15"
+        		android:layout_weight="3"
+        		android:layout_width="0dp"
+        		android:layout_height="wrap_content"
+        		android:text="Height" />
+		</LinearLayout>
+    	<ListView
+        	android:id="@+id/examdetails"
+        	android:layout_width="match_parent"
+        	android:layout_height="185dp"
+        	android:layout_below="@+id/examinfotitle"
+        	android:layout_marginTop="16dp"/>
+	</RelativeLayout>
+	
+	<TextView
+	    android:visibility="invisible"
+	    android:layout_below="@+id/examvisitinfo"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	 />
+</RelativeLayout>
+</ScrollView>
