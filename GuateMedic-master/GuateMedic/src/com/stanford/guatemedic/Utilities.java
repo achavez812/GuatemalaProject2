@@ -78,8 +78,12 @@ public class Utilities {
 				}
 			}
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			Log.i("WTF", "about to read input stream");
 			InputStream in = connection.getInputStream();
+			Log.i("WTF", "done reading input stream");
+
 			if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+				Log.i("WTF", "bad response");
 				return null;
 			}
 			int bytesRead = 0;
@@ -91,6 +95,8 @@ public class Utilities {
 			connection.disconnect();
 			return new String(out.toByteArray());
 		} catch(IOException e) {
+			Log.i("WTF", "EXCEPTION");
+			Log.i("WTF", e.toString());
 			return null;
 		}
 	}

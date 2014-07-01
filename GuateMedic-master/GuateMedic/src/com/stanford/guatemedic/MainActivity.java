@@ -1,12 +1,11 @@
 package com.stanford.guatemedic;
 
+import static com.nativecss.enums.RemoteContentRefreshPeriod.Never;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 
 import android.content.Intent;
-
-import com.nativecss.NativeCSS;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -17,7 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
-import static com.nativecss.enums.RemoteContentRefreshPeriod.*;
+
+import com.nativecss.NativeCSS;
 public class MainActivity extends ActionBarActivity {
 
 	@Override

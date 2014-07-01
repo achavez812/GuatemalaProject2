@@ -9,7 +9,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -126,7 +125,7 @@ public class DownloadLoginActivity extends ActionBarActivity {
 			protected void onPreExecute() {
 				if (showLoading) {
 					//Display loading bar
-					dialog.show();
+					//dialog.show();
 					
 				}
 			}
@@ -135,12 +134,13 @@ public class DownloadLoginActivity extends ActionBarActivity {
 			protected void onPostExecute(Void result) {
 				if (showLoading) {
 					//Dismiss loading bar
-					dialog.dismiss();
+					//dialog.dismiss();
 
 				}
 				if (auth_key != null) { //Success
-					Toast.makeText(getActivity(), "Success: " + auth_key, Toast.LENGTH_LONG).show();
+					//Toast.makeText(getActivity(), "Success: " + auth_key, Toast.LENGTH_LONG).show();
 					BasicRecordsStore.load(auth_key);
+					//dialog.dismiss();
 					Intent intent = new Intent(getActivity().getApplication(), DownloadVillageListActivity.class);
 					startActivity(intent);
 				} else { //Failure

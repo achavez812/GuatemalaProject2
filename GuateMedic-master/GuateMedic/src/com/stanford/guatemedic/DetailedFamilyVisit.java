@@ -1,5 +1,10 @@
 package com.stanford.guatemedic;
 
+import java.lang.reflect.Field;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class DetailedFamilyVisit {
 	
 	private String family_id;
@@ -7,14 +12,16 @@ public class DetailedFamilyVisit {
 	private String visit_date;
 	private String promoter_id;
 	
-	private String parent1_marital_status; // Together, Married, Widowed, Single
+	private int parent1_marital_status; // Together, Married, Widowed, Single
 	private int father_lives_with; //boolean
+	
 	private int num_pregnancies;
 	private int num_children_alive;
 	private int num_children_dead;
 	private String children_death_information; //Age and why died?
 	private int num_children_under_5;
 	private int num_people_in_household;
+	
 	private int fathers_job; //Should this be a String instead
 	private int IGSS; //Should this be a String instead
 
@@ -39,11 +46,11 @@ public class DetailedFamilyVisit {
 		this.visit_date = visit_date;
 	}
 
-	public String getParent1_marital_status() {
+	public int getParent1_marital_status() {
 		return parent1_marital_status;
 	}
 
-	public void setParent1_marital_status(String parent1_marital_status) {
+	public void setParent1_marital_status(int parent1_marital_status) {
 		this.parent1_marital_status = parent1_marital_status;
 	}
 
@@ -129,6 +136,19 @@ public class DetailedFamilyVisit {
 
 	public void setPromoter_id(String promoter_id) {
 		this.promoter_id = promoter_id;
+	}
+	public JSONObject toJSONObject() {
+		JSONObject obj = new JSONObject();
+		try {
+			Field[] fields = DetailedFamilyVisit.class.getDeclaredFields();
+			for (Field field : fields) {
+				if (field.get(this) != null)
+					obj.put(field.getName(), field.get(this).toString());
+			}
+		} catch (JSONException | IllegalAccessException | IllegalArgumentException e) {
+			e.printStackTrace();
+		}
+		return obj;
 	}
 
 }

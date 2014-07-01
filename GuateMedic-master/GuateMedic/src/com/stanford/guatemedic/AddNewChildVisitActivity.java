@@ -24,7 +24,7 @@ public class AddNewChildVisitActivity extends ActionBarActivity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_new_child_visit);
 
-		Spinner spinner = (Spinner) findViewById(R.id.child_visit_spinner);
+		Spinner spinner = (Spinner)findViewById(R.id.child_visit_spinner);
 		// Create an ArrayAdapter using the string array and a default spinner layout
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
 		        R.array.child_visit_array, android.R.layout.simple_spinner_item);

@@ -255,7 +255,7 @@ public class DetailedRecordsStore {
 		try {
 			dfv.setVisit_date(json.getString("visit_date"));
 			if (json.has("parent1_marital_status")) 
-				dfv.setParent1_marital_status(json.getString("parent1_marital_status"));
+				dfv.setParent1_marital_status(Integer.parseInt(json.getString("parent1_marital_status")));
 			if (json.has("father_lives_with")) 
 				dfv.setFather_lives_with(Integer.parseInt(json.getString("father_lives_with")));
 			if (json.has("num_pregnancies")) 
