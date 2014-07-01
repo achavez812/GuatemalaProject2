@@ -175,6 +175,8 @@ public class view_patient extends Activity{
 			patient_gender.setText("Male");
 		}else if(child.getGender()==1){
 			patient_gender.setText("Female");
+		}else {
+			patient_gender.setText("Not Set");
 		}
 		
 		String patient_gestation_string=child.getMonths_gestated()+"";
@@ -193,6 +195,8 @@ public class view_patient extends Activity{
 			patient_t_of_b.setText("Normal");
 		}else if (child.getType_of_birth()==1){
 			patient_t_of_b.setText("Cesarean");
+		}else {
+			patient_t_of_b.setText("Not Set");
 		}
 		
 		
@@ -212,6 +216,8 @@ public class view_patient extends Activity{
 			no_siblings_birth.setText("Twins");
 		}else if(child.getNum_children_in_same_pregnancy()==3){
 			no_siblings_birth.setText("Triplets");
+		}else{
+			no_siblings_birth.setText("Not Set");
 		}
 		
 		String YoungDOB=child.getYoungest_sibling_dob()+ "";
