@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    
+   	<EditText
+        android:id="@+id/family_visit2_num_pregnancies"
+        android:textSize="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       	android:layout_margin="20dp"
+       	android:layout_marginTop="100dp"
+       	android:inputType="number"
+        android:hint="Number of pregnancies" />
+    
+   	<EditText
+        android:id="@+id/family_visit2_num_children_alive"
+        android:textSize="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_marginTop="60dp"
+        android:inputType="number"
+        android:layout_below="@+id/family_visit2_num_pregnancies"
+        android:hint="Number of children alive" />
+   	<EditText
+        android:id="@+id/family_visit2_num_children_dead"
+        android:textSize="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       	android:layout_margin="20dp"
+       	android:inputType="number"
+       	android:layout_below="@+id/family_visit2_num_children_alive"
+        android:hint="Number of children dead" />
+   	<EditText
+        android:id="@+id/family_visit2_death_information"
+        android:textSize="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="120sp"
+        android:layout_margin="20dp"
+        android:layout_marginLeft="40dp"
+        android:layout_below="@+id/family_visit2_num_children_dead"
+        android:hint="Death information" 
+        android:layout_marginBottom="60dp"/>
+    
+   	<EditText
+        android:id="@+id/family_visit2_num_children_under_5"
+        android:textSize="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+      	android:inputType="number"
+      	android:layout_below="@+id/family_visit2_death_information"
+        android:hint="Number of children under 5" />
+   	<EditText
+        android:id="@+id/family_visit2_num_people_in_household"
+        android:textSize="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:inputType="number"
+        android:layout_below="@+id/family_visit2_num_children_under_5"
+        android:hint="Number of people living in household" />
+ 
+</RelativeLayout>
+</ScrollView>

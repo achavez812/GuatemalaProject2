@@ -6,7 +6,6 @@ INDEX VERSION 1.126+/Users/adityaaggarwal/Documents/GuatemalaProject2/.metadata/
 3075978171.index
 4037476689.index
 1144888004.index
-1731166835.index
 1691401685.index
 3267561591.index
 117370898.index
