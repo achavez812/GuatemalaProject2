@@ -2,6 +2,9 @@ package com.stanford.guatemedic;
 
 import java.util.ArrayList;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class UploadFamilyVisit {
 	
 	String visit_id;
@@ -22,6 +25,13 @@ public class UploadFamilyVisit {
 	
 	public void setFamily_id(String family_id) {
 		this.family_id = family_id;
+		try {
+			JSONObject obj = new JSONObject(data);
+			obj.put("family_id", family_id);
+			data = obj.toString();
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public String getFamily_id() {

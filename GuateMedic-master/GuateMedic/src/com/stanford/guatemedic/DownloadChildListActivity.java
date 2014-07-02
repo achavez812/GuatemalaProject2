@@ -18,11 +18,13 @@ import android.widget.TextView;
 public class DownloadChildListActivity extends ActionBarActivity {
 	
 	private static String family_id;
+	private static String village;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_download_village_list);
 		family_id = getIntent().getStringExtra("family_id");
+		village = getIntent().getStringExtra("village");
 		setTitle("Children of " + BasicRecordsStore.get().getFamily(family_id).getParent1_name());
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
@@ -49,6 +51,8 @@ public class DownloadChildListActivity extends ActionBarActivity {
 			return true;
 		}
 		if (id == R.id.action_selectall) {
+			BasicRecordsStore.get().getVillage(village).setCheckboxSelected(true);
+			BasicRecordsStore.get().getFamily(family_id).setCheckboxSelected(true);
 			for (BasicChild bc : BasicRecordsStore.get().getChildren(family_id))
 				bc.setCheckboxSelected(true);
 			getSupportFragmentManager().beginTransaction().replace(R.id.container, DownloadChildListFragment.newInstance(family_id)).commit();
@@ -132,6 +136,10 @@ public class DownloadChildListActivity extends ActionBarActivity {
 					@Override
 					public void onClick(View buttonView) {
 						boolean isChecked = ((CheckBox)buttonView).isChecked();
+						if (isChecked) {
+							BasicRecordsStore.get().getVillage(village).setCheckboxSelected(true);
+							BasicRecordsStore.get().getFamily(family_id).setCheckboxSelected(true);
+						}
 						View v = (View)buttonView.getParent();
 						BasicChild theChild = children.get(position);
 						String child_id = theChild.getChild_id();

@@ -1,5 +1,10 @@
 package com.stanford.guatemedic;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -61,7 +66,6 @@ public class UploadLoginActivity extends ActionBarActivity{
 		@Override
 		public void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
-			setRetainInstance(true);
 		}
 		
 		@Override
@@ -96,11 +100,116 @@ public class UploadLoginActivity extends ActionBarActivity{
 
 			private boolean showLoading;
 			private String auth_key;
+			private boolean success;
+			
+			ProgressDialog dialog;
 			
 			public HandleUploadLoginTask(boolean showLoading) {
 				super();
+				success = true;
 				this.showLoading = showLoading;
+				dialog = new ProgressDialog(getActivity());
+				dialog.setMessage("Loading");
 		
+			}
+			
+			private void postFamilies() {
+				try {
+					JSONArray json_arr = new JSONArray();
+					for (UploadFamily uf : UploadRecordsStore.get(getApplication()).getFamilies()) 
+						json_arr.put(new JSONObject(uf.getData()));
+					if (json_arr.length() > 0) {
+						Map<String, String> headerMap = new HashMap<String, String>();
+						headerMap.put("Authorization", auth_key);
+						String response = Utilities.postRequest("https://guatemedic.herokuapp.com/createFamily", headerMap, json_arr.toString());
+						if (response != null) {
+							JSONArray response_array = new JSONArray(response);
+							for (int i = 0; i < response_array.length(); i++) {
+								JSONObject obj = response_array.getJSONObject(i);
+								String family_id = obj.getString("family_id");
+								String temp_family_id = obj.getString("temp_family_id");
+								UploadFamily uf = UploadRecordsStore.get(getApplication()).getFamily(temp_family_id);
+								uf.setFamily_id(family_id);
+								ArrayList<String> child_ids = UploadRecordsStore.get(getApplication()).getChildren(temp_family_id);
+								for (String child_id : child_ids) {
+									UploadChild uc = UploadRecordsStore.get(getApplication()).getChild(child_id);
+									uc.setFamily_id(family_id);
+								}
+								ArrayList<String> visit_ids = UploadRecordsStore.get(getApplication()).getFamilyVisits(temp_family_id);
+								for (String visit_id : visit_ids) {
+									UploadFamilyVisit ufv = UploadRecordsStore.get(getApplication()).getFamilyVisit(visit_id);
+									ufv.setFamily_id(family_id);
+								}
+							}
+						} else {
+							success = false;
+						}
+					} 
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			private void postChildren() {
+				try {
+					JSONArray json_arr = new JSONArray();
+					for (UploadChild uc : UploadRecordsStore.get(getApplication()).getChildren()) 
+						json_arr.put(uc.getData());
+					if (json_arr.length() > 0) {
+						Map<String, String> headerMap = new HashMap<String, String>();
+						headerMap.put("Authorization", auth_key);
+						String response = Utilities.postRequest("https://guatemedic.herokuapp.com/createChild", headerMap, json_arr.toString());
+						if (response != null) {
+							JSONArray response_array = new JSONArray(response);
+							for (int i = 0; i < response_array.length(); i++) {
+								JSONObject obj = response_array.getJSONObject(i);
+								String child_id = obj.getString("child_id");
+								String temp_child_id = obj.getString("temp_child_id");
+								UploadChild uc = UploadRecordsStore.get(getApplication()).getChild(temp_child_id);
+								uc.setChild_id(child_id);
+								ArrayList<String> visit_ids = UploadRecordsStore.get(getApplication()).getChildVisits(temp_child_id);
+								for (String visit_id : visit_ids) {
+									UploadChildVisit ucv = UploadRecordsStore.get(getApplication()).getChildVisit(visit_id);
+									ucv.setChild_id(child_id);
+								}
+							} 
+						} else {
+							success = false;
+						}
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			private void postVisits() {
+				try {
+					JSONArray json_arr = new JSONArray();
+					for (UploadFamilyVisit ufv : UploadRecordsStore.get(getApplication()).getFamilyVisits())
+						json_arr.put(ufv.getData());
+					for (UploadChildVisit ucv : UploadRecordsStore.get(getApplication()).getChildVisits())
+						json_arr.put(ucv.getData());
+					if (json_arr.length() > 0) {
+						Map<String, String> headerMap = new HashMap<String, String>();
+						headerMap.put("Authorization", auth_key);
+						String response = Utilities.postRequest("https://guatemedic.herokuapp.com/addVisits", headerMap, json_arr.toString());
+						if (response != null) {
+							//Success
+							JSONObject obj = new JSONObject(response);
+						} else {
+							success = false;
+						}
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			private void processUploads() {
+				UploadRecordsStore.load(getActivity().getApplication());
+				postFamilies();
+				postChildren();
+				postVisits();
 			}
 
 			@Override
@@ -110,8 +219,10 @@ public class UploadLoginActivity extends ActionBarActivity{
 				if (response != null) {
 					try {
 						JSONObject json_response = new JSONObject(response);
-						if (json_response.getString("status").equals("success"))
+						if (json_response.getString("status").equals("success")) {
 							auth_key = json_response.getString("auth_key");
+							processUploads();
+						}
 					} catch (JSONException e) {
 						e.printStackTrace();
 					}
@@ -121,70 +232,28 @@ public class UploadLoginActivity extends ActionBarActivity{
 			
 			@Override
 			protected void onPreExecute() {
-
+				if (showLoading) {
+					dialog.show();
+				}
 			}
 			
 			@Override
 			protected void onPostExecute(Void result) {
-				if (auth_key != null) { //Success
-					//Toast.makeText(getActivity(), "Success: " + auth_key, Toast.LENGTH_LONG).show();
-					new HandleUploadRecordsTask(true, getActivity(), getApplication()).execute(auth_key);
-					Intent intent = new Intent(getActivity(), UploadResultsActivity.class);
-					intent.putExtra("auth_key", auth_key);
-					startActivity(intent);
-				} else { //Failure
-					Toast.makeText(getActivity(), "Invalid Login", Toast.LENGTH_LONG).show();
+				if (showLoading) {
+					dialog.dismiss();
+				}
+				if (auth_key == null) { //Success
+					Toast.makeText(getActivity(), "Invalid login", Toast.LENGTH_LONG).show();
+				} else if (!success){ //Failure
+					Toast.makeText(getActivity(), "Upload Failure", Toast.LENGTH_LONG).show();
+				} else {
+					Intent i = new Intent(getActivity(), UploadResultsActivity.class);
+					startActivity(i);
 				}
 			}
 		
 		}
 		
-	}
-	
-	private class HandleUploadRecordsTask extends AsyncTask<String, Void, Void> {
-		ProgressDialog dialog;
-		
-		private boolean showLoading;
-		private String auth_key;
-		private Context context1;
-		private Context context2;
-		
-		
-		public HandleUploadRecordsTask(boolean showLoading, Context context1, Context context2) {
-			super();
-			this.context1 = context1;
-			this.context2 = context2;
-			dialog = new ProgressDialog(context1);
-			dialog.setMessage("Loading");
-			this.showLoading = showLoading;
-	
-		}
-
-		@Override
-		protected Void doInBackground(String... params) {
-			auth_key = params[0];
-			//Build UploadRecordsStore
-			//Process Uploads
-			
-			return null;
-		}
-		
-		@Override
-		protected void onPreExecute() {
-			if (showLoading)
-				dialog.show();
-		}
-		
-		@Override
-		protected void onPostExecute(Void result) {
-			if (showLoading)
-				dialog.dismiss();
-			Intent intent = new Intent(context1, UploadResultsActivity.class);
-			intent.putExtra("auth_key", auth_key);
-			startActivity(intent);
-			
-		}
-	
 	}
 
 }

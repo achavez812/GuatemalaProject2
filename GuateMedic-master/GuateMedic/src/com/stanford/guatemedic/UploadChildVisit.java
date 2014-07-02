@@ -1,5 +1,8 @@
 package com.stanford.guatemedic;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class UploadChildVisit {
 	String visit_id;
 	String child_id;
@@ -19,6 +22,13 @@ public class UploadChildVisit {
 	
 	public void setChild_id(String child_id) {
 		this.child_id = child_id;
+		try {
+			JSONObject obj = new JSONObject(data);
+			obj.put("child_id", child_id);
+			data = obj.toString();
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public String getChild_id() {

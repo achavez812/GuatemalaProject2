@@ -1,0 +1,96 @@
+package com.stanford.guatemedic;
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+
+public class UploadResultsActivity extends ActionBarActivity {
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_upload_results);
+
+		if (savedInstanceState == null) {
+			getSupportFragmentManager().beginTransaction()
+					.add(R.id.container, new UploadResultsFragment()).commit();
+		}
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+
+		// Inflate the menu; this adds items to the action bar if it is present.
+		//getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+		if (id == R.id.action_download) {
+
+		}
+		return super.onOptionsItemSelected(item);
+	}
+	
+	public class UploadResultsFragment extends Fragment {
+		
+		public UploadResultsFragment() {
+					
+		}
+		
+		@Override
+		public void onCreate(Bundle savedInstanceState) {
+			super.onCreate(savedInstanceState);
+			setRetainInstance(true);
+		}
+		
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+			View rootView = inflater.inflate(R.layout.fragment_upload_results, container,false);
+			
+			int num_new_families = UploadRecordsStore.get(getApplication()).getChildren().size();
+			int num_new_children = UploadRecordsStore.get(getApplication()).getFamilies().size();
+			int num_new_family_visits = UploadRecordsStore.get(getApplication()).getFamilyVisits().size();
+			int num_new_child_visits = UploadRecordsStore.get(getApplication()).getChildVisits().size();
+			
+
+			
+			TextView textview1 = (TextView)rootView.findViewById(R.id.upload_results_textview1);
+			
+			TextView textview2 = (TextView)rootView.findViewById(R.id.upload_results_textview2);
+			
+			TextView textview3 = (TextView)rootView.findViewById(R.id.upload_results_textview3);
+			
+			TextView textview4 = (TextView)rootView.findViewById(R.id.upload_results_textview4);
+			
+			TextView textview5 = (TextView)rootView.findViewById(R.id.upload_results_textview5);
+			
+			TextView textview6 = (TextView)rootView.findViewById(R.id.upload_results_textview6);
+			
+			Button button = (Button)rootView.findViewById(R.id.upload_results_home_button);
+			
+			
+			
+
+
+			
+			return rootView;
+		}
+		
+	}
+
+	
+
+}

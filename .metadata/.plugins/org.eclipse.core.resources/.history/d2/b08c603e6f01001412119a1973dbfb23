@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <TextView 
+        android:id="@+id/upload_results_textview1"
+        android:gravity="center" 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp" />
+    
+   	<TextView 
+        android:id="@+id/upload_results_textview2"
+        android:gravity="center" 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp" />
+        
+   	<TextView 
+        android:id="@+id/upload_results_textview3"
+        android:gravity="center" 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp" />
+        
+  	<TextView 
+        android:id="@+id/upload_results_textview4"
+        android:gravity="center" 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp" />
+        
+   	<TextView 
+        android:id="@+id/upload_results_textview5"
+        android:gravity="center" 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp" />
+   	
+   	<TextView 
+        android:id="@+id/upload_results_textview6"
+        android:gravity="center" 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp" />
+   	
+   	<Button
+   	    android:id="@+id/upload_results_home_button"
+   	    android:gravity="center"
+   	    android:layout_width="wrap_content"
+   	    android:layout_height="wrap_content"
+   	    android:textSize="30sp"
+   	    android:padding="20dp"
+   	    />
+    
+
+</LinearLayout>

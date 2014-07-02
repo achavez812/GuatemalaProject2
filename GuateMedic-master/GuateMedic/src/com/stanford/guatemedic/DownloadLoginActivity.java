@@ -1,5 +1,8 @@
 package com.stanford.guatemedic;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -63,7 +66,6 @@ public class DownloadLoginActivity extends ActionBarActivity {
 		@Override
 		public void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
-			setRetainInstance(true);
 		}
 
 		@Override
@@ -98,11 +100,15 @@ public class DownloadLoginActivity extends ActionBarActivity {
 
 			private boolean showLoading;
 			private String auth_key;
+			private boolean success;
+			ProgressDialog dialog;
 			
 			public HandleDownloadLoginTask(boolean showLoading) {
 				super();
+				success = true;
 				this.showLoading = showLoading;
-		
+				dialog = new ProgressDialog(getActivity());
+				dialog.setMessage("Loading");
 			}
 
 			@Override
@@ -112,8 +118,16 @@ public class DownloadLoginActivity extends ActionBarActivity {
 				if (response != null) {
 					try {
 						JSONObject json_response = new JSONObject(response);
-						if (json_response.getString("status").equals("success"))
+						if (json_response.getString("status").equals("success")) {
 							auth_key = json_response.getString("auth_key");
+							Map<String, String> headerMap = new HashMap<String, String>();
+							headerMap.put("Authorization", auth_key);
+							String data = Utilities.getRequest("https://guatemedic.herokuapp.com/profiles", headerMap);
+							if (data == null) 
+								success = false;
+							else
+								BasicRecordsStore.load(auth_key, data);
+						}		
 					} catch (JSONException e) {
 						e.printStackTrace();
 					}
@@ -123,17 +137,24 @@ public class DownloadLoginActivity extends ActionBarActivity {
 			
 			@Override
 			protected void onPreExecute() {
-
+				if (showLoading) {
+					dialog.show();
+				}
 			}
 			
 			@Override
 			protected void onPostExecute(Void result) {
-				if (auth_key != null) { //Success
-					//Toast.makeText(getActivity(), "Success: " + auth_key, Toast.LENGTH_LONG).show();
-					BasicRecordsStore.load(getActivity(), auth_key);
-				} else { //Failure
-					Toast.makeText(getActivity(), "Invalid Login", Toast.LENGTH_LONG).show();
+				if (showLoading) {
+					dialog.dismiss();
 				}
+				if (auth_key == null) {
+					Toast.makeText(getActivity(), "Invalid Login", Toast.LENGTH_LONG).show();
+				} else if (!success) {
+					Toast.makeText(getActivity(), "Download Failure", Toast.LENGTH_LONG).show();
+				} else { //Success
+					Intent intent = new Intent(getActivity(), DownloadVillageListActivity.class);
+					startActivity(intent);
+				} 
 			}
 		
 		}

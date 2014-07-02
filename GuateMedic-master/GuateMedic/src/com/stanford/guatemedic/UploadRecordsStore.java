@@ -43,13 +43,22 @@ public class UploadRecordsStore {
 		sUploadRecordsStore = new UploadRecordsStore(c);
 	}
 	
+	public void clear() {
+		families = null;
+		family_visits = null;
+		children = null;
+		child_visits = null;
+	}
+	
 	public static UploadRecordsStore get(Context c) {
 		if (sUploadRecordsStore == null)
 			sUploadRecordsStore = new UploadRecordsStore(c);
 		return sUploadRecordsStore;
 	}
 	
-	private ArrayList<String> getChildVisits(String child_id) {
+	
+	
+	public ArrayList<String> getChildVisits(String child_id) {
 		ArrayList<String> ids = new ArrayList<String>();
 		for (UploadChildVisit ucv : child_visits) {
 			if (ucv.getTemp_child_id().equals(child_id))
@@ -58,7 +67,7 @@ public class UploadRecordsStore {
 		return ids;
 	}
 	
-	private ArrayList<String> getFamilyVisits(String family_id) {
+	public ArrayList<String> getFamilyVisits(String family_id) {
 		ArrayList<String> ids = new ArrayList<String>();
 		for (UploadFamilyVisit ufv : family_visits) {
 			if (ufv.getTemp_family_id().equals(family_id))
@@ -67,7 +76,7 @@ public class UploadRecordsStore {
 		return ids;
 	}
 	
-	private ArrayList<String> getChildren(String family_id) {
+	public ArrayList<String> getChildren(String family_id) {
 		ArrayList<String> ids = new ArrayList<String>();
 		for (UploadChild uc : children) {
 			if (uc.getTemp_family_id().equals(family_id))
@@ -75,6 +84,56 @@ public class UploadRecordsStore {
 		}
 		return ids;
 	}
+	
+	public UploadFamily getFamily(String family_id) {
+		for (UploadFamily uf : families) {
+			if (uf.getTemp_family_id().equals(family_id))
+				return uf;
+		}
+		return null;
+	}
+	
+	public ArrayList<UploadFamily> getFamilies() {
+		return families;
+	}
+	
+	public ArrayList<UploadChild> getChildren() {
+		return children;
+	}
+	
+	public ArrayList<UploadFamilyVisit> getFamilyVisits() {
+		return family_visits;
+	}
+	
+	public ArrayList<UploadChildVisit> getChildVisits() {
+		return child_visits;
+	}
+	
+	public UploadChild getChild(String child_id) {
+		for (UploadChild uc : children) {
+			if (uc.getTemp_child_id().equals(child_id))
+				return uc;
+		}
+		return null;
+	}
+	
+	public UploadChildVisit getChildVisit(String visit_id) {
+		for (UploadChildVisit ucv : child_visits) {
+			if (ucv.getVisit_id().equals(visit_id))
+				return ucv;
+		}
+		return null;
+	}
+	
+	public UploadFamilyVisit getFamilyVisit(String visit_id) {
+		for (UploadFamilyVisit ufv : family_visits) {
+			if (ufv.getVisit_id().equals(visit_id))
+				return ufv;
+		}
+		return null;
+	}
+	
+	
 	private void processChildVisits() {
 		for (File f : gmr.getNewChildVisitFiles()) {
 			String data = gmr.getStringData(f);
@@ -126,7 +185,6 @@ public class UploadRecordsStore {
 				String family_id = obj.getString("family_id");
 				String temp_family_id = obj.getString("temp_family_id");
 				if (child_id.equals(temp_child_id)) { //HAS NOT BEEN UPLOADED YET
-					obj.remove("temp_child_id");
 					obj.remove("child_id");
 					obj.remove("temp_family_id");
 					UploadChild uc = new UploadChild(temp_family_id, child_id, obj.toString());
@@ -147,7 +205,6 @@ public class UploadRecordsStore {
 				String family_id = obj.getString("family_id");
 				String temp_family_id = obj.getString("temp_family_id");
 				if (family_id.equals(temp_family_id)) {
-					obj.remove("temp_family_id");
 					obj.remove("family_id");
 					UploadFamily uf = new UploadFamily(family_id, obj.toString());
 					families.add(uf);

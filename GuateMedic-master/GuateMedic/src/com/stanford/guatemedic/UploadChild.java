@@ -2,6 +2,9 @@ package com.stanford.guatemedic;
 
 import java.util.ArrayList;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class UploadChild {
 	
 	String family_id;
@@ -21,6 +24,13 @@ public class UploadChild {
 	
 	public void setFamily_id(String family_id) {
 		this.family_id = family_id;
+		try {
+			JSONObject obj = new JSONObject(data);
+			obj.put("family_id", family_id);
+			data = obj.toString();
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public String getFamily_id() {
@@ -32,11 +42,11 @@ public class UploadChild {
 		return temp_family_id;
 	}
 	
-	public void setchild_id(String child_id) {
+	public void setChild_id(String child_id) {
 		this.child_id = child_id;
 	}
 	
-	public String getchild_id() {
+	public String getChild_id() {
 		return child_id;
 	}
 	

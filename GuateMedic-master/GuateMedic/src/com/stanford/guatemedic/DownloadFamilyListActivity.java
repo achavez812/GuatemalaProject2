@@ -61,7 +61,7 @@ public class DownloadFamilyListActivity extends ActionBarActivity {
 			return true;
 		}
 		if (id == R.id.action_selectall) {
-			
+			BasicRecordsStore.get().getVillage(village_name).setCheckboxSelected(true);
 			for (BasicFamily bf : BasicRecordsStore.get().getFamilies(village_name)) {
 				bf.setCheckboxSelected(true);
 				for (BasicChild bc : BasicRecordsStore.get().getChildren(bf.getFamily_id()))
@@ -128,6 +128,7 @@ public class DownloadFamilyListActivity extends ActionBarActivity {
 			BasicFamily family = families.get(position);
 			Intent intent = new Intent(getActivity().getApplication(), DownloadChildListActivity.class);
 			intent.putExtra("family_id", family.getFamily_id());
+			intent.putExtra("village", village_name);
 			startActivity(intent);
 		}
 		

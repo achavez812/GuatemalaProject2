@@ -1,5 +1,6 @@
 package com.stanford.guatemedic;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -70,6 +71,13 @@ public class GuatemedicWriter {
 	
 	public boolean saveChildModification(String data) {
 		return saveData(GuatemedicFileConstants.newChildModification_prefix, generateFilenameSuffix(), data);
+	}
+	
+	public void eraseAll() {
+		File dir = mContext.getFilesDir();
+		for (File f : dir.listFiles()) {
+			f.delete();
+		}
 	}
 
 }

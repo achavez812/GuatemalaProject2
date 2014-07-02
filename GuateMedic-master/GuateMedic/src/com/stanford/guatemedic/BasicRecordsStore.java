@@ -29,12 +29,12 @@ public class BasicRecordsStore {
 	static Context context;
 	
 	
-	private BasicRecordsStore(String authKey) throws InterruptedException, ExecutionException {
-		this.authKey = authKey;
+	private BasicRecordsStore(String auth_key, String data) throws InterruptedException, ExecutionException {
+		this.authKey = auth_key;
 		villages = new ArrayList<BasicVillage>();
 		families = new HashMap<String, ArrayList<BasicFamily>>();
 		children = new HashMap<String, ArrayList<BasicChild>>();
-		new FetchBasicRecordsTask(true).execute(authKey);
+		loadData(data);
 	}
 	
 	
@@ -44,10 +44,9 @@ public class BasicRecordsStore {
 	 *
 	 * @param authKey Authentication key must be passed in
 	 */
-	public static void load(Context c, String authKey) {
-		context = c;
+	public static void load(String auth_key, String data) {
 		try {
-			sBasicRecordsDatabase = new BasicRecordsStore(authKey);
+			sBasicRecordsDatabase = new BasicRecordsStore(auth_key, data);
 		} catch (InterruptedException | ExecutionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -118,64 +117,62 @@ public class BasicRecordsStore {
 		return null;
 	}
 	
-	//Handles performing the GET request and loading data into data structures
-	private class FetchBasicRecordsTask extends AsyncTask<String, Void, Void> {
-		
-		private boolean showLoading;
-		private boolean success;
-		
-		private ProgressDialog dialog;
-		
 
-		
-		public FetchBasicRecordsTask(boolean showLoading) {
-			super();
-			this.showLoading = showLoading;
-			dialog = new ProgressDialog(context);
-			dialog.setMessage("Loading");
+	private void setFamilyInfo(BasicFamily f, JSONObject family) {
+		try {
+			if (family.has("parent1_name"))
+				f.setParent1_name(family.getString("parent1_name"));
+		} catch (JSONException e) {
+			e.printStackTrace();
 		}
-		
-		private void setFamilyInfo(BasicFamily f, JSONObject family) {
-			try {
-				if (family.has("parent1_name"))
-					f.setParent1_name(family.getString("parent1_name"));
-			} catch (JSONException e) {
-				e.printStackTrace();
+	}
+	
+	private void setChildInfo(BasicChild c, JSONObject child) {
+		try {
+			if (child.has("name"))
+				c.setName(child.getString("name"));
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private boolean villageHasChildren(JSONObject village) {
+		try {
+			JSONArray families = village.getJSONArray("families");
+			for (int i = 0; i < families.length(); i++) {
+				if (families.getJSONObject(i).getJSONArray("children").length() > 0)
+					return true;
 			}
+		} catch (JSONException e) {
+			e.printStackTrace();
 		}
-		
-		private void setChildInfo(BasicChild c, JSONObject child) {
-			try {
-				if (child.has("name"))
-					c.setName(child.getString("name"));
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
+		return false;
+	}
+	
+	private boolean familyHasChildren(JSONObject family) {
+		try {
+			return (family.getJSONArray("children").length() > 0);
+		} catch (JSONException e) {
+			e.printStackTrace();
 		}
-		
-		@Override
-		protected Void doInBackground(String... params) {
-			Map<String, String> headerMap = new HashMap<String, String>();
-			headerMap.put("Authorization", params[0]); //Only one value
-			String response = Utilities.getRequest("https://guatemedic.herokuapp.com/profiles", headerMap);
-			if (response == null) {
-				Log.i("WTF", "response is null");
-				success = false;
-			} else {
-				Log.i("WTF", "response is not null");
-				Log.i("WTF", response);
-				try {
-					JSONArray json_villages = new JSONArray(response);
-					for (int i = 0; i < json_villages.length(); i++) {
-						JSONObject json_village = json_villages.getJSONObject(i);
-						String village_name = json_village.getString("city");
-						BasicVillage v = new BasicVillage(village_name);
-						villages.add(v);
-						ArrayList<BasicFamily> family_array = new ArrayList<BasicFamily>();
-						families.put(village_name, family_array);
-						JSONArray json_families = json_village.getJSONArray("families");
-						for (int j = 0; j < json_families.length(); j++) {
-							JSONObject json_family = json_families.getJSONObject(j);
+		return false;
+	}
+	
+	private boolean loadData(String data) {
+		try {
+			JSONArray json_villages = new JSONArray(data);
+			for (int i = 0; i < json_villages.length(); i++) {
+				JSONObject json_village = json_villages.getJSONObject(i);
+				if (villageHasChildren(json_village)) {
+					String village_name = json_village.getString("city");
+					BasicVillage v = new BasicVillage(village_name);
+					villages.add(v);
+					ArrayList<BasicFamily> family_array = new ArrayList<BasicFamily>();
+					families.put(village_name, family_array);
+					JSONArray json_families = json_village.getJSONArray("families");
+					for (int j = 0; j < json_families.length(); j++) {
+						JSONObject json_family = json_families.getJSONObject(j);
+						if (familyHasChildren(json_family)) {
 							String family_id = json_family.getString("family_id");
 							BasicFamily f = new BasicFamily(family_id);
 							setFamilyInfo(f, json_family);
@@ -192,37 +189,16 @@ public class BasicRecordsStore {
 							}
 						}
 					}
-					success = true;
-				} catch (JSONException e) {
-					success = false;
-					e.printStackTrace();
 				}
 			}
-			return null;
-		}
-		
-		@Override
-		protected void onPreExecute() {
-			if (showLoading) {
-				//Display loading bar
-				dialog.show();
-			}
-		}
-		
-		@Override
-		protected void onPostExecute(Void result) {
-			if (showLoading) {
-				//Dismiss loading bar
-				dialog.dismiss();
-			}
-			if (success) {
-				Intent intent = new Intent(context, DownloadVillageListActivity.class);
-				context.startActivity(intent);
-			} else {
-				Toast.makeText(context, "Failure Downloading", Toast.LENGTH_LONG).show();
-			}
+			return true;
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return false;
 		}
 	}
+		
+	
 	
 	public void DownloadData(Context context1, Context context2) {
 		new HandleDownloadRecordsTask(true, context1, context2).execute();
