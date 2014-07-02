@@ -12,7 +12,7 @@ public class UploadResultsActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_upload_results);
+		setContentView(R.layout.activity_upload_login);
 
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
