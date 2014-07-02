@@ -1,24 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<<<<<<< HEAD
-<qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="com.stanford.guatemedic.DetailedChildVisit"/>
-<fullyQualifiedTypeName name="java.lang.reflect.Field"/>
-<fullyQualifiedTypeName name="com.stanford.guatemedic.R.array"/>
-<fullyQualifiedTypeName name="android.R"/>
-<fullyQualifiedTypeName name="android.widget.AdapterView.OnItemSelectedListener"/>
-<fullyQualifiedTypeName name="android.content.Context"/>
-<fullyQualifiedTypeName name="android.widget.Toast"/>
-<fullyQualifiedTypeName name="com.stanford.guatemedic.R.anim"/>
-<fullyQualifiedTypeName name="android.util.Log"/>
-<fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
-<fullyQualifiedTypeName name="com.stanford.guatemedic.R.id"/>
-<fullyQualifiedTypeName name="com.stanford.guatemedic.R.layout"/>
-<fullyQualifiedTypeName name="com.stanford.guatemedic.UploadLoginActivity.HandleUploadRecordsTask"/>
-<fullyQualifiedTypeName name="org.json.JSONException"/>
-<fullyQualifiedTypeName name="android.support.v4.app.Fragment"/>
-<fullyQualifiedTypeName name="com.stanford.guatemedic.UploadRecordsStore"/>
-<fullyQualifiedTypeName name="java.util.Map"/>
-</qualifiedTypeNameHistroy>
-=======
 <qualifiedTypeNameHistroy/>
->>>>>>> cd36393852f94e9f132a8afd66039635520e6383

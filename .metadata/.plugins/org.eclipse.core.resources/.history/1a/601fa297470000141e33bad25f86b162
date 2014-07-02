@@ -1,9 +1,0 @@
-package com.stanford.guatemedic;
-
-public class UploadFamily {
-	
-	String family_id;
-	String temp_family_id;
-	ArrayList<Sring> visit_ids;
-
-}

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+    
+    <TextView
+        android:id="@+id/add_new_family_textview"
+        android:textSize="30sp"
+        android:layout_marginBottom="40dp"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    
+    <EditText
+        android:id="@+id/add_new_family_parent1_name"
+        android:textSize="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:hint="Mother name"
+        />
+    
+    <EditText
+        android:id="@+id/add_new_family_parent1_dob"
+        android:textSize="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:hint="Mother Date of Birth"
+        />
+    
+    <EditText
+        android:id="@+id/add_new_family_parent2_name"
+        android:textSize="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:hint="Father name"
+        />
+    
+    <EditText
+        android:id="@+id/add_new_family_parent2_dob"
+        android:textSize="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:hint="Father Date of Birth"
+        />
+    
+    <Button
+        android:id="@+id/add_new_family_button"
+        android:textSize="30sp"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        
+        android:text="Add Family"
+        />
+        
+</LinearLayout>

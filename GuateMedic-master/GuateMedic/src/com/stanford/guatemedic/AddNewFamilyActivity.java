@@ -61,7 +61,7 @@ public class AddNewFamilyActivity extends ActionBarActivity {
 			final String village = getArguments().getString("village");
 			
 			TextView textview = (TextView)rootView.findViewById(R.id.add_new_family_textview);
-			textview.setText(village);
+			textview.setText("Village: " + village);
 			
 			Button button = (Button)rootView.findViewById(R.id.add_new_family_button);
 			button.setOnClickListener(new View.OnClickListener() {
