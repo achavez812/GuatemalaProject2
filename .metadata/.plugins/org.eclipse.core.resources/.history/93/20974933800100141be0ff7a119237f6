@@ -44,27 +44,26 @@
      
  
      <EditText
-         android:id="@+id/add_new_child_dob"
+         android:id="@id/+add_new_child_dob"
          android:textSize="30sp"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:layout_marginTop="20dp"
          android:layout_centerHorizontal="true"
-         android:layout_below="@+id/add_new_child_name"
+         android:layout_below="@id/+add_new_child_name"
          android:hint="Date of Birth(Double Click to Enter)"
          android:layout_margin="20dp" 
          
          />
          
-     <TextView android:id="@+id/gender_title"
+     <TextView android:id="@id/+gender_title"
          android:text="Gender"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:layout_centerHorizontal="true"
          android:textSize="20sp"
-         android:layout_below="@+id/add_new_child_dob"
-         android:layout_marginTop="20dp"
-         android:layout_marginLeft="20dp" 
+         android:layout_below="@+id/+add_new_child_dob"
+         android:layout_margin="20dp" 
          android:layout_alignParentLeft="true"/>
      <RadioGroup
          android:id="@+id/add_new_child_gender"
@@ -112,7 +111,7 @@
          />
      
      <Spinner
-         android:id="@+id/add_new_child_num_children_in_same_pregnancy"
+         android:id="@id/add_new_child_num_children_in_same_pregnancy"
          android:textSize="30sp"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
@@ -124,7 +123,7 @@
          />
      
      <EditText
-         android:id="@+id/add_new_child_months_gestated"
+         android:id="@id/add_new_child_months_gestated"
          android:textSize="30sp"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
@@ -137,71 +136,71 @@
          />
      
      <Spinner
-         android:id="@+id/add_new_child_prenatal_care"
+         android:id="@id/add_new_child_prenatal_care"
          android:textSize="30sp"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:layout_marginTop="20dp"
          android:layout_centerHorizontal="true"
-         android:layout_below="@+id/add_new_child_months_gestated"
+         android:layout_below="@id/add_new_child_months_gestated"
          android:hint="Prenatal Care"
          android:layout_margin="20dp" 
          />
      
      <EditText
-         android:id="@+id/add_new_child_birth_weight"
+         android:id="@id/add_new_child_birth_weight"
          android:textSize="30sp"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:layout_marginTop="20dp"
          android:layout_centerHorizontal="true"
          android:inputType="numberDecimal"
-         android:layout_below="@+id/add_new_child_prenatal_care"
+         android:layout_below="@id/add_new_child_prenatal_care"
          android:hint="Birth Weight (kg)"
          android:layout_margin="20dp" 
          />
      
      <EditText
-         android:id="@+id/add_new_child_birth_height"
+         android:id="@id/add_new_child_birth_height"
          android:textSize="30sp"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:layout_marginTop="20dp"
          android:layout_centerHorizontal="true"
          android:inputType="numberDecimal"
-         android:layout_below="@+id/add_new_child_birth_weight"
+         android:layout_below="@id/add_new_child_birth_weight"
          android:hint="Birth Height (cm)"
          android:layout_margin="20dp" 
          />
      
      <EditText
-         android:id="@+id/add_new_child_youngest_sibling_dob"
+         android:id="@id/add_new_child_youngest_sibling_dob"
          android:textSize="30sp"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:layout_marginTop="20dp"
          android:layout_centerHorizontal="true"
-         android:layout_below="@+id/add_new_child_birth_height"
+         android:layout_below="@id/add_new_child_birth_height"
          android:hint="Youngest Sibling Date of Birth(Double Click to Enter)"
          android:layout_margin="20dp" 
          />
  
      <Button
-         android:id="@+id/add_new_child_button"
+         android:id="@id/add_new_child_button"
          android:layout_width="150dp"
          android:layout_height="wrap_content"
          android:layout_marginTop="20dp"
-         android:layout_below="@+id/add_new_child_youngest_sibling_dob"
+         android:layout_below="@id/add_new_child_youngest_sibling_dob"
          android:text="Add Child"
          android:layout_marginBottom="40dp"
          android:layout_centerHorizontal="true"
          android:layout_margin="20dp" 
          />
        <TextView 
-           android:id="@+id/footer_add_child"
+           android:id="@id/footer_add_child"
            android:layout_width="0dp"
            android:layout_height="0dp"
-           android:layout_below="@+id/add_new_child_button"
+           android:layout_below="@id/add_new_child_button"
            />  
  </RelativeLayout>
  </ScrollView>

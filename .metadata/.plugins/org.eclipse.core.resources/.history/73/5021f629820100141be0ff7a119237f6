@@ -74,12 +74,12 @@
     <string-array name="br_array">
         <item>Yes</item>
         <item>No</item>
-        <item>Breastfeeding Information(Not Set)</item>
+        <item>Breastfeeding Information</item>
     </string-array>
     <string-array name="t_of_b_array">
         <item>Normal</item>
         <item>Caesarean</item>
-        <item>Type of Birth(Not Set)</item>
+        <item>Type of Birth</item>
     </string-array>
         <string-array name="prenatal_array">
          <item>Yes</item>

@@ -210,6 +210,8 @@ public class AddNewChildActivity extends ActionBarActivity {
 					DatePickerFragment newdobFragment = new DatePickerFragment();
 					newdobFragment.show(getActivity().getFragmentManager(),
 							"datePicker");
+					EditText dob_field = (EditText) getActivity().findViewById(
+							R.id.add_new_child_dob);
 
 				}
 
@@ -249,7 +251,7 @@ public class AddNewChildActivity extends ActionBarActivity {
 
 			type_of_birth_field.setAdapter(adaptert_of_b);
 
-			type_of_birth_field.setSelection(adaptert_of_b.getCount()-1);
+			type_of_birth_field.setSelection(adaptert_of_b.getCount());
 
 			// Prenatal Care
 
@@ -266,7 +268,7 @@ public class AddNewChildActivity extends ActionBarActivity {
 
 			prenatal_care_field.setAdapter(adapter_prenatal);
 
-			prenatal_care_field.setSelection(adapter_prenatal.getCount()-1);
+			prenatal_care_field.setSelection(adapter_prenatal.getCount());
 
 			// In Same pregnancy
 
@@ -281,7 +283,8 @@ public class AddNewChildActivity extends ActionBarActivity {
 
 			num_children_in_same_pregrancy_field.setAdapter(adapter_preg);
 
-			num_children_in_same_pregrancy_field.setSelection(adapter_preg.getCount()-1);
+			num_children_in_same_pregrancy_field.setSelection(adapter_preg
+					.getCount());
 
 			// On Click add
 

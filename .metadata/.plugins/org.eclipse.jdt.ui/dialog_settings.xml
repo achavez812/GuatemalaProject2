@@ -14,12 +14,14 @@
 	</section>
 	<section name="JavaElementSearchActions">
 	</section>
-	<section name="quick_assist_proposal_size">
-	</section>
 	<section name="NewClassWizardPage">
 		<item value="false" key="create_constructor"/>
 		<item value="true" key="create_unimplemented"/>
 	</section>
+<<<<<<< HEAD
 	<section name="BreadcrumbItemDropDown">
+=======
+	<section name="quick_assist_proposal_size">
+>>>>>>> cd36393852f94e9f132a8afd66039635520e6383
 	</section>
 </section>

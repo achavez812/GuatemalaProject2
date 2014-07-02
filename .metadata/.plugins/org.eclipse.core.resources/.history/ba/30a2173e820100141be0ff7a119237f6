@@ -249,7 +249,7 @@ public class AddNewChildActivity extends ActionBarActivity {
 
 			type_of_birth_field.setAdapter(adaptert_of_b);
 
-			type_of_birth_field.setSelection(adaptert_of_b.getCount()-1);
+			type_of_birth_field.setSelection(adaptert_of_b.getCount());
 
 			// Prenatal Care
 

@@ -139,11 +139,14 @@ public class AddNewChildActivity extends ActionBarActivity {
 
 			@Override
 			public void onDateSet(DatePicker view, int year, int month, int day) {
+
 				// Do something with the date chosen by the user
 				month=month+1;
 				val = month + "-" + day + "-" + year;
+
 				EditText dob_field = (EditText) getActivity().findViewById(
 						R.id.add_new_child_dob);
+
 				dob_field.setText(val);
 
 			}
@@ -160,10 +163,15 @@ public class AddNewChildActivity extends ActionBarActivity {
 				// Use the current date as the default date in the picker
 				
 				final Calendar c = Calendar.getInstance();
+
 				int year = c.get(Calendar.YEAR);
+
 				int month = c.get(Calendar.MONTH);
+
 				int day = c.get(Calendar.DAY_OF_MONTH);
+
 				// Create a new instance of DatePickerDialog and return it
+
 				return new DatePickerDialog(getActivity(), this, year, month,
 						day);
 
@@ -175,8 +183,10 @@ public class AddNewChildActivity extends ActionBarActivity {
 				// Do something with the date chosen by the user
 				month=month+1;
 				val = month + "-" + day + "-" + year;
+
 				EditText youngest_sibling_dob_field = (EditText) getActivity()
 						.findViewById(R.id.add_new_child_youngest_sibling_dob);
+
 				youngest_sibling_dob_field.setText(val);
 
 			}
@@ -196,20 +206,29 @@ public class AddNewChildActivity extends ActionBarActivity {
 
 			TextView textview = (TextView) rootView
 					.findViewById(R.id.add_new_child_textview1);
+
 			textview.setText(family_id);
+
 			Button button = (Button) rootView
 					.findViewById(R.id.add_new_child_button);
+
 			// click listeners for date dialogs
+
 			EditText dob_field = (EditText) rootView
 					.findViewById(R.id.add_new_child_dob);
+
 			dob_field.setOnClickListener(new View.OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
 
 					DatePickerFragment newdobFragment = new DatePickerFragment();
+
 					newdobFragment.show(getActivity().getFragmentManager(),
 							"datePicker");
+
+					EditText dob_field = (EditText) getActivity().findViewById(
+							R.id.add_new_child_dob);
 
 				}
 
@@ -217,6 +236,7 @@ public class AddNewChildActivity extends ActionBarActivity {
 
 			EditText youngest_sibling_dob_field = (EditText) rootView
 					.findViewById(R.id.add_new_child_youngest_sibling_dob);
+
 			youngest_sibling_dob_field
 					.setOnClickListener(new View.OnClickListener() {
 
@@ -249,7 +269,7 @@ public class AddNewChildActivity extends ActionBarActivity {
 
 			type_of_birth_field.setAdapter(adaptert_of_b);
 
-			type_of_birth_field.setSelection(adaptert_of_b.getCount()-1);
+			type_of_birth_field.setSelection(adaptert_of_b.getCount());
 
 			// Prenatal Care
 
@@ -266,7 +286,7 @@ public class AddNewChildActivity extends ActionBarActivity {
 
 			prenatal_care_field.setAdapter(adapter_prenatal);
 
-			prenatal_care_field.setSelection(adapter_prenatal.getCount()-1);
+			prenatal_care_field.setSelection(adapter_prenatal.getCount());
 
 			// In Same pregnancy
 
@@ -274,16 +294,20 @@ public class AddNewChildActivity extends ActionBarActivity {
 					.findViewById(R.id.add_new_child_num_children_in_same_pregnancy);
 
 			ArrayAdapter<String> adapter_preg = new ArrayAdapter<String>(
-					getActivity(), R.layout.spinner_item,getResources().getStringArray(R.array.same_pregernating_array));
+					getActivity(), R.layout.spinner_item,
+
+					getResources().getStringArray(
+							R.array.same_pregernating_array));
 
 			adapter_preg
 					.setDropDownViewResource(R.layout.spinner_dropdown_item);
 
 			num_children_in_same_pregrancy_field.setAdapter(adapter_preg);
 
-			num_children_in_same_pregrancy_field.setSelection(adapter_preg.getCount()-1);
+			num_children_in_same_pregrancy_field.setSelection(adapter_preg
+					.getCount());
 
-			// On Click add
+			// On Click DOB Dialog
 
 			button.setOnClickListener(new View.OnClickListener() {
 

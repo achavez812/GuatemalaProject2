@@ -44,27 +44,26 @@
      
  
      <EditText
-         android:id="@+id/add_new_child_dob"
+         android:id="@id/+add_new_child_dob"
          android:textSize="30sp"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:layout_marginTop="20dp"
          android:layout_centerHorizontal="true"
-         android:layout_below="@+id/add_new_child_name"
+         android:layout_below="@id/+add_new_child_name"
          android:hint="Date of Birth(Double Click to Enter)"
          android:layout_margin="20dp" 
          
          />
          
-     <TextView android:id="@+id/gender_title"
+     <TextView android:id="@id/+gender_title"
          android:text="Gender"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:layout_centerHorizontal="true"
          android:textSize="20sp"
-         android:layout_below="@+id/add_new_child_dob"
-         android:layout_marginTop="20dp"
-         android:layout_marginLeft="20dp" 
+         android:layout_below="@+id/+add_new_child_dob"
+         android:layout_margin="20dp" 
          android:layout_alignParentLeft="true"/>
      <RadioGroup
          android:id="@+id/add_new_child_gender"

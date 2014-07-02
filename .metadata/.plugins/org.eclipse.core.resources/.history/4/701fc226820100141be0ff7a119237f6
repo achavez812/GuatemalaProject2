@@ -74,23 +74,29 @@
     <string-array name="br_array">
         <item>Yes</item>
         <item>No</item>
-        <item>Breastfeeding Information(Not Set)</item>
+        <item>Breastfeeding Information</item>
     </string-array>
     <string-array name="t_of_b_array">
         <item>Normal</item>
         <item>Caesarean</item>
-        <item>Type of Birth(Not Set)</item>
+        <item>Type of Birth</item>
     </string-array>
         <string-array name="prenatal_array">
          <item>Yes</item>
          <item>No</item>
-         <item>Prenatal Care(Not Set)</item>
-     </string-array>   
+         <item>Prenatal Care</item>
+     </string-array>
+     <string-array name="same_preger_array">
+         <item>Single</item>
+         <item>Twins</item>
+         <item>Triplets</item>
+        <!--  <item>Number of Children in Same Birth</item>-->
+     </string-array>    
           <string-array name="same_pregernating_array">
          <item>Single</item>
          <item>Twins</item>
          <item>Triplets</item>
-        <item>Number of Children in Same Birth(Not Set)</item>
+        <item>Number of Children in Same Birth</item>
      </string-array>
     <string-array name="child_visit_array">
         <item>Category 1</item>

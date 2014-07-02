@@ -62,9 +62,8 @@
          android:layout_height="wrap_content"
          android:layout_centerHorizontal="true"
          android:textSize="20sp"
-         android:layout_below="@+id/add_new_child_dob"
-         android:layout_marginTop="20dp"
-         android:layout_marginLeft="20dp" 
+         android:layout_below="@+id/+add_new_child_dob"
+         android:layout_margin="20dp" 
          android:layout_alignParentLeft="true"/>
      <RadioGroup
          android:id="@+id/add_new_child_gender"
