@@ -1,18 +1,10 @@
 package com.stanford.guatemedic;
 
-
-
 import java.util.Calendar;
-
-
 
 import org.json.JSONException;
 
 import org.json.JSONObject;
-
-
-
-import android.app.Activity;
 
 import android.app.DatePickerDialog;
 
@@ -38,8 +30,6 @@ import android.view.View;
 
 import android.view.ViewGroup;
 
-import android.view.inputmethod.InputMethodManager;
-
 import android.widget.ArrayAdapter;
 
 import android.widget.Button;
@@ -56,521 +46,448 @@ import android.widget.Spinner;
 
 import android.widget.TextView;
 
+public class AddNewChildActivity extends ActionBarActivity {
 
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
 
-public class AddNewChildActivity extends ActionBarActivity{
+		super.onCreate(savedInstanceState);
 
+		setContentView(R.layout.activity_add_new_child);
 
-protected void onCreate(Bundle savedInstanceState) {
+		String family_id = getIntent().getStringExtra("family_id");
 
-super.onCreate(savedInstanceState);
+		if (savedInstanceState == null) {
 
-setContentView(R.layout.activity_add_new_child);
+			getSupportFragmentManager().beginTransaction()
 
-String family_id = getIntent().getStringExtra("family_id");
+			.add(R.id.container, AddNewChildFragment.newInstance(family_id))
+					.commit();
 
-if (savedInstanceState == null) {
+		}
 
-getSupportFragmentManager().beginTransaction()
+	}
 
-.add(R.id.container, AddNewChildFragment.newInstance(family_id)).commit();
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
 
-}
+		// getMenuInflater().inflate(R.menu.main, menu);
 
-}
+		return true;
 
+	}
 
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
 
-@Override
+		int id = item.getItemId();
 
-public boolean onCreateOptionsMenu(Menu menu) {
+		if (id == R.id.action_settings) {
 
-//getMenuInflater().inflate(R.menu.main, menu);
+			return true;
 
-return true;
+		}
 
-}
+		return super.onOptionsItemSelected(item);
 
+	}
 
-@Override
+	public static class AddNewChildFragment extends Fragment {
 
-public boolean onOptionsItemSelected(MenuItem item) {
+		public AddNewChildFragment() {
 
-int id = item.getItemId();
+		}
 
-if (id == R.id.action_settings) {
+		public static AddNewChildFragment newInstance(String family_id) {
 
-return true;
+			AddNewChildFragment f = new AddNewChildFragment();
 
-}
+			Bundle args = new Bundle();
 
-return super.onOptionsItemSelected(item);
+			args.putString("family_id", family_id);
 
-}
+			f.setArguments(args);
 
+			return f;
 
+		}
 
+		public static class DatePickerFragment extends DialogFragment implements
+				DatePickerDialog.OnDateSetListener {
 
-public static class AddNewChildFragment extends Fragment {
+			String val = "00-00-00";
 
+			@Override
+			public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-public AddNewChildFragment() {
+				// Use the current date as the default date in the picker
 
+				final Calendar c = Calendar.getInstance();
 
-}
+				int year = c.get(Calendar.YEAR);
 
+				int month = c.get(Calendar.MONTH);
 
-public static AddNewChildFragment newInstance(String family_id) {
+				int day = c.get(Calendar.DAY_OF_MONTH);
 
-AddNewChildFragment f = new AddNewChildFragment();
+				// Create a new instance of DatePickerDialog and return it
 
-Bundle args = new Bundle();
+				return new DatePickerDialog(getActivity(), this, year, month,
+						day);
 
-args.putString("family_id", family_id);
+			}
 
-f.setArguments(args);
+			@Override
+			public void onDateSet(DatePicker view, int year, int month, int day) {
+				// Do something with the date chosen by the user
+				month=month+1;
+				val = month + "-" + day + "-" + year;
+				EditText dob_field = (EditText) getActivity().findViewById(
+						R.id.add_new_child_dob);
+				dob_field.setText(val);
 
-return f;
+			}
 
-}
+		}
 
-public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+		public static class DatePickerFragmentYoungest extends DialogFragment
+				implements DatePickerDialog.OnDateSetListener {
 
-String val="00-00-00";
+			String val = "00-00-00";
 
-@Override
+			@Override
+			public Dialog onCreateDialog(Bundle savedInstanceState) {
+				// Use the current date as the default date in the picker
+				
+				final Calendar c = Calendar.getInstance();
+				int year = c.get(Calendar.YEAR);
+				int month = c.get(Calendar.MONTH);
+				int day = c.get(Calendar.DAY_OF_MONTH);
+				// Create a new instance of DatePickerDialog and return it
+				return new DatePickerDialog(getActivity(), this, year, month,
+						day);
 
-public Dialog onCreateDialog(Bundle savedInstanceState) {
+			}
 
-// Use the current date as the default date in the picker
+			@Override
+			public void onDateSet(DatePicker view, int year, int month, int day) {
 
-final Calendar c = Calendar.getInstance();
+				// Do something with the date chosen by the user
+				month=month+1;
+				val = month + "-" + day + "-" + year;
+				EditText youngest_sibling_dob_field = (EditText) getActivity()
+						.findViewById(R.id.add_new_child_youngest_sibling_dob);
+				youngest_sibling_dob_field.setText(val);
 
-int year = c.get(Calendar.YEAR);
+			}
 
-int month = c.get(Calendar.MONTH);
+		}
 
-int day = c.get(Calendar.DAY_OF_MONTH);
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container,
+				Bundle savedInstanceState) {
 
+			View rootView = inflater.inflate(R.layout.fragment_add_new_child,
+					container, false);
 
-// Create a new instance of DatePickerDialog and return it
+			final String family_id = getArguments().getString("family_id");
 
-return new DatePickerDialog(getActivity(), this, year, month, day);
+			// get basic information for fragment functionality
 
-}
+			TextView textview = (TextView) rootView
+					.findViewById(R.id.add_new_child_textview1);
+			textview.setText(family_id);
+			Button button = (Button) rootView
+					.findViewById(R.id.add_new_child_button);
+			// click listeners for date dialogs
+			EditText dob_field = (EditText) rootView
+					.findViewById(R.id.add_new_child_dob);
+			dob_field.setOnClickListener(new View.OnClickListener() {
 
+				@Override
+				public void onClick(View v) {
 
-public void onDateSet(DatePicker view, int year, int month, int day) {
+					DatePickerFragment newdobFragment = new DatePickerFragment();
+					newdobFragment.show(getActivity().getFragmentManager(),
+							"datePicker");
 
-// Do something with the date chosen by the user
+				}
 
-val=month+"-"+day+"-"+year;
+			});
 
-EditText dob_field = (EditText)getActivity().findViewById(R.id.add_new_child_dob);
+			EditText youngest_sibling_dob_field = (EditText) rootView
+					.findViewById(R.id.add_new_child_youngest_sibling_dob);
+			youngest_sibling_dob_field
+					.setOnClickListener(new View.OnClickListener() {
 
-dob_field.setText(val);
+						@Override
+						public void onClick(View v) {
 
-}
+							DatePickerFragmentYoungest newdobFragmentYoung = new DatePickerFragmentYoungest();
 
-}
+							newdobFragmentYoung.show(getActivity()
+									.getFragmentManager(), "datePicker");
 
+						}
 
-public static class DatePickerFragmentYoungest extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+					});
 
-String val="00-00-00";
+			// Populating Spinners
 
-@Override
+			// Type of Birth
 
-public Dialog onCreateDialog(Bundle savedInstanceState) {
+			Spinner type_of_birth_field = (Spinner) rootView
+					.findViewById(R.id.add_new_child_type_of_birth);
 
-// Use the current date as the default date in the picker
+			ArrayAdapter<String> adaptert_of_b = new ArrayAdapter<String>(
+					getActivity(), R.layout.spinner_item,
 
-final Calendar c = Calendar.getInstance();
+					getResources().getStringArray(R.array.t_of_b_array));
 
-int year = c.get(Calendar.YEAR);
+			adaptert_of_b
+					.setDropDownViewResource(R.layout.spinner_dropdown_item);
 
-int month = c.get(Calendar.MONTH);
+			type_of_birth_field.setAdapter(adaptert_of_b);
 
-int day = c.get(Calendar.DAY_OF_MONTH);
+			type_of_birth_field.setSelection(adaptert_of_b.getCount()-1);
 
+			// Prenatal Care
 
-// Create a new instance of DatePickerDialog and return it
+			Spinner prenatal_care_field = (Spinner) rootView
+					.findViewById(R.id.add_new_child_prenatal_care);
 
-return new DatePickerDialog(getActivity(), this, year, month, day);
+			ArrayAdapter<String> adapter_prenatal = new ArrayAdapter<String>(
+					getActivity(), R.layout.spinner_item,
 
-}
+					getResources().getStringArray(R.array.prenatal_array));
 
+			adapter_prenatal
+					.setDropDownViewResource(R.layout.spinner_dropdown_item);
 
-public void onDateSet(DatePicker view, int year, int month, int day) {
+			prenatal_care_field.setAdapter(adapter_prenatal);
 
-// Do something with the date chosen by the user
+			prenatal_care_field.setSelection(adapter_prenatal.getCount()-1);
 
-val=month+"-"+day+"-"+year;
+			// In Same pregnancy
 
-EditText youngest_sibling_dob_field = (EditText)getActivity().findViewById(R.id.add_new_child_youngest_sibling_dob);
+			Spinner num_children_in_same_pregrancy_field = (Spinner) rootView
+					.findViewById(R.id.add_new_child_num_children_in_same_pregnancy);
 
-youngest_sibling_dob_field.setText(val);
+			ArrayAdapter<String> adapter_preg = new ArrayAdapter<String>(
+					getActivity(), R.layout.spinner_item,getResources().getStringArray(R.array.same_pregernating_array));
 
-}
+			adapter_preg
+					.setDropDownViewResource(R.layout.spinner_dropdown_item);
 
+			num_children_in_same_pregrancy_field.setAdapter(adapter_preg);
 
+			num_children_in_same_pregrancy_field.setSelection(adapter_preg.getCount()-1);
 
-}
+			// On Click add
 
+			button.setOnClickListener(new View.OnClickListener() {
 
-public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+				@Override
+				public void onClick(View v) {
 
-View rootView = inflater.inflate(R.layout.fragment_add_new_child, container, false);
+					EditText name_field = (EditText) getActivity()
+							.findViewById(R.id.add_new_child_name);
 
-final String family_id = getArguments().getString("family_id");
+					String name = name_field.getText().toString();
 
+					EditText dob_field = (EditText) getActivity().findViewById(
+							R.id.add_new_child_dob);
 
+					String dob = dob_field.getText().toString();
 
+					RadioGroup radioGenderGroup = (RadioGroup) getView()
+							.findViewById(R.id.add_new_child_gender);
 
+					int selectedId = radioGenderGroup.getCheckedRadioButtonId();
 
-//get basic information for fragment functionality
+					RadioButton gender_field = (RadioButton) getView()
+							.findViewById(selectedId);
 
-TextView textview = (TextView)rootView.findViewById(R.id.add_new_child_textview1);
+					// EditText gender_field =
+					// (EditText)getActivity().findViewById(R.id.add_new_child_gender);
 
-textview.setText(family_id);
+					String gender_string = gender_field.getText().toString();
 
-Button button = (Button)rootView.findViewById(R.id.add_new_child_button);
+					Spinner type_of_birth_field = (Spinner) getView()
+							.findViewById(R.id.add_new_child_type_of_birth);
 
+					// EditText type_of_birth_field =
+					// (EditText)getActivity().findViewById(R.id.add_new_child_type_of_birth);
 
-//click listeners for date dialogs
+					String type_of_birth_string = type_of_birth_field
+							.getSelectedItem().toString();
 
-EditText dob_field = (EditText)rootView.findViewById(R.id.add_new_child_dob);
+					Spinner num_children_in_same_pregrancy_field = (Spinner) getView()
+							.findViewById(
+									R.id.add_new_child_num_children_in_same_pregnancy);
 
-dob_field.setOnClickListener(new View.OnClickListener() {
+					// EditText num_children_in_same_pregnancy_field =
+					// (EditText)getActivity().findViewById(R.id.add_new_child_num_children_in_same_pregnancy);
 
+					String num_children_in_same_pregnancy_string = num_children_in_same_pregrancy_field
+							.getSelectedItem().toString();
 
-@Override
+					EditText months_gestated_field = (EditText) getActivity()
+							.findViewById(R.id.add_new_child_months_gestated);
 
-public void onClick(View v) {
+					String months_gestated_string = months_gestated_field
+							.getText().toString();
 
-DatePickerFragment newdobFragment = new DatePickerFragment();
+					Spinner prenatal_care_field = (Spinner) getActivity()
+							.findViewById(R.id.add_new_child_prenatal_care);
 
-    newdobFragment.show(getActivity().getFragmentManager(), "datePicker");
+					// EditText prenatal_care_field =
+					// (EditText)getActivity().findViewById(R.id.add_new_child_prenatal_care);
 
-    EditText dob_field = (EditText)getActivity().findViewById(R.id.add_new_child_dob);
+					String prenatal_care_string = prenatal_care_field
+							.getSelectedItem().toString();
 
-   
+					EditText birth_weight_field = (EditText) getActivity()
+							.findViewById(R.id.add_new_child_birth_weight);
 
-}
+					String birth_weight_string = birth_weight_field.getText()
+							.toString();
 
-});
+					EditText birth_height_field = (EditText) getActivity()
+							.findViewById(R.id.add_new_child_birth_height);
 
+					String birth_height_string = birth_height_field.getText()
+							.toString();
 
+					EditText youngest_sibling_dob_field = (EditText) getActivity()
+							.findViewById(
+									R.id.add_new_child_youngest_sibling_dob);
 
-EditText youngest_sibling_dob_field = (EditText)rootView.findViewById(R.id.add_new_child_youngest_sibling_dob);
+					String youngest_sibling_dob = youngest_sibling_dob_field
+							.getText().toString();
 
-youngest_sibling_dob_field.setOnClickListener(new View.OnClickListener() {
+					try {
 
+						JSONObject obj = new JSONObject();
 
-@Override
+						obj.put("family_id", family_id);
 
-public void onClick(View v) {
+						obj.put("name", name);
 
-DatePickerFragmentYoungest newdobFragmentYoung = new DatePickerFragmentYoungest();
+						obj.put("dob", dob);
 
-    newdobFragmentYoung.show(getActivity().getFragmentManager(), "datePicker");
+						int gender = 2;
 
+						if (gender_string.trim().equalsIgnoreCase("male")) {
 
-}
+							gender = 0;
 
-});
+						} else if (gender_string.trim().equalsIgnoreCase(
+								"female")) {
 
+							gender = 1;
 
+						}
 
+						obj.put("gender", gender);
 
+						int type_of_birth = 2;
 
+						if (type_of_birth_string.trim().equalsIgnoreCase(
+								"normal")) {
 
+							type_of_birth = 0;
 
+						} else if (type_of_birth_string.trim()
+								.equalsIgnoreCase("cesarean")) {
 
+							type_of_birth = 1;
 
+						}
 
+						obj.put("type_of_birth", type_of_birth);
 
-//Populating Spinners
+						int num_children_in_same_pregnancy = 0;
 
- 	 //Type of Birth
+						if (num_children_in_same_pregnancy_string
+								.equalsIgnoreCase("single")) {
 
- 	 Spinner type_of_birth_field=(Spinner)rootView.findViewById(R.id.add_new_child_type_of_birth);
+							num_children_in_same_pregnancy = 1;
 
- 	 ArrayAdapter<String> adaptert_of_b = new ArrayAdapter<String>(getActivity(),R.layout.spinner_item,
+						} else if (num_children_in_same_pregnancy_string
+								.equalsIgnoreCase("twins")) {
 
- 	 getResources().getStringArray(R.array.t_of_b_array)){
+							num_children_in_same_pregnancy = 2;
 
- 	     @Override
+						} else if (num_children_in_same_pregnancy_string
+								.equalsIgnoreCase("triplets")) {
 
- 	     public int getCount() {
+							num_children_in_same_pregnancy = 3;
 
- 	         return super.getCount()-1;
+						}
 
- 	     }
+						obj.put("num_children_in_same_pregnancy",
+								num_children_in_same_pregnancy);
 
- 	 };
+						float months_gestated = Float
+								.parseFloat(months_gestated_string);
 
- 	 adaptert_of_b.setDropDownViewResource(R.layout.spinner_dropdown_item);
+						obj.put("months_gestated", months_gestated);
 
- 	 type_of_birth_field.setAdapter(adaptert_of_b);
+						int prenatal_care = 2;
 
- 	 type_of_birth_field.setSelection(adaptert_of_b.getCount());
+						if (prenatal_care_string.trim().equalsIgnoreCase("Yes")) {
 
- 
+							prenatal_care = 0;
 
- 
+						} else if (prenatal_care_string.trim()
+								.equalsIgnoreCase("No")) {
 
- 	 //Prenatal Care
+							prenatal_care = 1;
 
- 	 Spinner prenatal_care_field = (Spinner)rootView.findViewById(R.id.add_new_child_prenatal_care);
+						}
 
- 	 ArrayAdapter<String> adapter_prenatal = new ArrayAdapter<String>(getActivity(),R.layout.spinner_item,
+						obj.put("prenatal_care", prenatal_care);
 
- 	 getResources().getStringArray(R.array.prenatal_array)){
+						float birth_weight = Float
+								.parseFloat(birth_weight_string);
 
- 	     @Override
+						obj.put("birth_weight", birth_weight);
 
- 	     public int getCount() {
+						float birth_height = Float
+								.parseFloat(birth_height_string);
 
- 	         return super.getCount()-1;
+						obj.put("birth_height", birth_height);
 
- 	     }
+						obj.put("youngest_sibling_dob", youngest_sibling_dob);
 
- 	 };
+						DetailedRecordsStore
+								.get(getActivity().getApplication())
+								.addNewChild(obj);
 
- 
+					} catch (JSONException e) {
 
- 	 adapter_prenatal.setDropDownViewResource(R.layout.spinner_dropdown_item);
+						e.printStackTrace();
 
- 	 prenatal_care_field.setAdapter(adapter_prenatal);
+					}
 
- 	 prenatal_care_field.setSelection(adapter_prenatal.getCount());
+					// Go to activity of this family
 
- 
+					Intent i = new Intent(getActivity(),
+							ViewChildListActivity.class);
 
- 
+					i.putExtra("family_id", family_id);
 
- 	 //In Same pregnancy
+					startActivity(i);
 
- 	 Spinner num_children_in_same_pregrancy_field = (Spinner)rootView.findViewById(R.id.add_new_child_num_children_in_same_pregnancy);
+				}
 
- 	 ArrayAdapter<String> adapter_preg = new ArrayAdapter<String>(getActivity(),R.layout.spinner_item,
+			});
 
- 	 getResources().getStringArray(R.array.same_pregernating_array)){
+			return rootView;
 
- 	     @Override
+		}
 
- 	     public int getCount() {
-
- 	         return super.getCount()-1;
-
- 	     }
-
- 	 };
-
- 
-
- 	 adapter_preg.setDropDownViewResource(R.layout.spinner_dropdown_item);
-
- 	 num_children_in_same_pregrancy_field.setAdapter(adapter_preg);
-
- 	 num_children_in_same_pregrancy_field.setSelection(adapter_preg.getCount());
-
- 
-
-
-
-//On Click DOB Dialog
-
-button.setOnClickListener(new View.OnClickListener() {
-
-@Override
-
-public void onClick(View v) {
-
-EditText name_field = (EditText)getActivity().findViewById(R.id.add_new_child_name);
-
-String name = name_field.getText().toString();
-
-
-EditText dob_field = (EditText)getActivity().findViewById(R.id.add_new_child_dob);
-
-String dob = dob_field.getText().toString();
-
-
-
-RadioGroup radioGenderGroup = (RadioGroup) getView().findViewById(R.id.add_new_child_gender);
-
-int selectedId=radioGenderGroup.getCheckedRadioButtonId();
-
-RadioButton gender_field=(RadioButton)getView().findViewById(selectedId);
-
-//EditText gender_field = (EditText)getActivity().findViewById(R.id.add_new_child_gender);
-
-String gender_string = gender_field.getText().toString();
-
-
-
-Spinner type_of_birth_field=(Spinner)getView().findViewById(R.id.add_new_child_type_of_birth);
-
-//EditText type_of_birth_field = (EditText)getActivity().findViewById(R.id.add_new_child_type_of_birth);
-
-String type_of_birth_string = type_of_birth_field.getSelectedItem().toString();
-
-
-Spinner num_children_in_same_pregrancy_field=(Spinner)getView().findViewById(R.id.add_new_child_num_children_in_same_pregnancy);
-
-//EditText num_children_in_same_pregnancy_field = (EditText)getActivity().findViewById(R.id.add_new_child_num_children_in_same_pregnancy);
-
-String num_children_in_same_pregnancy_string = num_children_in_same_pregrancy_field.getSelectedItem().toString();
-
-
-EditText months_gestated_field = (EditText)getActivity().findViewById(R.id.add_new_child_months_gestated);
-
-String months_gestated_string = months_gestated_field.getText().toString();
-
-
-Spinner prenatal_care_field = (Spinner)getActivity().findViewById(R.id.add_new_child_prenatal_care);
-
-//EditText prenatal_care_field = (EditText)getActivity().findViewById(R.id.add_new_child_prenatal_care);
-
-String prenatal_care_string = prenatal_care_field.getSelectedItem().toString();
-
-
-EditText birth_weight_field = (EditText)getActivity().findViewById(R.id.add_new_child_birth_weight);
-
-String birth_weight_string = birth_weight_field.getText().toString();
-
-
-EditText birth_height_field = (EditText)getActivity().findViewById(R.id.add_new_child_birth_height);
-
-String birth_height_string = birth_height_field.getText().toString();
-
-
-EditText youngest_sibling_dob_field = (EditText)getActivity().findViewById(R.id.add_new_child_youngest_sibling_dob);
-
-String youngest_sibling_dob = youngest_sibling_dob_field.getText().toString();
-
-
-try {
-
-JSONObject obj = new JSONObject();
-
-obj.put("family_id", family_id);
-
-obj.put("name", name);
-
-obj.put("dob", dob);
-
-
-int gender=2;
-
-if(gender_string.trim().equalsIgnoreCase("male")){
-
-gender=0;
-
-}else if(gender_string.trim().equalsIgnoreCase("female")){
-
-gender=1;
-
-}
-
-obj.put("gender", gender);
-
-
-int type_of_birth=2;
-
-if(type_of_birth_string.trim().equalsIgnoreCase("normal")){
-
-type_of_birth=0;
-
-}else if(type_of_birth_string.trim().equalsIgnoreCase("cesarean")) {
-
-type_of_birth=1;
-
-}
-
-obj.put("type_of_birth", type_of_birth);
-
-int num_children_in_same_pregnancy=0;
-
-if(num_children_in_same_pregnancy_string.equalsIgnoreCase("single")){
-
-num_children_in_same_pregnancy=1;
-
-}else if(num_children_in_same_pregnancy_string.equalsIgnoreCase("twins")){
-
-num_children_in_same_pregnancy=2;
-
-}else if(num_children_in_same_pregnancy_string.equalsIgnoreCase("triplets")){
-
-num_children_in_same_pregnancy=3;
-
-}
-
-
-obj.put("num_children_in_same_pregnancy", num_children_in_same_pregnancy);
-
-float months_gestated=Float.parseFloat(months_gestated_string);
-
-obj.put("months_gestated", months_gestated);
-
-int prenatal_care=2;
-
-if(prenatal_care_string.trim().equalsIgnoreCase("Yes")){
-
-prenatal_care=0;
-
-}else if(prenatal_care_string.trim().equalsIgnoreCase("No")){
-
-prenatal_care=1;
-
-}
-
-
-obj.put("prenatal_care", prenatal_care);
-
-float birth_weight=Float.parseFloat(birth_weight_string);
-
-obj.put("birth_weight", birth_weight);
-
-float birth_height=Float.parseFloat(birth_height_string);
-
-obj.put("birth_height", birth_height);
-
-obj.put("youngest_sibling_dob", youngest_sibling_dob);
-
-DetailedRecordsStore.get(getActivity().getApplication()).addNewChild(obj);
-
-} catch (JSONException e) {
-
-e.printStackTrace();
-
-}
-
-
-//Go to activity of this family
-
-Intent i = new Intent(getActivity(), ViewChildListActivity.class);
-
-i.putExtra("family_id", family_id);
-
-startActivity(i);
-
-
-}
-
-});
-
-
-return rootView;
-
-}
-
-
-
-
-
-}
+	}
 
 }
