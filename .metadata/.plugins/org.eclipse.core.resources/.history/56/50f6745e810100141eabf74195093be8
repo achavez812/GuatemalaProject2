@@ -72,8 +72,6 @@
         
         <activity
             android:name="com.stanford.guatemedic.UploadLoginActivity"
-            android:screenOrientation="portrait" 
-            android:configChanges="keyboardHidden|orientation"
             android:label="UPLOAD" />
         
         <activity

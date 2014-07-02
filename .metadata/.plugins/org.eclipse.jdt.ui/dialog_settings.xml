@@ -20,11 +20,6 @@
 		<item value="false" key="create_constructor"/>
 		<item value="true" key="create_unimplemented"/>
 	</section>
-<<<<<<< HEAD
-	<section name="quick_assist_proposal_size">
-	</section>
 	<section name="BreadcrumbItemDropDown">
 	</section>
-=======
->>>>>>> c0f93962119d11a02133199fb52f18b37ca6efa9
 </section>
