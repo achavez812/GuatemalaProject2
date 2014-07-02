@@ -8,6 +8,15 @@ INDEX VERSION 1.126+/Users/achavez/Documents/NewWorkspace/.metadata/.plugins/org
 3594599409.index
 4112439864.index
 1377251446.index
+<<<<<<< HEAD
 2379257999.index
+=======
+3470844063.index
+3614995588.index
+1077381343.index
+3075978171.index
+4037476689.index
+1144888004.index
+>>>>>>> 5dc4836e0c8be61504d6fa9bbbafb5a8e2eed8cd
 1691401685.index
 2318892183.index

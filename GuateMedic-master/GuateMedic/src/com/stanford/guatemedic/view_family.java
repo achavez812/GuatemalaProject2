@@ -50,25 +50,12 @@ public class view_family extends Activity{
 		Log.d("Rec No","ID="+family.getFamily_id());
 		
 		
-		
-		//Parent 1 Father Information
-		String father_name_string=family.getParent1_name()+"";
-		father_name.setText(father_name_string);
-		if(father_name_string.toString().trim().equals("") || father_name_string.toString().trim().equals("null")){
-			father_name.setText("Not Set");
-		}
-		String father_dob_string=family.getParent1_dob()+"";
-		if(father_dob_string.toString().trim().equals("") || father_dob_string.toString().trim().equals("null")){
-			father_dob.setText("Not Set");
-		}else {
-			father_dob.setText(father_dob_string);
-		}
+
 		
 		
 		
 		
-		
-		//Parent 2--Mother Information
+		//Parent 1--Mother Information
 		String mother_name_string=family.getParent1_name()+"";
 		mother_name.setText(mother_name_string);
 		if(mother_name_string.toString().trim().equals("") || mother_name_string.toString().trim().equals("null")){
@@ -82,6 +69,19 @@ public class view_family extends Activity{
 		}
 	
 		
+		//Parent 2 Father Information
+		String father_name_string=family.getParent2_name()+"";
+		father_name.setText(father_name_string);
+		if(father_name_string.toString().trim().equals("") || father_name_string.toString().trim().equals("null")){
+			father_name.setText("Not Set");
+		}
+		String father_dob_string=family.getParent2_dob()+"";
+		if(father_dob_string.toString().trim().equals("") || father_dob_string.toString().trim().equals("null")){
+			father_dob.setText("Not Set");
+		}else {
+			father_dob.setText(father_dob_string);
+		}
+			
 		
 		
 		

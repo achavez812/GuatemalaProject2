@@ -24,6 +24,9 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_new_family_visit);
 		
+		
+
+		
 		Spinner spinner = (Spinner)findViewById(R.id.family_visit_spinner);
 		
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.family_visit_array, android.R.layout.simple_spinner_dropdown_item);
@@ -87,7 +90,7 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 		public AddNewFamilyVisitFragment1() {
 
 		}
-
+		
 		public static AddNewFamilyVisitFragment1 newInstance(String family_id) {
 			AddNewFamilyVisitFragment1 f = new AddNewFamilyVisitFragment1();
 			Bundle args = new Bundle();
@@ -95,132 +98,39 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 			f.setArguments(args);
 			return f;
 		}
-
+		public void onCreate(Bundle savedInstanceState) {
+			Utilities utilityObj=new Utilities();
+			utilityObj.loadNativeCSS();
+			super.onCreate(savedInstanceState);
+		}
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+			Utilities utilityObj=new Utilities();
+			utilityObj.loadNativeCSS();
 			View rootView = inflater.inflate(R.layout.fragment_add_new_family_visit1, container, false);
-			final String family_id = getArguments().getString("family_id");
 			
 			final DetailedFamilyVisit dfv = ((AddNewFamilyVisitActivity)getActivity()).dfv;
 			
-			EditText parent1_marital_status_field = (EditText)rootView.findViewById(R.id.family_visit1_parent1_marital_status);
-			if (dfv.getParent1_marital_status() != 0) parent1_marital_status_field.setText("" + dfv.getParent1_marital_status());
-			parent1_marital_status_field.addTextChangedListener(new TextWatcher() {
+			Spinner parent1_marital_status_field = (Spinner)rootView.findViewById(R.id.family_visit1_parent1_marital_status);
+			ArrayAdapter<String> adapter_marital = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item,
+					getResources().getStringArray(R.array.marital_status_array));
+			adapter_marital.setDropDownViewResource(R.layout.spinner_dropdown_item);
 
-				@Override
-				public void afterTextChanged(Editable arg0) {
-					// TODO Auto-generated method stub
-					
-				}
+			parent1_marital_status_field.setAdapter(adapter_marital);
 
-				@Override
-				public void beforeTextChanged(CharSequence s, int start,
-						int count, int after) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void onTextChanged(CharSequence s, int start,
-						int before, int count) {
-					// TODO Auto-generated method stub
-					if (s.length() > 0)
-						dfv.setParent1_marital_status(Integer.parseInt(s.toString()));
-					else 
-						dfv.setParent1_marital_status(0);
-					
-				}
-				
-			});
+			parent1_marital_status_field.setSelection(adapter_marital.getCount()-1);
 			
-			EditText father_lives_with_field = (EditText)rootView.findViewById(R.id.family_visit1_father_lives_with);
-			if (dfv.getFather_lives_with() != 0) father_lives_with_field.setText("" + dfv.getFather_lives_with());
-			father_lives_with_field.addTextChangedListener(new TextWatcher() {
-
-				@Override
-				public void afterTextChanged(Editable arg0) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void beforeTextChanged(CharSequence s, int start,
-						int count, int after) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void onTextChanged(CharSequence s, int start,
-						int before, int count) {
-					// TODO Auto-generated method stub
-					if (s.length() > 0)
-						dfv.setFather_lives_with(Integer.parseInt(s.toString()));
-					else 
-						dfv.setFather_lives_with(0);
-					
-				}
-				
-			});
 			
-			EditText fathers_job_field = (EditText)rootView.findViewById(R.id.family_visit1_fathers_job);
-			if (dfv.getFathers_job() != 0) fathers_job_field.setText("" + dfv.getFathers_job());
-			fathers_job_field.addTextChangedListener(new TextWatcher() {
-
-				@Override
-				public void afterTextChanged(Editable arg0) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void beforeTextChanged(CharSequence s, int start,
-						int count, int after) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void onTextChanged(CharSequence s, int start,
-						int before, int count) {
-					// TODO Auto-generated method stub
-					if (s.length() > 0)
-						dfv.setFathers_job(Integer.parseInt(s.toString()));
-					else 
-						dfv.setFathers_job(0);
-					
-				}
-				
-			});
+			//EditText father_lives_with_field = (EditText)rootView.findViewById(R.id.family_visit1_father_lives_with);
 			
-			EditText igss_field = (EditText)rootView.findViewById(R.id.family_visit1_igss);
-			if (dfv.getIGSS() != 0) igss_field.setText("" + dfv.getIGSS());
-			igss_field.addTextChangedListener(new TextWatcher() {
-
-				@Override
-				public void afterTextChanged(Editable arg0) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void beforeTextChanged(CharSequence s, int start,
-						int count, int after) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void onTextChanged(CharSequence s, int start,
-						int before, int count) {
-					// TODO Auto-generated method stub
-					if (s.length() > 0)
-						dfv.setIGSS(Integer.parseInt(s.toString()));
-					else 
-						dfv.setIGSS(0);
-					
-				}
-				
-			});
+			Spinner fathers_job_field = (Spinner)rootView.findViewById(R.id.family_visit1_fathers_job);
+			ArrayAdapter<String> adapter_father_job = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item,
+					getResources().getStringArray(R.array.fathers_job));
+			adapter_father_job.setDropDownViewResource(R.layout.spinner_dropdown_item);
+			fathers_job_field.setAdapter(adapter_father_job);
+			fathers_job_field.setSelection(adapter_father_job.getCount()-1);
+			
+			
+			//EditText igss_field = (EditText)rootView.findViewById(R.id.family_visit1_igss);
 			
 			
 			
@@ -233,7 +143,11 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 		public AddNewFamilyVisitFragment2() {
 
 		}
-
+		public void onCreate(Bundle savedInstanceState) {
+			Utilities utilityObj=new Utilities();
+			utilityObj.loadNativeCSS();
+			super.onCreate(savedInstanceState);
+		}
 		public static AddNewFamilyVisitFragment2 newInstance(String family_id) {
 			AddNewFamilyVisitFragment2 f = new AddNewFamilyVisitFragment2();
 			Bundle args = new Bundle();
@@ -243,6 +157,8 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 		}
 
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+			Utilities utilityObj=new Utilities();
+			utilityObj.loadNativeCSS();
 			View rootView = inflater.inflate(R.layout.fragment_add_new_family_visit2, container, false);
 			final String family_id = getArguments().getString("family_id");
 			
@@ -445,8 +361,15 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 			f.setArguments(args);
 			return f;
 		}
-
+		public void onCreate(Bundle savedInstanceState) {
+			Utilities utilityObj=new Utilities();
+			utilityObj.loadNativeCSS();
+			super.onCreate(savedInstanceState);
+		}
+		
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+			Utilities utilityObj=new Utilities();
+			utilityObj.loadNativeCSS();
 			View rootView = inflater.inflate(R.layout.fragment_add_new_family_visit3, container, false);
 			final String family_id = getArguments().getString("family_id");
 			

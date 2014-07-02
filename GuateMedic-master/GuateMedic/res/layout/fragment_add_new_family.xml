@@ -1,26 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+<<<<<<< HEAD
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:layout_marginLeft="40dp"
     android:layout_marginRight="40dp"
     android:orientation="vertical" >
+=======
+    android:layout_height="wrap_content">
+>>>>>>> 5dc4836e0c8be61504d6fa9bbbafb5a8e2eed8cd
     
     <TextView
         android:id="@+id/add_new_family_textview"
         android:textSize="30sp"
+<<<<<<< HEAD
         android:layout_marginBottom="40dp"
         android:layout_marginTop="40dp"
         android:gravity="center"
+=======
+        android:layout_marginBottom="100dp"
+        android:layout_margin="20dp"
+        android:layout_centerHorizontal="true"
+>>>>>>> 5dc4836e0c8be61504d6fa9bbbafb5a8e2eed8cd
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     
     <EditText
         android:id="@+id/add_new_family_parent1_name"
         android:textSize="30sp"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
+=======
+        android:layout_below="@+id/add_new_family_textview"
+>>>>>>> 5dc4836e0c8be61504d6fa9bbbafb5a8e2eed8cd
         android:hint="Mother name"
         />
     
@@ -29,9 +45,9 @@
         android:textSize="30sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_margin="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/add_new_family_parent1_name"
         android:hint="Mother Date of Birth"
         />
     
@@ -40,9 +56,9 @@
         android:textSize="30sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+		android:layout_margin="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/add_new_family_parent1_dob"
         android:hint="Father name"
         />
     
@@ -51,20 +67,34 @@
         android:textSize="30sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+		android:layout_margin="20dp"
+		android:layout_centerHorizontal="true"
+		android:layout_below="@+id/add_new_family_parent2_name"
         android:hint="Father Date of Birth"
         />
     
     <Button
         android:id="@+id/add_new_family_button"
+<<<<<<< HEAD
         android:textSize="30sp"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginTop="30dp"
         
+=======
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_marginBottom="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/add_new_family_parent2_dob"
+>>>>>>> 5dc4836e0c8be61504d6fa9bbbafb5a8e2eed8cd
         android:text="Add Family"
         />
-        
-</LinearLayout>
+     <TextView
+         android:id="@+id/footer_add_new_family"
+         android:layout_width="0dp"
+         android:layout_height="0dp"
+         android:layout_below="@+id/add_new_family_button"
+         />   
+</RelativeLayout>

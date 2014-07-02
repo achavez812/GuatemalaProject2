@@ -1,10 +1,13 @@
 
 package com.stanford.guatemedic;
 
+import static com.nativecss.enums.RemoteContentRefreshPeriod.Never;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Calendar;
 import java.util.Map;
@@ -15,6 +18,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+
+import com.nativecss.NativeCSS;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -111,6 +116,21 @@ public class Utilities {
 			return null;
 		}
 	}
+	
+	
+	/*Loads Native CSS*/
+	public void loadNativeCSS() {
+    URL css;
+	try {
+		css = new URL("http://10.0.2.2:8000/styles.css");
+		NativeCSS.styleWithCSS("styles.css",css,Never);
+	} catch (MalformedURLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		}
+	}
+	
+	
 	
 	/**
 	 * Performs an HTTP POST Request
