@@ -45,70 +45,70 @@
 	
     	
     		<TextView 
-    	    android:id="@+id/father_name_text"
+    	    android:id="@+id/mother_name_text"
     	    android:layout_width="wrap_content"
     	    android:layout_height="wrap_content"
     	    android:layout_below="@+id/view_family_name" 
     	    android:layout_alignLeft="@+id/view_family_name"
-    	    android:text="Father Name: "
+    	    android:text="Mother Name: "
     	    />
-    	<TextView 
-    	    android:id="@+id/father_dob_text"
-    	    android:layout_width="wrap_content"
-    	    android:layout_height="wrap_content"
-    	    android:layout_below="@+id/father_name_text" 
-    	    android:layout_alignLeft="@+id/view_family_name"
-    	    android:text="Father Date of Birth: "
-    	    />
-    	
-    	<TextView 
-    	    android:id="@+id/mother_name_text"
-    	    android:layout_width="wrap_content"
-    	    android:layout_height="wrap_content"
-    	    android:layout_below="@+id/father_dob_text"
-    	    android:layout_alignLeft="@+id/view_family_name"
-    	    android:text="Mother Name: "/>
-    	
     	<TextView 
     	    android:id="@+id/mother_dob_text"
     	    android:layout_width="wrap_content"
     	    android:layout_height="wrap_content"
-    	    android:layout_below="@+id/mother_name_text"
+    	    android:layout_below="@+id/mother_name_text" 
     	    android:layout_alignLeft="@+id/view_family_name"
-    	    android:text="Mother Date of Birth: "/>
+    	    android:text="Mother Date of Birth: "
+    	    />
+    	
+    	<TextView 
+    	    android:id="@+id/father_name_text"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"
+    	    android:layout_below="@+id/mother_dob_text"
+    	    android:layout_alignLeft="@+id/view_family_name"
+    	    android:text="Father Name: "/>
+    	
+    	<TextView 
+    	    android:id="@+id/father_dob_text"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"
+    	    android:layout_below="@+id/father_name_text"
+    	    android:layout_alignLeft="@+id/view_family_name"
+    	    android:text="Father Date of Birth: "/>
     	
     	
 	    
-	    <TextView
-	        android:id="@+id/father_name"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-        	android:layout_toRightOf="@+id/father_name_text"
-	        android:layout_below="@+id/view_family_name"
-	        android:text="TextView" />
-	   
-	    <TextView
-	        android:id="@+id/father_dob"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-        	android:layout_toRightOf="@+id/father_dob_text"
-	        android:layout_below="@+id/father_name"
-	        android:text="TextView" />
-
 	    <TextView
 	        android:id="@+id/mother_name"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
         	android:layout_toRightOf="@+id/mother_name_text"
-	        android:layout_below="@+id/father_dob"
+	        android:layout_below="@+id/view_family_name"
 	        android:text="TextView" />
-	     
-	    <TextView 
+	   
+	    <TextView
 	        android:id="@+id/mother_dob"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:layout_toRightOf="@+id/mother_dob_text"
+        	android:layout_toRightOf="@+id/mother_dob_text"
 	        android:layout_below="@+id/mother_name"
+	        android:text="TextView" />
+
+	    <TextView
+	        android:id="@+id/father_name"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+        	android:layout_toRightOf="@+id/father_name_text"
+	        android:layout_below="@+id/mother_dob"
+	        android:text="TextView" />
+	     
+	    <TextView 
+	        android:id="@+id/father_dob"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_toRightOf="@+id/father_dob_text"
+	        android:layout_below="@+id/father_name"
 	        android:text="TextView"
 	        /> 
 	  

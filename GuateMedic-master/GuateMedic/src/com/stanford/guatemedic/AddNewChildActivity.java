@@ -1,7 +1,5 @@
 package com.stanford.guatemedic;
-
 import java.util.Calendar;
-
 import org.json.JSONException;
 
 import org.json.JSONObject;

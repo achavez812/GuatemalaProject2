@@ -190,7 +190,6 @@
          android:id="@+id/add_new_child_button"
          android:layout_width="150dp"
          android:layout_height="wrap_content"
-         android:layout_marginTop="20dp"
          android:layout_below="@+id/add_new_child_youngest_sibling_dob"
          android:text="Add Child"
          android:layout_marginBottom="40dp"
