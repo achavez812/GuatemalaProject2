@@ -14,7 +14,6 @@ public class DetailedFamilyVisit {
 	
 	private int parent1_marital_status; // Together, Married, Widowed, Single
 	private int father_lives_with; //boolean
-	
 	private int num_pregnancies;
 	private int num_children_alive;
 	private int num_children_dead;
