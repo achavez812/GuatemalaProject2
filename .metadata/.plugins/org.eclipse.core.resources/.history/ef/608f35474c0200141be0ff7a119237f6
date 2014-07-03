@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+    
+	<EditText
+        android:id="@+id/child_visit4_num_times_incaparina_past_week"
+        android:textSize="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+		android:layout_margin="20dp"
+        android:layout_centerHorizontal="true"
+        android:hint="Number of times incaparina past week?"
+        android:inputType="number"
+        />
+	
+		<EditText
+        android:id="@+id/child_visit4_num_times_vegetables_or_fruits_past_week"
+        android:textSize="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+		android:layout_margin="20dp"
+		android:layout_below="@+id/child_visit4_num_times_incaparina_past_week"
+		android:layout_centerHorizontal="true"
+        android:hint="Number of times vegetables or fruits past week?"
+        android:inputType="number"
+        />
+		
+			<EditText
+        android:id="@+id/child_visit4_num_times_herbs_past_week"
+        android:textSize="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+		android:layout_margin="20dp"
+		android:layout_centerHorizontal="true"
+		android:layout_below="@+id/child_visit4_num_times_vegetables_or_fruits_past_week"
+        android:hint="Number of times herbs past week?"
+        android:inputType="number"
+        />
+			
+				<EditText
+        android:id="@+id/child_visit4_num_times_diarrhea_past_week"
+        android:textSize="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+		android:layout_marginLeft="20dp"
+		android:layout_marginRight="20dp"
+		android:layout_marginBottom="20dp"
+		android:layout_marginTop="100dp"
+		android:layout_below="@+id/child_visit4_num_times_herbs_past_week"
+		android:layout_centerHorizontal="true"
+        android:hint="Number of times diarrhea past week?"
+        android:inputType="number"
+        />
+	
+		<EditText
+        android:id="@+id/child_visit4_num_times_vomit_past_week"
+        android:textSize="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+		android:layout_margin="20dp"
+		android:layout_centerHorizontal="true"
+		android:layout_below="@+id/child_visit4_num_times_diarrhea_past_week"
+        android:hint="Number of times vomit past week?"
+        android:inputType="number"
+        />
+		
+			<EditText
+        android:id="@+id/child_visit4_num_times_cough_past_week"
+        android:textSize="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+		android:layout_margin="20dp"
+		android:layout_centerHorizontal="true"
+		android:layout_below="@+id/child_visit4_num_times_vomit_past_week"
+        android:hint="Number of times cough past week?"
+        android:inputType="number"
+        />
+				<EditText
+        android:id="@+id/child_visit4_num_times_fever_past_week"
+        android:textSize="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"	
+        android:layout_margin="20dp"
+        android:layout_centerHorizontal="true"
+        android:hint="Number of times fever past week?"
+        android:inputType="number"
+        />
+	
+		<EditText
+        android:id="@+id/child_visit4_num_times_other_illness_past_week"
+        android:textSize="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+		android:layout_margin="20dp"
+		android:layout_centerHorizontal="true"
+        android:hint="Number of times other illness past week?"
+        android:inputType="number"
+        />
+		
+			<EditText
+        android:id="@+id/child_visit4_other_illness_information"
+        android:textSize="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_centerHorizontal="true"
+        android:hint="Other illness information"
+        />
+			
+    
+
+</RelativeLayout>
+</ScrollView>

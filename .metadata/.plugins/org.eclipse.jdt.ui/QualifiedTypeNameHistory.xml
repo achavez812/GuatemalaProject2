@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
+<<<<<<< HEAD
 <fullyQualifiedTypeName name="android.widget.Toast"/>
 <fullyQualifiedTypeName name="android.util.Log"/>
 <fullyQualifiedTypeName name="android.content.pm.ActivityInfo"/>
@@ -21,4 +22,13 @@
 <fullyQualifiedTypeName name="android.R"/>
 <fullyQualifiedTypeName name="android.R.id"/>
 <fullyQualifiedTypeName name="android.R.color"/>
+=======
+<fullyQualifiedTypeName name="com.stanford.guatemedic.R.array"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
+<fullyQualifiedTypeName name="com.stanford.guatemedic.AddNewFamilyVisitActivity.AddNewFamilyVisitFragment2"/>
+<fullyQualifiedTypeName name="android.widget.RadioGroup"/>
+<fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="com.stanford.guatemedic.R.id"/>
+>>>>>>> 7ba6d648bdf884e50c03d45f365cd9249f78d4c3
 </qualifiedTypeNameHistroy>

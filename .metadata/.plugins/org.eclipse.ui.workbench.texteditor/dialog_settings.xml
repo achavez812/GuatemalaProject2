@@ -2,9 +2,15 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="263" key="DIALOG_WIDTH"/>
+<<<<<<< HEAD
 		<item value="120" key="DIALOG_Y_ORIGIN"/>
 		<item value="399" key="DIALOG_HEIGHT"/>
 		<item value="487" key="DIALOG_X_ORIGIN"/>
+=======
+		<item value="358" key="DIALOG_Y_ORIGIN"/>
+		<item value="399" key="DIALOG_HEIGHT"/>
+		<item value="1123" key="DIALOG_X_ORIGIN"/>
+>>>>>>> 7ba6d648bdf884e50c03d45f365cd9249f78d4c3
 		<item value="1|Lucida Grande|11.0|0|COCOA|1|LucidaGrande" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
@@ -13,6 +19,7 @@
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
+<<<<<<< HEAD
 		<item value="vaccination" key="selection"/>
 		<list key="findhistory">
 			<item value="vaccination"/>
@@ -20,6 +27,27 @@
 			<item value="add_new_child_button"/>
 		</list>
 		<list key="replacehistory">
+=======
+		<item value="Child" key="selection"/>
+		<list key="findhistory">
+			<item value="child"/>
+			<item value="visit"/>
+			<item value="listener"/>
+			<item value="//click"/>
+			<item value="//Click"/>
+			<item value="click listener"/>
+			<item value="click listeners"/>
+			<item value="click"/>
 		</list>
+		<list key="replacehistory">
+			<item value="father_occu_put"/>
+			<item value="father_occu_string"/>
+			<item value=""/>
+>>>>>>> 7ba6d648bdf884e50c03d45f365cd9249f78d4c3
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.GotoLineAction$GotoLineDialog_dialogBounds">
+		<item value="339" key="DIALOG_Y_ORIGIN"/>
+		<item value="484" key="DIALOG_X_ORIGIN"/>
 	</section>
 </section>

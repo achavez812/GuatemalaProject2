@@ -93,10 +93,10 @@ public class view_family extends Activity{
 		add_ex_info.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//Intent intent = new Intent(getApplication(), AddNewChildVisitActivity.class);
-				//intent.putExtra("family_id", patientId);
-				//startActivity(intent);
-				Log.d("click","add_exam_info_family clicked");
+				Intent intent = new Intent(getApplication(), AddNewFamilyVisitActivity.class);
+				intent.putExtra("family_id", familyId);
+				startActivity(intent);
+				//Log.d("click","add_exam_info_family clicked");
 			}
 		});		
 		

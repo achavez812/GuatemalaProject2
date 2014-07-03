@@ -176,7 +176,14 @@ public class ViewFamilyListActivity extends ActionBarActivity {
 				int num_children = DetailedRecordsStore.get(getActivity().getApplication()).getChildren(family_id).size();
 				
 				TextView familyTitle = (TextView)convertView.findViewById(R.id.list_item_title);
+<<<<<<< HEAD
 				familyTitle.setText(family.getParent1_name());
+=======
+				TextView familysubTitle=(TextView)convertView.findViewById(R.id.list_item_subtitle);
+				familyTitle.setText(family_id);
+				familysubTitle.setText("Primary Parent Name: "+family.getParent1_name());
+				
+>>>>>>> 7ba6d648bdf884e50c03d45f365cd9249f78d4c3
 				
 				TextView subtitle = (TextView)convertView.findViewById(R.id.list_item_subtitle);
 				subtitle.setText(num_children + " Children");
