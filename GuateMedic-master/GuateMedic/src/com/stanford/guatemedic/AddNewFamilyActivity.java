@@ -7,6 +7,7 @@ import org.json.JSONObject;
 
 
 
+
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -29,6 +30,8 @@ public class AddNewFamilyActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_new_family);
+		getActionBar().setHomeButtonEnabled(true);
+
 		String village = getIntent().getStringExtra("village");
 		if (savedInstanceState == null) {
 			getSupportFragmentManager()
@@ -47,7 +50,9 @@ public class AddNewFamilyActivity extends ActionBarActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
+		if (id == android.R.id.home) {
+			Intent i = new Intent(getApplication(), MainActivity.class);
+			startActivity(i);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -121,17 +126,11 @@ public class AddNewFamilyActivity extends ActionBarActivity {
 			View rootView = inflater.inflate(R.layout.fragment_add_new_family,
 					container, false);
 			final String village = getArguments().getString("village");
-<<<<<<< HEAD
 			
 			TextView textview = (TextView)rootView.findViewById(R.id.add_new_family_textview);
 			textview.setText("Village: " + village);
-=======
 
-			TextView textview = (TextView) rootView
-					.findViewById(R.id.add_new_family_textview);
-			textview.setText(village);
 
->>>>>>> 5dc4836e0c8be61504d6fa9bbbafb5a8e2eed8cd
 			
 			EditText mother_dob_field=(EditText)rootView.findViewById(R.id.add_new_family_parent1_dob);
 					mother_dob_field.setOnClickListener(new View.OnClickListener() {

@@ -8,10 +8,12 @@ import org.json.JSONObject;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,7 +29,7 @@ public class DownloadLoginActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_download_login);
-
+		getActionBar().setHomeButtonEnabled(true);
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, new DownloadLoginFragment()).commit();
@@ -48,8 +50,10 @@ public class DownloadLoginActivity extends ActionBarActivity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_download) {
-
+		if (id == android.R.id.home) {
+			Intent i = new Intent(getApplication(), MainActivity.class);
+			startActivity(i);
+			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -76,6 +80,8 @@ public class DownloadLoginActivity extends ActionBarActivity {
 			submit_button.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
+					getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+
 					EditText username_input = (EditText)getActivity().findViewById(R.id.download_login_username_edittext);
 					String username = username_input.getText().toString();
 					

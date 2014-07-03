@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -76,6 +77,8 @@ public class UploadLoginActivity extends ActionBarActivity{
 			submit_button.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
+					getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+					
 					EditText username_input = (EditText)getActivity().findViewById(R.id.upload_login_username_edittext);
 					String username = username_input.getText().toString();
 					

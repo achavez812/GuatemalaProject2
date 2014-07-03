@@ -12,10 +12,10 @@ public class DetailedChildVisit {
 	private String visit_date;
 	private String promoter_id;
 	
-	private int did_receive_vaccinations;
-	private String vaccination_information;
-	private int has_chronic_disease_or_disability;
-	private String chronic_disease_or_disability_information;
+	private int did_receive_vaccinations; //received_all_vaccinations is backend field name
+	private String vaccination_information; //types_of_vaccines_received
+	private int has_chronic_disease_or_disability; //chronic_disease_or_disability
+	private String chronic_disease_or_disability_information; //type_of_chronic_disease_or_disability
 	
 	private int is_currently_breastfed;
 	private int is_only_breastfed;
@@ -25,6 +25,9 @@ public class DetailedChildVisit {
 	private float weight; //in kilograms
 	private float height; //in centimeters
 	private int num_times_incaparina_past_week;
+	
+	private int nan_1_baby_formula; //Is the child taking nan? It's a supplement like incaparina (HANDLE THIS!!!!!!!!)
+	
 	private int num_times_vegetables_or_fruits_past_week;
 	private int num_times_herbs_past_week;
 	private int num_times_diarrhea_past_week;
@@ -36,7 +39,8 @@ public class DetailedChildVisit {
 	
 	private float age_last_received_deparasiting_medicine; //Could be String date_when_last_received_deparasiting_medicine 
 	
-	private int receiving_supplements;
+	//REMOVE THESE
+	private int receiving_supplements; 
 	private int why_receiving_supplements;
 	
 	public DetailedChildVisit(String child_id) {

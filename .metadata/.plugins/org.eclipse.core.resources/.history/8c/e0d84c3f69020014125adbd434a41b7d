@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="5dp"
+    android:paddingLeft="5dp"
+    android:background="@color/white"
+    android:orientation="vertical" >
+    
+    <TextView
+        android:id="@+id/graph_child_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"       
+        android:textSize="22sp" 
+        android:text="Child Information"
+        />
+    
+    <TextView
+        android:id="@+id/graph__child_dob"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:text="DOB: 08/12/1992"
+        />
+        
+     <TextView
+        android:id="@+id/graph__child_sex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:text="Sex: Male"
+        />   
+
+    <TextView
+        android:id="@+id/graph_last_child_visit_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"       
+        android:textSize="22sp" 
+        android:text="Last Child Visit"
+        />
+    
+    <TextView
+        android:id="@+id/graph_last_child_visit_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:text="Date: 08/12/1993"
+        />
+    
+    <TextView
+        android:id="@+id/graph_last_child_visit_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:text="Age: 12 months"
+        />
+    
+    <TextView
+        android:id="@+id/graph_last_child_visit_weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:text="Weight: 101 lbs"
+        />
+    
+    <TextView
+        android:id="@+id/graph_last_child_visit_height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:text="Height: 100 cm"
+        />
+    
+    <TextView
+        android:id="@+id/graph_last_child_visit_bmi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:text="BMI: 5"
+        />
+    
+    <TextView
+        android:id="@+id/graph_last_child_visit_weight_z_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:text="Weight z-score: -0.53"
+        />
+    
+    <TextView
+        android:id="@+id/graph_last_child_visit_height_z_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:text="Height z-score: 0.23"
+        />
+    
+    <TextView
+        android:id="@+id/graph_last_child_visit_bmi_z_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:text="BMI z-score: -0.29"
+        />
+    
+    <TextView
+        android:id="@+id/graph_child_reccomendation_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"  
+        android:textSize="22sp"
+        android:layout_marginTop="10dp"
+        android:text="Recommendation"
+        />
+    
+	 <TextView
+        android:id="@+id/graph_child_reccomendation_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:text="We recommend incaparina."
+        />
+    
+
+</LinearLayout>

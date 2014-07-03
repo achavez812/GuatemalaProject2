@@ -10,6 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -34,6 +35,8 @@ public class DownloadFamilyListActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_download_village_list);
+		getActionBar().setHomeButtonEnabled(true);
+
 		village_name = getIntent().getStringExtra("village_name");
 		setTitle("Families in " + village_name);
 		if (savedInstanceState == null) {
@@ -56,7 +59,13 @@ public class DownloadFamilyListActivity extends ActionBarActivity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
+		if (id == android.R.id.home) {
+			Intent i = new Intent(getApplication(), MainActivity.class);
+			startActivity(i);
+			return true;
+		}
 		if (id == R.id.action_download) {
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
 			BasicRecordsStore.get().DownloadData(DownloadFamilyListActivity.this, getApplication());
 			return true;
 		}

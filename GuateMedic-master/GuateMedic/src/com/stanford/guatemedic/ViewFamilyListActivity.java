@@ -27,6 +27,8 @@ public class ViewFamilyListActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_view_family_list);
+		getActionBar().setHomeButtonEnabled(true);
+
 		String village_name = getIntent().getStringExtra("village_name");
 		setTitle("Families in " + village_name);
 		village = village_name;
@@ -54,6 +56,11 @@ public class ViewFamilyListActivity extends ActionBarActivity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
+		if (id == android.R.id.home) {
+			Intent i = new Intent(getApplication(), MainActivity.class);
+			startActivity(i);
+			return true;
+		}
 		if (id == R.id.action_addfamily) {
 			Intent i = new Intent(getApplication(), AddNewFamilyActivity.class);
 			i.putExtra("village", village);
@@ -130,9 +137,9 @@ public class ViewFamilyListActivity extends ActionBarActivity {
 		
 		@Override
 		public void onListItemClick(ListView l, View v, int position, long id) {
-			String family_id=((TextView)(v.findViewById(R.id.list_item_title))).getText().toString();
+			families.get(position).getFamily_id();
 			Intent intent = new Intent(getActivity().getApplication(), ViewChildListActivity.class);
-			intent.putExtra("family_id", family_id);
+			intent.putExtra("family_id", families.get(position).getFamily_id());
 			intent.putExtra("village", village);
 			startActivity(intent);
 		}
@@ -166,11 +173,13 @@ public class ViewFamilyListActivity extends ActionBarActivity {
 				
 				DetailedFamily family = getItem(position);
 				String family_id = family.getFamily_id();
+				int num_children = DetailedRecordsStore.get(getActivity().getApplication()).getChildren(family_id).size();
 				
 				TextView familyTitle = (TextView)convertView.findViewById(R.id.list_item_title);
-				familyTitle.setText(family_id);
+				familyTitle.setText(family.getParent1_name());
 				
-				
+				TextView subtitle = (TextView)convertView.findViewById(R.id.list_item_subtitle);
+				subtitle.setText(num_children + " Children");
 				
 				return convertView;
 				

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="5dp"
+    android:orientation="vertical" >
+    
+    <TextView
+        android:id="@+id/graph_child_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="Child Information"
+        />
+    
+    <TextView
+        android:id="@+id/graph_information"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DOB: 08/12/1992, Sex: Male"
+        />
+    
+    <TextView
+        android:id="@+id/graph_child_dob"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sex: Male"
+        />
+    
+    <!-- 
+    <TextView
+        android:id="@+id/graph_last_child_visit_header"
+        />
+    
+    <TextView
+        android:id="@+id/graph_last_child_visit_date"
+        />
+    
+    <TextView
+        android:id="@+id/graph_last_child_visit_age"
+        />
+    
+    <TextView
+        android:id="@+id/graph_last_child_visit_weight"
+        />
+    
+    <TextView
+        android:id="@+id/graph_last_child_visit_height"
+        />
+    
+    <TextView
+        android:id="@+id/graph_last_child_visit_bmi"
+        />
+    
+    <TextView
+        android:id="@+id/graph_last_child_visit_weight_z_score"
+        />
+    
+    <TextView
+        android:id="@+id/graph_last_child_visit_height_z_score"
+        />
+    
+    <TextView
+        android:id="@+id/graph_last_child_visit_bmi_z_score"
+        />
+	
+    -->
+
+    <!-- Graph will go here -->
+
+</LinearLayout>

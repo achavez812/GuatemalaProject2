@@ -1,0 +1,363 @@
+package com.stanford.guatemedic;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.stanford.guatemedic.R.color;
+
+public class GraphActivity extends ActionBarActivity {
+	
+	//static String date_of_birth;
+	static String sex = null;
+	//static String visit_date;
+	static int age_weeks = -1;
+	static double weight = -1;
+	static double height = -1;
+	
+
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_graph);
+		getActionBar().setHomeButtonEnabled(true);
+		if (savedInstanceState == null) {
+			getSupportFragmentManager().beginTransaction().add(R.id.left_content, new GraphFragmentLeft()).commit();
+			getSupportFragmentManager().beginTransaction().add(R.id.right_content, new GraphFragmentRight()).commit();
+		}
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.graph_menu_bar, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int id = item.getItemId();
+		if (id == android.R.id.home) {
+			Intent i = new Intent(getApplication(), MainActivity.class);
+			startActivity(i);
+		}
+		if (id == R.id.action_newchild) {
+			NewChildGraphDialog ncgd = new NewChildGraphDialog();
+			ncgd.show(getSupportFragmentManager(), null);
+			return false;
+		}
+		if (id == R.id.action_addvisit) {
+			AddVisitGraphDialog avgd = new AddVisitGraphDialog();
+			avgd.show(getSupportFragmentManager(), null);
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+	
+	public class NewChildGraphDialog extends DialogFragment {
+	
+		@Override
+		public Dialog onCreateDialog(Bundle savedInstanceState) {
+		    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		    // Get the layout inflater
+		    LayoutInflater inflater = getActivity().getLayoutInflater();
+		    
+		    final View v = inflater.inflate(R.layout.fragment_graph_new_child_dialog, null);
+	
+		    // Inflate and set the layout for the dialog
+		    // Pass null as the parent view because its going in the dialog layout
+		    AlertDialog.Builder view = builder.setView(v);
+		    /*
+		    String[] month_array = new String[12];
+		    for (int i = 1; i <= 12; i++) month_array[i-1] = "" + i;
+		    final Spinner month_spinner = (Spinner)v.findViewById(R.id.graph_new_child_month_spinner);
+			ArrayAdapter<CharSequence> month_adapter = new ArrayAdapter<CharSequence>(getActivity(), android.R.layout.simple_spinner_item, month_array);
+			month_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			month_spinner.setAdapter(month_adapter);
+			
+			String[] day_array = new String[31];
+			for (int i = 1; i <= 31; i++) day_array[i-1] = "" + i;
+			final Spinner day_spinner = (Spinner)v.findViewById(R.id.graph_new_child_day_spinner);
+			ArrayAdapter<CharSequence> day_adapter = new ArrayAdapter<CharSequence>(getActivity(), android.R.layout.simple_spinner_item, day_array);
+			day_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			day_spinner.setAdapter(day_adapter);
+			
+			String[] year_array = new String[11];
+			for (int i = 2004; i <= 2014; i++) year_array[i-2004] = "" + i;
+			final Spinner year_spinner = (Spinner)v.findViewById(R.id.graph_new_child_year_spinner);
+			ArrayAdapter<CharSequence> year_adapter = new ArrayAdapter<CharSequence>(getActivity(), android.R.layout.simple_spinner_item, year_array);
+			year_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			year_spinner.setAdapter(year_adapter);
+			*/
+			final RadioGroup sex_radio = (RadioGroup)v.findViewById(R.id.sex_radio);
+			
+		    // Add action buttons
+           view.setPositiveButton("Add New Child", new DialogInterface.OnClickListener() {
+               @Override
+               public void onClick(DialogInterface dialog, int id) {
+            	   /*
+                   String month = month_spinner.getSelectedItem().toString();
+                   String day = day_spinner.getSelectedItem().toString();
+                   String year = year_spinner.getSelectedItem().toString();
+                   if (month.length() == 1) month = 0 + month;
+                   if (day.length() == 1) day = 0 + day;
+                   date_of_birth = month + "/" + day + "/" + year;
+                   */
+                   sex = ((RadioButton)v.findViewById(sex_radio.getCheckedRadioButtonId())).getText().toString();
+                   age_weeks = -1;
+                   weight = -1;
+                   height = -1;
+                   
+                   getSupportFragmentManager().beginTransaction().replace(R.id.left_content, new GraphFragmentLeft()).commit();
+               }
+           });
+           view.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+               public void onClick(DialogInterface dialog, int id) {
+                   NewChildGraphDialog.this.getDialog().cancel();
+               }
+           });      
+		    return builder.create();
+		}
+	}
+	
+	public class AddVisitGraphDialog extends DialogFragment {
+		
+		@Override
+		public Dialog onCreateDialog(Bundle savedInstanceState) {
+		    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		    // Get the layout inflater
+		    LayoutInflater inflater = getActivity().getLayoutInflater();
+		    
+		    final View v = inflater.inflate(R.layout.fragment_graph_add_visit_dialog, null);
+	
+		    // Inflate and set the layout for the dialog
+		    // Pass null as the parent view because its going in the dialog layout
+		    AlertDialog.Builder view = builder.setView(v);
+		    
+		    final EditText age_field = (EditText)v.findViewById(R.id.graph_add_visit_weeks_age);
+		    final EditText weight_field = (EditText)v.findViewById(R.id.graph_add_visit_weight);
+		    final EditText height_field = (EditText)v.findViewById(R.id.graph_add_visit_height);
+		    
+		    // Add action buttons
+           view.setPositiveButton("Add New Visit", new DialogInterface.OnClickListener() {
+               @Override
+               public void onClick(DialogInterface dialog, int id) {
+            	   age_weeks = Integer.parseInt(age_field.getText().toString());
+            	   weight = Double.parseDouble(weight_field.getText().toString());
+            	   height = Double.parseDouble(height_field.getText().toString());
+            	   getSupportFragmentManager().beginTransaction().replace(R.id.left_content, new GraphFragmentLeft()).commit();
+               }
+           });
+           view.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+               public void onClick(DialogInterface dialog, int id) {
+            	   AddVisitGraphDialog.this.getDialog().cancel();
+               }
+           });      
+		    return builder.create();
+		}
+	}
+	
+	public static double calculate_weight_z_score() {
+		double[] x_value ={0, 0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5, 10.5, 11.5, 12.5, 13.5, 14.5, 15.5, 16.5, 17.5, 18.5, 19.5, 20.5, 21.5, 22.5, 23.5, 24.5, 25.5, 26.5, 27.5, 28.5, 29.5, 30.5, 31.5, 32.5, 33.5, 34.5, 35.5, 36};
+		
+		//male weight in kilograms
+		double[] male_weight_mean_data = {3.530203, 4.003106, 4.879525, 5.672889, 6.391392, 7.041836, 7.630425, 8.162951, 8.644832, 9.08112, 9.4765, 9.835308, 10.16154, 10.45885, 10.73063, 10.97992, 11.20956, 11.42207, 11.61978, 11.80478, 11.97897, 12.14404, 12.30154, 12.45283, 12.59913, 12.74154, 12.88102, 13.01842, 13.1545, 13.2899, 13.42519, 13.56088, 13.69738, 13.83505, 13.97418, 14.11503, 14.2578, 14.32994};
+		double[] male_weight_standard_deviations;
+		
+		//female weight in kilograms
+		double[] female_weight_mean_data = {3.399186, 3.797528, 4.544777, 5.230584, 5.859961, 6.437588, 6.96785, 7.454854, 7.902436, 8.314178, 8.693418, 9.043262, 9.366594, 9.666089, 9.944226, 10.20329, 10.44541, 10.67251, 10.88639, 11.08868, 11.2809, 11.4644, 11.64043, 11.81014, 11.97454, 12.13456, 12.29102, 12.44469, 12.59622, 12.74621, 12.89517, 13.04357, 13.19181, 13.34023, 13.48913, 13.63877, 13.78937, 13.86507};
+		double[] female_weight_standard_deviations;
+		
+		double[] standard_deviations;
+		double[] mean_data;
+		if (sex.equals("Male")) {
+			standard_deviations = male_weight_standard_deviations;
+			mean_data = male_weight_mean_data;
+		} else if (sex.equals("Female")) {
+			standard_deviations = female_weight_standard_deviations;
+			mean_data = female_weight_mean_data;
+		} else {
+			return 99; //invalid result
+		}
+		return 0;
+		
+		
+	}
+	
+	public static double calculate_height_z_score() {
+		double[] x_value ={0, 0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5, 10.5, 11.5, 12.5, 13.5, 14.5, 15.5, 16.5, 17.5, 18.5, 19.5, 20.5, 21.5, 22.5, 23.5, 24.5, 25.5, 26.5, 27.5, 28.5, 29.5, 30.5, 31.5, 32.5, 33.5, 34.5, 35.5, 36};
+		
+		//male height in centimeters
+		double[] male_height_mean_data = {49.98888, 52.69598, 56.62843, 59.60895, 62.077, 64.21686, 66.12531, 67.86018, 69.45908, 70.94804, 72.34586, 73.66665, 74.9213, 76.11838, 77.2648, 78.36622, 79.42734, 80.45209, 81.44384, 82.40544, 83.33938, 84.24783, 85.1327, 85.99565, 86.83818, 87.66161, 88.45247, 89.22326, 89.97549, 90.71041, 91.42908, 92.13242, 92.82127, 93.49638, 94.15847, 94.80823, 95.44637};
+		double[] male_height_standard_deviations;
+		
+		//female height in centimeters
+		double[] female_height_mean_data = {49.2864, 51.68358, 55.28613, 58.09382, 60.45981, 62.5367, 64.40633, 66.11842, 67.70574, 69.19124, 70.59164, 71.91962, 73.18501, 74.39564, 75.55785, 76.67686, 77.75701, 78.80198, 79.81492, 80.79852, 81.75512, 82.68679, 83.59532, 84.48233, 85.34924, 86.19732, 87.09026, 87.95714, 88.79602, 89.60551, 90.38477, 91.13342, 91.85154, 92.53964, 93.19854, 93.82945, 94.43382};
+		double[] female_height_standard_deviations;
+		
+		double[] standard_deviations;
+		double[] mean_data;
+		if (sex.equals("Male")) {
+			standard_deviations = male_height_standard_deviations;
+			mean_data = male_height_mean_data;
+		} else if (sex.equals("Female")) {
+			standard_deviations = female_height_standard_deviations;
+			mean_data = female_height_mean_data;
+		} else {
+			return 99; //invalid result
+		}
+		return 0;
+		
+		
+	}
+	
+	public static double calculate_bmi_z_score() {
+		
+	}
+	
+	public static double round(double value, int places) {
+	    if (places < 0) throw new IllegalArgumentException();
+
+	    BigDecimal bd = new BigDecimal(value);
+	    bd = bd.setScale(places, RoundingMode.HALF_UP);
+	    return bd.doubleValue();
+	}
+	
+	public static class GraphFragmentLeft extends Fragment {
+
+		public GraphFragmentLeft() {
+			
+		}
+		
+		@Override
+		public void onCreate(Bundle savedInstanceState) {
+			super.onCreate(savedInstanceState);
+		}
+
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+			View rootView = inflater.inflate(R.layout.fragment_graph_left, container,false);
+			
+			TextView sex_field = (TextView)rootView.findViewById(R.id.graph_child_sex);
+			
+			TextView age_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_age);
+			
+			TextView weight_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_weight);
+			
+			TextView height_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_height);
+			
+			TextView bmi_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_bmi);
+			
+			TextView weight_z_score_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_weight_z_score);
+			
+			TextView height_z_score_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_height_z_score);
+			
+			TextView bmi_z_score_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_bmi_z_score);
+			
+			TextView recommendation_field = (TextView)rootView.findViewById(R.id.graph_child_reccomendation_info);
+			
+			if (sex == null) { //No child (therefore no visit either)
+				
+			} else if (age_weeks == -1) { //No visit
+				sex_field.setText("Sex: " + sex);
+			} else { //It's good
+				sex_field.setText("Sex: " + sex);
+				age_field.setText("Age: " + age_weeks + " weeks");
+				weight_field.setText("Weight: " + round(weight, 2) + " kg");
+				height_field.setText("Height: " + round(height, 2) + " cm");
+				double bmi = weight / Math.pow((height/100), 2);
+				bmi_field.setText("BMI: " + round(bmi, 2));
+				double weight_z_score = calculate_weight_z_score();
+				double height_z_score = calculate_height_z_score();
+				double bmi_z_score = calculate_bmi_z_score();
+			}
+			
+			return rootView;
+		}
+	}
+	
+	public static class GraphFragmentRight extends Fragment {
+		
+		//1 = weight
+		//2 = height
+		//3 = bmi
+		int selected;
+		
+		public GraphFragmentRight() {
+			selected = 1;
+		}
+		
+		@Override
+		public void onCreate(Bundle savedInstanceState) {
+			super.onCreate(savedInstanceState);
+		}
+
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+			View rootView = inflater.inflate(R.layout.fragment_graph_right, container,false);
+			
+			final TextView weight_view = (TextView)rootView.findViewById(R.id.tab_weight);
+			final TextView height_view = (TextView)rootView.findViewById(R.id.tab_height);
+			final TextView bmi_view = (TextView)rootView.findViewById(R.id.tab_bmi);
+			
+			weight_view.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+
+					weight_view.setBackgroundResource(color.gray_medium);
+					height_view.setBackgroundResource(color.gray_dark);
+					bmi_view.setBackgroundResource(color.gray_dark);
+					
+				}
+			});
+			
+			
+			height_view.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					
+					height_view.setBackgroundResource(color.gray_medium);
+					weight_view.setBackgroundResource(color.gray_dark);
+					bmi_view.setBackgroundResource(color.gray_dark);
+				}
+			});
+			
+			
+			bmi_view.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+
+					bmi_view.setBackgroundResource(color.gray_medium);
+					height_view.setBackgroundResource(color.gray_dark);
+					weight_view.setBackgroundResource(color.gray_dark);
+				}
+			});
+			
+			if (selected == 1) weight_view.performClick();
+			else if (selected == 2) height_view.performClick();
+			else if (selected == 3) bmi_view.performClick();
+			
+			return rootView;
+		}
+	}
+
+}

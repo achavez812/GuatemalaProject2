@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"   
+    android:orientation="vertical" >
+    
+    <LinearLayout
+        android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="20dp"
+	    android:orientation="horizontal" >
+	    
+        <TextView
+            android:id="@+id/graph_add_visit_weeks_age_label"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_marginTop="2dp"
+			android:textSize="18sp"		    
+		    android:text="Age (in weeks): "
+            />
+    
+	    <Spinner
+		    android:id="@+id/graph_add_visit_weeks_age"
+		    android:layout_marginTop="10dp"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content" />
+	    
+	</LinearLayout>
+	
+    <TextView
+        android:id="@+id/graph_add_visit_weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:inputType="numberDecimal"
+        android:hint="Weight"
+        />
+    
+  	<TextView
+        android:id="@+id/graph_add_visit_height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:inputType="numberDecimal"
+        android:hint="Height"
+        />
+
+</LinearLayout>

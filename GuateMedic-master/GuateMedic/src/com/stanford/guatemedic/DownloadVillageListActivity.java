@@ -12,6 +12,7 @@ import com.stanford.guatemedic.DownloadFamilyListActivity.DownloadFamilyListFrag
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -33,6 +34,7 @@ public class DownloadVillageListActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_download_village_list);
+		getActionBar().setHomeButtonEnabled(true);
 
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
@@ -60,7 +62,13 @@ public class DownloadVillageListActivity extends ActionBarActivity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
+		if (id == android.R.id.home) {
+			Intent i = new Intent(getApplication(), MainActivity.class);
+			startActivity(i);
+			return true;
+		}
 		if (id == R.id.action_download) {
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
 			BasicRecordsStore.get().DownloadData(DownloadVillageListActivity.this, getApplication());
 			return true;
 		}

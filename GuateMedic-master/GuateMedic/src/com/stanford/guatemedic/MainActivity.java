@@ -25,9 +25,6 @@ public class MainActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		if (getIntent().getStringExtra("toast") != null)
-			Toast.makeText(getApplication(), "Successful Download", Toast.LENGTH_LONG).show();
-
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
@@ -130,6 +127,15 @@ public class MainActivity extends ActionBarActivity {
 				}
 			});
 			
+			Button graph_button = (Button)rootView.findViewById(R.id.graph_button);
+			graph_button.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					Intent i = new Intent(getActivity().getApplication(), GraphActivity.class);
+					startActivity(i);
+				}
+			});
 			
 			return rootView;
 		}

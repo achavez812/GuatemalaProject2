@@ -279,7 +279,7 @@ public class BasicRecordsStore {
 			}
 			if (success) {
 				Intent i = new Intent(context1, MainActivity.class);
-				i.putExtra("toast", "success");
+				Toast.makeText(context2, "Successful Download", Toast.LENGTH_LONG).show();
 				context1.startActivity(i);
 			} 
 		}
