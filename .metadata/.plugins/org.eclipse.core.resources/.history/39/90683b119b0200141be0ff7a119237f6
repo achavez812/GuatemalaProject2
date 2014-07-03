@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/guatemala_home_bg"
+    >
+
+
+	<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="20dp" 
+    android:background="#ffe5edf0"
+    android:alpha="0.7"
+    >
+
+    <TextView 
+        android:id="@+id/main_page_textview"
+        android:textSize="30sp"
+        android:layout_marginTop="150dp"
+        android:layout_marginBottom="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome Promoter" 
+        android:alpha="1"/>
+    
+    <TextView
+        android:id="@+id/main_page_notes"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:layout_marginBottom="80dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="1" />
+    
+    <Button
+        android:id="@+id/main_view_button"
+        android:textSize="30sp"
+        android:paddingTop="40dp"
+        android:paddingBottom="40dp"
+        android:layout_marginBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+		android:text="VIEW"
+		android:alpha="1" />
+    
+    <Button
+        android:id="@+id/main_upload_download_button"
+        android:textSize="30sp"
+        android:paddingTop="40dp"
+        android:paddingBottom="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="DOWNLOAD" 
+        android:alpha="1"/>
+</RelativeLayout>
+</LinearLayout>
+</ScrollView>

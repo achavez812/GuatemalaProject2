@@ -69,6 +69,33 @@ public class view_patient extends Activity{
 		plot_weight_graph();
 		plot_height_graph();
 		
+		
+		
+		Button add_family_visit= (Button)findViewById(R.id.add_family_visits_cont);
+		add_family_visit.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				DetailedChild child = DetailedRecordsStore.get(getApplication()).getChild(getIntent().getStringExtra("child_id"));
+				Intent intent = new Intent(getApplication(), AddNewFamilyVisitActivity.class);
+				intent.putExtra("family_id", child.getFamily_id());
+				startActivity(intent);
+				//Log.d("click","add_exam_info_family clicked");
+			}
+		});
+		
+		Button view_family_info= (Button)findViewById(R.id.view_family_info_cont);
+		view_family_info.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				DetailedChild child = DetailedRecordsStore.get(getApplication()).getChild(getIntent().getStringExtra("child_id"));
+				Intent intent = new Intent(getApplication(), view_family.class);
+				intent.putExtra("family_id", child.getFamily_id());
+				startActivity(intent);
+				//Log.d("click","add_exam_info_family clicked");
+			}
+		});
+		
+		
 		Button add_ex_info = (Button)findViewById(R.id.add_exam_info);
 		add_ex_info.setOnClickListener(new View.OnClickListener() {
 			@Override

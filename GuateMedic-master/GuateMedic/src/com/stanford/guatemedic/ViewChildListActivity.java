@@ -226,7 +226,9 @@ public class ViewChildListActivity extends ActionBarActivity {
 				String child_id = child.getChild_id();
 				
 				TextView childTitle = (TextView)convertView.findViewById(R.id.list_item_title);
+				TextView childSubTitle= (TextView)convertView.findViewById(R.id.list_item_subtitle);
 				childTitle.setText(child_id);
+				childSubTitle.setText("Name: " + child.getName());
 
 				return convertView;
 				
