@@ -193,7 +193,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_marginTop="10dp"
 	        android:layout_below="@+id/view_family_info_cont"
-	        android:text="ADD FAMILY VIST"
+	        android:text="ADD FAMILY VISIT"
 	        android:layout_alignParentRight="true"/>
     </RelativeLayout>
     	<TextView
