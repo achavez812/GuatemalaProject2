@@ -16,9 +16,7 @@
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:layout_marginTop="100dp"
-		    android:layout_marginBottom="20dp"
-		    android:layout_marginRight="20dp"
-		    android:layout_marginLeft="20dp"
+		    android:layout_margin="20dp"
 		    />
 	
 	<EditText
@@ -63,9 +61,7 @@
 		    android:layout_height="wrap_content"
 		    android:layout_below="@+id/child_visit4_num_times_herbs_past_week"
 		    android:layout_marginTop="100dp"
-		    android:layout_marginBottom="20dp"
-		    android:layout_marginRight="20dp"
-		    android:layout_marginLeft="20dp"
+		    android:layout_margin="20dp"
 		    />
 				<EditText
         android:id="@+id/child_visit4_num_times_diarrhea_past_week"

@@ -244,9 +244,6 @@ public class AddNewChildVisitActivity extends ActionBarActivity {
 									R.id.child_visit2_is_only_breastfed_text)
 									.setVisibility(View.VISIBLE);
 							getView().findViewById(R.id.child_visit2_age_when_stopped_breastfeeding).setVisibility(View.GONE);
-							if(createFirstTime2==0){
-								rootView.findViewById(R.id.child_visit2_how_long_only_breastfed).setVisibility(View.VISIBLE);
-							}
 							createFirstTime1=0;
 						}
 					});
