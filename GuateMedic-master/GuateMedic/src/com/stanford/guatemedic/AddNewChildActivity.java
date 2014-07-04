@@ -1,13 +1,14 @@
 package com.stanford.guatemedic;
 import java.util.Calendar;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
@@ -188,7 +189,7 @@ public class AddNewChildActivity extends ActionBarActivity {
 				public void onClick(View v) {
 
 					DatePickerFragment newdobFragment = new DatePickerFragment();
-					newdobFragment.show(getActivity().getFragmentManager(),
+					newdobFragment.show(getActivity().getSupportFragmentManager(),
 							"datePicker");
 
 				}
@@ -206,7 +207,7 @@ public class AddNewChildActivity extends ActionBarActivity {
 							DatePickerFragmentYoungest newdobFragmentYoung = new DatePickerFragmentYoungest();
 
 							newdobFragmentYoung.show(getActivity()
-									.getFragmentManager(), "datePicker");
+									.getSupportFragmentManager(), "datePicker");
 
 						}
 
