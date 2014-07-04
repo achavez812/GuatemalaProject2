@@ -297,31 +297,38 @@ public class DetailedRecordsStore {
 			DetailedChild dc = getChild(family_id, child_id);
 			if (dc == null) //Error
 				return;
-			if (json_child.has("name"))
+			if (json_child.has("name") && !json_child.getString("name").isEmpty())
 				dc.setName(json_child.getString("name"));
-			if (json_child.has("gender"))
-				//dc.setGender(Integer.parseInt(json_child.getString("gender")));
-			if (json_child.has("dob"))
+			if (json_child.has("gender") && !json_child.getString("gender").isEmpty()) {
+				String gender = json_child.getString("gender");
+				if (gender.equals("Female"))
+					dc.setGender(2);
+				else if (gender.equals("Male"))
+					dc.setGender(1);
+				else
+					dc.setGender(0);
+			}
+			if (json_child.has("dob") && !json_child.getString("dob").isEmpty())
 				dc.setDob(json_child.getString("dob"));
-			if (json_child.has("type_of_birth"))
-				//dc.setType_of_birth(Integer.parseInt(json_child.getString("type_of_birth")));
-			if (json_child.has("num_children_in_same_pregnancy"))
-				//dc.setNum_children_in_same_pregnancy(Integer.parseInt(json_child.getString("num_children_in_same_pregnancy")));
-			if (json_child.has("months_gestated"))
-				//dc.setMonths_gestated(Float.parseFloat(json_child.getString("months_gestated")));
-			if (json_child.has("prenatal_care")) 
-				//dc.setPrenatal_care(Integer.parseInt(json_child.getString("prenatal_care")));
-			if (json_child.has("birth_weight"))
-				//dc.setBirth_weight(Float.parseFloat(json_child.getString("birth_weight")));
-			if (json_child.has("birth_height"))
-				//dc.setBirth_height(Float.parseFloat(json_child.getString("birth_height")));
-			if (json_child.has("youngest_sibling_dob"))
+			if (json_child.has("type_of_birth") && !json_child.getString("type_of_birth").isEmpty())
+				dc.setType_of_birth(Integer.parseInt(json_child.getString("type_of_birth")));
+			if (json_child.has("num_children_in_same_pregnancy") && !json_child.getString("num_children_in_same_pregnancy").isEmpty())
+				dc.setNum_children_in_same_pregnancy(Integer.parseInt(json_child.getString("num_children_in_same_pregnancy")));
+			if (json_child.has("months_gestated") && !json_child.getString("months_gestated").isEmpty())
+				dc.setMonths_gestated(Float.parseFloat(json_child.getString("months_gestated")));
+			if (json_child.has("received_prenatal_care") && !json_child.getString("received_prenatal_care").isEmpty()) 
+				dc.setReceived_prenatal_care(Integer.parseInt(json_child.getString("received_prenatal_care")));
+			if (json_child.has("birth_weight") && !json_child.getString("birth_weight").isEmpty())
+				dc.setBirth_weight(Float.parseFloat(json_child.getString("birth_weight")));
+			if (json_child.has("birth_height") && !json_child.getString("birth_height").isEmpty())
+				dc.setBirth_height(Float.parseFloat(json_child.getString("birth_height")));
+			if (json_child.has("youngest_sibling_dob") && !json_child.getString("youngest_sibling_dob").isEmpty())
 				dc.setYoungest_sibling_dob(json_child.getString("youngest_sibling_dob"));
 			if (json_child.has("date_created"))
 				dc.setDate_created(json_child.getString("date_created"));
 			if (json_child.has("date_last_modified"))
 				dc.setDate_last_modified(json_child.getString("date_last_modified"));
-			if (json_child.has("promoter_id"))
+			if (json_child.has("promoter_id") && !json_child.getString("promoter_id").isEmpty())
 				dc.setPromoter_id(json_child.getString("promoter_id"));
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -522,7 +529,6 @@ public class DetailedRecordsStore {
 	}
 	
 	private void processNewFamilyFiles() {
-		Log.i("WTF", "Processing new family files");
 		ArrayList<File> files = gfr.getNewFamilyFiles();
 		for (File f : files) {
 			Log.i("WTF", "	Process a file");

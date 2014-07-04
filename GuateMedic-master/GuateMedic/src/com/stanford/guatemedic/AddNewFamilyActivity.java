@@ -162,21 +162,21 @@ public class AddNewFamilyActivity extends ActionBarActivity {
 			button.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					TextView parent1_name_field = (TextView) getActivity()
+					EditText parent1_name_field = (EditText) getActivity()
 							.findViewById(R.id.add_new_family_parent1_name);
 					String parent1_name = parent1_name_field.getText()
 							.toString();
 
-					TextView parent1_dob_field = (TextView) getActivity()
+					EditText parent1_dob_field = (EditText) getActivity()
 							.findViewById(R.id.add_new_family_parent1_dob);
 					String parent1_dob = parent1_dob_field.getText().toString();
 
-					TextView parent2_name_field = (TextView) getActivity()
+					EditText parent2_name_field = (EditText) getActivity()
 							.findViewById(R.id.add_new_family_parent2_name);
 					String parent2_name = parent2_name_field.getText()
 							.toString();
 
-					TextView parent2_dob_field = (TextView) getActivity()
+					EditText parent2_dob_field = (EditText) getActivity()
 							.findViewById(R.id.add_new_family_parent2_dob);
 					String parent2_dob = parent2_dob_field.getText().toString();
 

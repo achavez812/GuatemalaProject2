@@ -16,7 +16,7 @@ public class DetailedChild {
 	private int type_of_birth;
 	private int num_children_in_same_pregnancy;
 	private float months_gestated;
-	private int prenatal_care;
+	private int received_prenatal_care;
 	private float birth_weight;
 	private float birth_height; //length
 	private String youngest_sibling_dob;
@@ -108,12 +108,12 @@ public class DetailedChild {
 		this.months_gestated = months_gestated;
 	}
 
-	public int getPrenatal_care() {
-		return prenatal_care;
+	public int getReceived_prenatal_care() {
+		return received_prenatal_care;
 	}
 
-	public void setPrenatal_care(int prenatal_care) {
-		this.prenatal_care = prenatal_care;
+	public void setReceived_prenatal_care(int received_prenatal_care) {
+		this.received_prenatal_care = received_prenatal_care;
 	}
 
 	public float getBirth_weight() {

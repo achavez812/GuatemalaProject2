@@ -137,9 +137,8 @@ public class ViewFamilyListActivity extends ActionBarActivity {
 		
 		@Override
 		public void onListItemClick(ListView l, View v, int position, long id) {
-			families.get(position).getFamily_id();
 			Intent intent = new Intent(getActivity().getApplication(), ViewChildListActivity.class);
-			intent.putExtra("family_id", families.get(position).getFamily_id());
+			intent.putExtra("family_id", families.get(position).getTemp_family_id());
 			intent.putExtra("village", village);
 			startActivity(intent);
 		}
@@ -178,6 +177,10 @@ public class ViewFamilyListActivity extends ActionBarActivity {
 				TextView familyTitle = (TextView)convertView.findViewById(R.id.list_item_title);
 				familyTitle.setText(family.getParent1_name());
 
+<<<<<<< HEAD
+=======
+				
+>>>>>>> d353a505f90c82ab28c781fd42620a43841af815
 				TextView subtitle = (TextView)convertView.findViewById(R.id.list_item_subtitle);
 				subtitle.setText(num_children + " Children");
 				

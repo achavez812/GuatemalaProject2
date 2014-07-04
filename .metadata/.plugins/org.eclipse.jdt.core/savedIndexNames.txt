@@ -1,24 +1,12 @@
-<<<<<<< HEAD
 INDEX VERSION 1.126+/Users/achavez/Documents/NewWorkspace/.metadata/.plugins/org.eclipse.jdt.core
-=======
-INDEX VERSION 1.126+/Users/adityaaggarwal/Documents/GuatemalaProject2/.metadata/.plugins/org.eclipse.jdt.core
-1377251446.index
-3470844063.index
-3614995588.index
-1077381343.index
-3075978171.index
-4037476689.index
-1144888004.index
-1731166835.index
->>>>>>> 7ba6d648bdf884e50c03d45f365cd9249f78d4c3
-1691401685.index
-3594599409.index
-1377251446.index
-1731166835.index
 266927663.index
-3293187977.index
 2318892183.index
-4210828800.index
-698784449.index
+3293187977.index
 655699220.index
 2379257999.index
+698784449.index
+1377251446.index
+3594599409.index
+1691401685.index
+1731166835.index
+4210828800.index

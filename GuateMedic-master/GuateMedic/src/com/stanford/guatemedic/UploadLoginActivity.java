@@ -15,6 +15,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -118,8 +119,10 @@ public class UploadLoginActivity extends ActionBarActivity{
 			private void postFamilies() {
 				try {
 					JSONArray json_arr = new JSONArray();
-					for (UploadFamily uf : UploadRecordsStore.get(getApplication()).getFamilies()) 
+					for (UploadFamily uf : UploadRecordsStore.get(getApplication()).getFamilies())  {
+						Log.i("WTF", uf.getFamily_id());
 						json_arr.put(new JSONObject(uf.getData()));
+					}
 					if (json_arr.length() > 0) {
 						Map<String, String> headerMap = new HashMap<String, String>();
 						headerMap.put("Authorization", auth_key);
@@ -132,12 +135,14 @@ public class UploadLoginActivity extends ActionBarActivity{
 								String temp_family_id = obj.getString("temp_family_id");
 								UploadFamily uf = UploadRecordsStore.get(getApplication()).getFamily(temp_family_id);
 								uf.setFamily_id(family_id);
-								ArrayList<String> child_ids = UploadRecordsStore.get(getApplication()).getChildren(temp_family_id);
+								Log.i("WTF", uf.getTemp_family_id());
+								ArrayList<String> child_ids = UploadRecordsStore.get(getApplication()).getFamily(temp_family_id).getChild_ids();
 								for (String child_id : child_ids) {
+									Log.i("WTF","found a matching kid during upload");
 									UploadChild uc = UploadRecordsStore.get(getApplication()).getChild(child_id);
 									uc.setFamily_id(family_id);
 								}
-								ArrayList<String> visit_ids = UploadRecordsStore.get(getApplication()).getFamilyVisits(temp_family_id);
+								ArrayList<String> visit_ids = UploadRecordsStore.get(getApplication()).getFamily(temp_family_id).getVisit_ids();
 								for (String visit_id : visit_ids) {
 									UploadFamilyVisit ufv = UploadRecordsStore.get(getApplication()).getFamilyVisit(visit_id);
 									ufv.setFamily_id(family_id);
@@ -154,10 +159,12 @@ public class UploadLoginActivity extends ActionBarActivity{
 			
 			private void postChildren() {
 				try {
+					Log.i("WTF", "Added");
 					JSONArray json_arr = new JSONArray();
 					for (UploadChild uc : UploadRecordsStore.get(getApplication()).getChildren()) 
-						json_arr.put(uc.getData());
+						json_arr.put(new JSONObject(uc.getData()));
 					if (json_arr.length() > 0) {
+						Log.i("WTF", json_arr.toString());
 						Map<String, String> headerMap = new HashMap<String, String>();
 						headerMap.put("Authorization", auth_key);
 						String response = Utilities.postRequest("https://guatemedic.herokuapp.com/createChild", headerMap, json_arr.toString());
@@ -165,6 +172,7 @@ public class UploadLoginActivity extends ActionBarActivity{
 							JSONArray response_array = new JSONArray(response);
 							for (int i = 0; i < response_array.length(); i++) {
 								JSONObject obj = response_array.getJSONObject(i);
+								Log.i("WTF", DetailedRecordsStore.get(getActivity().getApplication()).getFamily(obj.getString("family_id")).getParent1_name());
 								String child_id = obj.getString("child_id");
 								String temp_child_id = obj.getString("temp_child_id");
 								UploadChild uc = UploadRecordsStore.get(getApplication()).getChild(temp_child_id);
@@ -176,6 +184,7 @@ public class UploadLoginActivity extends ActionBarActivity{
 								}
 							} 
 						} else {
+							Log.i("WTF", "Failed to post child");
 							success = false;
 						}
 					}

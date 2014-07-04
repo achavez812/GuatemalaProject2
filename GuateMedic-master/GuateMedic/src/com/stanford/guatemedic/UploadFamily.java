@@ -29,7 +29,7 @@ public class UploadFamily {
 		return temp_family_id;
 	}
 	
-	public void setVisit_id(ArrayList<String> visit_ids) {
+	public void setVisit_ids(ArrayList<String> visit_ids) {
 		this.visit_ids = visit_ids;
 	}
 	
@@ -38,7 +38,7 @@ public class UploadFamily {
 	}
 	
 	public void setChild_ids(ArrayList<String> child_ids) {
-		this.visit_ids = child_ids;
+		this.child_ids = child_ids;
 	}
 	
 	public ArrayList<String> getChild_ids() {
