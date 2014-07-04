@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<<<<<<< HEAD
-<fullyQualifiedTypeName name="android.widget.Toast"/>
 <fullyQualifiedTypeName name="android.util.Log"/>
 <fullyQualifiedTypeName name="android.content.pm.ActivityInfo"/>
-<fullyQualifiedTypeName name="com.stanford.guatemedic.R"/>
 <fullyQualifiedTypeName name="android.view.ViewGroup.LayoutParams"/>
 <fullyQualifiedTypeName name="com.stanford.guatemedic.R.style"/>
 <fullyQualifiedTypeName name="com.stanford.guatemedic.R.layout"/>
@@ -17,18 +14,16 @@
 <fullyQualifiedTypeName name="android.app.ActionBar.Tab"/>
 <fullyQualifiedTypeName name="android.app.Fragment"/>
 <fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
-<fullyQualifiedTypeName name="com.stanford.guatemedic.R.id"/>
-<fullyQualifiedTypeName name="com.stanford.guatemedic.R.color"/>
 <fullyQualifiedTypeName name="android.R"/>
 <fullyQualifiedTypeName name="android.R.id"/>
 <fullyQualifiedTypeName name="android.R.color"/>
-=======
-<fullyQualifiedTypeName name="com.stanford.guatemedic.R.array"/>
-<fullyQualifiedTypeName name="java.util.Date"/>
-<fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
-<fullyQualifiedTypeName name="com.stanford.guatemedic.AddNewFamilyVisitActivity.AddNewFamilyVisitFragment2"/>
-<fullyQualifiedTypeName name="android.widget.RadioGroup"/>
-<fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="com.stanford.guatemedic.R.color"/>
+<fullyQualifiedTypeName name="android.app.DialogFragment"/>
+<fullyQualifiedTypeName name="android.app.AlertDialog.Builder"/>
+<fullyQualifiedTypeName name="android.support.v4.app.DialogFragment"/>
+<fullyQualifiedTypeName name="android.widget.RadioButton"/>
+<fullyQualifiedTypeName name="com.stanford.guatemedic.R"/>
 <fullyQualifiedTypeName name="com.stanford.guatemedic.R.id"/>
->>>>>>> 7ba6d648bdf884e50c03d45f365cd9249f78d4c3
+<fullyQualifiedTypeName name="android.widget.Toast"/>
+<fullyQualifiedTypeName name="android.graphics.Color"/>
 </qualifiedTypeNameHistroy>

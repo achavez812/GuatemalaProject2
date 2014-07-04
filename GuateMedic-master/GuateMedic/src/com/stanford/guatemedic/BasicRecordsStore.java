@@ -163,7 +163,7 @@ public class BasicRecordsStore {
 			JSONArray json_villages = new JSONArray(data);
 			for (int i = 0; i < json_villages.length(); i++) {
 				JSONObject json_village = json_villages.getJSONObject(i);
-				if (villageHasChildren(json_village)) {
+				//if (villageHasChildren(json_village)) {
 					String village_name = json_village.getString("city");
 					BasicVillage v = new BasicVillage(village_name);
 					villages.add(v);
@@ -172,7 +172,7 @@ public class BasicRecordsStore {
 					JSONArray json_families = json_village.getJSONArray("families");
 					for (int j = 0; j < json_families.length(); j++) {
 						JSONObject json_family = json_families.getJSONObject(j);
-						if (familyHasChildren(json_family)) {
+						//if (familyHasChildren(json_family)) {
 							String family_id = json_family.getString("family_id");
 							BasicFamily f = new BasicFamily(family_id);
 							setFamilyInfo(f, json_family);
@@ -187,9 +187,9 @@ public class BasicRecordsStore {
 								setChildInfo(c, json_child);
 								child_array.add(c);
 							}
-						}
+						//}
 					}
-				}
+			//	}
 			}
 			return true;
 		} catch (JSONException e) {

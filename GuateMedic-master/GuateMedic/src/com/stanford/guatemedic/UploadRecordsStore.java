@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.util.Log;
 
 public class UploadRecordsStore {
 	
@@ -185,6 +186,7 @@ public class UploadRecordsStore {
 				String family_id = obj.getString("family_id");
 				String temp_family_id = obj.getString("temp_family_id");
 				if (child_id.equals(temp_child_id)) { //HAS NOT BEEN UPLOADED YET
+					Log.i("WTF", "Created UploadChild");
 					obj.remove("child_id");
 					obj.remove("temp_family_id");
 					UploadChild uc = new UploadChild(temp_family_id, child_id, obj.toString());
@@ -208,7 +210,7 @@ public class UploadRecordsStore {
 					obj.remove("family_id");
 					UploadFamily uf = new UploadFamily(family_id, obj.toString());
 					families.add(uf);
-					uf.setVisit_id(getFamilyVisits(temp_family_id));
+					uf.setVisit_ids(getFamilyVisits(temp_family_id));
 					uf.setChild_ids(getChildren(temp_family_id));
 				}
 				

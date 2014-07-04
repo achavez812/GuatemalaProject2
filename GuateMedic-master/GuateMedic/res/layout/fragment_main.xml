@@ -55,7 +55,6 @@
         android:paddingBottom="40dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
         android:layout_marginBottom="60dp"
         android:text="DOWNLOAD" />
     
@@ -69,11 +68,7 @@
         android:layout_marginBottom="60dp"
         android:text="GRAPH" />
 
-=======
-        android:text="DOWNLOAD" 
-        android:alpha="1.2"
-        android:layout_marginBottom="50dp"/>
->>>>>>> 7ba6d648bdf884e50c03d45f365cd9249f78d4c3
+
 </LinearLayout>
 </RelativeLayout>
 </ScrollView>

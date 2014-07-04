@@ -82,6 +82,10 @@
             android:screenOrientation="landscape"
             android:label="Graph" />
         
+        <activity
+            android:name="com.stanford.guatemedic.NFCActivity"
+            android:label="NFC Tag Stuff" />
+        
     </application>
 
 </manifest>

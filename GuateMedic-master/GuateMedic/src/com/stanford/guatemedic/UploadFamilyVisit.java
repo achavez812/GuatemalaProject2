@@ -7,10 +7,10 @@ import org.json.JSONObject;
 
 public class UploadFamilyVisit {
 	
-	String visit_id;
-	String family_id;
-	String temp_family_id;
-	String data;
+	private String visit_id;
+	private String family_id;
+	private String temp_family_id;
+	private String data;
 	
 	public UploadFamilyVisit(String visit_id, String family_id, String data) {
 		this.visit_id = visit_id;

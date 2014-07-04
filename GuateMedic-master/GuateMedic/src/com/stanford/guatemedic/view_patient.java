@@ -5,7 +5,6 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.DatePickerDialog;
@@ -17,7 +16,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.animation.Animation;
@@ -35,7 +37,7 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GraphView.GraphViewData;
 import com.jjoe64.graphview.GraphViewSeries;
 import com.jjoe64.graphview.LineGraphView;
-public class view_patient extends Activity{
+public class view_patient extends ActionBarActivity{
 	private TextView mDateDisplay;
     private int mYear;
     private int mMonth;
@@ -58,6 +60,30 @@ public class view_patient extends Activity{
 	DBController controller = new DBController(this);
 	ListView list;
     LazyAdapterExam adapter;
+    
+    @Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.nfc_stuff_menu, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+		if (id == R.id.action_nfc_button) {
+			Intent i = new Intent(getApplication(), NFCActivity.class);
+			i.putExtra("child_id", getIntent().getStringExtra("child_id"));
+			startActivity(i);
+			return true;
+		}
+
+		return super.onOptionsItemSelected(item);
+	}
     
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
