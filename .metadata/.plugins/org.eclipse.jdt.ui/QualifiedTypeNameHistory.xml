@@ -13,7 +13,6 @@
 <fullyQualifiedTypeName name="android.app.FragmentTransaction"/>
 <fullyQualifiedTypeName name="android.app.ActionBar.Tab"/>
 <fullyQualifiedTypeName name="android.app.Fragment"/>
-<fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
 <fullyQualifiedTypeName name="android.R"/>
 <fullyQualifiedTypeName name="android.R.id"/>
 <fullyQualifiedTypeName name="android.R.color"/>
@@ -23,7 +22,8 @@
 <fullyQualifiedTypeName name="android.support.v4.app.DialogFragment"/>
 <fullyQualifiedTypeName name="android.widget.RadioButton"/>
 <fullyQualifiedTypeName name="com.stanford.guatemedic.R"/>
-<fullyQualifiedTypeName name="com.stanford.guatemedic.R.id"/>
 <fullyQualifiedTypeName name="android.widget.Toast"/>
 <fullyQualifiedTypeName name="android.graphics.Color"/>
+<fullyQualifiedTypeName name="com.stanford.guatemedic.R.id"/>
+<fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
 </qualifiedTypeNameHistroy>

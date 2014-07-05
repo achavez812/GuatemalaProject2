@@ -60,7 +60,7 @@ public class GuatemedicReader {
 		BufferedReader reader = null;
 		try {
 			InputStream in = mContext.openFileInput(f.getName());
-			reader = new BufferedReader(new InputStreamReader(in));
+			reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
 			StringBuilder jsonString = new StringBuilder();
 			String line = null;
 			while ((line = reader.readLine()) != null) {

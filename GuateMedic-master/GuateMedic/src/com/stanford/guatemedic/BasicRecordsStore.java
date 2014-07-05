@@ -253,7 +253,6 @@ public class BasicRecordsStore {
 						DetailedRecordsStore.load(context2);
 						success = true;
 					} else {
-
 						success = false;
 					}
 				}

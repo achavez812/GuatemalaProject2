@@ -51,7 +51,6 @@
 	     	android:id="@+id/graph_new_child_date"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
-		    android:layout_marginTop="2dp"
 			android:textSize="18sp"		    
 		    android:text="Sex: "
 		    />

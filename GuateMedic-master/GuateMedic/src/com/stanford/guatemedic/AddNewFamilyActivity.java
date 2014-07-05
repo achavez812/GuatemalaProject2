@@ -63,7 +63,7 @@ public class AddNewFamilyActivity extends ActionBarActivity {
 		public AddNewFamilyFragment() {
 
 		}
-
+		
 		public static class DatePickerFragmentFather extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
 			String val = "00-00-00";
@@ -113,6 +113,7 @@ public class AddNewFamilyActivity extends ActionBarActivity {
 			}
 
 		}
+		
 		public static AddNewFamilyFragment newInstance(String village) {
 			AddNewFamilyFragment f = new AddNewFamilyFragment();
 			Bundle args = new Bundle();
@@ -133,32 +134,32 @@ public class AddNewFamilyActivity extends ActionBarActivity {
 
 			
 			EditText mother_dob_field=(EditText)rootView.findViewById(R.id.add_new_family_parent1_dob);
-					mother_dob_field.setOnClickListener(new View.OnClickListener() {
+			mother_dob_field.setOnClickListener(new View.OnClickListener() {
 
-						@Override
-						public void onClick(View v) {
-
-							DatePickerFragmentMother newdobFragment = new DatePickerFragmentMother();
-							newdobFragment.show(getActivity().getFragmentManager(),
-									"datePicker");
-
-						}
-					});
-
-					EditText father_dob_field=(EditText)rootView.findViewById(R.id.add_new_family_parent2_dob);
-					father_dob_field.setOnClickListener(new View.OnClickListener() {
-
-						@Override
-						public void onClick(View v) {
-
-							DatePickerFragmentFather newdobFragment = new DatePickerFragmentFather();
-							newdobFragment.show(getActivity().getFragmentManager(),
-									"datePicker");
-
-						}
-					});
-			
+				@Override
+				public void onClick(View v) {
 					
+					DatePickerFragmentMother newdobFragment = new DatePickerFragmentMother();
+					newdobFragment.show(getActivity().getFragmentManager(),
+							"datePicker");
+					
+				}
+			});
+
+			EditText father_dob_field=(EditText)rootView.findViewById(R.id.add_new_family_parent2_dob);
+			father_dob_field.setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					
+					DatePickerFragmentFather newdobFragment = new DatePickerFragmentFather();
+					newdobFragment.show(getActivity().getFragmentManager(),
+							"datePicker");
+					
+
+				}
+			});
+
 					
 			Button button = (Button) rootView
 					.findViewById(R.id.add_new_family_button);
@@ -183,6 +184,7 @@ public class AddNewFamilyActivity extends ActionBarActivity {
 							.findViewById(R.id.add_new_family_parent2_dob);
 					String parent2_dob = parent2_dob_field.getText().toString();
 
+					//Some of these may be empty strings
 					try {
 						JSONObject obj = new JSONObject();
 						obj.put("village", village);

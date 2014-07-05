@@ -186,7 +186,6 @@ public class UploadRecordsStore {
 				String family_id = obj.getString("family_id");
 				String temp_family_id = obj.getString("temp_family_id");
 				if (child_id.equals(temp_child_id)) { //HAS NOT BEEN UPLOADED YET
-					Log.i("WTF", "Created UploadChild");
 					obj.remove("child_id");
 					obj.remove("temp_family_id");
 					UploadChild uc = new UploadChild(temp_family_id, child_id, obj.toString());
