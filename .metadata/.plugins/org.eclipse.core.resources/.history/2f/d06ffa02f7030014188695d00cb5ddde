@@ -111,10 +111,10 @@
 	    <item>Marital Status of Primary Parent(Not Set)</item>
 	</string-array>
 	<string-array name="fathers_job">
-	    <item>Fixed</item>
-	    <item>Merchant</item>
-	    <item>Farmer (owner)</item>
-	    <item>Farmer (alien)</item>
+	    <item>Farmer</item>
+	    <item>Doctor</item>
+	    <item>Social Worker</item>
+	    <item>Teacher</item>
 	    <item>Other</item>
 	    <item>Father\'s Job(Not Set)</item>
 	</string-array>

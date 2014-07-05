@@ -87,7 +87,6 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 			frag2_instance.convertValuesFrag2();
 			JSONObject obj = new JSONObject();
 			try {
-				obj.put("family_id", family_id);
 				obj.put("does_father_live_with", AddNewFamilyVisitFragment1.father_lives_with_put);
 				//Log.d("Working","WorkingTag"+AddNewFamilyVisitFragment1.father_lives_with_put);
 				obj.put("parent1_marital_status", AddNewFamilyVisitFragment1.parent1_marital_status_put);
@@ -108,7 +107,6 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 				//Log.d("Working","WorkingTag"+AddNewFamilyVisitFragment2.num_pregnancies_put);
 				obj.put("how_children_died", AddNewFamilyVisitFragment2.children_death_information_put);	
 				//Log.d("Working","WorkingTag"+AddNewFamilyVisitFragment2.children_death_information_put);
-				DetailedRecordsStore.get(getApplication()).addNewFamilyVisit(obj);
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

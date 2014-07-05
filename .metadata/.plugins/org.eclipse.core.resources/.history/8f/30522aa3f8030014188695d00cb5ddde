@@ -256,8 +256,8 @@ public class DetailedRecordsStore {
 			dfv.setVisit_date(json.getString("visit_date"));
 			if (json.has("parent1_marital_status")) 
 				dfv.setParent1_marital_status(Integer.parseInt(json.getString("parent1_marital_status")));
-			if (json.has("does_father_live_with")) 
-				dfv.setDoes_father_live_with(Integer.parseInt(json.getString("does_father_live_with")));
+			if (json.has("father_lives_with")) 
+				dfv.setDoes_father_live_with(Integer.parseInt(json.getString("father_lives_with")));
 			if (json.has("num_pregnancies")) 
 				dfv.setNum_pregnancies(Integer.parseInt(json.getString("num_pregnancies")));
 			if (json.has("num_children_alive"))
@@ -272,8 +272,8 @@ public class DetailedRecordsStore {
 				dfv.setNum_people_in_household(Integer.parseInt(json.getString("num_people_in_household")));
 			if (json.has("fathers_job"))
 				dfv.setFathers_job(Integer.parseInt(json.getString("fathers_job")));
-			if (json.has("has_igss"))
-				dfv.setHas_igss(Integer.parseInt(json.getString("has_igss")));
+			if (json.has("igss"))
+				dfv.setHas_igss(Integer.parseInt(json.getString("igss")));
 			if (json.has("promoter_id"))
 				dfv.setPromoter_id(json.getString("promoter_id"));
 		} catch (JSONException e) {

@@ -57,7 +57,7 @@ public class DetailedFamilyVisit {
 		return does_father_live_with;
 	}
 
-	public void setDoes_father_live_with(int does_father_live_with) {
+	public void setFather_lives_with(int does_father_live_with) {
 		this.does_father_live_with = does_father_live_with;
 	}
 

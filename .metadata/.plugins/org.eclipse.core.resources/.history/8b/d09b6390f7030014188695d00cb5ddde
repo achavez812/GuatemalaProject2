@@ -57,7 +57,7 @@ public class DetailedFamilyVisit {
 		return does_father_live_with;
 	}
 
-	public void setDoes_father_live_with(int does_father_live_with) {
+	public void setFather_lives_with(int does_father_live_with) {
 		this.does_father_live_with = does_father_live_with;
 	}
 
@@ -117,12 +117,12 @@ public class DetailedFamilyVisit {
 		this.fathers_job = fathers_job;
 	}
 
-	public int getHas_igss() {
-		return has_igss;
+	public int getIGSS() {
+		return IGSS;
 	}
 
-	public void setHas_igss(int igss) {
-		this.has_igss = has_igss;
+	public void setIGSS(int IGSS) {
+		this.IGSS = IGSS;
 	}
 
 	public String getTemp_family_id() {

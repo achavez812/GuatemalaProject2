@@ -87,7 +87,6 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 			frag2_instance.convertValuesFrag2();
 			JSONObject obj = new JSONObject();
 			try {
-				obj.put("family_id", family_id);
 				obj.put("does_father_live_with", AddNewFamilyVisitFragment1.father_lives_with_put);
 				//Log.d("Working","WorkingTag"+AddNewFamilyVisitFragment1.father_lives_with_put);
 				obj.put("parent1_marital_status", AddNewFamilyVisitFragment1.parent1_marital_status_put);

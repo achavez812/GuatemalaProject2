@@ -87,14 +87,13 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 			frag2_instance.convertValuesFrag2();
 			JSONObject obj = new JSONObject();
 			try {
-				obj.put("family_id", family_id);
-				obj.put("does_father_live_with", AddNewFamilyVisitFragment1.father_lives_with_put);
+				obj.put("father_lives_with", AddNewFamilyVisitFragment1.father_lives_with_put);
 				//Log.d("Working","WorkingTag"+AddNewFamilyVisitFragment1.father_lives_with_put);
 				obj.put("parent1_marital_status", AddNewFamilyVisitFragment1.parent1_marital_status_put);
 				//Log.d("Working","WorkingTag"+AddNewFamilyVisitFragment1.parent1_marital_status_put);
 				obj.put("fathers_job", AddNewFamilyVisitFragment1.father_occu_put);
 				//Log.d("Working","WorkingTag"+AddNewFamilyVisitFragment1.father_occu_put);
-				obj.put("has_igss", AddNewFamilyVisitFragment1.IGSS_family_put);
+				obj.put("IGSS", AddNewFamilyVisitFragment1.IGSS_family_put);
 				//Log.d("Working","WorkingTag"+AddNewFamilyVisitFragment1.IGSS_family_put);
 				obj.put("num_children_alive", AddNewFamilyVisitFragment2.num_children_alive_put);
 				//Log.d("Working","WorkingTag"+AddNewFamilyVisitFragment2.num_children_alive_put);
@@ -106,9 +105,8 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 				//Log.d("Working","WorkingTag"+AddNewFamilyVisitFragment2.num_people_in_household_put);
 				obj.put("num_pregnancies", AddNewFamilyVisitFragment2.num_pregnancies_put);
 				//Log.d("Working","WorkingTag"+AddNewFamilyVisitFragment2.num_pregnancies_put);
-				obj.put("how_children_died", AddNewFamilyVisitFragment2.children_death_information_put);	
+				obj.put("children_death_information", AddNewFamilyVisitFragment2.children_death_information_put);	
 				//Log.d("Working","WorkingTag"+AddNewFamilyVisitFragment2.children_death_information_put);
-				DetailedRecordsStore.get(getApplication()).addNewFamilyVisit(obj);
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -375,7 +373,7 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 			});
 			
 			EditText death_information_field = (EditText)rootView.findViewById(R.id.family_visit2_death_information);
-			if (dfv.getHow_children_died() != null) death_information_field.setText("" + dfv.getHow_children_died());
+			if (dfv.getChildren_death_information() != null) death_information_field.setText("" + dfv.getChildren_death_information());
 			death_information_field.addTextChangedListener(new TextWatcher() {
 
 				@Override
@@ -396,9 +394,9 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 						int before, int count) {
 					// TODO Auto-generated method stub
 					if (s.length() > 0)
-						dfv.setHow_children_died(s.toString());
+						dfv.setChildren_death_information(s.toString());
 					else 
-						dfv.setHow_children_died(null);
+						dfv.setChildren_death_information(null);
 					
 				}
 				
@@ -483,10 +481,7 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 			
 			//Number of Children Dead
 			String num_children_dead_string=((EditText)(rootView.findViewById(R.id.family_visit2_num_children_dead))).getText().toString();
-			if (num_children_dead_string.isEmpty())
-				num_children_dead_put = -1;
-			else
-				num_children_dead_put=Integer.parseInt(num_children_dead_string);
+			num_children_dead_put=Integer.parseInt(num_children_dead_string);
 			
 			//Death Information 
 			String children_death_information_string=((EditText)(rootView.findViewById(R.id.family_visit2_death_information))).getText().toString();
@@ -494,17 +489,11 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 			
 			//Number of children under 5
 			String num_children_under_5_string=((EditText)(rootView.findViewById(R.id.family_visit2_num_children_under_5))).getText().toString();
-			if (num_children_under_5_string.isEmpty())
-				num_children_under_5_put = -1;
-			else
-				num_children_under_5_put=Integer.parseInt(num_children_under_5_string);
+			num_children_under_5_put=Integer.parseInt(num_children_under_5_string);
 			
 			//Number of People in household
 			String num_people_in_household_string=((EditText)(rootView.findViewById(R.id.family_visit2_num_people_in_household))).getText().toString();
-			if (num_people_in_household_string.isEmpty())
-				num_people_in_household_put = -1;
-			else
-				num_people_in_household_put=Integer.parseInt(num_people_in_household_string);
+			num_people_in_household_put=Integer.parseInt(num_people_in_household_string);
 			
 			
 		}
