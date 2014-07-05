@@ -127,16 +127,6 @@ public class MainActivity extends ActionBarActivity {
 				}
 			});
 			
-			Button graph_button = (Button)rootView.findViewById(R.id.graph_button);
-			graph_button.setOnClickListener(new View.OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					Intent i = new Intent(getActivity().getApplication(), GraphActivity.class);
-					startActivity(i);
-				}
-			});
-			
 			return rootView;
 		}
 	}

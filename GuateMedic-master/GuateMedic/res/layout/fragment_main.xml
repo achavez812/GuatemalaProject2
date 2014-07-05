@@ -50,16 +50,6 @@
 	        android:layout_height="wrap_content"
 	        android:layout_marginBottom="60dp"
 	        android:text="DOWNLOAD" />
-    
-        <Button
-	        android:id="@+id/graph_button"
-	        android:textSize="30sp"
-	        android:paddingTop="40dp"
-	        android:paddingBottom="40dp"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_marginBottom="60dp"
-	        android:text="GRAPH" />
 
 	</LinearLayout>
 

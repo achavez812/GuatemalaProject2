@@ -182,6 +182,12 @@ public class Utilities {
 		return new_date.substring(0, 10);
 	}
 	
+	public static double convertMonthsToWeeks(double months) {
+		double days_in_month = 30.4167;
+		
+		return (months * days_in_month) / 7;
+	}
+	
 	//in months
 	public static double timeBetween(String date1, String date2) {
 		int year1 = Integer.parseInt(date1.substring(0,4));
@@ -197,6 +203,7 @@ public class Utilities {
 		
 		return (years/12) + months + days*30.4167;
 	}
+	
 	
 	public static double round(double value, int places) {
 	    if (places < 0) throw new IllegalArgumentException();
