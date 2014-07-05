@@ -165,4 +165,12 @@ public class Utilities {
 			return null;
 		} 
 	}
+	
+	public static double kilogramsToPounds(double kilograms) {
+		return kilograms * 2.2046;
+	}
+	
+	public static double poundsToKilograms(double pounds) {
+		return pounds / 2.2046;
+	}
 }

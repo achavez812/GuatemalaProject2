@@ -351,13 +351,13 @@ public class DetailedRecordsStore {
 		try {
 			dcv.setVisit_date(json.getString("visit_date"));
 			if (json.has("received_all_vaccines"))
-				dcv.setDid_receive_vaccinations(Integer.parseInt(json.getString("received_all_vaccines")));
+				dcv.setReceived_all_vaccines(Integer.parseInt(json.getString("received_all_vaccines")));
 			if (json.has("type_of_vaccines_received"))
-				dcv.setVaccination_information(json.getString("types_of_vaccines_received"));
+				dcv.setType_of_vaccines_received(json.getString("types_of_vaccines_received"));
 			if (json.has("chronic_disease_or_disability"))
 				dcv.setHas_chronic_disease_or_disability(Integer.parseInt(json.getString("chronic_disease_or_disability")));
 			if (json.has("type_of_chronic_disease_or_disability"))
-				dcv.setChronic_disease_or_disability_information(json.getString("type_of_chronic_disease_or_disability"));
+				dcv.setType_of_chronic_disease_or_disability(json.getString("type_of_chronic_disease_or_disability"));
 			if (json.has("currently_breastfed"))
 				dcv.setIs_currently_breastfed(Integer.parseInt("currently_breastfed"));
 			if (json.has("only_breastfed"))
@@ -367,9 +367,9 @@ public class DetailedRecordsStore {
 			if (json.has("child_age_when_stoppped_breastfeeding"))
 				dcv.setChild_age_when_stopped_breastfeeding(Float.parseFloat("child_age_when_stoppped_breastfeeding"));
 			if (json.has("weight_in_kilos"))
-				dcv.setWeight(Float.parseFloat("weight_in_kilos"));
+				dcv.setWeight_in_pounds(Float.parseFloat("weight_in_pounds"));
 			if (json.has("height_in_centimeters"))
-				dcv.setHeight(Float.parseFloat("height_in_centimeters"));
+				dcv.setHeight_in_centimeters(Float.parseFloat("height_in_centimeters"));
 			if (json.has("num_times_incaparina_past_week"))
 				dcv.setNum_times_incaparina_past_week(Integer.parseInt(json.getString("num_times_incaparina_past_week")));
 			if (json.has("num_times_vegetables_or_fruits_past_week"))

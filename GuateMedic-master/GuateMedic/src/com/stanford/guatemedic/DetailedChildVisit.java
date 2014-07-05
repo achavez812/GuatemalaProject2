@@ -12,18 +12,18 @@ public class DetailedChildVisit {
 	private String visit_date;
 	private String promoter_id;
 	
-	private int did_receive_vaccinations; //received_all_vaccinations is backend field name
-	private String vaccination_information; //types_of_vaccines_received
+	private int received_all_vaccines; //received_all_vaccinations is backend field name
+	private String types_of_vaccines_received; //types_of_vaccines_received
 	private int has_chronic_disease_or_disability; //chronic_disease_or_disability
-	private String chronic_disease_or_disability_information; //type_of_chronic_disease_or_disability
+	private String type_of_chronic_disease_or_disability; //type_of_chronic_disease_or_disability
 	
 	private int is_currently_breastfed;
 	private int is_only_breastfed;
 	private float how_long_only_breastfed;
 	private float child_age_when_stopped_breastfeeding; //Could be String date_when_stopped breastfeeding
 	
-	private float weight; //in kilograms
-	private float height; //in centimeters
+	private float weight_in_pounds; //in kilograms
+	private float height_in_centimeters; //in centimeters
 	private int num_times_incaparina_past_week;
 	
 	private int nan_1_baby_formula; //Is the child taking nan? It's a supplement like incaparina (HANDLE THIS!!!!!!!!)
@@ -72,20 +72,20 @@ public class DetailedChildVisit {
 		this.promoter_id = promoter_id;
 	}
 
-	public int getDid_receive_vaccinations() {
-		return did_receive_vaccinations;
+	public int getReceived_all_vaccines() {
+		return received_all_vaccines;
 	}
 
-	public void setDid_receive_vaccinations(int did_receive_vaccinations) {
-		this.did_receive_vaccinations = did_receive_vaccinations;
+	public void setReceived_all_vaccines(int received_all_vaccines) {
+		this.received_all_vaccines = received_all_vaccines;
 	}
 
-	public String getVaccination_information() {
-		return vaccination_information;
+	public String getType_of_vaccines_received() {
+		return types_of_vaccines_received;
 	}
 
-	public void setVaccination_information(String vaccination_information) {
-		this.vaccination_information = vaccination_information;
+	public void setType_of_vaccines_received(String types_of_vaccines_received) {
+		this.types_of_vaccines_received = types_of_vaccines_received;
 	}
 
 	public int getHas_chronic_disease_or_disability() {
@@ -97,13 +97,12 @@ public class DetailedChildVisit {
 		this.has_chronic_disease_or_disability = has_chronic_disease_or_disability;
 	}
 
-	public String getChronic_disease_or_disability_information() {
-		return chronic_disease_or_disability_information;
+	public String getType_of_chronic_disease_or_disability() {
+		return type_of_chronic_disease_or_disability;
 	}
 
-	public void setChronic_disease_or_disability_information(
-			String chronic_disease_or_disability_information) {
-		this.chronic_disease_or_disability_information = chronic_disease_or_disability_information;
+	public void setType_of_chronic_disease_or_disability(String type_of_chronic_disease_or_disability) {
+		this.type_of_chronic_disease_or_disability = type_of_chronic_disease_or_disability;
 	}
 
 	public int getIs_currently_breastfed() {
@@ -134,25 +133,24 @@ public class DetailedChildVisit {
 		return child_age_when_stopped_breastfeeding;
 	}
 
-	public void setChild_age_when_stopped_breastfeeding(
-			float child_age_when_stopped_breastfeeding) {
+	public void setChild_age_when_stopped_breastfeeding(float child_age_when_stopped_breastfeeding) {
 		this.child_age_when_stopped_breastfeeding = child_age_when_stopped_breastfeeding;
 	}
 
-	public float getWeight() {
-		return weight;
+	public float getWeight_in_pounds() {
+		return weight_in_pounds;
 	}
 
-	public void setWeight(float weight) {
-		this.weight = weight;
+	public void setWeight_in_pounds(float weight_in_pounds) {
+		this.weight_in_pounds = weight_in_pounds;
 	}
 	
-	public float getHeight() {
-		return height;
+	public float getHeight_in_centimeters() {
+		return height_in_centimeters;
 	}
 	
-	public void setHeight(float height) {
-		this.height = height;
+	public void setHeight_in_centimeters(float height_in_centimeters) {
+		this.height_in_centimeters = height_in_centimeters;
 	}
 
 	public int getNum_times_incaparina_past_week() {

@@ -510,34 +510,4 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 		}
 	}
 	
-	public static class AddNewFamilyVisitFragment3 extends Fragment {
-
-		public AddNewFamilyVisitFragment3() {
-
-		}
-
-		public static AddNewFamilyVisitFragment3 newInstance(String family_id) {
-			AddNewFamilyVisitFragment3 f = new AddNewFamilyVisitFragment3();
-			Bundle args = new Bundle();
-			args.putString("family_id", family_id);
-			f.setArguments(args);
-			return f;
-		}
-		public void onCreate(Bundle savedInstanceState) {
-			Utilities utilityObj=new Utilities();
-			utilityObj.loadNativeCSS();
-			super.onCreate(savedInstanceState);
-		}
-		
-		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-			Utilities utilityObj=new Utilities();
-			utilityObj.loadNativeCSS();
-			View rootView = inflater.inflate(R.layout.fragment_add_new_family_visit3, container, false);
-			final String family_id = getArguments().getString("family_id");
-			
-			final DetailedFamilyVisit dfv = ((AddNewFamilyVisitActivity)getActivity()).dfv;
-			
-			return rootView;
-		}
-	}
 }
