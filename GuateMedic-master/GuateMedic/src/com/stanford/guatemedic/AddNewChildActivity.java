@@ -1,13 +1,14 @@
 package com.stanford.guatemedic;
 import java.util.Calendar;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
@@ -181,10 +182,17 @@ public class AddNewChildActivity extends ActionBarActivity {
 				@Override
 				public void onClick(View v) {
 					DatePickerFragment newdobFragment = new DatePickerFragment();
+<<<<<<< HEAD
 					newdobFragment.show(getActivity().getFragmentManager(), "datePicker");
+=======
+					newdobFragment.show(getActivity().getSupportFragmentManager(),
+							"datePicker");
+
+>>>>>>> 03c51b25eb714e27f00b3e688abe54e12f87e56d
 				}
 			});
 
+<<<<<<< HEAD
 			EditText youngest_sibling_dob_field = (EditText) rootView.findViewById(R.id.add_new_child_youngest_sibling_dob);
 			youngest_sibling_dob_field.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -193,6 +201,24 @@ public class AddNewChildActivity extends ActionBarActivity {
 					newdobFragmentYoung.show(getActivity().getFragmentManager(), "datePicker");
 				}
 			});
+=======
+			EditText youngest_sibling_dob_field = (EditText) rootView
+					.findViewById(R.id.add_new_child_youngest_sibling_dob);
+			youngest_sibling_dob_field
+					.setOnClickListener(new View.OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+
+							DatePickerFragmentYoungest newdobFragmentYoung = new DatePickerFragmentYoungest();
+
+							newdobFragmentYoung.show(getActivity()
+									.getSupportFragmentManager(), "datePicker");
+
+						}
+
+					});
+>>>>>>> 03c51b25eb714e27f00b3e688abe54e12f87e56d
 
 			// Populating Spinners
 
