@@ -102,7 +102,6 @@
     <string-array name="family_visit_array">
         <item>Category 1</item>
         <item>Category 2</item>
-        <item>Category 3</item>
     </string-array>
 	<string-array name="marital_status_array">
 	    <item>Married</item>

@@ -223,7 +223,7 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 			
 			
 			//Lives With Father?
-			RadioGroup radioFatherLivesWithGroup = (RadioGroup) rootView.findViewById(R.id.family_visit1_family_visit1_father_lives_with);
+			RadioGroup radioFatherLivesWithGroup = (RadioGroup) rootView.findViewById(R.id.family_visit1_father_lives_with);
 			int selectedId_father = radioFatherLivesWithGroup.getCheckedRadioButtonId();
 			RadioButton father_lives_with = (RadioButton) rootView.findViewById(selectedId_father);
 			String father_lives_with_string=father_lives_with.getText().toString();
