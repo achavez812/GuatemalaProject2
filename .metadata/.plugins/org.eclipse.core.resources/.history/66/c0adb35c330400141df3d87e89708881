@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="5dp"
+    android:paddingLeft="5dp"
+    android:background="@color/white"
+    android:orientation="vertical" >
+    
+    <LinearLayout
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content" 
+        android:orientation="horizontal">
+        
+	    <ImageView
+	        android:id="@+id/graph_child_image" 
+	        android:layout_width="120dp"
+	        android:layout_height="120dp"
+	        android:src="@drawable/patient"/>
+	    <LinearLayout
+	        android:layout_width="match_parent" 
+        	android:layout_height="wrap_content" 
+        	android:orientation="vertical">
+	        
+	        <TextView
+		        android:id="@+id/graph_child_sex"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:textSize="17sp"
+		        android:text="Male"/>
+	
+		    <TextView
+		        android:id="@+id/graph_child_dob"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:textSize="17sp"
+		        android:text="08/12/1992"/>
+		</LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/graph_last_child_visit_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"       
+        android:textSize="18sp" 
+        android:text="Child Visit (08/12/1993)"
+        />
+    <!--  
+    <TextView
+        android:id="@+id/graph_last_child_visit_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:text="Date: 08/12/1993"
+        />
+    -->
+    <TextView
+        android:id="@+id/graph_last_child_visit_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:text="Age: "
+        />
+    
+    <TextView
+        android:id="@+id/graph_last_child_visit_weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:text="Weight: "
+        />
+    
+    <TextView
+        android:id="@+id/graph_last_child_visit_height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:text="Height: "
+        />
+
+    
+    <TextView
+        android:id="@+id/graph_last_child_visit_weight_z_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:textStyle="italic"  
+        android:text="Weight z-score: "
+        />
+    
+    <TextView
+        android:id="@+id/graph_last_child_visit_height_z_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:textStyle="italic"   
+        android:text="Height z-score: "
+        />
+    
+    <TextView
+        android:id="@+id/graph_last_child_visit_other_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:textStyle="italic"  
+        android:text="Other score: "
+        />
+    
+    <TextView
+        android:id="@+id/graph_child_recommendation_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"  
+        android:text="Recommendation"
+        />
+    
+	 <TextView
+        android:id="@+id/graph_child_reccomendation_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:text=""
+        />
+    
+
+</LinearLayout>

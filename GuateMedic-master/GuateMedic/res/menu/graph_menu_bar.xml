@@ -3,10 +3,6 @@
          xmlns:yourapp="http://schemas.android.com/apk/res-auto" >
   
         <item
-        android:id="@+id/action_newchild"
-        android:title="New Child"
-        yourapp:showAsAction="always"/>
-        <item
         android:id="@+id/action_addvisit"
         android:title="Add Visit"
         yourapp:showAsAction="always"/>

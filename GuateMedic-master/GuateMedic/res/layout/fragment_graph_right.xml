@@ -40,7 +40,7 @@
             />
         
         <TextView
-            android:id="@+id/tab_bmi"
+            android:id="@+id/tab_other"
             android:gravity="center"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
             android:textSize="35sp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:text="BMI"
+            android:text="Other"
             />
         
     </LinearLayout>
@@ -57,7 +57,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             androidPlot.title="A Simple XY Plot"
-            androidPlot.domainLabel="Domain"
+            androidPlot.domainLabel="Age (weeks)"
             androidPlot.rangeLabel="Range"
             androidPlot.titleWidget.labelPaint.textSize="@dimen/title_font_size"
             androidPlot.domainLabelWidget.labelPaint.textSize="@dimen/domain_label_font_size"

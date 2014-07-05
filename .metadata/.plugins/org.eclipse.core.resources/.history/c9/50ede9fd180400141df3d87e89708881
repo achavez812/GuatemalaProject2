@@ -1,0 +1,26 @@
+package com.stanford.guatemedic;
+
+import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+
+public class ViewFamilyActivity extends ActionBarActivity{
+	
+	private static String family_id;
+	
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_view_family1);
+		getActionBar().setHomeButtonEnabled(true);
+		
+		family_id = getIntent().getStringExtra("family_id");
+		if (savedInstanceState == null) {
+			getSupportFragmentManager().beginTransaction().add(R.id.child_list_container, new ViewChildListFragment()).commit();
+		}
+		
+		
+		
+		
+	}
+	
+
+}

@@ -137,7 +137,7 @@ public class ViewFamilyListActivity extends ActionBarActivity {
 		
 		@Override
 		public void onListItemClick(ListView l, View v, int position, long id) {
-			Intent intent = new Intent(getActivity().getApplication(), ViewChildListActivity.class);
+			Intent intent = new Intent(getActivity().getApplication(), ViewFamilyActivity.class);
 			intent.putExtra("family_id", families.get(position).getTemp_family_id());
 			intent.putExtra("village", village);
 			startActivity(intent);

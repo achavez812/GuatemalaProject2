@@ -298,21 +298,19 @@ public class AddNewChildActivity extends ActionBarActivity {
 						//obj.put("birth_height", birth_height);
 						obj.put("youngest_sibling_dob", youngest_sibling_dob);
 						DetailedRecordsStore.get(getActivity().getApplication()).addNewChild(obj);
+						// Go to activity of this family
 
+						Intent i = new Intent(getActivity(), ViewFamilyActivity.class);
+						i.putExtra("family_id", family_id);
+						startActivity(i);
+						
 					} catch (JSONException e) {
 
 						e.printStackTrace();
 
 					}
 
-					// Go to activity of this family
 
-					Intent i = new Intent(getActivity(),
-							ViewChildListActivity.class);
-
-					i.putExtra("family_id", family_id);
-					i.putExtra("village", DetailedRecordsStore.get(getActivity().getApplication()).getFamily(family_id).getVillage_name());
-					startActivity(i);
 
 				}
 

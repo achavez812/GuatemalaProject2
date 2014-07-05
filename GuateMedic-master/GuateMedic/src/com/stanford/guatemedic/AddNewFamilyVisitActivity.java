@@ -3,6 +3,7 @@ package com.stanford.guatemedic;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -109,6 +110,10 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 				obj.put("how_children_died", AddNewFamilyVisitFragment2.children_death_information_put);	
 				//Log.d("Working","WorkingTag"+AddNewFamilyVisitFragment2.children_death_information_put);
 				DetailedRecordsStore.get(getApplication()).addNewFamilyVisit(obj);
+				
+				Intent i = new Intent(getApplication(), ViewFamilyActivity.class);
+				i.putExtra("family_id", family_id);
+				startActivity(i);
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

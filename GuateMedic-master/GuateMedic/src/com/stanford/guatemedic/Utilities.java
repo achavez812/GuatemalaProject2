@@ -6,6 +6,8 @@ import static com.nativecss.enums.RemoteContentRefreshPeriod.Never;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -17,6 +19,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
 import android.content.Context;
@@ -160,7 +163,7 @@ public class Utilities {
 		    if (response.getStatusLine().getStatusCode() != 200) {
 		    	return "-1";
 		    }
-		    return EntityUtils.toString(response.getEntity());
+		    return EntityUtils.toString(response.getEntity(), HTTP.UTF_8);
 		} catch (IOException e) {
 			return null;
 		} 
@@ -172,5 +175,34 @@ public class Utilities {
 	
 	public static double poundsToKilograms(double pounds) {
 		return pounds / 2.2046;
+	}
+	
+	public static String formatDate(String old_date) {
+		String new_date = old_date.replace('-', '/');
+		return new_date.substring(0, 10);
+	}
+	
+	//in months
+	public static double timeBetween(String date1, String date2) {
+		int year1 = Integer.parseInt(date1.substring(0,4));
+		int year2 = Integer.parseInt(date2.substring(0, 4));
+		int month1 = Integer.parseInt(date1.substring(5, 7));
+		int month2 = Integer.parseInt(date2.substring(5, 7));
+		int day1 = Integer.parseInt(date1.substring(8, 10));
+		int day2 = Integer.parseInt(date2.substring(8, 10));
+		
+		int years = year2 - year1;
+		int months = month2 - month1;
+		int days = day2 - day1;
+		
+		return (years/12) + months + days*30.4167;
+	}
+	
+	public static double round(double value, int places) {
+	    if (places < 0) throw new IllegalArgumentException();
+
+	    BigDecimal bd = new BigDecimal(value);
+	    bd = bd.setScale(places, RoundingMode.HALF_UP);
+	    return bd.doubleValue();
 	}
 }

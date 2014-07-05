@@ -7,21 +7,19 @@ import java.util.Arrays;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.androidplot.xy.LineAndPointFormatter;
@@ -31,17 +29,6 @@ import com.androidplot.xy.XYSeries;
 import com.stanford.guatemedic.R.color;
 
 public class GraphActivity extends ActionBarActivity {
-	
-	//static String date_of_birth;
-	static String sex = null;
-	//static String visit_date;
-	static int age_weeks = -1;
-	static double weight = -1;
-	static double height = -1;
-	
-	static ArrayList<Integer> weeks_array;
-	static ArrayList<Double> weight_array;
-	static ArrayList<Double> height_array;
 	
 	//This represents age in months and matches up with weight/height data
     static double[] x_weight_values = {0, 0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5, 10.5, 11.5, 12.5, 13.5, 14.5, 15.5, 16.5, 17.5, 18.5, 19.5, 20.5, 21.5, 22.5, 23.5, 24.5, 25.5, 26.5, 27.5, 28.5, 29.5, 30.5, 31.5, 32.5, 33.5, 34.5, 35.5, 36};
@@ -107,17 +94,18 @@ public class GraphActivity extends ActionBarActivity {
         {4.254922, 4.743582, 5.657379, 6.492574, 7.256166, 7.95473, 8.594413, 9.180938, 9.719621, 10.21539, 10.6728, 11.09607, 11.48908, 11.85539, 12.19829, 12.52078, 12.82561, 13.11527, 13.39204, 13.65799, 13.91497, 14.16467, 14.40858, 14.64807, 14.88432, 15.11839, 15.35122, 15.58363, 15.81632, 16.0499, 16.28491, 16.52176, 16.76085, 17.00245, 17.24681, 17.49412, 17.7445, 17.87089}    
     };
 	
+    private static String child_id;
 
 	protected void onCreate(Bundle savedInstanceState) {
-		weeks_array = new ArrayList<Integer>();
-		weight_array = new ArrayList<Double>();
-		height_array = new ArrayList<Double>();
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_graph);
 		getActionBar().setHomeButtonEnabled(true);
+		child_id = getIntent().getStringExtra("child_id");
+		setTitle(DetailedRecordsStore.get(getApplication()).getChild(child_id).getName());
 		if (savedInstanceState == null) {
-			getSupportFragmentManager().beginTransaction().add(R.id.left_content, new GraphFragmentLeft()).commit();
-			getSupportFragmentManager().beginTransaction().add(R.id.right_content, new GraphFragmentRight()).commit();
+			getSupportFragmentManager().beginTransaction().add(R.id.left_content, new GraphFragmentLeft(child_id)).commit();
+			getSupportFragmentManager().beginTransaction().add(R.id.right_content, new GraphFragmentRight(child_id)).commit();			Log.i("WTF", "ADDED LEFT");
+
 		}
 	}
 	
@@ -133,15 +121,12 @@ public class GraphActivity extends ActionBarActivity {
 		if (id == android.R.id.home) {
 			Intent i = new Intent(getApplication(), MainActivity.class);
 			startActivity(i);
-		}
-		if (id == R.id.action_newchild) {
-			NewChildGraphDialog ncgd = new NewChildGraphDialog();
-			ncgd.show(getSupportFragmentManager(), null);
-			return false;
+			return true;
 		}
 		if (id == R.id.action_addvisit) {
-			AddVisitGraphDialog avgd = new AddVisitGraphDialog();
-			avgd.show(getSupportFragmentManager(), null);
+			Intent i = new Intent(getApplication(), AddNewChildVisitActivity.class);
+			i.putExtra("child_id", child_id);
+			startActivity(i);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -161,87 +146,13 @@ public class GraphActivity extends ActionBarActivity {
 		    // Pass null as the parent view because its going in the dialog layout
 		    AlertDialog.Builder view = builder.setView(v);
 
-			final RadioGroup sex_radio = (RadioGroup)v.findViewById(R.id.sex_radio);
-			
-		    // Add action buttons
-           view.setPositiveButton("Add New Child", new DialogInterface.OnClickListener() {
-               @Override
-               public void onClick(DialogInterface dialog, int id) {
-            	   /*
-                   String month = month_spinner.getSelectedItem().toString();
-                   String day = day_spinner.getSelectedItem().toString();
-                   String year = year_spinner.getSelectedItem().toString();
-                   if (month.length() == 1) month = 0 + month;
-                   if (day.length() == 1) day = 0 + day;
-                   date_of_birth = month + "/" + day + "/" + year;
-                   */
-                   sex = ((RadioButton)v.findViewById(sex_radio.getCheckedRadioButtonId())).getText().toString();
-                   age_weeks = -1;
-                   weight = -1;
-                   height = -1;
-                   
-                   weeks_array.clear();
-                   weight_array.clear();
-                   height_array.clear();
-                   
-                   getSupportFragmentManager().beginTransaction().replace(R.id.left_content, new GraphFragmentLeft()).commit();
-                   getSupportFragmentManager().beginTransaction().replace(R.id.right_content, new GraphFragmentRight()).commit();
-               }
-           });
-           view.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-               public void onClick(DialogInterface dialog, int id) {
-                   NewChildGraphDialog.this.getDialog().cancel();
-               }
-           });      
-		    return builder.create();
-		}
-	}
-	
-	public class AddVisitGraphDialog extends DialogFragment {
-		
-		@Override
-		public Dialog onCreateDialog(Bundle savedInstanceState) {
-		    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		    // Get the layout inflater
-		    LayoutInflater inflater = getActivity().getLayoutInflater();
-		    
-		    final View v = inflater.inflate(R.layout.fragment_graph_add_visit_dialog, null);
-	
-		    // Inflate and set the layout for the dialog
-		    // Pass null as the parent view because its going in the dialog layout
-		    AlertDialog.Builder view = builder.setView(v);
-		    
-		    final EditText age_field = (EditText)v.findViewById(R.id.graph_add_visit_weeks_age);
-		    final EditText weight_field = (EditText)v.findViewById(R.id.graph_add_visit_weight);
-		    final EditText height_field = (EditText)v.findViewById(R.id.graph_add_visit_height);
-		    
-		    // Add action buttons
-           view.setPositiveButton("Add New Visit", new DialogInterface.OnClickListener() {
-               @Override
-               public void onClick(DialogInterface dialog, int id) {
-            	   age_weeks = Integer.parseInt(age_field.getText().toString());
-            	   weight = Double.parseDouble(weight_field.getText().toString());
-            	   height = Double.parseDouble(height_field.getText().toString());
-            	   weeks_array.add(age_weeks);
-            	   weight_array.add(weight);
-            	   height_array.add(height);
-            	   getSupportFragmentManager().beginTransaction().replace(R.id.left_content, new GraphFragmentLeft()).commit();
-                   getSupportFragmentManager().beginTransaction().replace(R.id.right_content, new GraphFragmentRight()).commit();
-
-               }
-           });
-           view.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-               public void onClick(DialogInterface dialog, int id) {
-            	   AddVisitGraphDialog.this.getDialog().cancel();
-               }
-           });      
+			//Set stuff up
 		    return builder.create();
 		}
 	}
 	
 	
-	
-	public static double calculate_weight_z_score() {
+	public static double calculate_weight_z_score(double weight, double age_weeks, int sex) {
 		double[] x_value ={0, 0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5, 10.5, 11.5, 12.5, 13.5, 14.5, 15.5, 16.5, 17.5, 18.5, 19.5, 20.5, 21.5, 22.5, 23.5, 24.5, 25.5, 26.5, 27.5, 28.5, 29.5, 30.5, 31.5, 32.5, 33.5, 34.5, 35.5, 36};
 		
 		//male weight in kilograms
@@ -254,10 +165,10 @@ public class GraphActivity extends ActionBarActivity {
 		
 		double[] standard_deviations;
 		double[] mean_data;
-		if (sex.equals("Male")) {
+		if (sex == 1) {
 			standard_deviations = male_weight_standard_deviations;
 			mean_data = male_weight_mean_data;
-		} else if (sex.equals("Female")) {
+		} else if (sex == 2) {
 			standard_deviations = female_weight_standard_deviations;
 			mean_data = female_weight_mean_data;
 		} else {
@@ -297,7 +208,7 @@ public class GraphActivity extends ActionBarActivity {
 		
 	}
 	
-	public static double calculate_height_z_score() {
+	public static double calculate_height_z_score(double height, double age_weeks, int sex) {
 		double[] x_value ={0, 0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5, 10.5, 11.5, 12.5, 13.5, 14.5, 15.5, 16.5, 17.5, 18.5, 19.5, 20.5, 21.5, 22.5, 23.5, 24.5, 25.5, 26.5, 27.5, 28.5, 29.5, 30.5, 31.5, 32.5, 33.5, 34.5, 35.5};
 		
 		//male height in centimeters
@@ -310,10 +221,10 @@ public class GraphActivity extends ActionBarActivity {
 		
 		double[] standard_deviations;
 		double[] mean_data;
-		if (sex.equals("Male")) {
+		if (sex == 1) {
 			standard_deviations = male_height_standard_deviations;
 			mean_data = male_height_mean_data;
-		} else if (sex.equals("Female")) {
+		} else if (sex == 2) {
 			standard_deviations = female_height_standard_deviations;
 			mean_data = female_height_mean_data;
 		} else {
@@ -353,22 +264,18 @@ public class GraphActivity extends ActionBarActivity {
 		
 	}
 	
-	public static double calculate_bmi_z_score() {
+	public static double calculate_other_score() {
 		return 0;
 	}
 	
-	public static double round(double value, int places) {
-	    if (places < 0) throw new IllegalArgumentException();
 
-	    BigDecimal bd = new BigDecimal(value);
-	    bd = bd.setScale(places, RoundingMode.HALF_UP);
-	    return bd.doubleValue();
-	}
 	
 	public static class GraphFragmentLeft extends Fragment {
+		
+		private static String child_id;
 
-		public GraphFragmentLeft() {
-			
+		public GraphFragmentLeft(String child_id) {
+			this.child_id = child_id;
 		}
 		
 		@Override
@@ -380,41 +287,65 @@ public class GraphActivity extends ActionBarActivity {
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_graph_left, container,false);
 			
+			DetailedChild child = DetailedRecordsStore.get(getActivity()).getChild(child_id);
+			int gender = child.getGender();
+			String dob = child.getDob();
+			ArrayList<DetailedChildVisit> child_visits = child.getChild_visits();
+			
+			ImageView image_field = (ImageView)rootView.findViewById(R.id.graph_child_image);
+			
 			TextView sex_field = (TextView)rootView.findViewById(R.id.graph_child_sex);
+			if (gender == 1) {
+				sex_field.setText("Male");
+			} else if (gender == 2) {
+				sex_field.setText("Female");
+			} else if (gender == 0) {
+				sex_field.setText("No sex");
+			}
 			
-			TextView age_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_age);
+			String formatted_dob = Utilities.formatDate(dob);
+			TextView dob_field = (TextView)rootView.findViewById(R.id.graph_child_dob);
+			dob_field.setText(formatted_dob);
 			
-			TextView weight_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_weight);
+			DetailedChildVisit dcv = null;
+			if (!child_visits.isEmpty()) 
+				dcv = child_visits.get(child_visits.size() - 1);
 			
-			TextView height_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_height);
-			
-			TextView bmi_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_bmi);
-			
-			TextView weight_z_score_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_weight_z_score);
-			
-			TextView height_z_score_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_height_z_score);
-			
-			TextView bmi_z_score_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_bmi_z_score);
-			
-			TextView recommendation_field = (TextView)rootView.findViewById(R.id.graph_child_reccomendation_info);
-			
-			if (sex == null) { //No child (therefore no visit either)
+			TextView visit_header_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_header);
+			if (dcv == null) 
+				visit_header_field.setText("No Visits Logged");
+			else {
+				String visit_date = dcv.getVisit_date();
+				String formatted_visit_date = Utilities.formatDate(visit_date);
+				double age = Utilities.timeBetween(formatted_dob, formatted_visit_date); //Weeks?
 				
-			} else if (age_weeks == -1) { //No visit
-				sex_field.setText("Sex: " + sex);
-			} else { //It's good
-				sex_field.setText("Sex: " + sex);
-				age_field.setText("Age: " + age_weeks + " weeks");
-				weight_field.setText("Weight: " + round(weight, 2) + " kg");
-				height_field.setText("Height: " + round(height, 2) + " cm");
-				double bmi = weight / Math.pow((height/100), 2);
-				bmi_field.setText("BMI: " + round(bmi, 2));
-				double weight_z_score = round(calculate_weight_z_score(), 2);
-				double height_z_score = round(calculate_height_z_score(), 2);
-				double bmi_z_score = round(calculate_bmi_z_score(), 2);
+				double weight = Utilities.round(dcv.getWeight_in_pounds(), 2);
+				double height = Utilities.round(dcv.getHeight_in_centimeters(), 2);
+				double weight_z_score = Utilities.round(calculate_weight_z_score(weight, age, gender), 2);
+				double height_z_score = Utilities.round(calculate_height_z_score(height, age, gender), 2);
+				
+				
+				visit_header_field.setText("Child Visit (" + formatted_visit_date + ")"); //Format visit date
+				
+				TextView age_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_age);
+				age_field.setText("Age: " + age);
+				
+				TextView weight_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_weight);
+				weight_field.setText("Weight: " + weight);
+				
+				TextView height_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_height);
+				height_field.setText("Height: " + height);
+							
+				TextView weight_z_score_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_weight_z_score);
 				weight_z_score_field.setText("Weight z-score: " + weight_z_score);
-				height_z_score_field.setText("Height z-score: " + height_z_score);
 				
+				TextView height_z_score_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_height_z_score);
+				height_z_score_field.setText("Height z-score: " + height_z_score);
+
+				TextView other_score_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_other_score);
+				
+				TextView recommendation_field = (TextView)rootView.findViewById(R.id.graph_child_reccomendation_info);
+				//Assign variables
 			}
 			
 			return rootView;
@@ -429,13 +360,15 @@ public class GraphActivity extends ActionBarActivity {
 	
 	public static class GraphFragmentRight extends Fragment {
 		
-		//1 = weight
-		//2 = height
-		//3 = bmi
 		int selected;
+		private static ArrayList<DetailedChildVisit> child_visits;
+		private static int sex = 0;
 		
-		public GraphFragmentRight() {
+		public GraphFragmentRight(String child_id) {
 			selected = 1;
+			DetailedChild child = DetailedRecordsStore.get(getActivity()).getChild(child_id);
+			child_visits = child.getChild_visits();
+			sex = child.getGender();
 		}
 		
 		@Override
@@ -446,102 +379,103 @@ public class GraphActivity extends ActionBarActivity {
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 			final View rootView = inflater.inflate(R.layout.fragment_graph_right, container,false);
-
+			final XYPlot plot = (XYPlot) rootView.findViewById(R.id.mySimpleXYPlot);
 			
 			final TextView weight_view = (TextView)rootView.findViewById(R.id.tab_weight);
 			final TextView height_view = (TextView)rootView.findViewById(R.id.tab_height);
-			final TextView bmi_view = (TextView)rootView.findViewById(R.id.tab_bmi);
+			final TextView other_view = (TextView)rootView.findViewById(R.id.tab_other);
 			
 			weight_view.setOnClickListener(new View.OnClickListener() {
 				
 				@Override
 				public void onClick(View v) {
-
+					Log.i("WTF", "Weight Tab Click");
 					weight_view.setBackgroundResource(color.gray_medium);
 					height_view.setBackgroundResource(color.gray_dark);
-					bmi_view.setBackgroundResource(color.gray_dark);
-					if (sex != null) {
-						if (sex.equals("Female")) {
-							XYPlot plot;
-							plot = (XYPlot) rootView.findViewById(R.id.mySimpleXYPlot);
-							 
-					        // Create a couple arrays of y-values to plot:
-					        Number[] series1Numbers = {1, 8, 5, 2, 7, 4};
-					        Number[] series2Numbers = {4, 6, 3, 8, 2, 10};
-					 
-					        // Turn the above arrays into XYSeries':
-					        XYSeries series1 = new SimpleXYSeries(
-					                Arrays.asList(series1Numbers),          // SimpleXYSeries takes a List so turn our array into a List
-					                SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, // Y_VALS_ONLY means use the element index as the x value
-					                "Series1");                             // Set the display title of the series
-					 
-					        // same as above
-					        XYSeries series2 = new SimpleXYSeries(Arrays.asList(series2Numbers), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Series2");
-					 
-					        // Create a formatter to use for drawing a series using LineAndPointRenderer
-					        // and configure it from xml:
-					        LineAndPointFormatter series1Format = new LineAndPointFormatter(Color.RED, Color.GREEN, Color.BLUE, null);
-					 
-					        // add a new series' to the xyplot:
-					        plot.addSeries(series1, series1Format);
-					 
-					        // same as above:
-					        LineAndPointFormatter series2Format = new LineAndPointFormatter(Color.RED, Color.GREEN, Color.BLUE, null);
-					        plot.addSeries(series2, series2Format);
-					 
-					        // reduce the number of range labels
-					        plot.setTicksPerRangeLabel(3);
-					        plot.getGraphWidget().setDomainLabelOrientation(-45);
-							
-						} else {
-			
-						}
+					other_view.setBackgroundResource(color.gray_dark);
 
-					} 
-				}
+					plot.setRangeLabel("Weight (pounds)");
+
+					if (sex == 1) { //MALE
+						plot.setTitle("Male Weight vs. Age");
+						 
+				        // Create a couple arrays of y-values to plot:
+				        Number[] series1Numbers = {1, 8, 5, 2, 7, 4};
+				        Number[] series2Numbers = {4, 6, 3, 8, 2, 10};
+				 
+				        // Turn the above arrays into XYSeries':
+				        XYSeries series1 = new SimpleXYSeries(
+				                Arrays.asList(series1Numbers),          // SimpleXYSeries takes a List so turn our array into a List
+				                SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, // Y_VALS_ONLY means use the element index as the x value
+				                "Series1");                             // Set the display title of the series
+				 
+				        // same as above
+				        XYSeries series2 = new SimpleXYSeries(Arrays.asList(series2Numbers), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Series2");
+				 
+				        // Create a formatter to use for drawing a series using LineAndPointRenderer
+				        // and configure it from xml:
+				        LineAndPointFormatter series1Format = new LineAndPointFormatter(Color.RED, Color.GREEN, Color.BLUE, null);
+				 
+				        // add a new series' to the xyplot:
+				        plot.addSeries(series1, series1Format);
+				 
+				        // same as above:
+				        LineAndPointFormatter series2Format = new LineAndPointFormatter(Color.RED, Color.GREEN, Color.BLUE, null);
+				        plot.addSeries(series2, series2Format);
+				 
+				        // reduce the number of range labels
+				        plot.setTicksPerRangeLabel(3);
+				        plot.getGraphWidget().setDomainLabelOrientation(-45);
+						
+					} else { //Female
+						plot.setTitle("Female Weight vs. Age");
+					}
+					plot.redraw();
+
+				} 
 			});
-			
-			
 			height_view.setOnClickListener(new View.OnClickListener() {
-				
+			
 				@Override
 				public void onClick(View v) {
-					
+					Log.i("WTF", "Height Tab Click");
 					height_view.setBackgroundResource(color.gray_medium);
 					weight_view.setBackgroundResource(color.gray_dark);
-					bmi_view.setBackgroundResource(color.gray_dark);
-					if (sex != null) {
+					other_view.setBackgroundResource(color.gray_dark);
 
-						if (sex.equals("Female")) {
-		
-						} else {
+					plot.setRangeLabel("Height (centimeters)");
+					
+					if (sex == 1) { //Male
+						plot.setTitle("Male Height vs. Age");
 
-						}	
-
+					} else { //Female
+						plot.setTitle("Female Height vs. Age");
 						
 					} 
+					plot.redraw();
 				}
 			});
-			
-			
-			bmi_view.setOnClickListener(new View.OnClickListener() {
+		
+			other_view.setOnClickListener(new View.OnClickListener() {
 				
 				@Override
 				public void onClick(View v) {
 
-					bmi_view.setBackgroundResource(color.gray_medium);
+					other_view.setBackgroundResource(color.gray_medium);
 					height_view.setBackgroundResource(color.gray_dark);
 					weight_view.setBackgroundResource(color.gray_dark);
 				}
 			});
-			
-			
+		
+		
 			if (selected == 1) weight_view.performClick();
 			else if (selected == 2) height_view.performClick();
-			else if (selected == 3) bmi_view.performClick();
+			else if (selected == 3) other_view.performClick();
 			
 			return rootView;
-		}
+		}	
+		
 	}
-
 }
+
+

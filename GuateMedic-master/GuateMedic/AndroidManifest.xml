@@ -28,59 +28,79 @@
         </activity>
         <activity
             android:name="com.stanford.guatemedic.DownloadLoginActivity"
+            android:screenOrientation="portrait"
             android:label="Download Records" />
         <activity
             android:name="com.stanford.guatemedic.DownloadVillageListActivity"
+            android:screenOrientation="portrait"
             android:label="Villages" />
         <activity
             android:name="com.stanford.guatemedic.DownloadFamilyListActivity"
+            android:screenOrientation="portrait"
             android:label="Families" />
         <activity
             android:name="com.stanford.guatemedic.DownloadChildListActivity"
+            android:screenOrientation="portrait"
             android:label="Children" />
         <activity
             android:name="com.stanford.guatemedic.ViewVillageListActivity"
+            android:screenOrientation="portrait"
             android:label="Villages" />
         <activity
             android:name="com.stanford.guatemedic.ViewFamilyListActivity"
+            android:screenOrientation="portrait"
             android:label="Families" />
         <activity
+            android:name="com.stanford.guatemedic.ViewFamilyActivity"
+            android:screenOrientation="portrait"
+            android:label="View Family" />
+        <activity
             android:name="com.stanford.guatemedic.ViewChildListActivity"
+            android:screenOrientation="portrait"
             android:label="Children" />
         <activity
             android:name="com.stanford.guatemedic.view_patient"
+            android:screenOrientation="portrait"
             android:label="View Patient" />
         <activity
             android:name="com.stanford.guatemedic.view_family"
+            android:screenOrientation="portrait"
             android:label="View Family" />
         <activity
             android:name="com.stanford.guatemedic.AddNewFamilyActivity"
+            android:screenOrientation="portrait"
             android:label="Add Family" />
         <activity
             android:name="com.stanford.guatemedic.AddNewFamilyVisitActivity"
+            android:screenOrientation="portrait"
             android:label="Add Family Visit" />
         <activity
             android:name="com.stanford.guatemedic.AddNewChildActivity"
+            android:screenOrientation="portrait"
             android:label="Add Child" />
         <activity
             android:name="com.stanford.guatemedic.AddNewChildVisitActivity"
+            android:screenOrientation="portrait"
             android:label="Add Child Visit" />
         <activity
             android:name="com.stanford.guatemedic.ViewFamily"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_view_family" />
         
         <activity
             android:name="com.stanford.guatemedic.UploadLoginActivity"
+            android:screenOrientation="portrait"
             android:label="UPLOAD" />
         
         <activity
             android:name="com.stanford.guatemedic.UploadResultsActivity"
+            android:screenOrientation="portrait"
             android:label="UPLOAD" />
         
         <activity
             android:name="com.stanford.guatemedic.GraphActivity"
             android:screenOrientation="landscape"
-            android:label="Graph" />
+            android:label="Alejandro Chavez" />
         
         <activity
             android:name="com.stanford.guatemedic.NFCActivity"
