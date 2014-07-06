@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+     xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent">
+	 <LinearLayout
+	     android:layout_width="match_parent"
+	     android:layout_height="wrap_content" 
+	     android:orientation="vertical" 
+	     android:gravity="center"
+	     android:padding="20dp">
+     
+	     <TextView
+	         android:id="@+id/add_new_child_family"
+	         android:layout_width="wrap_content"
+	         android:layout_height="wrap_content"
+	         android:gravity="center"
+	         android:textSize="30sp"
+	         android:layout_marginBottom="20dp"/>
+     
+	     <EditText
+	         android:id="@+id/add_new_child_name"
+	         android:layout_width="match_parent"
+	         android:layout_height="wrap_content"
+	         android:gravity="center"
+	         android:textSize="30sp"
+	         android:hint="Nombre" />
+ 
+	     <EditText
+	         android:id="@+id/add_new_child_dob"
+	         android:layout_width="match_parent"
+	         android:layout_height="wrap_content"
+	         android:gravity="center"
+	         android:layout_marginTop="20dp"
+	         android:textSize="30sp"
+	         android:hint="Fecha de Nacimiento" />
+         
+		<LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="20dp"
+	        android:gravity="center_horizontal"    
+	        android:orientation="horizontal" >
+	    
+	    	<TextView
+		     	android:id="@+id/add_new_child_gender_title"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+				android:textSize="30sp"		    
+			    android:text="Sexo "
+			    />
+	    	
+	    	<RadioGroup 
+	    	    android:id="@+id/add_new_child_gender"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:layout_marginTop="8dp"
+			    android:orientation="horizontal">
+			    
+			    <RadioButton android:id="@+id/radio_male"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:textSize="30sp"
+			        android:text="Ñino"/>
+			    
+			    <RadioButton android:id="@+id/radio_female"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:textSize="30sp"
+			        android:text="Ñina"/>
+			    
+			</RadioGroup>
+	    
+		</LinearLayout>
+    
+
+     
+     <Spinner
+         android:id="@+id/add_new_child_type_of_birth"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="center"
+         android:layout_marginTop="20dp"/>
+     
+     <Spinner
+         android:id="@+id/add_new_child_num_children_in_same_pregnancy"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="center"
+         android:layout_marginTop="20dp" />
+  
+     <Spinner
+         android:id="@+id/add_new_child_prenatal_care"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="center"
+         android:layout_marginTop="20dp" />
+     
+     <EditText
+         android:id="@+id/add_new_child_months_gestated"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="center"
+         android:layout_marginTop="20dp"
+         android:textSize="30sp"
+         android:ellipsize="start"
+         android:inputType="numberDecimal"
+         android:hint="¿Cuántos Meses Duró el Embarazo?" />
+     
+     <EditText
+         android:id="@+id/add_new_child_birth_weight"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="center"
+         android:layout_marginTop="20dp"
+         android:textSize="30sp"
+         android:ellipsize="start"
+         android:inputType="numberDecimal"
+         android:hint="Peso al Nacer (libras)" />
+     
+     <EditText
+         android:id="@+id/add_new_child_birth_height"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="center"
+         android:layout_marginTop="20dp"
+         android:textSize="30sp"
+         android:ellipsize="start"
+         android:inputType="numberDecimal"
+         android:hint="Talla al Nacer (cm)" />
+     
+     <EditText
+         android:id="@+id/add_new_child_youngest_sibling_dob"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="center"
+         android:layout_marginTop="20dp"
+         android:textSize="30sp"
+         android:hint="Fecha de Nacimiento del Ultimo Nino"
+         />
+ 
+     <Button
+         android:id="@+id/add_new_child_button"
+         android:layout_width="150dp"
+         android:layout_height="50dp"
+         android:layout_marginTop="30dp"
+         android:gravity="center"
+         android:textSize="30sp"
+         android:text="Añadir el Ñino" />
+ 	</LinearLayout>
+</ScrollView>

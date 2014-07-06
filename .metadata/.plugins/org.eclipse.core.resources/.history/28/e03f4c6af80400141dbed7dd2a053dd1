@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" 
+    android:padding="20dp">
+    
+	<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+    
+		<TextView
+		    android:id="@+id/food_information_text"
+			android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="30sp"
+		    android:text="¿Cuantos Veces a la Semana ...?" />
+	
+		<EditText
+        	android:id="@+id/child_visit4_num_times_incaparina_past_week"
+        	android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+			android:layout_marginTop="30dp"
+			android:ellipsize="start"
+            android:inputType="number"
+            android:textSize="30sp" 
+        	android:hint="Toma Incaparina el Niño?" />
+	
+		<EditText
+		    android:id="@+id/child_visit4_num_times_vegetables_or_fruits_past_week"
+		    android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+			android:layout_marginTop="30dp"
+			android:ellipsize="start"
+            android:inputType="number"
+            android:textSize="30sp" 
+		    android:hint="Come Verduras y Fruta el Niño?" />
+		
+		<EditText
+        	android:id="@+id/child_visit4_num_times_herbs_past_week"
+        	android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+			android:layout_marginTop="30dp"
+			android:ellipsize="start"
+            android:inputType="number"
+            android:textSize="30sp" 
+        	android:hint="Come Hierbas el Niño?" />
+
+	</LinearLayout>
+</ScrollView>

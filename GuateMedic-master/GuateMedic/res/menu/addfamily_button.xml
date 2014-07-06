@@ -4,7 +4,7 @@
   
         <item
         android:id="@+id/action_addfamily"
-        android:title="@string/add_family_button_text"
+        android:title="AÑADIR UNA FAMILIA"
         yourapp:showAsAction="always"/>
     
 

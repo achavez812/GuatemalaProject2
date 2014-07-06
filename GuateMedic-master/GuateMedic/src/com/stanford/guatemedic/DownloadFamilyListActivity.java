@@ -27,7 +27,7 @@ public class DownloadFamilyListActivity extends ActionBarActivity {
 		getActionBar().setHomeButtonEnabled(true);
 
 		village_name = getIntent().getStringExtra("village_name");
-		setTitle("Families in " + village_name);
+		setTitle("Familias en " + village_name);
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, DownloadFamilyListFragment.newInstance(village_name)).commit();
@@ -155,7 +155,7 @@ public class DownloadFamilyListActivity extends ActionBarActivity {
 				if (BasicRecordsStore.get().getFamilies(village_name).size() == 0) {
 					checkbox.setVisibility(View.INVISIBLE);
 					TextView numChildrenTextView = (TextView)convertView.findViewById(R.id.list_item_subtitle);
-					numChildrenTextView.setText("0/0 Children");
+					numChildrenTextView.setText("0/0 Niños");
 				} else {
 					int count = 0;
 					for (BasicChild aChild : BasicRecordsStore.get().getChildren(family_id)) {
@@ -165,7 +165,7 @@ public class DownloadFamilyListActivity extends ActionBarActivity {
 					family.setCheckboxSelected(count != 0);
 					
 					TextView numChildrenTextView = (TextView)convertView.findViewById(R.id.list_item_subtitle);
-					numChildrenTextView.setText(count + "/" + BasicRecordsStore.get().getChildren(family_id).size() + " Children");
+					numChildrenTextView.setText(count + "/" + BasicRecordsStore.get().getChildren(family_id).size() + " Niños");
 					
 					
 					checkbox.setChecked(family.isCheckboxSelected());
@@ -179,12 +179,12 @@ public class DownloadFamilyListActivity extends ActionBarActivity {
 							theFamily.setCheckboxSelected(isChecked);
 							int numTotalChildren = BasicRecordsStore.get().getChildren(theFamily.getFamily_id()).size();
 							if (isChecked) {
-								((TextView)v.findViewById(R.id.list_item_subtitle)).setText(numTotalChildren + "/" + numTotalChildren + " Children");
+								((TextView)v.findViewById(R.id.list_item_subtitle)).setText(numTotalChildren + "/" + numTotalChildren + " Niños");
 								String villageName = village_name;
 								BasicVillage village = BasicRecordsStore.get().getVillage(villageName);
 								village.setCheckboxSelected(true);
 							} else
-								((TextView)v.findViewById(R.id.list_item_subtitle)).setText("0/" + numTotalChildren + " Children");
+								((TextView)v.findViewById(R.id.list_item_subtitle)).setText("0/" + numTotalChildren + " Niños");
 							
 							
 							String familyId = theFamily.getFamily_id();

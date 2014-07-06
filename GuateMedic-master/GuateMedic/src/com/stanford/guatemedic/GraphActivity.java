@@ -1,7 +1,5 @@
 package com.stanford.guatemedic;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -9,11 +7,11 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,6 +20,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.androidplot.ui.AnchorPosition;
+import com.androidplot.ui.DynamicTableModel;
+import com.androidplot.ui.SizeLayoutType;
+import com.androidplot.ui.SizeMetrics;
+import com.androidplot.ui.XLayoutStyle;
+import com.androidplot.ui.YLayoutStyle;
 import com.androidplot.xy.LineAndPointFormatter;
 import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYPlot;
@@ -74,6 +78,18 @@ public class GraphActivity extends ActionBarActivity {
         {4.340293, 4.91013, 5.967102, 6.921119, 7.781401, 8.556813, 9.255615, 9.885436, 10.45331, 10.96574, 11.42868, 11.84763, 12.22766, 12.5734, 12.88911, 13.17867, 13.44564, 13.69325, 13.92444, 14.14187, 14.34795, 14.54484, 14.73448, 14.91861, 15.09876, 15.2763, 15.45242, 15.62819, 15.8045, 15.98214, 16.16177, 16.34395, 16.52915, 16.71773, 16.91, 17.10619, 17.30646, 17.40816},
         {4.446488, 5.032625, 6.121929, 7.10625, 7.993878, 8.793444, 9.513307, 10.16135, 10.74492, 11.27084, 11.74538, 12.17436, 12.56308, 12.91645, 13.23893, 13.53462, 13.80724, 14.06019, 14.29655, 14.51909, 14.73034, 14.93256, 15.12777, 15.31777, 15.50418, 15.68841, 15.8717, 16.05514, 16.23967, 16.42609, 16.61508, 16.8072, 17.00291, 17.2026, 17.40654, 17.61495, 17.82797, 17.93625}
     };
+    
+    static Number[][] male_weight_data_pounds = {
+    	{5.192827, 6.171886, 7.968941, 9.573125, 11.007343, 12.291018, 13.44095, 14.471942, 15.397198, 16.228581, 16.976796, 17.65152, 18.261506, 18.814663, 19.318136, 19.778364, 20.201147, 20.591687, 20.954644, 21.294176, 21.613984, 21.917351, 22.207178, 22.485972, 22.756013, 23.019199, 23.277203, 23.531459, 23.783181, 24.033381, 24.282919, 24.532502, 24.78268, 25.033894, 25.286497, 25.540754, 25.79684, 25.925611},
+    	{5.570813, 6.535881, 8.322032, 9.927876, 11.37003, 12.66488, 13.827637, 14.872216, 15.811285, 16.656386, 17.418004, 18.105683, 18.728077, 19.293037, 19.807672, 20.2784, 20.711013, 21.110714, 21.482176, 21.829574, 22.156649, 22.466682, 22.762649, 23.047109, 23.322353, 23.590344, 23.852846, 24.111291, 24.367003, 24.621039, 24.874347, 25.127634, 25.38156, 25.63661, 25.893203, 26.151627, 26.412122, 26.543186},
+    	{6.115124, 7.075686, 8.863729, 10.481724, 11.941884, 13.257838, 14.44317, 15.510807, 16.472817, 17.340354, 18.123662, 18.832123, 19.474303, 20.057993, 20.590276, 21.077568, 21.525675, 21.939826, 22.324728, 22.684629, 23.023299, 23.344091, 23.650045, 23.943808, 24.227738, 24.503909, 24.774126, 25.039979, 25.302811, 25.563814, 25.823979, 26.084166, 26.34508, 26.607317, 26.871318, 27.13748, 27.406088, 27.541362},
+    	{6.945837, 7.930819, 9.763893, 11.427275, 12.933961, 14.296763, 15.52838, 16.641084, 17.646498, 18.555499, 19.378174, 20.123831, 20.801016, 21.417561, 21.980607, 22.496664, 22.971623, 23.410868, 23.819226, 24.201063, 24.56028, 24.90045, 25.224703, 25.535838, 25.836369, 26.128522, 26.414239, 26.695259, 26.973083, 27.24901, 27.524211, 27.799631, 28.076088, 28.354331, 28.634888, 28.918245, 29.204799, 29.349355},
+    	{7.782686, 8.825247, 10.757401, 12.506451, 14.090463, 15.524432, 16.822035, 17.996042, 19.058397, 20.020237, 20.891892, 21.68292, 22.402131, 23.057581, 23.656747, 24.206332, 24.712596, 25.181096, 25.616967, 26.024818, 26.408837, 26.772751, 27.119975, 27.453509, 27.776042, 28.089999, 28.397497, 28.700409, 29.000411, 29.298914, 29.597174, 29.896316, 30.197244, 30.500751, 30.807477, 31.117995, 31.432746, 31.591786},
+    	{8.551813, 9.672513, 11.744627, 13.614723, 15.304812, 16.832833, 18.214478, 19.463942, 20.594249, 21.61741, 22.544504, 23.38578, 24.150643, 24.84776, 25.485088, 26.069924, 26.608927, 27.108136, 27.573109, 28.008848, 28.419873, 28.810264, 29.183723, 29.543536, 29.892612, 30.233576, 30.568763, 30.900181, 31.229636, 31.558695, 31.888701, 32.220824, 32.556034, 32.895211, 33.238997, 33.587985, 33.942639, 34.122182},
+    	{9.198678, 10.401658, 12.628286, 14.636293, 16.447864, 18.082555, 19.557853, 20.889612, 22.092319, 23.179297, 24.162791, 25.054066, 25.863485, 26.600593, 27.274099, 27.892048, 28.461717, 28.989807, 29.482358, 29.944861, 30.38232, 30.799188, 31.199521, 31.586892, 31.964495, 32.335221, 32.701537, 33.065649, 33.429474, 33.794688, 34.162702, 34.534728, 34.911781, 35.29472, 35.684185, 36.080748, 36.484807, 36.689769},
+    	{9.56861, 10.824873, 13.155073, 15.258299, 17.154877, 18.86435, 20.404929, 21.793432, 23.045367, 24.17507, 25.195668, 26.119285, 26.957099, 27.719318, 28.415332, 29.053696, 29.642258, 30.188139, 30.69782, 31.177167, 31.631491, 32.065554, 32.483635, 32.889568, 33.286726, 33.678131, 34.066405, 34.453908, 34.842601, 35.234226, 35.630238, 36.031872, 36.440164, 36.855908, 37.279786, 37.712306, 38.153822, 38.37803},
+    	{9.802727, 11.094925, 13.496405, 15.666439, 17.623303, 19.386027, 20.973037, 22.401712, 23.688251, 24.847694, 25.893865, 26.839594, 27.696566, 28.475606, 29.186545, 29.838423, 30.439441, 30.997095, 31.518174, 32.008786, 32.474508, 32.920322, 33.350682, 33.769556, 34.180515, 34.586669, 34.99075, 35.395162, 35.801976, 36.212958, 36.629605, 37.053153, 37.484615, 37.924852, 38.374458, 38.833919, 39.303543, 39.542257}
+    };
 	
     //Centimeters
     static Number[][] female_height_data = {
@@ -100,9 +116,22 @@ public class GraphActivity extends ActionBarActivity {
         {4.152637, 4.628836, 5.519169, 6.332837, 7.076723, 7.757234, 8.38033, 8.951544, 9.476009, 9.95848, 10.40335, 10.8147, 11.19625, 11.55145, 11.88348, 12.19522, 12.48934, 12.76825, 13.03415, 13.28904, 13.53473, 13.77284, 14.00484, 14.23205, 14.45561, 14.67659, 14.89587, 15.11428, 15.33249, 15.55113, 15.7707, 15.99164, 16.21432, 16.43904, 16.66605, 16.89553, 17.12762, 17.24469},
         {4.254922, 4.743582, 5.657379, 6.492574, 7.256166, 7.95473, 8.594413, 9.180938, 9.719621, 10.21539, 10.6728, 11.09607, 11.48908, 11.85539, 12.19829, 12.52078, 12.82561, 13.11527, 13.39204, 13.65799, 13.91497, 14.16467, 14.40858, 14.64807, 14.88432, 15.11839, 15.35122, 15.58363, 15.81632, 16.0499, 16.28491, 16.52176, 16.76085, 17.00245, 17.24681, 17.49412, 17.7445, 17.87089}    
     };
+    
+    static Number[][] female_weight_data_pounds = {
+    	{5.322151, 6.077899, 7.500695, 8.813563, 10.025161, 11.143237, 12.174904, 13.126788, 14.005092, 14.815635, 15.563885, 16.254983, 16.893759, 17.484749, 18.032208, 18.540122, 19.012221, 19.452002, 19.862714, 20.247399, 20.608881, 20.949785, 21.272543, 21.579407, 21.872456, 22.153607, 22.424596, 22.687076, 22.942479, 23.192172, 23.437367, 23.679124, 23.918477, 24.156287, 24.393348, 24.630342, 24.867888, 24.987025},
+    	{5.617111, 6.381087, 7.821061, 9.150499, 10.377323, 11.509088, 12.552935, 13.515611, 14.403474, 15.222512, 15.978359, 16.676315, 17.321357, 17.918153, 18.471076, 18.984221, 19.461411, 19.906213, 20.321959, 20.711736, 21.078423, 21.424678, 21.752967, 22.065555, 22.364565, 22.65189, 22.929295, 23.198433, 23.460714, 23.717506, 23.970021, 24.219317, 24.466408, 24.712111, 24.957262, 25.20248, 25.448403, 25.571795},
+    	{6.056526, 6.838156, 8.311688, 9.671673, 10.925834, 12.081858, 13.147154, 14.128785, 15.033436, 15.867419, 16.636666, 17.346754, 18.002916, 18.610043, 19.17271, 19.695191, 20.181462, 20.63523, 21.059933, 21.458761, 21.834667, 22.190379, 22.528411, 22.851076, 23.160491, 23.458619, 23.747224, 24.027913, 24.302144, 24.571259, 24.836472, 25.098798, 25.359249, 25.618642, 25.877727, 26.137164, 26.397528, 26.528216},
+    	{6.756801, 7.578595, 9.124826, 10.548614, 11.858854, 13.064213, 14.172994, 15.193074, 16.131881, 16.996399, 17.793177, 18.52834, 19.207606, 19.836312, 20.419413, 20.961524, 21.466916, 21.939551, 22.383083, 22.800877, 23.196074, 23.571495, 23.929743, 24.273241, 24.604152, 24.92448, 25.23599, 25.540313, 25.838948, 26.133152, 26.424159, 26.712962, 27.000508, 27.287591, 27.574938, 27.863168, 28.152764, 28.298246},
+    	{7.493845, 8.37203, 10.019415, 11.531345, 12.91887, 14.192307, 15.361322, 16.434971, 17.42171, 18.329437, 19.165509, 19.936775, 20.649593, 21.30986, 21.923041, 22.494173, 23.027951, 23.528616, 24.000135, 24.446104, 24.869872, 25.274416, 25.662492, 26.036635, 26.399071, 26.751851, 27.096783, 27.435564, 27.769627, 28.100295, 28.428692, 28.755854, 29.082664, 29.409871, 29.738136, 30.068032, 30.400045, 30.566933},
+    	{8.195642, 9.139377, 10.90564, 12.522311, 14.002543, 15.358399, 16.601035, 17.740809, 18.78733, 19.749521, 20.635653, 21.453388, 22.209824, 22.911482, 23.564396, 24.174144, 24.745819, 25.284072, 25.793203, 26.27709, 26.739307, 27.183071, 27.61127, 28.026573, 28.431315, 28.827636, 29.217409, 29.602333, 29.983861, 30.363316, 30.741824, 31.120376, 31.49981, 31.880853, 32.264123, 32.650082, 33.039172, 33.234984},
+    	{8.802024, 9.810748, 11.696796, 13.420813, 14.997387, 16.439965, 17.760987, 18.971985, 20.083637, 21.10584, 22.047742, 22.917809, 23.723833, 24.473022, 25.171946, 25.826691, 26.44281, 27.025354, 27.578973, 28.107856, 28.615796, 29.106232, 29.582293, 30.046736, 30.502052, 30.950423, 31.393879, 31.834071, 32.272544, 32.710598, 33.14938, 33.589859, 34.032829, 34.478996, 34.928911, 35.383014, 35.841659, 36.072768},
+    	{9.154904, 10.204732, 12.16756, 13.961372, 15.601344, 17.101598, 18.475276, 19.734574, 20.890809, 21.954465, 22.935225, 23.842088, 24.683253, 25.466327, 26.19832, 26.885582, 27.533999, 28.148884, 28.735087, 29.297018, 29.838666, 30.363603, 30.87507, 31.375977, 31.868838, 32.35601, 32.839435, 33.320942, 33.802007, 34.284021, 34.768085, 35.25517, 35.74609, 36.241508, 36.741974, 37.247885, 37.759551, 38.017644},
+    	{9.380401, 10.457701, 12.472258, 14.313529, 15.996944, 17.536998, 18.947243, 20.240296, 21.427876, 22.520849, 23.529255, 24.462396, 25.328826, 26.136393, 26.89235, 27.603312, 28.27534, 28.913924, 29.524091, 30.110405, 30.676943, 31.227431, 31.765155, 32.293135, 32.813972, 33.330003, 33.8433, 34.355671, 34.868659, 35.38361, 35.901713, 36.423872, 36.95097, 37.483601, 38.022317, 38.567537, 39.119525, 39.398164}
+    };
 	
     private static String child_id;
-    private static Number[] child_age_in_weeks;
+    private static Number[] child_age_in_weeks_weight;
+    private static Number[] child_age_in_weeks_height;
     private static Number[] child_weight;
     private static Number[] child_height;
 
@@ -112,26 +141,82 @@ public class GraphActivity extends ActionBarActivity {
 		getActionBar().setHomeButtonEnabled(true);
 		child_id = getIntent().getStringExtra("child_id");
 		DetailedChild child = DetailedRecordsStore.get(getApplication()).getChild(child_id);
-		ArrayList<DetailedChildVisit> child_visits = child.getChild_visits();
-		processVisits(child_visits, child.getDob());
+		processVisits(child);
 		setTitle(child.getName());
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction().add(R.id.left_content, GraphFragmentLeft.newInstance(child_id)).commit();
-			getSupportFragmentManager().beginTransaction().add(R.id.right_content, GraphFragmentRight.newInstance(child_id)).commit();			Log.i("WTF", "ADDED LEFT");
+			getSupportFragmentManager().beginTransaction().add(R.id.right_content, GraphFragmentRight.newInstance(child_id)).commit();
 
 		}
 	}
 	
-	private void processVisits(ArrayList<DetailedChildVisit> visits, String date_of_birth) {
+	private void processVisits(DetailedChild child) {
+		ArrayList<DetailedChildVisit> visits = child.getChild_visits();
+		String date_of_birth = child.getDob();
+		int birth_weight_plus = 0;
+		int birth_height_plus = 0;
+		if (date_of_birth != null && !date_of_birth.isEmpty()) {
+			double birth_weight = child.getBirth_weight();
+			double birth_height = child.getBirth_height();
+			
+			if (birth_weight != 0) {
+				child_age_in_weeks_weight = new Number[visits.size() + 1];
+				child_weight = new Number[visits.size() + 1];
+				child_age_in_weeks_weight[0] = 0;
+				child_weight[0] = birth_weight;
+				birth_weight_plus = 1;
+			} else {
+				child_age_in_weeks_weight = new Number[visits.size()];
+				child_weight = new Number[visits.size()];
+			}
+			
+			if (birth_height != 0) {
+				child_age_in_weeks_height = new Number[visits.size() + 1];
+				child_height = new Number[visits.size() + 1];
+				child_age_in_weeks_height[0] = 0;
+				child_height[0] = birth_height;
+				birth_height_plus = 1;
+			} else {
+				child_height = new Number[visits.size()];
+				child_age_in_weeks_height = new Number[visits.size()];
+			}
+		} else {
+			double birth_weight = child.getBirth_weight();
+			double birth_height = child.getBirth_height();
+			
+			if (birth_weight != 0) {
+				child_age_in_weeks_weight = new Number[1];
+				child_weight = new Number[1];
+				child_age_in_weeks_weight[0] = 0;
+				child_weight[0] = Utilities.round(birth_weight, 2);
+				birth_weight_plus = 1;
+			} else {
+				child_age_in_weeks_weight = new Number[0];
+				child_weight = new Number[0];
+			}
+			
+			if (birth_height != 0) {
+				child_age_in_weeks_height = new Number[1];
+				child_height = new Number[1];
+				child_age_in_weeks_height[0] = 0;
+				child_height[0] = Utilities.round(birth_height, 2);
+				birth_height_plus = 1;
+			} else {
+				child_height = new Number[0];
+				child_age_in_weeks_height = new Number[0];
+			}
+		}
+		
 		for (int i = 0; i < visits.size(); i++) {
 			DetailedChildVisit visit = visits.get(i);
 			String visit_date = visit.getVisit_date();
 			double weight = visit.getWeight_in_pounds();
 			double height = visit.getHeight_in_centimeters();
-			double age_in_weeks = Utilities.timeBetween(Utilities.formatDate(date_of_birth), Utilities.formatDate(visit_date));
-			child_age_in_weeks[i] = age_in_weeks;
-			child_weight[i] = weight; //convert here
-			child_height[i] = height; //convert here
+			double age_in_weeks = Utilities.convertMonthsToWeeks(Utilities.timeBetween(Utilities.formatDate(date_of_birth), Utilities.formatDate(visit_date)));
+			child_age_in_weeks_weight[i + birth_weight_plus] = Utilities.round(age_in_weeks, 1);
+			child_age_in_weeks_height[i + birth_height_plus] = Utilities.round(age_in_weeks, 1);
+			child_weight[i + birth_weight_plus] = Utilities.round(weight, 2); //convert here
+			child_height[i + birth_height_plus] = Utilities.round(height, 2); //convert here
 		}
 	}
 	
@@ -139,6 +224,13 @@ public class GraphActivity extends ActionBarActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.graph_menu_bar, menu);
 		return true;
+	}
+	
+	@Override
+	public void onBackPressed() {
+		Intent i = new Intent(getApplication(), ViewFamilyActivity.class);
+		i.putExtra("family_id", DetailedRecordsStore.get(getApplication()).getChild(child_id).getFamily_id());
+		startActivity(i);
 	}
 
 	@Override
@@ -181,17 +273,16 @@ public class GraphActivity extends ActionBarActivity {
 	public static double calculate_weight_z_score(double weight, double age_weeks, int sex) {
 		double[] x_value ={0, 0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5, 10.5, 11.5, 12.5, 13.5, 14.5, 15.5, 16.5, 17.5, 18.5, 19.5, 20.5, 21.5, 22.5, 23.5, 24.5, 25.5, 26.5, 27.5, 28.5, 29.5, 30.5, 31.5, 32.5, 33.5, 34.5, 35.5, 36};
 		
-		//male weight in kilograms
-		double[] male_weight_mean_data = {3.530203, 4.003106, 4.879525, 5.672889, 6.391392, 7.041836, 7.630425, 8.162951, 8.644832, 9.08112, 9.4765, 9.835308, 10.16154, 10.45885, 10.73063, 10.97992, 11.20956, 11.42207, 11.61978, 11.80478, 11.97897, 12.14404, 12.30154, 12.45283, 12.59913, 12.74154, 12.88102, 13.01842, 13.1545, 13.2899, 13.42519, 13.56088, 13.69738, 13.83505, 13.97418, 14.11503, 14.2578, 14.32994};
-		double[] male_weight_standard_deviations = {0.5483388691636308, 0.5899617828596111, 0.6664550675377855, 0.7353077161040221, 0.7977077843674071, 0.8544459425408992, 0.906099060498862, 0.9531362941802027, 0.9959705728155609, 1.0349856374072548, 1.0705382544191666, 1.102975035569814, 1.132623337338286, 1.1597999014779625, 1.1848050385035822, 1.207929214780667, 1.2294452237365494, 1.2496087374808416, 1.2686666623451814, 1.2868445072622676, 1.3043597199631523, 1.3214059701285943, 1.3381679141488099, 1.3548155352308067, 1.371495406210474, 1.3883500383546428, 1.4055036216423076, 1.423066888330417, 1.4411391271542766, 1.459810211505902, 1.4791502672511687, 1.4992276392320234, 1.5200958441225314, 1.5418009836815039, 1.5643775415899328, 1.5878568414316763, 1.612257112638661, 1.624809414181855};
-		
-		//female weight in kilograms
-		double[] female_weight_mean_data = {3.399186, 3.797528, 4.544777, 5.230584, 5.859961, 6.437588, 6.96785, 7.454854, 7.902436, 8.314178, 8.693418, 9.043262, 9.366594, 9.666089, 9.944226, 10.20329, 10.44541, 10.67251, 10.88639, 11.08868, 11.2809, 11.4644, 11.64043, 11.81014, 11.97454, 12.13456, 12.29102, 12.44469, 12.59622, 12.74621, 12.89517, 13.04357, 13.19181, 13.34023, 13.48913, 13.63877, 13.78937, 13.86507};
-		double[] female_weight_standard_deviations = {0.4868317793152519, 0.526686945129281, 0.5993150515466676, 0.6635877636928744, 0.7206212275044657, 0.7713859944899943, 0.8167455265127599, 0.8574748220662556, 0.8942713470732092, 0.927763771920194, 0.9585169772679141, 0.9870407033905422, 1.0137879351111063, 1.0391619172023916, 1.0635229179410999, 1.087189035727074, 1.1104407785020416, 1.1335156616703101, 1.1566276426873197, 1.1799557593671335, 1.2036494429981581, 1.2278382142342168, 1.2526258947078388, 1.2780977914501177, 1.3043145957622737, 1.3313258529395857, 1.359168725618415, 1.3878615264596312, 1.4174100518009947, 1.447818009178694, 1.4790687342629933, 1.5111525841589346, 1.5440390371811814, 1.577704356900138, 1.6121132997563938, 1.647227552286689, 1.6830116164721458, 1.7011412416713223};
+		//male weight in pounds
+    	double[] male_weight_mean_data = {7.782686, 8.825247, 10.757401, 12.506451, 14.090463, 15.524432, 16.822035, 17.996042, 19.058397, 20.020237, 20.891892, 21.68292, 22.402131, 23.057581, 23.656747, 24.206332, 24.712596, 25.181096, 25.616967, 26.024818, 26.408837, 26.772751, 27.119975, 27.453509, 27.776042, 28.089999, 28.397497, 28.700409, 29.000411, 29.298914, 29.597174, 29.896316, 30.197244, 30.500751, 30.807477, 31.117995, 31.432746, 31.591786};
+    	double[] male_weight_standard_deviations = {1.20887, 1.30063, 1.46927, 1.62106, 1.75863, 1.88371, 1.99759, 2.10128, 2.19572, 2.28173, 2.36011, 2.43162, 2.49698, 2.55689, 2.61202, 2.663, 2.71044, 2.75489, 2.7969, 2.83698, 2.87559, 2.91317, 2.95012, 2.98683, 3.0236, 3.06076, 3.09857, 3.13729, 3.17714, 3.2183, 3.26093, 3.3052, 3.3512, 3.39905, 3.44883, 3.50059, 3.55438, 3.58205};		
+		//female weight in pounds
+    	double[] female_weight_mean_data = {7.493845, 8.37203, 10.019415, 11.531345, 12.91887, 14.192307, 15.361322, 16.434971, 17.42171, 18.329437, 19.165509, 19.936775, 20.649593, 21.30986, 21.923041, 22.494173, 23.027951, 23.528616, 24.000135, 24.446104, 24.869872, 25.274416, 25.662492, 26.036635, 26.399071, 26.751851, 27.096783, 27.435564, 27.769627, 28.100295, 28.428692, 28.755854, 29.082664, 29.409871, 29.738136, 30.068032, 30.400045, 30.566933};
+		double[] female_weight_standard_deviations = {1.07327, 1.16113, 1.32125, 1.46295, 1.58868, 1.7006, 1.8006, 1.89039, 1.97151, 2.04535, 2.11315, 2.17603, 2.235, 2.29094, 2.34464, 2.39682, 2.44808, 2.49895, 2.5499, 2.60133, 2.65357, 2.70689, 2.76154, 2.81769, 2.87549, 2.93504, 2.99642, 3.05968, 3.12482, 3.19186, 3.26075, 3.33149, 3.40399, 3.47821, 3.55407, 3.63148, 3.71037, 3.75034};
 		
 		double[] standard_deviations;
 		double[] mean_data;
-		if (sex == 1) {
+		if (sex <= 1) { //Defaults to girl
 			standard_deviations = male_weight_standard_deviations;
 			mean_data = male_weight_mean_data;
 		} else if (sex == 2) {
@@ -247,7 +338,7 @@ public class GraphActivity extends ActionBarActivity {
 		
 		double[] standard_deviations;
 		double[] mean_data;
-		if (sex == 1) {
+		if (sex <= 1) { //Defaults to girl
 			standard_deviations = male_height_standard_deviations;
 			mean_data = male_height_mean_data;
 		} else if (sex == 2) {
@@ -334,31 +425,60 @@ public class GraphActivity extends ActionBarActivity {
 			
 			TextView sex_field = (TextView)rootView.findViewById(R.id.graph_child_sex);
 			if (gender == 1) {
-				sex_field.setText("Male");
+				sex_field.setText("Ñino");
 			} else if (gender == 2) {
-				sex_field.setText("Female");
+				sex_field.setText("Ñino");
 			} else if (gender == 0) {
-				sex_field.setText("No sex");
+				sex_field.setText("No Sexo");
 			}
 			
-			String formatted_dob = Utilities.formatDate(dob);
-			TextView dob_field = (TextView)rootView.findViewById(R.id.graph_child_dob);
-			dob_field.setText(formatted_dob);
+			if (dob != null && !dob.isEmpty()) {
+				String formatted_dob = Utilities.formatDate(dob);
+				TextView dob_field = (TextView)rootView.findViewById(R.id.graph_child_dob);
+				dob_field.setText(formatted_dob);
+			} else {
+				TextView dob_field = (TextView)rootView.findViewById(R.id.graph_child_dob);
+				dob_field.setText("");
+			}
 			
 			DetailedChildVisit dcv = null;
 			if (!child_visits.isEmpty()) 
 				dcv = child_visits.get(child_visits.size() - 1);
 			
 			TextView visit_header_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_header);
-			if (dcv == null) 
-				visit_header_field.setText("No Visits Logged");
-			else {
+			if (dcv == null) { 
+				if (child_age_in_weeks_weight.length > 0 || child_age_in_weeks_height.length > 0) {
+					visit_header_field.setText("Visita de Nacimiento (" + Utilities.formatDate(child.getDate_created()) + ")");
+					TextView age_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_age);
+					age_field.setText("Edad: " + 0 + " semanas");
+					if (child_age_in_weeks_weight.length > 0) {
+						double weight = child_weight[0].doubleValue();
+						TextView weight_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_weight);
+						weight_field.setText("Peso: " + weight + " libras");
+						double weight_z_score = Utilities.round(calculate_weight_z_score(weight, 0, gender), 2);
+						TextView weight_z_score_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_weight_z_score);
+						weight_z_score_field.setText("Peso z-score: " + weight_z_score);
+						
+					} 
+					if (child_age_in_weeks_height.length > 0) {
+						double height = child_height[0].doubleValue();
+						TextView height_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_height);
+						height_field.setText("Talla: " + height + " cm");
+						double height_z_score = Utilities.round(calculate_height_z_score(height, 0, gender), 2);
+						TextView height_z_score_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_height_z_score);
+						height_z_score_field.setText("Talla z-score: " + height_z_score);
+					}
+					
+				} else {
+					visit_header_field.setText("No Hay Visitos");
+				}
+			} else {
 				String visit_date = dcv.getVisit_date();
 				String formatted_visit_date = Utilities.formatDate(visit_date);
-				double age = Utilities.timeBetween(formatted_dob, formatted_visit_date); //Weeks?
+				double age = child_age_in_weeks_weight[child_age_in_weeks_weight.length - 1].doubleValue(); //Weeks?
 				
-				double weight = Utilities.round(dcv.getWeight_in_pounds(), 2);
-				double height = Utilities.round(dcv.getHeight_in_centimeters(), 2);
+				double weight = child_weight[child_weight.length -1].doubleValue();
+				double height = child_height[child_height.length - 1].doubleValue();
 				double weight_z_score = Utilities.round(calculate_weight_z_score(weight, age, gender), 2);
 				double height_z_score = Utilities.round(calculate_height_z_score(height, age, gender), 2);
 				
@@ -366,19 +486,19 @@ public class GraphActivity extends ActionBarActivity {
 				visit_header_field.setText("Child Visit (" + formatted_visit_date + ")"); //Format visit date
 				
 				TextView age_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_age);
-				age_field.setText("Age: " + age);
+				age_field.setText("Edad: " + age + " semanas");
 				
 				TextView weight_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_weight);
-				weight_field.setText("Weight: " + weight);
+				weight_field.setText("Peso: " + weight + " libras");
 				
 				TextView height_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_height);
-				height_field.setText("Height: " + height);
+				height_field.setText("Talla: " + height + " cm");
 							
 				TextView weight_z_score_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_weight_z_score);
-				weight_z_score_field.setText("Weight z-score: " + weight_z_score);
+				weight_z_score_field.setText("Peso z-score: " + weight_z_score);
 				
 				TextView height_z_score_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_height_z_score);
-				height_z_score_field.setText("Height z-score: " + height_z_score);
+				height_z_score_field.setText("Talla z-score: " + height_z_score);
 
 				TextView other_score_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_other_score);
 				
@@ -400,6 +520,7 @@ public class GraphActivity extends ActionBarActivity {
 		
 		int selected;
 		int sex;
+		double age_in_weeks;
 		
 		public GraphFragmentRight() {
 			selected = 1;
@@ -421,6 +542,12 @@ public class GraphActivity extends ActionBarActivity {
 			Bundle args = getArguments();
 			String child_id = args.getString("child_id");
 			DetailedChild child = DetailedRecordsStore.get(getActivity()).getChild(child_id);
+			String dob = child.getDob();
+			if (dob != null && !dob.isEmpty()) {
+				age_in_weeks = Utilities.getAge(Utilities.formatDate(dob)) / 52.143;
+			} else {
+				age_in_weeks = -1;
+			}
 			sex = child.getGender();
 		}
 
@@ -428,6 +555,32 @@ public class GraphActivity extends ActionBarActivity {
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 			final View rootView = inflater.inflate(R.layout.fragment_graph_right, container,false);
 			final XYPlot plot = (XYPlot) rootView.findViewById(R.id.mySimpleXYPlot);
+			 // use a 2x2 grid:
+	        plot.getLegendWidget().setTableModel(new DynamicTableModel(3, 3));
+	 
+	        // adjust the legend size so there is enough room
+	        // to draw the new legend grid:
+	 
+	        // add a semi-transparent black background to the legend
+	        // so it's easier to see overlaid on top of our plot:
+	        Paint bgPaint = new Paint();
+	        bgPaint.setColor(Color.BLACK);
+	        bgPaint.setStyle(Paint.Style.FILL);
+	        bgPaint.setAlpha(140);
+	        plot.getLegendWidget().setBackgroundPaint(bgPaint);
+	 
+	        // adjust the padding of the legend widget to look a little nicer:
+	        plot.getLegendWidget().setPadding(10, 5, 5, 5);       
+	 
+
+	        plot.getLegendWidget().setSize(new SizeMetrics(90, SizeLayoutType.ABSOLUTE, 300, SizeLayoutType.ABSOLUTE));
+
+	       //plot.disableAllMarkup();
+	        plot.getLegendWidget().position(25,
+	                XLayoutStyle.ABSOLUTE_FROM_RIGHT,
+	                70,
+	                YLayoutStyle.ABSOLUTE_FROM_BOTTOM,
+	                AnchorPosition.RIGHT_BOTTOM);
 			
 			final TextView weight_view = (TextView)rootView.findViewById(R.id.tab_weight);
 			final TextView height_view = (TextView)rootView.findViewById(R.id.tab_height);
@@ -442,29 +595,57 @@ public class GraphActivity extends ActionBarActivity {
 					height_view.setBackgroundResource(color.gray_dark);
 					other_view.setBackgroundResource(color.gray_dark);
 
-					plot.setRangeLabel("Weight (pounds)");
+					plot.setRangeLabel("Peso (libras)");
 					
 					Number[][] data;
 					Number[] x_values = x_weight_values_week;
 					if (sex == 1) { //MALE
-						plot.setTitle("Male Weight vs. Age");
-						data = male_weight_data;
+						plot.setTitle("Niño Peso vs. Edad");
+						data = male_weight_data_pounds;
 					} else { //Female
-						plot.setTitle("Female Weight vs. Age");
-						data = female_weight_data;
+						plot.setTitle("Niña Peso vs. Edad");
+						data = female_weight_data_pounds;
 					}
 					 
-			        // Create a couple arrays of y-values to plot:
-			        for (int i = 0; i < data_indices.length; i++) {
-			        	Number[] row = data[data_indices[i]];
-			        	XYSeries series = new SimpleXYSeries(Arrays.asList(x_values), Arrays.asList(row), "Name");
-			        	LineAndPointFormatter seriesFormat = new LineAndPointFormatter(Color.RED, Color.GREEN, null, null);
-						 
-				        // add a new series' to the xyplot:
+					if (age_in_weeks == -1 || age_in_weeks >= 100) {
+				        for (int i = 0; i < data_indices.length; i++) {
+				        	Number[] row = data[data_indices[i]];
+				        	XYSeries series = new SimpleXYSeries(Arrays.asList(x_values), Arrays.asList(row), "");
+				        	LineAndPointFormatter seriesFormat = new LineAndPointFormatter(Color.RED, Color.GREEN, null, null);
+							 
+					        // add a new series' to the xyplot:
+					        plot.addSeries(series, seriesFormat);
+				        }
+					} else {
+						Number[] new_x;
+						if (age_in_weeks < 50) {
+							new_x = Utilities.truncateArray(x_values, 10);
+							for (int i = 0; i < data_indices.length; i++) {
+					        	Number[] row = Utilities.truncateArray(data[data_indices[i]], 10);
+					        	XYSeries series = new SimpleXYSeries(Arrays.asList(new_x), Arrays.asList(row), "");
+					        	LineAndPointFormatter seriesFormat = new LineAndPointFormatter(Color.RED, Color.GREEN, null, null);
+								 
+						        // add a new series' to the xyplot:
+						        plot.addSeries(series, seriesFormat);
+					        }
+						} else if (age_in_weeks < 100) {
+							new_x = Utilities.truncateArray(x_values, 20);
+							for (int i = 0; i < data_indices.length; i++) {
+					        	Number[] row = Utilities.truncateArray(data[data_indices[i]], 20);
+					        	XYSeries series = new SimpleXYSeries(Arrays.asList(new_x), Arrays.asList(row), "");
+					        	LineAndPointFormatter seriesFormat = new LineAndPointFormatter(Color.RED, Color.GREEN, null, null);
+								 
+						        // add a new series' to the xyplot:
+						        plot.addSeries(series, seriesFormat);
+					        }
+						}
+					}
+			        if (child_age_in_weeks_weight.length > 0) {
+				        XYSeries series = new SimpleXYSeries(Arrays.asList(child_age_in_weeks_weight), Arrays.asList(child_weight), "Niño");
+				        LineAndPointFormatter seriesFormat = new LineAndPointFormatter(Color.BLUE, Color.YELLOW, null, null);
 				        plot.addSeries(series, seriesFormat);
 			        }
-			        
-			        
+			    
 			        
 			        
 			        // reduce the number of range labels
@@ -483,28 +664,59 @@ public class GraphActivity extends ActionBarActivity {
 					weight_view.setBackgroundResource(color.gray_dark);
 					other_view.setBackgroundResource(color.gray_dark);
 
-					plot.setRangeLabel("Height (centimeters)");
+					plot.setRangeLabel("Talla (cm)");
 					
 
 					Number[][] data;
 					Number[] x_values = x_height_values_week;
 					if (sex == 1) { //MALE
-						plot.setTitle("Male Height vs. Age");
+						plot.setTitle("Niño Talla vs. Edad");
 						data = male_height_data;
 					} else { //Female
-						plot.setTitle("Female height vs. Age");
+						plot.setTitle("Niña Talla vs. Edad");
 						data = female_height_data;
 					}
-					 
-			        // Create a couple arrays of y-values to plot:
-					for (int i = 0; i < data_indices.length; i++) {
-			        	Number[] row = data[data_indices[i]];
-			        	XYSeries series = new SimpleXYSeries(Arrays.asList(x_values), Arrays.asList(row), "Name");
-			        	LineAndPointFormatter seriesFormat = new LineAndPointFormatter(Color.RED, Color.GREEN, null, null);
-						 
-				        // add a new series' to the xyplot:
+					if (age_in_weeks == -1 || age_in_weeks >= 100) {
+				        // Create a couple arrays of y-values to plot:
+						for (int i = 0; i < data_indices.length; i++) {
+				        	Number[] row = data[data_indices[i]];
+				        	XYSeries series = new SimpleXYSeries(Arrays.asList(x_values), Arrays.asList(row), "");
+				        	LineAndPointFormatter seriesFormat = new LineAndPointFormatter(Color.RED, Color.GREEN, null, null);
+							 
+					        // add a new series' to the xyplot:
+					        plot.addSeries(series, seriesFormat);
+				        }
+					} else {
+						Number[] new_x;
+						if (age_in_weeks < 50) {
+							new_x = Utilities.truncateArray(x_values, 10);
+							for (int i = 0; i < data_indices.length; i++) {
+					        	Number[] row = Utilities.truncateArray(data[data_indices[i]], 10);
+					        	XYSeries series = new SimpleXYSeries(Arrays.asList(new_x), Arrays.asList(row), "");
+					        	LineAndPointFormatter seriesFormat = new LineAndPointFormatter(Color.RED, Color.GREEN, null, null);
+								 
+						        // add a new series' to the xyplot:
+						        plot.addSeries(series, seriesFormat);
+					        }
+						} else if (age_in_weeks < 100) {
+							new_x = Utilities.truncateArray(x_values, 20);
+							for (int i = 0; i < data_indices.length; i++) {
+					        	Number[] row = Utilities.truncateArray(data[data_indices[i]], 20);
+					        	XYSeries series = new SimpleXYSeries(Arrays.asList(new_x), Arrays.asList(row), "");
+					        	LineAndPointFormatter seriesFormat = new LineAndPointFormatter(Color.RED, Color.GREEN, null, null);
+								 
+						        // add a new series' to the xyplot:
+						        plot.addSeries(series, seriesFormat);
+					        }
+						}
+							
+					}
+					if (child_age_in_weeks_height.length > 0) {
+						XYSeries series = new SimpleXYSeries(Arrays.asList(child_age_in_weeks_height), Arrays.asList(child_height), "Niño");
+				        LineAndPointFormatter seriesFormat = new LineAndPointFormatter(Color.BLUE, Color.YELLOW, null, null);
 				        plot.addSeries(series, seriesFormat);
-			        }
+					}
+					
 			     // reduce the number of range labels
 			        plot.setTicksPerRangeLabel(3);
 			        plot.getGraphWidget().setDomainLabelOrientation(-45);

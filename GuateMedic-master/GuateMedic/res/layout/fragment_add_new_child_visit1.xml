@@ -15,7 +15,7 @@
         android:ellipsize="start"
         android:inputType="numberDecimal"
         android:textSize="30sp"
-        android:hint="Weight"
+        android:hint="Peso (libras)"
         />
     
 
@@ -28,7 +28,7 @@
         android:ellipsize="start"
         android:inputType="numberDecimal"
         android:textSize="30sp"
-        android:hint="Height"
+        android:hint="Talla (cm)"
         />
     
     

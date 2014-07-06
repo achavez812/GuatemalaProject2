@@ -3,6 +3,7 @@ package com.stanford.guatemedic;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -35,7 +36,7 @@ public class AddNewChildVisitActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_new_child_visit);
-
+		getActionBar().setHomeButtonEnabled(true);
 		Spinner spinner = (Spinner) findViewById(R.id.child_visit_spinner);
 
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.child_visit_array, android.R.layout.simple_spinner_dropdown_item);
@@ -55,15 +56,15 @@ public class AddNewChildVisitActivity extends ActionBarActivity {
 				// An item was selected. You can retrieve the selected item
 				// using
 				String item = (String) parent.getItemAtPosition(pos);
-				if (item.trim().equals("Category 1")) {
+				if (item.trim().equals("Categoría 1")) {
 					getSupportFragmentManager().beginTransaction().replace(R.id.container, frag1_childvisit).commit();
-				} else if (item.trim().equals("Category 2")) {
+				} else if (item.trim().equals("Categoría 2")) {
 					getSupportFragmentManager().beginTransaction().replace(R.id.container, frag2_childvisit).commit();
-				} else if (item.trim().equals("Category 3")) {
+				} else if (item.trim().equals("Categoría 3")) {
 					getSupportFragmentManager().beginTransaction().replace(R.id.container, frag3_childvisit).commit();
-				} else if (item.trim().equals("Category 4")) {
+				} else if (item.trim().equals("Categoría 4")) {
 					getSupportFragmentManager().beginTransaction().replace(R.id.container, frag4_childvisit).commit();
-				} else if (item.trim().equals("Category 5")){
+				} else if (item.trim().equals("Categoría 5")){
 					getSupportFragmentManager().beginTransaction().replace(R.id.container, frag5_childvisit).commit();
 				} else {
 					Toast.makeText(getApplication(), "Error", Toast.LENGTH_LONG).show();
@@ -76,6 +77,13 @@ public class AddNewChildVisitActivity extends ActionBarActivity {
 			}
 		});
 	}
+	
+	@Override
+	public void onBackPressed() {
+		Intent i = new Intent(getApplication(), GraphActivity.class);
+		i.putExtra("child_id", child_id);
+		startActivity(i);
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -86,10 +94,28 @@ public class AddNewChildVisitActivity extends ActionBarActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
+		if (id == android.R.id.home) {
+			Intent i = new Intent(getApplication(), MainActivity.class);
+			startActivity(i);
+			return true;
+		}
 		if (id == R.id.action_addchildvisit_submit) {
 			try {
 				JSONObject obj = new JSONObject();
 				obj.put("child_id", child_id);
+				if (dcv.getWeight_in_pounds() == 0) {
+					getSupportFragmentManager().beginTransaction().replace(R.id.container, frag1_childvisit).commit();
+					Toast.makeText(getApplication(), "Necesitas Incluir Peso", Toast.LENGTH_LONG).show();
+					return false;
+				}
+				if (dcv.getHeight_in_centimeters() == 0) {
+					getSupportFragmentManager().beginTransaction().replace(R.id.container, frag1_childvisit).commit();
+					Toast.makeText(getApplication(), "Necesitas Incluir Talla", Toast.LENGTH_LONG).show();
+					return false;
+				}
+				obj.put("weight_in_pounds", dcv.getWeight_in_pounds());
+				obj.put("height_in_centimeters", dcv.getHeight_in_centimeters());
+				
 				obj.put("received_all_vaccines", dcv.getReceived_all_vaccines());
 				obj.put("types_of_vaccines_received", dcv.getType_of_vaccines_received());
 				obj.put("has_chronic_disease_or_disability", dcv.getHas_chronic_disease_or_disability());
@@ -98,8 +124,7 @@ public class AddNewChildVisitActivity extends ActionBarActivity {
 				obj.put("is_only_breastfed", dcv.getIs_only_breastfed());
 				obj.put("how_long_only_breastfed", dcv.getHow_long_only_breastfed());
 				obj.put("child_age_when_stopped_breastfeeding", dcv.getChild_age_when_stopped_breastfeeding());
-				obj.put("weight_in_pounds", dcv.getWeight_in_pounds());
-				obj.put("height_in_centimeters", dcv.getHeight_in_centimeters());
+				
 				obj.put("num_times_incaparina_past_week", dcv.getNum_times_incaparina_past_week());
 				obj.put("num_times_vegetables_or_fruits_past_week", dcv.getNum_times_vegetables_or_fruits_past_week());
 				obj.put("num_times_herbs_past_week", dcv.getNum_times_herbs_past_week());
@@ -111,6 +136,9 @@ public class AddNewChildVisitActivity extends ActionBarActivity {
 				obj.put("illness_description", dcv.getIllness_description());
 				obj.put("age_last_received_deparasiting_medicine", dcv.getAge_last_received_deparasiting_medicine());
 				DetailedRecordsStore.get(getApplication()).addNewChildVisit(obj);
+				Intent i = new Intent(getApplication(), GraphActivity.class);
+				i.putExtra("child_id", child_id);
+				startActivity(i);
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
@@ -320,7 +348,7 @@ public class AddNewChildVisitActivity extends ActionBarActivity {
 				String is_currently_breastfed_string = is_currently_breastfed.getText().toString();
 				
 	
-				if(is_currently_breastfed_string.trim().equals("Yes")){
+				if(is_currently_breastfed_string.trim().equals("Sí")){
 					dcv.setIs_currently_breastfed(2);
 				}else if(is_currently_breastfed_string.trim().equals("No")){
 					dcv.setIs_currently_breastfed(1);
@@ -334,7 +362,7 @@ public class AddNewChildVisitActivity extends ActionBarActivity {
 				String does_only_breastfeed_string = does_only_breastfeed.getText().toString();
 				
 	
-				if(does_only_breastfeed_string.trim().equals("Yes")){
+				if(does_only_breastfeed_string.trim().equals("Sí")){
 					dcv.setIs_currently_breastfed(2);
 				}else if(does_only_breastfeed_string.trim().equals("No")){
 					dcv.setIs_currently_breastfed(1);
@@ -540,7 +568,7 @@ public class AddNewChildVisitActivity extends ActionBarActivity {
 				String did_receive_vaccinations_string = did_receive_vaccinations.getText().toString();
 				
 	
-				if(did_receive_vaccinations_string.trim().equals("Yes")){
+				if(did_receive_vaccinations_string.trim().equals("Sí")){
 					dcv.setReceived_all_vaccines(2);
 				}else if(did_receive_vaccinations_string.trim().equals("No")){
 					dcv.setReceived_all_vaccines(1);

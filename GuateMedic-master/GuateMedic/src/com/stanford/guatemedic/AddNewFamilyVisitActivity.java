@@ -32,6 +32,7 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_new_family_visit);
+		getActionBar().setHomeButtonEnabled(true);
 		frag1_instance=AddNewFamilyVisitFragment1.newInstance(family_id);
 		frag2_instance=AddNewFamilyVisitFragment2.newInstance(family_id);
 		
@@ -50,12 +51,12 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 			public void onItemSelected(AdapterView<?> parent, View view,
 					int pos, long id) {
 		        String item =  (String)parent.getItemAtPosition(pos);
-		        if (item.equals("Category 1")) {
+		        if (item.equals("Categoría 1")) {
 		        	
 		        	getSupportFragmentManager().beginTransaction()
 					.replace(R.id.container, frag1_instance).commit();
 		        }
-		        else if (item.equals("Category 2")) {
+		        else if (item.equals("Categoría 2")) {
 		        	getSupportFragmentManager().beginTransaction()
 					.replace(R.id.container, frag2_instance).commit();
 		        } else {
@@ -74,6 +75,13 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 		});
 	}
 	
+	@Override
+	public void onBackPressed() {
+		Intent i = new Intent(getApplication(), ViewFamilyActivity.class);
+		i.putExtra("family_id", family_id);
+		startActivity(i);
+	}
+	
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.add_family_visit_menu, menu);
 		return true;
@@ -82,6 +90,11 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
+		if (id == android.R.id.home) {
+			Intent i = new Intent(getApplication(), MainActivity.class);
+			startActivity(i);
+			return true;
+		}
 		if (id == R.id.action_addfamilyvisit_submit) {
 			
 			frag1_instance.convertValuesFrag1();
@@ -191,13 +204,13 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 			//Marital Status
 			String parent1_marital_status_string=((Spinner)(rootView.findViewById(R.id.family_visit1_parent1_marital_status))).getSelectedItem().toString();
 			
-			if(parent1_marital_status_string.trim().equals("Together")){
+			if(parent1_marital_status_string.trim().equals("Unida")){
 				parent1_marital_status_put=1;
-			} else if(parent1_marital_status_string.trim().equals("Married")) {
+			} else if(parent1_marital_status_string.trim().equals("Casada")) {
 				parent1_marital_status_put=2;
-			} else if(parent1_marital_status_string.trim().equals("Widowed")){
+			} else if(parent1_marital_status_string.trim().equals("Viuda")){
 				parent1_marital_status_put=3;
-			} else if(parent1_marital_status_string.trim().equalsIgnoreCase("Single")){
+			} else if(parent1_marital_status_string.trim().equalsIgnoreCase("Soltera")){
 				parent1_marital_status_put=4;
 			} else{
 				parent1_marital_status_put=0;
@@ -207,15 +220,15 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 			//Father Occupation
 			String father_occu_string=((Spinner)(rootView.findViewById(R.id.family_visit1_fathers_job))).getSelectedItem().toString();
 			
-			if(father_occu_string.trim().equals("Fixed")) {
+			if(father_occu_string.trim().equals("Fijo")) {
 				father_occu_put=1;
-			}else if(father_occu_string.trim().equals("Merchant")){
+			}else if(father_occu_string.trim().equals("Comerciante")){
 				father_occu_put=2;
-			}else if(father_occu_string.trim().equals("Farmer (owner)")){
+			}else if(father_occu_string.trim().equals("Agricultor (Propio)")){
 				father_occu_put=3;
-			}else if(father_occu_string.trim().equals("Farmer (alien)")){
+			}else if(father_occu_string.trim().equals("Agricultor (Ajeno)")){
 				father_occu_put=4;
-			}else if(father_occu_string.trim().equals("Other")){
+			}else if(father_occu_string.trim().equals("Otro")){
 				father_occu_put=5;
 			}else{
 				father_occu_put=0;
@@ -229,7 +242,7 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 			String father_lives_with_string=father_lives_with.getText().toString();
 			
 
-			if(father_lives_with_string.trim().equals("Yes")){
+			if(father_lives_with_string.trim().equals("Sí")){
 				father_lives_with_put=1;
 			}else if(father_lives_with_string.trim().equals("No")){
 				father_lives_with_put=2;
@@ -244,7 +257,7 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 			String IGSS_family_string=IGSS_family.getText().toString();
 			
 
-			if(IGSS_family_string.trim().equals("Yes")){
+			if(IGSS_family_string.trim().equals("Sí")){
 				IGSS_family_put=1;
 			}else if(IGSS_family_string.trim().equals("No")){
 				IGSS_family_put=2;

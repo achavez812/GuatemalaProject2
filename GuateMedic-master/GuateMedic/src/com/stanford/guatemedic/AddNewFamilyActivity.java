@@ -78,8 +78,11 @@ public class AddNewFamilyActivity extends ActionBarActivity {
 			@Override
 			public void onDateSet(DatePicker view, int year, int month, int day) {
 				// Do something with the date chosen by the user
-				month = month + 1;
-				val = month + "-" + day + "-" + year;
+				String month_string = "" + month;
+				if (month < 10) month_string = 0 + month_string;
+				String day_string = "" + day;
+				if (day < 10) day_string = 0 + day_string;
+				val = year + "/" + month_string + "/" + day_string;
 				EditText dob_field = (EditText) getActivity().findViewById(R.id.add_new_family_parent2_dob);
 				dob_field.setText(val);
 			}
@@ -103,8 +106,11 @@ public class AddNewFamilyActivity extends ActionBarActivity {
 			@Override
 			public void onDateSet(DatePicker view, int year, int month, int day) {
 				// Do something with the date chosen by the user
-				month = month + 1;
-				val = month + "-" + day + "-" + year;
+				String month_string = "" + month;
+				if (month < 10) month_string = 0 + month_string;
+				String day_string = "" + day;
+				if (day < 10) day_string = 0 + day_string;
+				val = year + "/" + month_string + "/" + day_string;
 				EditText dob_field = (EditText) getActivity().findViewById(R.id.add_new_family_parent1_dob);
 				dob_field.setText(val);
 			}

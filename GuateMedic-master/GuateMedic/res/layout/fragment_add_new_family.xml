@@ -23,7 +23,7 @@
         android:gravity="center"
         android:layout_marginTop="20dp"
         android:textSize="30sp"
-        android:hint="Mother name"
+        android:hint="Nombe de la Madre"
         />
     
     <EditText
@@ -33,7 +33,7 @@
         android:gravity="center"
         android:layout_marginTop="20dp"
         android:textSize="30sp"
-        android:hint="Mother Date of Birth"
+        android:hint="Fecha de Nacimiento de la Madre"
         />
     
     <EditText
@@ -43,7 +43,7 @@
         android:gravity="center"
         android:layout_marginTop="20dp"
         android:textSize="30sp"
-        android:hint="Father name"
+        android:hint="Nombre del Padre"
         />
     
     <EditText
@@ -53,7 +53,7 @@
         android:gravity="center"
         android:layout_marginTop="20dp"
         android:textSize="30sp"	
-        android:hint="Father Date of Birth"
+        android:hint="Fecha de Nacimiento del Padre"
         />
     
     <Button
@@ -63,7 +63,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginBottom="40dp"
         android:textSize="30sp"
-        android:text="Add Family"
+        android:text="Añadir la Familia"
         />
  
 </LinearLayout>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+ 	<LinearLayout 
+	  	android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:gravity="center_horizontal"
+	    android:padding="20dp"
+	    android:orientation="vertical">
+    
+
+
+     <TextView 
+       	android:id="@+id/child_visit3_did_receive_vaccinations_text"
+        android:layout_width="wrap_content"
+       	android:layout_height="wrap_content"
+      	android:gravity="center"
+		android:layout_marginTop="20dp"
+       	android:textSize="20sp"
+        android:text="¿Tiene Todas Sus Vacunas el Niño?" />
+     
+     <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="10dp"
+	        android:gravity="center_horizontal"    
+	        android:orientation="horizontal" >
+
+	    	<RadioGroup 
+	    	    android:id="@+id/child_visit3_did_receive_vaccinations"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:orientation="horizontal">
+			    
+			    <RadioButton android:id="@+id/yes_vaccinations"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginRight="10dp"
+			        android:text="Sí"/>
+			    
+			    <RadioButton android:id="@+id/no_vaccinations"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="No"/>
+			    
+			</RadioGroup>
+			
+		</LinearLayout>
+        
+    	<EditText
+        	android:id="@+id/child_visit3_vaccination_information"
+            android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:gravity="center"
+        	android:layout_marginTop="20dp"
+        	android:textSize="20sp"
+        	android:hint="Mas Información Sobre Vacunas" />
+ 
+    
+    
+     	<TextView android:id="@+id/child_visit3_has_chronic_disease_or_disability_text"
+            android:layout_width="wrap_content"
+         	android:layout_height="wrap_content"
+         	android:gravity="center"
+			android:layout_marginTop="20dp"
+         	android:textSize="20sp"
+         	android:text="¿Tiene una Enfermedad Crónica o Discapacidad?" />
+     	
+     	<LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="10dp"
+	        android:gravity="center_horizontal"    
+	        android:orientation="horizontal" >
+
+	    	<RadioGroup 
+	    	    android:id="@+id/child_visit3_has_chronic_disease_or_disability"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:orientation="horizontal">
+			    
+			    <RadioButton android:id="@+id/yes_has_chronic_disease"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginRight="10dp"
+			        android:text="Sí"/>
+			    
+			    <RadioButton android:id="@+id/no_has_chronic_disease"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="No"/>
+			    
+			</RadioGroup>
+			
+		</LinearLayout>
+           
+	    <EditText
+	        android:id="@+id/child_visit3_chronic_disease_or_disability_information"
+	        android:layout_width="match_parent"
+	       	android:layout_height="wrap_content"
+	       	android:gravity="center"
+	       	android:layout_marginTop="20dp"
+	       	android:textSize="20sp"
+	        android:hint="Mas Información Sobre la Enfermedad o Discapacidad" />
+ 
+	  	<EditText
+	        android:id="@+id/child_visit3_age_last_received_deparasiting_medicine"
+	        android:layout_width="match_parent"
+	       	android:layout_height="wrap_content"
+	       	android:gravity="center"
+	       	android:layout_marginTop="20dp"
+	       	android:textSize="20sp"
+	        android:hint="¿A Que Edad Recibió Desparasitantes?" />
+
+	</LinearLayout>
+</ScrollView>

@@ -1390,13 +1390,12 @@ containing a value of this type.
         public static final int view_exam_date=0x7f050080;
         public static final int view_family_add_child_button=0x7f05005c;
         public static final int view_family_child_list_header=0x7f05006c;
-        public static final int view_family_has_igss=0x7f050067;
+        public static final int view_family_has_igss=0x7f050068;
         public static final int view_family_info_cont=0x7f05010a;
         public static final int view_family_log_new_visit=0x7f05006b;
-        public static final int view_family_marital_status=0x7f050066;
+        public static final int view_family_marital_status=0x7f050067;
         public static final int view_family_name=0x7f050048;
-        public static final int view_family_num_people_in_household=0x7f050069;
-        public static final int view_family_num_pregnancies=0x7f050068;
+        public static final int view_family_num_pregnancies=0x7f050069;
         public static final int view_family_parent1_dob_field=0x7f050061;
         public static final int view_family_parent1_header=0x7f05005f;
         public static final int view_family_parent1_name_field=0x7f050060;
@@ -1404,6 +1403,7 @@ containing a value of this type.
         public static final int view_family_parent2_header=0x7f050062;
         public static final int view_family_parent2_lives_with_family_field=0x7f050065;
         public static final int view_family_parent2_name_field=0x7f050063;
+        public static final int view_family_parent2_occupation_field=0x7f050066;
         public static final int view_family_view_past_visits=0x7f05006a;
         public static final int view_family_village_header=0x7f05005e;
         public static final int view_height=0x7f050082;
@@ -1516,10 +1516,11 @@ containing a value of this type.
         public static final int fragment_upload_login=0x7f03003e;
         public static final int fragment_upload_results=0x7f03003f;
         public static final int list_item_fragment=0x7f030040;
-        public static final int spinner_dropdown_item=0x7f030041;
-        public static final int spinner_item=0x7f030042;
-        public static final int support_simple_spinner_dropdown_item=0x7f030043;
-        public static final int view_patient_des=0x7f030044;
+        public static final int list_item_fragment2=0x7f030041;
+        public static final int spinner_dropdown_item=0x7f030042;
+        public static final int spinner_item=0x7f030043;
+        public static final int support_simple_spinner_dropdown_item=0x7f030044;
+        public static final int view_patient_des=0x7f030045;
     }
     public static final class menu {
         public static final int add_child_visit_menu=0x7f0d0000;

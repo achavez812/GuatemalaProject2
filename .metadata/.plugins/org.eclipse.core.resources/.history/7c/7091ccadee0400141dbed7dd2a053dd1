@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:gravity="center_horizontal"
+	    android:padding="20dp"
+	    android:orientation="vertical">   
+	    <Spinner
+	        android:id="@+id/family_visit1_parent1_marital_status"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="20dp"/>
+
+     	<TextView 
+         	android:id="@+id/family_visit1_father_lives_with_text"
+         	android:layout_width="wrap_content"
+         	android:layout_height="wrap_content"
+         	android:gravity="center"
+			android:layout_marginTop="20dp"
+         	android:textSize="25sp"
+         	android:text="¿Vive el Padre Con la Familia?"/>
+     	
+     	<LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="10dp"
+	        android:gravity="center_horizontal"    
+	        android:orientation="horizontal" >
+
+	    	<RadioGroup 
+	    	    android:id="@+id/family_visit1_father_lives_with"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:orientation="horizontal">
+			    
+			    <RadioButton android:id="@+id/yes_father_lives_with"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginRight="10dp"
+			        android:text="Yes"/>
+			    
+			    <RadioButton android:id="@+id/no_father_lives_with"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="No"/>
+			    
+			</RadioGroup>
+			
+		</LinearLayout>
+	     
+
+	  	<Spinner
+	        android:id="@+id/family_visit1_fathers_job"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"        
+	        android:layout_marginTop="20dp" />
+	            
+	
+	     <TextView android:id="@+id/family_visit1_igss_text"
+	         android:layout_width="wrap_content"
+	         android:layout_height="wrap_content"
+	         android:gravity="center"
+	         android:layout_marginTop="20dp"
+	         android:textSize="25sp"
+	         android:text="Does the family have an IGSS?" />
+	     
+	   	<LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="10dp"
+	        android:gravity="center_horizontal"    
+	        android:orientation="horizontal" >
+
+	    	<RadioGroup 
+	    	    android:id="@+id/family_visit1_igss"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:orientation="horizontal">
+			    
+			    <RadioButton android:id="@+id/yes_igss"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginRight="10dp"
+			        android:text="Yes"/>
+			    
+			    <RadioButton android:id="@+id/no_igss"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="No"/>
+			    
+			</RadioGroup>
+			
+		</LinearLayout>
+
+	</LinearLayout>
+</ScrollView>

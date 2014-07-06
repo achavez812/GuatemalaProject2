@@ -193,7 +193,6 @@ public class ViewVillageListActivity extends ActionBarActivity {
 		                        Log.d("Something","Something2");
 		                    }
 		                } 
-		               Log.d("Work","Work"+results.values.toString());
 		                return results;
 		            }
 		        };
@@ -213,7 +212,7 @@ public class ViewVillageListActivity extends ActionBarActivity {
 				villageTitle.setText(village_name);
 				
 				TextView subtitle = (TextView)convertView.findViewById(R.id.list_item_subtitle);
-				subtitle.setText(num_families + " Families");
+				subtitle.setText(num_families + " Familias");
 				
 				return convertView;
 				

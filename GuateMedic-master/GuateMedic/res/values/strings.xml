@@ -78,45 +78,45 @@
     </string-array>
     <string-array name="t_of_b_array">
         <item>Normal</item>
-        <item>Caesarean</item>
-        <item>Type of Birth(Not Set)</item>
+        <item>Cesaria</item>
+        <item>¿Qué Tipo de Parto?</item>
     </string-array>
         <string-array name="prenatal_array">
-         <item>Yes</item>
+         <item>Sí</item>
          <item>No</item>
-         <item>Prenatal Care(Not Set)</item>
+         <item>¿Tenia la Madre Control Prenatal?</item>
      </string-array>   
           <string-array name="same_pregernating_array">
-         <item>Single</item>
-         <item>Twins</item>
-         <item>Triplets</item>
-        <item>Number of Children in Same Birth(Not Set)</item>
+         <item>Solo Uno</item>
+         <item>Gemelos</item>
+         <item>Trillizos</item>
+        <item>¿Cuántos Niños en este Parto?</item>
      </string-array>
     <string-array name="child_visit_array">
-        <item>Category 1</item>
-        <item>Category 2</item>
-        <item>Category 3</item>
-        <item>Category 4</item>
-        <item>Category 5</item>
+        <item>Categoría 1</item>
+        <item>Categoría 2</item>
+        <item>Categoría 3</item>
+        <item>Categoría 4</item>
+        <item>Categoría 5</item>
     </string-array>
     <string-array name="family_visit_array">
-        <item>Category 1</item>
-        <item>Category 2</item>
+        <item>Categoría 1</item>
+        <item>Categoría 2</item>
     </string-array>
 	<string-array name="marital_status_array">
-	    <item>Married</item>
-	    <item>Together</item>
-	    <item>Single</item>
-	    <item>Widowed</item>
-	    <item>Marital Status of Primary Parent(Not Set)</item>
+	    <item>Casada</item>
+	    <item>Unida</item>
+	    <item>Soltera</item>
+	    <item>Viuda</item>
+	    <item>Estado Civil</item>
 	</string-array>
 	<string-array name="fathers_job">
-	    <item>Fixed</item>
-	    <item>Merchant</item>
-	    <item>Farmer (owner)</item>
-	    <item>Farmer (alien)</item>
-	    <item>Other</item>
-	    <item>Father\'s Job(Not Set)</item>
+	    <item>Fijo</item>
+	    <item>Comerciante</item>
+	    <item>Agricultor (Propio)</item>
+	    <item>Agricultor (Ajeno)</item>
+	    <item>Otro</item>
+	    <item>Ocupación del Padre</item>
 	</string-array>
 	<string-array name="month_options">
 	    <item>January</item>

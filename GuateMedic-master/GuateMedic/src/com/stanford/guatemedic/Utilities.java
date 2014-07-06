@@ -49,7 +49,7 @@ public class Utilities {
 		Calendar calendar = Calendar.getInstance(); //Uses default timezone (figure out what to use)
 		
 		String year = "" + calendar.get(Calendar.YEAR); 
-		String month = "" + calendar.get(Calendar.MONTH);
+		String month = "" + (calendar.get(Calendar.MONTH) + 1) ;
 		if (month.length() == 1) month = 0 + month;
 		String day = "" + calendar.get(Calendar.DAY_OF_MONTH);
 		if (day.length() == 1) day = 0 + day;
@@ -190,6 +190,8 @@ public class Utilities {
 	
 	//in months
 	public static double timeBetween(String date1, String date2) {
+		Log.i("WTF", "date1: " + date1);
+		Log.i("WTF", "date2: " + date2);
 		int year1 = Integer.parseInt(date1.substring(0,4));
 		int year2 = Integer.parseInt(date2.substring(0, 4));
 		int month1 = Integer.parseInt(date1.substring(5, 7));
@@ -201,7 +203,7 @@ public class Utilities {
 		int months = month2 - month1;
 		int days = day2 - day1;
 		
-		return (years/12) + months + days*30.4167;
+		return years*12 + months + days/30.4167;
 	}
 	
 	
@@ -211,5 +213,30 @@ public class Utilities {
 	    BigDecimal bd = new BigDecimal(value);
 	    bd = bd.setScale(places, RoundingMode.HALF_UP);
 	    return bd.doubleValue();
+	}
+	
+	//This only handles String dates formatted correctly
+	public static int getAge(String birth_date) {
+		String current_date = formatDate(getTodayString());
+		Log.i("WTF", current_date);
+		int year1 = Integer.parseInt(current_date.substring(0,4));
+		int year2 = Integer.parseInt(birth_date.substring(0, 4));
+		int month1 = Integer.parseInt(current_date.substring(5, 7));
+		int month2 = Integer.parseInt(birth_date.substring(5, 7));
+		int day1 = Integer.parseInt(current_date.substring(8, 10));
+		int day2 = Integer.parseInt(birth_date.substring(8, 10));
+		
+		int years = year1 - year2;
+		int months = month1 - month2;
+		int days = day1 - day2;
+		
+		return (int)(years + months/12.0 + days/365.0);
+	}
+	
+	public static Number[] truncateArray(Number[] array, int values) {
+		Number[] new_array = new Number[values];
+		for (int i = 0; i < values; i++)
+			new_array[i] = array[i];
+		return new_array;
 	}
 }

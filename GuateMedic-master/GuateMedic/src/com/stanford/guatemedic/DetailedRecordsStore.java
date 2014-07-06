@@ -297,16 +297,13 @@ public class DetailedRecordsStore {
 			DetailedChild dc = getChild(family_id, child_id);
 			if (dc == null) //Error
 				return;
-			if (json_child.has("name") && !json_child.getString("name").isEmpty())
+			if (json_child.has("name"))
 				dc.setName(json_child.getString("name"));
-			if (json_child.has("gender") && !json_child.getString("gender").isEmpty()) {
-				String gender = json_child.getString("gender");
-				if (gender.equals("Female"))
-					dc.setGender(2);
-				else if (gender.equals("Male"))
-					dc.setGender(1);
-				else
+			if (json_child.has("gender")) {
+				if (json_child.getString("gender").isEmpty())
 					dc.setGender(0);
+				else
+					dc.setGender(Integer.parseInt(json_child.getString("gender")));
 			}
 			if (json_child.has("dob") && !json_child.getString("dob").isEmpty())
 				dc.setDob(json_child.getString("dob"));
@@ -359,17 +356,17 @@ public class DetailedRecordsStore {
 			if (json.has("type_of_chronic_disease_or_disability"))
 				dcv.setType_of_chronic_disease_or_disability(json.getString("type_of_chronic_disease_or_disability"));
 			if (json.has("currently_breastfed"))
-				dcv.setIs_currently_breastfed(Integer.parseInt("currently_breastfed"));
+				dcv.setIs_currently_breastfed(Integer.parseInt(json.getString("currently_breastfed")));
 			if (json.has("only_breastfed"))
 				dcv.setIs_only_breastfed(Integer.parseInt(json.getString("only_breastfed")));
 			if (json.has("how_long_only_breastfed"))
 				dcv.setHow_long_only_breastfed(Float.parseFloat(json.getString("how_long_only_breastfed")));
 			if (json.has("child_age_when_stoppped_breastfeeding"))
-				dcv.setChild_age_when_stopped_breastfeeding(Float.parseFloat("child_age_when_stoppped_breastfeeding"));
-			if (json.has("weight_in_kilos"))
-				dcv.setWeight_in_pounds(Float.parseFloat("weight_in_pounds"));
+				dcv.setChild_age_when_stopped_breastfeeding(Float.parseFloat(json.getString("child_age_when_stoppped_breastfeeding")));
+			if (json.has("weight_in_pounds"))
+				dcv.setWeight_in_pounds(Float.parseFloat(json.getString("weight_in_pounds")));
 			if (json.has("height_in_centimeters"))
-				dcv.setHeight_in_centimeters(Float.parseFloat("height_in_centimeters"));
+				dcv.setHeight_in_centimeters(Float.parseFloat(json.getString("height_in_centimeters")));
 			if (json.has("num_times_incaparina_past_week"))
 				dcv.setNum_times_incaparina_past_week(Integer.parseInt(json.getString("num_times_incaparina_past_week")));
 			if (json.has("num_times_vegetables_or_fruits_past_week"))
@@ -395,7 +392,7 @@ public class DetailedRecordsStore {
 			if (json.has("receiving_supplements"))
 				dcv.setReceiving_supplements(Integer.parseInt(json.getString("receiving_supplements")));
 			if (json.has("why_receiving_supplements"))
-				dcv.setWhy_receiving_supplements(Integer.parseInt("why_receiving_supplements"));
+				dcv.setWhy_receiving_supplements(Integer.parseInt(json.getString("why_receiving_supplements")));
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

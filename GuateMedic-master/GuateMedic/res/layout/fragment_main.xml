@@ -21,7 +21,7 @@
 	        android:layout_marginBottom="60dp"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="Welcome Promoter" />
+	        android:text="Bienvenido Promotor" />
 	    
 	    <TextView
 	        android:id="@+id/main_page_notes"
@@ -39,17 +39,17 @@
 	        android:layout_marginBottom="20dp"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
-			android:text="VIEW" />
+			android:text="REGISTROS" />
 	    
 	    <Button
 	        android:id="@+id/main_upload_download_button"
 	        android:textSize="30sp"
 	        android:paddingTop="40dp"
-	        android:paddingBottom="40dp"
+	        android:paddingBottom="20dp"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
-	        android:layout_marginBottom="60dp"
-	        android:text="DOWNLOAD" />
+	        android:layout_marginBottom="120dp"
+	        android:text="DESCARGAR" />
 
 	</LinearLayout>
 

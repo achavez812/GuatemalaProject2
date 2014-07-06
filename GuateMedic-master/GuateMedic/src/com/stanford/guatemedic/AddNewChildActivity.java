@@ -27,6 +27,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class AddNewChildActivity extends ActionBarActivity {
+	
+	private static String family_id;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +36,9 @@ public class AddNewChildActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_add_new_child);
+		getActionBar().setHomeButtonEnabled(true);
 
-		String family_id = getIntent().getStringExtra("family_id");
+		family_id = getIntent().getStringExtra("family_id");
 		if (savedInstanceState == null) {
 
 			getSupportFragmentManager().beginTransaction()
@@ -45,6 +48,13 @@ public class AddNewChildActivity extends ActionBarActivity {
 
 		}
 
+	}
+	
+	@Override
+	public void onBackPressed() {
+		Intent i = new Intent(getApplication(), ViewFamilyActivity.class);
+		i.putExtra("family_id", family_id);
+		startActivity(i);
 	}
 
 	@Override
@@ -60,7 +70,11 @@ public class AddNewChildActivity extends ActionBarActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 
 		int id = item.getItemId();
-
+		if (id == android.R.id.home) {
+			Intent i = new Intent(getApplication(), MainActivity.class);
+			startActivity(i);
+			return true;
+		}
 		if (id == R.id.action_settings) {
 
 			return true;
@@ -120,7 +134,11 @@ public class AddNewChildActivity extends ActionBarActivity {
 			public void onDateSet(DatePicker view, int year, int month, int day) {
 				// Do something with the date chosen by the user
 				month=month+1;
-				val = month + "-" + day + "-" + year;
+				String month_string = "" + month;
+				if (month < 10) month_string = 0 + month_string;
+				String day_string = "" + day;
+				if (day < 10) day_string = 0 + day_string;
+				val = year + "/" + month_string + "/" + day_string;
 				EditText dob_field = (EditText) getActivity().findViewById(
 						R.id.add_new_child_dob);
 				dob_field.setText(val);
@@ -172,7 +190,7 @@ public class AddNewChildActivity extends ActionBarActivity {
 			// get basic information for fragment functionality
 
 			TextView textview = (TextView) rootView.findViewById(R.id.add_new_child_family);
-			textview.setText("Family: " + DetailedRecordsStore.get(getActivity().getApplication()).getFamily(family_id).getParent1_name());
+			textview.setText("Familia: " + DetailedRecordsStore.get(getActivity().getApplication()).getFamily(family_id).getParent1_name());
 			
 			EditText dob_field = (EditText) rootView.findViewById(R.id.add_new_child_dob);
 			dob_field.setOnClickListener(new View.OnClickListener() {
@@ -222,64 +240,64 @@ public class AddNewChildActivity extends ActionBarActivity {
 				@Override
 				public void onClick(View v) {
 
-					EditText name_field = (EditText)getActivity().findViewById(R.id.add_new_child_name);
+					EditText name_field = (EditText)rootView.findViewById(R.id.add_new_child_name);
 					String name = name_field.getText().toString();
 					if (name.equals("")) {
 						Toast.makeText(getActivity(), "Name required", Toast.LENGTH_LONG).show();
 						return;
 					}
 					
-					EditText dob_field = (EditText)getActivity().findViewById(R.id.add_new_child_dob);
+					EditText dob_field = (EditText)rootView.findViewById(R.id.add_new_child_dob);
 					String dob = dob_field.getText().toString();
 					if (dob.equals("")) {
 						Toast.makeText(getActivity(), "Date of Birth required", Toast.LENGTH_LONG).show();
 						return;
 					}
 
-					RadioGroup radioGenderGroup = (RadioGroup)getView().findViewById(R.id.add_new_child_gender);
+					RadioGroup radioGenderGroup = (RadioGroup)rootView.findViewById(R.id.add_new_child_gender);
 					int selectedId = radioGenderGroup.getCheckedRadioButtonId();
 					int gender = 0;
 					if (selectedId != -1) {
-						RadioButton gender_field = (RadioButton)getView().findViewById(selectedId);
-						String gender_string = gender_field.getText().toString();
+						RadioButton gender_field = (RadioButton)rootView.findViewById(selectedId);
+						String gender_string = gender_field.getText().toString().trim();
 						if (gender_string.equals("Male")) gender = 1;
 						else if (gender_string.equals("Female")) gender = 2;
 					}
 
-					Spinner type_of_birth_field = (Spinner)getView().findViewById(R.id.add_new_child_type_of_birth);
+					Spinner type_of_birth_field = (Spinner)rootView.findViewById(R.id.add_new_child_type_of_birth);
 					String type_of_birth_string = type_of_birth_field.getSelectedItem().toString();
 					int type_of_birth = 0;
 					if (type_of_birth_string.equals("Normal")) type_of_birth = 1;
 					else if (type_of_birth_string.equals("Caesarean")) type_of_birth = 2;
 
-					Spinner num_children_in_same_pregrancy_field = (Spinner) getView().findViewById(R.id.add_new_child_num_children_in_same_pregnancy);
+					Spinner num_children_in_same_pregrancy_field = (Spinner)rootView.findViewById(R.id.add_new_child_num_children_in_same_pregnancy);
 					String num_children_in_same_pregnancy_string = num_children_in_same_pregrancy_field.getSelectedItem().toString();
 					int num_children_in_same_pregnancy = 0;
 					if (num_children_in_same_pregnancy_string.equals("Single")) num_children_in_same_pregnancy = 1;
 					else if (num_children_in_same_pregnancy_string.equals("Twins")) num_children_in_same_pregnancy = 2;
 					else if (num_children_in_same_pregnancy_string.equals("Triplets")) num_children_in_same_pregnancy = 3;
 
-					String months_gestated_string = ((EditText) getActivity().findViewById(R.id.add_new_child_months_gestated)).getText().toString();
+					String months_gestated_string = ((EditText) rootView.findViewById(R.id.add_new_child_months_gestated)).getText().toString();
 					float months_gestated = 0;
 					if (!months_gestated_string.equals("")) months_gestated = Float.parseFloat(months_gestated_string);
 
-					Spinner prenatal_care_field = (Spinner) getActivity().findViewById(R.id.add_new_child_prenatal_care);
+					Spinner prenatal_care_field = (Spinner) rootView.findViewById(R.id.add_new_child_prenatal_care);
 					String received_prenatal_care_string = prenatal_care_field.getSelectedItem().toString();
 					int received_prenatal_care = 0;
 					if (received_prenatal_care_string.equals("Yes")) received_prenatal_care = 2;
 					else if (received_prenatal_care_string.equals("No")) received_prenatal_care = 1;
 
-					EditText birth_weight_field = (EditText) getActivity().findViewById(R.id.add_new_child_birth_weight);
+					EditText birth_weight_field = (EditText) rootView.findViewById(R.id.add_new_child_birth_weight);
 					String birth_weight_string = birth_weight_field.getText().toString();
 					float birth_weight = 0;
 					if (!birth_weight_string.equals("")) birth_weight = Float.parseFloat(birth_weight_string);
 
-					EditText birth_height_field = (EditText) getActivity().findViewById(R.id.add_new_child_birth_height);
+					EditText birth_height_field = (EditText)rootView.findViewById(R.id.add_new_child_birth_height);
 					String birth_height_string = birth_height_field.getText().toString();
 					float birth_height= 0;
 					if (!birth_height_string.equals("")) birth_height = Float.parseFloat(birth_height_string);
 
-					EditText youngest_sibling_dob_field = (EditText) getActivity().findViewById(R.id.add_new_child_youngest_sibling_dob);
+					EditText youngest_sibling_dob_field = (EditText)rootView.findViewById(R.id.add_new_child_youngest_sibling_dob);
 					String youngest_sibling_dob = youngest_sibling_dob_field.getText().toString();
 
 					try {
@@ -295,7 +313,7 @@ public class AddNewChildActivity extends ActionBarActivity {
 						obj.put("months_gestated", months_gestated);
 						obj.put("received_prenatal_care", received_prenatal_care);
 						obj.put("birth_weight", birth_weight);
-						//obj.put("birth_height", birth_height);
+						obj.put("birth_height", birth_height);
 						obj.put("youngest_sibling_dob", youngest_sibling_dob);
 						DetailedRecordsStore.get(getActivity().getApplication()).addNewChild(obj);
 						// Go to activity of this family

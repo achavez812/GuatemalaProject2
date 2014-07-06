@@ -15,8 +15,8 @@
 	        android:layout_height="wrap_content"
 	        android:gravity="center"
 	       	android:layout_marginTop="20dp"
-	       	android:textSize="25sp"
-	        android:text="Is the child currently breastfed?"/>
+	       	android:textSize="20sp"
+	        android:text="¿El Niño TODAVÍA está Mamando?"/>
 	     
  		<LinearLayout
 	  		android:layout_width="match_parent"
@@ -35,7 +35,7 @@
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
 			        android:layout_marginRight="10dp"
-			        android:text="Yes"/>
+			        android:text="Sí"/>
 			    
 			    <RadioButton android:id="@+id/no_breastfed"
 			        android:layout_width="wrap_content"
@@ -51,8 +51,8 @@
 	        android:layout_height="wrap_content"
 	        android:gravity="center"
 	       	android:layout_marginTop="20dp"
-	       	android:textSize="25sp"
-	        android:text="Is the child only breastfed?"/>
+	       	android:textSize="20sp"
+	        android:text="¿Esta Comiendo Solo Pecho?"/>
 	  	
 	 	<LinearLayout
 	  		android:layout_width="match_parent"
@@ -71,7 +71,7 @@
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
 			        android:layout_marginRight="10dp"
-			        android:text="Yes"/>
+			        android:text="Sí"/>
 			    
 			    <RadioButton android:id="@+id/no_only_breastfed"
 			        android:layout_width="wrap_content"
@@ -91,8 +91,8 @@
 	        android:layout_marginTop="20dp"
 	        android:ellipsize="start"
 	        android:inputType="numberDecimal"
-	        android:textSize="25sp"
-	        android:hint="How Long Only Breastfed?" />
+	        android:textSize="20sp"
+	        android:hint="¿Por Cuántos Meses le Dio Solo Pecho?" />
       
      	<EditText
 	        android:id="@+id/child_visit2_age_when_stopped_breastfeeding"
@@ -102,8 +102,8 @@
 	        android:layout_marginTop="20dp"
 	        android:ellipsize="start"
 	        android:inputType="numberDecimal"
-	        android:textSize="25sp"
-	        android:hint="Age When Stopped Breastfeeding?" />
+	        android:textSize="20sp"
+	        android:hint="¿A Que Edad Dejó de Mamar?" />
 
 	</LinearLayout>
 </ScrollView> 

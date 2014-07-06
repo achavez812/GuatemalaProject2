@@ -115,7 +115,7 @@ public class DownloadLoginActivity extends ActionBarActivity {
 				has_internet = true;
 				this.showLoading = showLoading;
 				dialog = new ProgressDialog(getActivity());
-				dialog.setMessage("Loading");
+				dialog.setMessage("Los Datos Son De Carga");
 			}
 
 			@Override

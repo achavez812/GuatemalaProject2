@@ -19,7 +19,7 @@
 			android:ellipsize="start"
             android:inputType="number"
             android:textSize="30sp" 
-            android:hint="Number of pregnancies"/>
+            android:hint="¿Cuántos Partos ha Tenido la Madre?"/>
 
         <EditText
             android:id="@+id/family_visit2_num_children_alive"
@@ -30,7 +30,7 @@
 			android:ellipsize="start"
             android:inputType="number"
             android:textSize="30sp" 
-            android:hint="Number of children alive" />
+            android:hint="¿Cuántos Ñinos Viven?" />
 
         <EditText
             android:id="@+id/family_visit2_num_children_dead"
@@ -41,7 +41,7 @@
 			android:ellipsize="start"
             android:inputType="number"
             android:textSize="30sp" 
-            android:hint="Number of children dead" />
+            android:hint="¿Cuántos Ñinos Han Muerto?" />
 
         <EditText
             android:id="@+id/family_visit2_death_information"
@@ -51,7 +51,7 @@
 			android:layout_marginTop="30dp"
 			android:ellipsize="start"
             android:textSize="30sp" 
-            android:hint="Death information" />
+            android:hint="Información Sobre Los Muertos" />
 
         <EditText
             android:id="@+id/family_visit2_num_children_under_5"
@@ -62,7 +62,7 @@
 			android:ellipsize="start"
             android:inputType="number"
             android:textSize="30sp" 
-            android:hint="Number of children under 5" />
+            android:hint="¿Cuántos Ñinos Menores de 5 Años?" />
 
         <EditText
             android:id="@+id/family_visit2_num_people_in_household"
@@ -73,7 +73,7 @@
 			android:ellipsize="start"
             android:inputType="number"
             android:textSize="30sp" 
-            android:hint="Number of people living in household" />
+            android:hint="¿Cuántos Personas Viven en la Casa?" />
 
     </LinearLayout>
 

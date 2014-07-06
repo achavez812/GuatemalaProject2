@@ -19,8 +19,8 @@
        	android:layout_height="wrap_content"
       	android:gravity="center"
 		android:layout_marginTop="20dp"
-       	android:textSize="25sp"
-        android:text="Did the child receive vaccinations?" />
+       	android:textSize="20sp"
+        android:text="¿Tiene Todas Sus Vacunas el Niño?" />
      
      <LinearLayout
 	        android:layout_width="match_parent"
@@ -39,7 +39,7 @@
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
 			        android:layout_marginRight="10dp"
-			        android:text="Yes"/>
+			        android:text="Sí"/>
 			    
 			    <RadioButton android:id="@+id/no_vaccinations"
 			        android:layout_width="wrap_content"
@@ -56,8 +56,8 @@
         	android:layout_height="wrap_content"
         	android:gravity="center"
         	android:layout_marginTop="20dp"
-        	android:textSize="30sp"
-        	android:hint="More Information" />
+        	android:textSize="20sp"
+        	android:hint="Mas Información Sobre Vacunas" />
  
     
     
@@ -66,8 +66,8 @@
          	android:layout_height="wrap_content"
          	android:gravity="center"
 			android:layout_marginTop="20dp"
-         	android:textSize="25sp"
-         	android:text="Has Chronic Disease Or Disability?" />
+         	android:textSize="20sp"
+         	android:text="¿Tiene una Enfermedad Crónica o Discapacidad?" />
      	
      	<LinearLayout
 	        android:layout_width="match_parent"
@@ -86,7 +86,7 @@
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
 			        android:layout_marginRight="10dp"
-			        android:text="Yes"/>
+			        android:text="Sí"/>
 			    
 			    <RadioButton android:id="@+id/no_has_chronic_disease"
 			        android:layout_width="wrap_content"
@@ -103,8 +103,8 @@
 	       	android:layout_height="wrap_content"
 	       	android:gravity="center"
 	       	android:layout_marginTop="20dp"
-	       	android:textSize="30sp"
-	        android:hint="More Information" />
+	       	android:textSize="20sp"
+	        android:hint="Mas Información Sobre la Enfermedad o Discapacidad" />
  
 	  	<EditText
 	        android:id="@+id/child_visit3_age_last_received_deparasiting_medicine"
@@ -112,8 +112,10 @@
 	       	android:layout_height="wrap_content"
 	       	android:gravity="center"
 	       	android:layout_marginTop="20dp"
-	       	android:textSize="30sp"
-	        android:hint="Age when last received deparasiting medicine?" />
+	       	android:textSize="20sp"
+	       	android:inputType="numberDecimal"
+	       	android:ellipsize="start"
+	        android:hint="¿A Que Edad Recibió Desparasitantes?" />
 
 	</LinearLayout>
 </ScrollView>

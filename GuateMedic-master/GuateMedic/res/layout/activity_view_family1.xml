@@ -11,7 +11,7 @@
 	    android:layout_width="fill_parent"
 	    android:layout_height="60dp"
 	    android:layout_alignParentBottom="true"
-	    android:text="Add Child"
+	    android:text="Añadir un Niño"
 	    />
 	
 	<LinearLayout
@@ -49,20 +49,20 @@
 					android:layout_height="wrap_content"
 					android:textStyle="bold"
 					android:textSize="25sp"
-					android:text="Mother" />
+					android:text="Madre" />
 	            
 	            <TextView
 	                android:id="@+id/view_family_parent1_name_field"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:textSize="25sp"
+					android:textSize="21sp"
 					android:text="Mother name" />
 	            
 	            <TextView
 	                android:id="@+id/view_family_parent1_dob_field"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:textSize="25sp"
+					android:textSize="21sp"
 					android:text="Mother DOB" />
 	            
 	            <TextView
@@ -72,34 +72,34 @@
 					android:layout_marginTop="7dp"
 					android:textStyle="bold"
 					android:textSize="25sp"
-					android:text="Father" />
+					android:text="Padre" />
 	            
 	            <TextView
 	                android:id="@+id/view_family_parent2_name_field"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:textSize="25sp"
+					android:textSize="21sp"
 					android:text="Father Name" />
 	            
 	            <TextView
 	                android:id="@+id/view_family_parent2_dob_field"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:textSize="25sp"
+					android:textSize="21sp"
 					android:text="Father DOB" />
 	            
 	            <TextView
 	                android:id="@+id/view_family_parent2_lives_with_family_field"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:textSize="25sp"
+					android:textSize="21sp"
 					android:text="Lives with family?" />
 	            
 	            <TextView
-	                android:id="@+id/view_family_parent2_lives_with_family_field"
+	                android:id="@+id/view_family_parent2_occupation_field"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:textSize="25sp"
+					android:textSize="21sp"
 					android:text="Father's job?" />
 	            
 	        </LinearLayout>
@@ -115,30 +115,23 @@
 	                android:id="@+id/view_family_marital_status"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:textSize="25sp"
+					android:textSize="21sp"
 					android:text="Family Field 1" />
 	            
 	            <TextView
 	                android:id="@+id/view_family_has_igss"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:textSize="25sp"
+					android:textSize="21sp"
 					android:text="Family Field 2" />
 	            
 	            <TextView
 	                android:id="@+id/view_family_num_pregnancies"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:textSize="25sp"
+					android:textSize="21sp"
 					android:text="Family Field 3" />
-	            
-	            <TextView
-	                android:id="@+id/view_family_num_people_in_household"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:textSize="25sp"
-					android:text="Family Field 4" />
-	            
+	        
 	            
 	            
 	            <Button 
@@ -147,7 +140,7 @@
 	                android:layout_height="60dp"
 	                android:layout_marginTop="12dp"
 	                android:gravity="center"
-	                android:text="View Visits" />
+	                android:text="Visitas Pasadas" />
 	            
 	            <Button 
 	                android:id="@+id/view_family_log_new_visit"
@@ -155,7 +148,7 @@
 	                android:layout_height="60dp"
 	                android:layout_marginTop="10dp"
 	                android:gravity="center"
-	                android:text="Log Visit" />
+	                android:text="Registrar una Visita" />
 	            
 	        </LinearLayout>
 	        
@@ -169,7 +162,7 @@
 	        android:layout_marginTop="30dp"
 	        android:gravity="center"
 	        android:textSize="30sp"
-	        android:text="Children" />
+	        android:text="Los Niños" />
 	
 	    <FrameLayout
 		    android:id="@+id/child_list_container"

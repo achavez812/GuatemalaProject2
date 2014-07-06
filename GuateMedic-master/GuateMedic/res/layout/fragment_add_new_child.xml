@@ -24,7 +24,7 @@
 	         android:layout_height="wrap_content"
 	         android:gravity="center"
 	         android:textSize="30sp"
-	         android:hint="Name" />
+	         android:hint="Nombre" />
  
 	     <EditText
 	         android:id="@+id/add_new_child_dob"
@@ -33,7 +33,7 @@
 	         android:gravity="center"
 	         android:layout_marginTop="20dp"
 	         android:textSize="30sp"
-	         android:hint="Date of Birth" />
+	         android:hint="Fecha de Nacimiento" />
          
 		<LinearLayout
 	        android:layout_width="match_parent"
@@ -47,7 +47,7 @@
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content"
 				android:textSize="30sp"		    
-			    android:text="Sex: "
+			    android:text="Sexo: "
 			    />
 	    	
 	    	<RadioGroup 
@@ -61,13 +61,13 @@
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
 			        android:textSize="30sp"
-			        android:text="Male"/>
+			        android:text="Ñino"/>
 			    
 			    <RadioButton android:id="@+id/radio_female"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
 			        android:textSize="30sp"
-			        android:text="Female"/>
+			        android:text="Ñina"/>
 			    
 			</RadioGroup>
 	    
@@ -80,21 +80,21 @@
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:gravity="center"
-         android:layout_marginTop="20dp"/>
+         android:layout_marginTop="15dp"/>
      
      <Spinner
          android:id="@+id/add_new_child_num_children_in_same_pregnancy"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:gravity="center"
-         android:layout_marginTop="20dp" />
+         android:layout_marginTop="15dp" />
   
      <Spinner
          android:id="@+id/add_new_child_prenatal_care"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:gravity="center"
-         android:layout_marginTop="20dp" />
+         android:layout_marginTop="15dp" />
      
      <EditText
          android:id="@+id/add_new_child_months_gestated"
@@ -105,7 +105,7 @@
          android:textSize="30sp"
          android:ellipsize="start"
          android:inputType="numberDecimal"
-         android:hint="Months Gestated" />
+         android:hint="¿Cuántos Meses Duró el Embarazo?" />
      
      <EditText
          android:id="@+id/add_new_child_birth_weight"
@@ -115,8 +115,8 @@
          android:layout_marginTop="20dp"
          android:textSize="30sp"
          android:ellipsize="start"
-         android:inputType="number"
-         android:hint="Birth Weight (kg)" />
+         android:inputType="numberDecimal"
+         android:hint="Peso al Nacer (libras)" />
      
      <EditText
          android:id="@+id/add_new_child_birth_height"
@@ -126,8 +126,8 @@
          android:layout_marginTop="20dp"
          android:textSize="30sp"
          android:ellipsize="start"
-         android:inputType="number"
-         android:hint="Birth Height (cm)" />
+         android:inputType="numberDecimal"
+         android:hint="Talla al Nacer (cm)" />
      
      <EditText
          android:id="@+id/add_new_child_youngest_sibling_dob"
@@ -136,7 +136,7 @@
          android:gravity="center"
          android:layout_marginTop="20dp"
          android:textSize="30sp"
-         android:hint="Youngest Sibling Date of Birth"
+         android:hint="Fecha de Nacimiento del Último Nińo"
          />
  
      <Button
@@ -146,6 +146,6 @@
          android:layout_marginTop="30dp"
          android:gravity="center"
          android:textSize="30sp"
-         android:text="Add Child" />
+         android:text="Añadir el Ñino" />
  	</LinearLayout>
 </ScrollView>

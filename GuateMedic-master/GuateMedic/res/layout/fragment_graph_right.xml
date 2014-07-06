@@ -22,7 +22,7 @@
             android:textSize="35sp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:text="Weight"
+            android:text="Peso"
             android:layout_marginRight="2dp"
             />
         
@@ -35,7 +35,7 @@
             android:textSize="35sp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:text="Height"
+            android:text="Talla"
             android:layout_marginRight="2dp"
             />
         
@@ -48,7 +48,7 @@
             android:textSize="35sp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:text="Other"
+            android:text="Otro"
             />
         
     </LinearLayout>
@@ -57,8 +57,8 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             androidPlot.title="A Simple XY Plot"
-            androidPlot.domainLabel="Age (weeks)"
-            androidPlot.rangeLabel="Range"
+            androidPlot.domainLabel="Edad (semanas)"
+            androidPlot.rangeLabel="Peso/Talla"
             androidPlot.titleWidget.labelPaint.textSize="@dimen/title_font_size"
             androidPlot.domainLabelWidget.labelPaint.textSize="@dimen/domain_label_font_size"
             androidPlot.rangeLabelWidget.labelPaint.textSize="@dimen/range_label_font_size"

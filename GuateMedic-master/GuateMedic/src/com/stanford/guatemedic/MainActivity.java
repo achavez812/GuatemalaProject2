@@ -91,7 +91,7 @@ public class MainActivity extends ActionBarActivity {
 						Intent intent = new Intent(getActivity().getApplication(), ViewVillageListActivity.class);
 						startActivity(intent);
 					} else {
-						Toast.makeText(getActivity(), "NO RECORDS", Toast.LENGTH_LONG).show();
+						Toast.makeText(getActivity(), "NO HAY REGISTROS", Toast.LENGTH_LONG).show();
 					}
 				}
 			});
@@ -99,22 +99,22 @@ public class MainActivity extends ActionBarActivity {
 			final Button upload_download_button = (Button)rootView.findViewById(R.id.main_upload_download_button);
 			if (gmr.hasDownloadedData()) {
 				if (gmr.isUploadNeeded()) {
-					upload_download_button.setText("UPLOAD");
-					notes.setText("There have been records created. Please upload when possible.");
+					upload_download_button.setText("CARGAR");
+					notes.setText("Registros han sido creado. Por favor carga cuando hay un conexión al Internet.");
 				} else {
-					upload_download_button.setText("DOWNLOAD");
-					notes.setText("There are downloaded records. You are free to download more when you have an internet connection.");
+					upload_download_button.setText("DESCARGAR");
+					notes.setText("Hay registros descargados. Puedes descargar mas cuando hay un conexión al Internet.");
 				}
 			} else {
-				upload_download_button.setText("DOWNLOAD");
-				notes.setText("No records are currently downloaded. You are free to download when you have an internet connection.");
+				upload_download_button.setText("DESCARGAR");
+				notes.setText("No hay registros descargados. Puedes descargar cuando hay un conexión al Internet.");
 			}
 			
 			upload_download_button.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					if (Utilities.hasInternetConnection(getActivity().getApplication())) {
-						if (upload_download_button.getText().equals("DOWNLOAD")) {
+						if (upload_download_button.getText().equals("DESCARGAR")) {
 							Intent intent = new Intent(getActivity().getApplication(), DownloadLoginActivity.class);
 							startActivity(intent);
 						} else {
@@ -122,7 +122,7 @@ public class MainActivity extends ActionBarActivity {
 							startActivity(intent);
 						}
 					} else {
-						Toast.makeText(getActivity(), "NO INTERNET", Toast.LENGTH_LONG).show();
+						Toast.makeText(getActivity(), "NO CONEXIÓN AL INTERNET", Toast.LENGTH_LONG).show();
 					}
 				}
 			});

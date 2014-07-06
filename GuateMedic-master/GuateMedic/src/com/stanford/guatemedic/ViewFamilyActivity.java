@@ -63,12 +63,99 @@ public class ViewFamilyActivity extends ActionBarActivity{
 			}
 		});
 		
+		DetailedFamily family = DetailedRecordsStore.get(getApplication()).getFamily(family_id);
+		
+		TextView village_field = (TextView)findViewById(R.id.view_family_village_header);
+		village_field.setText(family.getVillage_name());
+		
+		
+		TextView mother_name_field = (TextView)findViewById(R.id.view_family_parent1_name_field);
+		if (!family.getParent1_name().isEmpty())
+			mother_name_field.setText(family.getParent1_name());
+		else
+			mother_name_field.setText("Nombre desconocido");
+		
+		TextView mother_dob_field = (TextView)findViewById(R.id.view_family_parent1_dob_field);
+		if (!family.getParent1_dob().isEmpty()) {
+			String formatted_mother_dob = Utilities.formatDate(family.getParent1_dob());
+			mother_dob_field.setText(formatted_mother_dob + " (" + Utilities.getAge(formatted_mother_dob) + " años)");
+		} else
+			mother_dob_field.setText("Edad desconocida");
+		
+		TextView father_name_field = (TextView)findViewById(R.id.view_family_parent2_name_field);
+		if (!family.getParent2_name().isEmpty())
+			father_name_field.setText(family.getParent2_name());
+		else
+			father_name_field.setText("Nombre desconocido");
+		
+		TextView father_dob_field = (TextView)findViewById(R.id.view_family_parent2_dob_field);
+		if (!family.getParent2_dob().isEmpty()) {
+			String formatted_father_dob = Utilities.formatDate(family.getParent2_dob());
+			father_dob_field.setText(formatted_father_dob + " (" + Utilities.getAge(formatted_father_dob) + " años)");
+		} else
+			father_dob_field.setText("Edad desconocida");
+		
+		int family_visits_size = family.getFamily_visits().size();
+		if (family_visits_size > 0) {
+			DetailedFamilyVisit visit = family.getFamily_visits().get(family_visits_size - 1);
+			
+			TextView father_lives_with_field = (TextView)findViewById(R.id.view_family_parent2_lives_with_family_field);
+			int does_father_live_with = visit.getDoes_father_lives_with();
+			if (does_father_live_with != 0) {
+				if (does_father_live_with == 1) {
+					father_lives_with_field.setText("No vive con familia");
+				} else if (does_father_live_with == 2) {
+					father_lives_with_field.setText("Vive con familia");
+				} 
+			} else {
+				father_lives_with_field.setText("Información desconocida");
+			}
+			
+			TextView father_occupation_field = (TextView)findViewById(R.id.view_family_parent2_occupation_field);
+			int father_occupation = visit.getFathers_job();
+			if (father_occupation != 0) {
+				if (father_occupation == 1) {
+					father_occupation_field.setText("Fijo");
+				} else if (father_occupation == 2) {
+					father_occupation_field.setText("Comerciante");
+				} else if (father_occupation == 3) {
+					father_occupation_field.setText("Agricultor (Propio)");
+				} else if (father_occupation == 4) {
+					father_occupation_field.setText("Agricultor (Ajeno)");
+				} else if (father_occupation == 5) {
+					
+				}
+			} else {
+				father_occupation_field.setText("Información desconocida");
+			}
+			
+			
+			
+		} else {
+			TextView father_lives_with_field = (TextView)findViewById(R.id.view_family_parent2_lives_with_family_field);
+			father_lives_with_field.setText("Información desconocida");
+			
+			TextView father_occupation_field = (TextView)findViewById(R.id.view_family_parent2_occupation_field);
+			father_occupation_field.setText("Información desconocida");
+
+		}
+		
+		
+		
+		
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
 				.add(R.id.child_list_container, ViewChildListFragment.newInstance(family_id)).commit();
 		}
 		
 		
+	}
+	
+	@Override
+	public void onBackPressed() {
+		Intent i = new Intent(getApplication(), ViewFamilyListActivity.class);
+		i.putExtra("village_name", DetailedRecordsStore.get(getApplication()).getFamily(family_id).getVillage_name());
+		startActivity(i);
 	}
 	
 	@Override
@@ -137,7 +224,7 @@ public class ViewFamilyActivity extends ActionBarActivity{
 			
 			public View getView(final int position, View convertView, ViewGroup parent) {
 				if (convertView == null) {
-					convertView = getActivity().getLayoutInflater().inflate(R.layout.list_item_fragment, null);
+					convertView = getActivity().getLayoutInflater().inflate(R.layout.list_item_fragment2, null);
 					CheckBox checkbox = (CheckBox)convertView.findViewById(R.id.list_item_checkbox);
 					checkbox.setVisibility(View.GONE);
 				}

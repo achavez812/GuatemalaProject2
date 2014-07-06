@@ -43,7 +43,7 @@
 		        android:layout_width="100dp"
 		        android:layout_height="50dp"
 		        android:layout_marginTop="10dp"
-		        android:text="Details"
+		        android:text="Detalles"
 		        />
 		</LinearLayout>
     </LinearLayout>
@@ -63,7 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="17sp"
-        android:text="Age: "
+        android:text="Edad: "
         />
     
     <TextView
@@ -71,7 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="17sp"
-        android:text="Weight: "
+        android:text="Peso: "
         />
     
     <TextView
@@ -79,7 +79,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="17sp"
-        android:text="Height: "
+        android:text="Talla: "
         />
 
     
@@ -89,7 +89,7 @@
         android:layout_height="wrap_content"
         android:textSize="17sp"
         android:textStyle="italic"  
-        android:text="Weight z-score: "
+        android:text="Peso z-score: "
         />
     
     <TextView
@@ -98,7 +98,7 @@
         android:layout_height="wrap_content"
         android:textSize="17sp"
         android:textStyle="italic"   
-        android:text="Height z-score: "
+        android:text="Talla z-score: "
         />
     
     <TextView
@@ -107,7 +107,7 @@
         android:layout_height="wrap_content"
         android:textSize="17sp"
         android:textStyle="italic"  
-        android:text="Other score: "
+        android:text="Otro score: "
         />
     
     <TextView
@@ -117,7 +117,7 @@
         android:textSize="18sp"
         android:layout_marginTop="10dp"
         android:textStyle="bold"  
-        android:text="Recommendation"
+        android:text="Recomendación"
         />
     
 	 <TextView

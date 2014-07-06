@@ -161,7 +161,7 @@ public class DownloadVillageListActivity extends ActionBarActivity {
 				village.setCheckboxSelected(numFamilies != 0);
 				
 				TextView villageSubtitle = (TextView)convertView.findViewById(R.id.list_item_subtitle);
-				String subtitleText = numChildren + "/" + totalChildren + " Children from " + numFamilies + " Families";
+				String subtitleText = numChildren + "/" + totalChildren + " Niños de " + numFamilies + " Familias";
 				villageSubtitle.setText(subtitleText);
 				
 				CheckBox checkbox = (CheckBox)convertView.findViewById(R.id.list_item_checkbox);
@@ -192,11 +192,11 @@ public class DownloadVillageListActivity extends ActionBarActivity {
 						}
 						
 						if (isChecked) {
-							String subtitleText = numChildren + "/" + numChildren + " Children from " + numFamilies + " Families";
+							String subtitleText = numChildren + "/" + numChildren + " Niños de " + numFamilies + " Familias";
 							((TextView)v.findViewById(R.id.list_item_subtitle)).setText(subtitleText);
 							
 						} else {
-							String subtitleText = 0 + "/" + numChildren + " Children from 0 Families";
+							String subtitleText = 0 + "/" + numChildren + " Niños de 0 Familias";
 							((TextView)v.findViewById(R.id.list_item_subtitle)).setText(subtitleText);
 						}
 					}

@@ -174,7 +174,7 @@ public class DetailedChild {
 		String visit_date = child_visit.getVisit_date(); //Date of visit being added
 		for (int i = 0; i < child_visits.size(); i++) {
 			int value = visit_date.compareTo(child_visits.get(i).getVisit_date());
-			if (value > 0) {
+			if (value < 0) {
 				child_visits.add(i, child_visit); //Shifts everything over
 				return;
 			} else if (value == 0) //Should never happen

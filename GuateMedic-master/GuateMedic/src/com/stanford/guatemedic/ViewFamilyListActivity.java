@@ -30,7 +30,7 @@ public class ViewFamilyListActivity extends ActionBarActivity {
 		getActionBar().setHomeButtonEnabled(true);
 
 		String village_name = getIntent().getStringExtra("village_name");
-		setTitle("Families in " + village_name);
+		setTitle("Familias en " + village_name);
 		village = village_name;
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
@@ -178,7 +178,10 @@ public class ViewFamilyListActivity extends ActionBarActivity {
 				familyTitle.setText(family.getParent1_name());
 
 				TextView subtitle = (TextView)convertView.findViewById(R.id.list_item_subtitle);
-				subtitle.setText(num_children + " Children");
+				if (num_children == 1)
+					subtitle.setText(num_children + " Niño");
+				else
+					subtitle.setText(num_children + " Niños");
 				
 				return convertView;
 				
