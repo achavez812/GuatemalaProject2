@@ -191,7 +191,7 @@ public class DetailedRecordsStore {
 	
 	public void addNewFamilyVisit(JSONObject obj) {
 		try {
-			String family_id = obj.getString("child_id");
+			String family_id = obj.getString("family_id");
 			String random_id = generateRandomId();
 			String current_date = Utilities.getTodayString();
 			
@@ -256,24 +256,24 @@ public class DetailedRecordsStore {
 			dfv.setVisit_date(json.getString("visit_date"));
 			if (json.has("parent1_marital_status")) 
 				dfv.setParent1_marital_status(Integer.parseInt(json.getString("parent1_marital_status")));
-			if (json.has("father_lives_with")) 
-				dfv.setFather_lives_with(Integer.parseInt(json.getString("father_lives_with")));
+			if (json.has("does_father_live_with")) 
+				dfv.setDoes_father_live_with(Integer.parseInt(json.getString("does_father_live_with")));
 			if (json.has("num_pregnancies")) 
 				dfv.setNum_pregnancies(Integer.parseInt(json.getString("num_pregnancies")));
 			if (json.has("num_children_alive"))
 				dfv.setNum_children_alive(Integer.parseInt(json.getString("num_children_alive")));
 			if (json.has("num_children_dead"))
 				dfv.setNum_children_dead(Integer.parseInt(json.getString("num_children_dead")));
-			if (json.has("how_died")) 
-				dfv.setChildren_death_information(json.getString("how_died"));
+			if (json.has("how_children_died")) 
+				dfv.setHow_children_died(json.getString("how_children_died"));
 			if (json.has("num_children_under_5"))
 				dfv.setNum_children_under_5(Integer.parseInt(json.getString("num_children_under_5")));
 			if (json.has("num_people_in_household"))
 				dfv.setNum_people_in_household(Integer.parseInt(json.getString("num_people_in_household")));
 			if (json.has("fathers_job"))
 				dfv.setFathers_job(Integer.parseInt(json.getString("fathers_job")));
-			if (json.has("igss"))
-				dfv.setIGSS(Integer.parseInt(json.getString("igss")));
+			if (json.has("has_igss"))
+				dfv.setHas_igss(Integer.parseInt(json.getString("has_igss")));
 			if (json.has("promoter_id"))
 				dfv.setPromoter_id(json.getString("promoter_id"));
 		} catch (JSONException e) {
@@ -351,13 +351,13 @@ public class DetailedRecordsStore {
 		try {
 			dcv.setVisit_date(json.getString("visit_date"));
 			if (json.has("received_all_vaccines"))
-				dcv.setDid_receive_vaccinations(Integer.parseInt(json.getString("received_all_vaccines")));
+				dcv.setReceived_all_vaccines(Integer.parseInt(json.getString("received_all_vaccines")));
 			if (json.has("type_of_vaccines_received"))
-				dcv.setVaccination_information(json.getString("types_of_vaccines_received"));
+				dcv.setType_of_vaccines_received(json.getString("types_of_vaccines_received"));
 			if (json.has("chronic_disease_or_disability"))
 				dcv.setHas_chronic_disease_or_disability(Integer.parseInt(json.getString("chronic_disease_or_disability")));
 			if (json.has("type_of_chronic_disease_or_disability"))
-				dcv.setChronic_disease_or_disability_information(json.getString("type_of_chronic_disease_or_disability"));
+				dcv.setType_of_chronic_disease_or_disability(json.getString("type_of_chronic_disease_or_disability"));
 			if (json.has("currently_breastfed"))
 				dcv.setIs_currently_breastfed(Integer.parseInt("currently_breastfed"));
 			if (json.has("only_breastfed"))
@@ -367,9 +367,9 @@ public class DetailedRecordsStore {
 			if (json.has("child_age_when_stoppped_breastfeeding"))
 				dcv.setChild_age_when_stopped_breastfeeding(Float.parseFloat("child_age_when_stoppped_breastfeeding"));
 			if (json.has("weight_in_kilos"))
-				dcv.setWeight(Float.parseFloat("weight_in_kilos"));
+				dcv.setWeight_in_pounds(Float.parseFloat("weight_in_pounds"));
 			if (json.has("height_in_centimeters"))
-				dcv.setHeight(Float.parseFloat("height_in_centimeters"));
+				dcv.setHeight_in_centimeters(Float.parseFloat("height_in_centimeters"));
 			if (json.has("num_times_incaparina_past_week"))
 				dcv.setNum_times_incaparina_past_week(Integer.parseInt(json.getString("num_times_incaparina_past_week")));
 			if (json.has("num_times_vegetables_or_fruits_past_week"))

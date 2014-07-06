@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" 
+    android:padding="20dp">
+    
+	<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+    
+		<TextView
+		    android:id="@+id/food_information_text"
+			android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="30sp"
+		    android:text="Food Information" />
+	
+		<EditText
+        	android:id="@+id/child_visit4_num_times_incaparina_past_week"
+        	android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+			android:layout_marginTop="30dp"
+			android:ellipsize="start"
+            android:inputType="number"
+            android:textSize="30sp" 
+        	android:hint="Number of times incaparina past week?" />
+	
+		<EditText
+		    android:id="@+id/child_visit4_num_times_vegetables_or_fruits_past_week"
+		    android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+			android:layout_marginTop="30dp"
+			android:ellipsize="start"
+            android:inputType="number"
+            android:textSize="30sp" 
+		    android:hint="Number of times vegetables or fruits past week?" />
+		
+		<EditText
+        	android:id="@+id/child_visit4_num_times_herbs_past_week"
+        	android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+			android:layout_marginTop="30dp"
+			android:ellipsize="start"
+            android:inputType="number"
+            android:textSize="30sp" 
+        	android:hint="Number of times herbs past week?" />
+		
+		<TextView
+		    android:id="@+id/illness_info_text"
+		    android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:gravity="center"
+            android:textSize="30sp"
+		    android:text="Illness Information" />
+		
+		<EditText
+        	android:id="@+id/child_visit4_num_times_diarrhea_past_week"
+        	android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+			android:layout_marginTop="30dp"
+			android:ellipsize="start"
+            android:inputType="number"
+            android:textSize="30sp" 
+        	android:hint="Number of times diarrhea past week?" />
+	
+		<EditText
+        	android:id="@+id/child_visit4_num_times_vomit_past_week"
+        	android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+			android:layout_marginTop="30dp"
+			android:ellipsize="start"
+            android:inputType="number"
+            android:textSize="30sp" 
+        	android:hint="Number of times vomit past week?" />
+		
+		<EditText
+        	android:id="@+id/child_visit4_num_times_cough_past_week"
+        	android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+			android:layout_marginTop="30dp"
+			android:ellipsize="start"
+            android:inputType="number"
+            android:textSize="30sp" 
+        	android:hint="Number of times cough past week?" />
+		
+		<EditText
+        	android:id="@+id/child_visit4_num_times_fever_past_week"
+        	android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+			android:layout_marginTop="30dp"
+			android:ellipsize="start"
+            android:inputType="number"
+            android:textSize="30sp" 
+        	android:hint="Number of times fever past week?" />
+	
+		<EditText
+        android:id="@+id/child_visit4_num_times_other_illness_past_week"
+        android:textSize="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+		android:layout_margin="20dp"
+		android:layout_centerHorizontal="true"
+		android:layout_below="@+id/child_visit4_num_times_fever_past_week"
+        android:hint="Number of times other illness past week?"
+        android:inputType="number"
+        />
+		
+			<EditText
+        android:id="@+id/child_visit4_other_illness_information"
+        android:textSize="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/child_visit4_num_times_other_illness_past_week"
+        android:hint="Other illness information"
+        />
+		<EditText
+		android:id="@+id/footer_fragment_add_new_child_visit4"
+		android:layout_width="0dp"
+		android:layout_height="0dp"
+		android:layout_below="@+id/child_visit4_other_illness_information"
+		/>
+    
+
+	</LinearLayout>
+</ScrollView>

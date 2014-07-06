@@ -26,17 +26,13 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 	DetailedFamilyVisit dfv;
 	private String family_id;
 	private  AddNewFamilyVisitFragment1 frag1_instance;
-	private  AddNewFamilyVisitFragment2 frag2_instance;
-	private  AddNewFamilyVisitFragment3 frag3_instance;
-	
+	private  AddNewFamilyVisitFragment2 frag2_instance;	
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_new_family_visit);
 		frag1_instance=AddNewFamilyVisitFragment1.newInstance(family_id);
 		frag2_instance=AddNewFamilyVisitFragment2.newInstance(family_id);
-		frag3_instance=AddNewFamilyVisitFragment3.newInstance(family_id);
-
 		
 		Spinner spinner = (Spinner)findViewById(R.id.family_visit_spinner);
 		
@@ -61,12 +57,7 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 		        else if (item.equals("Category 2")) {
 		        	getSupportFragmentManager().beginTransaction()
 					.replace(R.id.container, frag2_instance).commit();
-		        }
-		        else if (item.equals("Category 3")) {
-					getSupportFragmentManager().beginTransaction()
-					.replace(R.id.container, frag3_instance).commit();    	
-				}
-		        else {
+		        } else {
 					Toast.makeText(getApplication(), "Error", Toast.LENGTH_LONG).show();
 				}
 				
@@ -96,13 +87,14 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 			frag2_instance.convertValuesFrag2();
 			JSONObject obj = new JSONObject();
 			try {
-				obj.put("father_lives_with", AddNewFamilyVisitFragment1.father_lives_with_put);
+				obj.put("family_id", family_id);
+				obj.put("does_father_live_with", AddNewFamilyVisitFragment1.father_lives_with_put);
 				//Log.d("Working","WorkingTag"+AddNewFamilyVisitFragment1.father_lives_with_put);
 				obj.put("parent1_marital_status", AddNewFamilyVisitFragment1.parent1_marital_status_put);
 				//Log.d("Working","WorkingTag"+AddNewFamilyVisitFragment1.parent1_marital_status_put);
 				obj.put("fathers_job", AddNewFamilyVisitFragment1.father_occu_put);
 				//Log.d("Working","WorkingTag"+AddNewFamilyVisitFragment1.father_occu_put);
-				obj.put("IGSS", AddNewFamilyVisitFragment1.IGSS_family_put);
+				obj.put("has_igss", AddNewFamilyVisitFragment1.IGSS_family_put);
 				//Log.d("Working","WorkingTag"+AddNewFamilyVisitFragment1.IGSS_family_put);
 				obj.put("num_children_alive", AddNewFamilyVisitFragment2.num_children_alive_put);
 				//Log.d("Working","WorkingTag"+AddNewFamilyVisitFragment2.num_children_alive_put);
@@ -114,8 +106,9 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 				//Log.d("Working","WorkingTag"+AddNewFamilyVisitFragment2.num_people_in_household_put);
 				obj.put("num_pregnancies", AddNewFamilyVisitFragment2.num_pregnancies_put);
 				//Log.d("Working","WorkingTag"+AddNewFamilyVisitFragment2.num_pregnancies_put);
-				obj.put("children_death_information", AddNewFamilyVisitFragment2.children_death_information_put);	
+				obj.put("how_children_died", AddNewFamilyVisitFragment2.children_death_information_put);	
 				//Log.d("Working","WorkingTag"+AddNewFamilyVisitFragment2.children_death_information_put);
+				DetailedRecordsStore.get(getApplication()).addNewFamilyVisit(obj);
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -193,13 +186,15 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 			//Marital Status
 			String parent1_marital_status_string=((Spinner)(rootView.findViewById(R.id.family_visit1_parent1_marital_status))).getSelectedItem().toString();
 			
-			if(parent1_marital_status_string.trim().equalsIgnoreCase("married")) {
+			if(parent1_marital_status_string.trim().equals("Together")){
 				parent1_marital_status_put=1;
-			}else if(parent1_marital_status_string.trim().equalsIgnoreCase("divorced")){
+			} else if(parent1_marital_status_string.trim().equals("Married")) {
 				parent1_marital_status_put=2;
-			}else if(parent1_marital_status_string.trim().equalsIgnoreCase("widowed")){
+			} else if(parent1_marital_status_string.trim().equals("Widowed")){
 				parent1_marital_status_put=3;
-			}else{
+			} else if(parent1_marital_status_string.trim().equalsIgnoreCase("Single")){
+				parent1_marital_status_put=4;
+			} else{
 				parent1_marital_status_put=0;
 			}
 			
@@ -207,15 +202,15 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 			//Father Occupation
 			String father_occu_string=((Spinner)(rootView.findViewById(R.id.family_visit1_fathers_job))).getSelectedItem().toString();
 			
-			if(father_occu_string.trim().equalsIgnoreCase("farmer")) {
+			if(father_occu_string.trim().equals("Fixed")) {
 				father_occu_put=1;
-			}else if(father_occu_string.trim().equalsIgnoreCase("doctor")){
+			}else if(father_occu_string.trim().equals("Merchant")){
 				father_occu_put=2;
-			}else if(father_occu_string.trim().equalsIgnoreCase("social worker")){
+			}else if(father_occu_string.trim().equals("Farmer (owner)")){
 				father_occu_put=3;
-			}else if(father_occu_string.trim().equalsIgnoreCase("teacher")){
+			}else if(father_occu_string.trim().equals("Farmer (alien)")){
 				father_occu_put=4;
-			}else if(father_occu_string.trim().equalsIgnoreCase("other")){
+			}else if(father_occu_string.trim().equals("Other")){
 				father_occu_put=5;
 			}else{
 				father_occu_put=0;
@@ -223,15 +218,15 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 			
 			
 			//Lives With Father?
-			RadioGroup radioFatherLivesWithGroup = (RadioGroup) rootView.findViewById(R.id.family_visit1_family_visit1_father_lives_with);
+			RadioGroup radioFatherLivesWithGroup = (RadioGroup) rootView.findViewById(R.id.family_visit1_father_lives_with);
 			int selectedId_father = radioFatherLivesWithGroup.getCheckedRadioButtonId();
 			RadioButton father_lives_with = (RadioButton) rootView.findViewById(selectedId_father);
 			String father_lives_with_string=father_lives_with.getText().toString();
 			
 
-			if(father_lives_with_string.trim().equalsIgnoreCase("yes")){
+			if(father_lives_with_string.trim().equals("Yes")){
 				father_lives_with_put=1;
-			}else if(father_lives_with_string.trim().equalsIgnoreCase("no")){
+			}else if(father_lives_with_string.trim().equals("No")){
 				father_lives_with_put=2;
 			}else {
 				father_lives_with_put=0;
@@ -244,9 +239,9 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 			String IGSS_family_string=IGSS_family.getText().toString();
 			
 
-			if(IGSS_family_string.trim().equalsIgnoreCase("yes")){
+			if(IGSS_family_string.trim().equals("Yes")){
 				IGSS_family_put=1;
-			}else if(IGSS_family_string.trim().equalsIgnoreCase("no")){
+			}else if(IGSS_family_string.trim().equals("No")){
 				IGSS_family_put=2;
 			}else {
 				IGSS_family_put=0;
@@ -380,7 +375,7 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 			});
 			
 			EditText death_information_field = (EditText)rootView.findViewById(R.id.family_visit2_death_information);
-			if (dfv.getChildren_death_information() != null) death_information_field.setText("" + dfv.getChildren_death_information());
+			if (dfv.getHow_children_died() != null) death_information_field.setText("" + dfv.getHow_children_died());
 			death_information_field.addTextChangedListener(new TextWatcher() {
 
 				@Override
@@ -401,9 +396,9 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 						int before, int count) {
 					// TODO Auto-generated method stub
 					if (s.length() > 0)
-						dfv.setChildren_death_information(s.toString());
+						dfv.setHow_children_died(s.toString());
 					else 
-						dfv.setChildren_death_information(null);
+						dfv.setHow_children_died(null);
 					
 				}
 				
@@ -474,15 +469,24 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 		public void convertValuesFrag2(){
 			//Number of Pregnancies
 			String num_pregnancies_string=((EditText)(rootView.findViewById(R.id.family_visit2_num_pregnancies))).getText().toString();
-			num_pregnancies_put=Integer.parseInt(num_pregnancies_string);
+			if (num_pregnancies_string.isEmpty())
+				num_pregnancies_put = -1;
+			else
+				num_pregnancies_put=Integer.parseInt(num_pregnancies_string);
 			
 			//Number of Children Alive
 			String num_children_alive_string=((EditText)(rootView.findViewById(R.id.family_visit2_num_children_alive))).getText().toString();
-			num_children_alive_put=Integer.parseInt(num_children_alive_string);
+			if (num_children_alive_string.isEmpty())
+				num_children_alive_put = -1;
+			else
+				num_children_alive_put=Integer.parseInt(num_children_alive_string);
 			
 			//Number of Children Dead
 			String num_children_dead_string=((EditText)(rootView.findViewById(R.id.family_visit2_num_children_dead))).getText().toString();
-			num_children_dead_put=Integer.parseInt(num_children_dead_string);
+			if (num_children_dead_string.isEmpty())
+				num_children_dead_put = -1;
+			else
+				num_children_dead_put=Integer.parseInt(num_children_dead_string);
 			
 			//Death Information 
 			String children_death_information_string=((EditText)(rootView.findViewById(R.id.family_visit2_death_information))).getText().toString();
@@ -490,44 +494,20 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 			
 			//Number of children under 5
 			String num_children_under_5_string=((EditText)(rootView.findViewById(R.id.family_visit2_num_children_under_5))).getText().toString();
-			num_children_under_5_put=Integer.parseInt(num_children_under_5_string);
+			if (num_children_under_5_string.isEmpty())
+				num_children_under_5_put = -1;
+			else
+				num_children_under_5_put=Integer.parseInt(num_children_under_5_string);
 			
 			//Number of People in household
 			String num_people_in_household_string=((EditText)(rootView.findViewById(R.id.family_visit2_num_people_in_household))).getText().toString();
-			num_people_in_household_put=Integer.parseInt(num_people_in_household_string);
+			if (num_people_in_household_string.isEmpty())
+				num_people_in_household_put = -1;
+			else
+				num_people_in_household_put=Integer.parseInt(num_people_in_household_string);
 			
 			
 		}
 	}
 	
-	public static class AddNewFamilyVisitFragment3 extends Fragment {
-
-		public AddNewFamilyVisitFragment3() {
-
-		}
-
-		public static AddNewFamilyVisitFragment3 newInstance(String family_id) {
-			AddNewFamilyVisitFragment3 f = new AddNewFamilyVisitFragment3();
-			Bundle args = new Bundle();
-			args.putString("family_id", family_id);
-			f.setArguments(args);
-			return f;
-		}
-		public void onCreate(Bundle savedInstanceState) {
-			Utilities utilityObj=new Utilities();
-			utilityObj.loadNativeCSS();
-			super.onCreate(savedInstanceState);
-		}
-		
-		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-			Utilities utilityObj=new Utilities();
-			utilityObj.loadNativeCSS();
-			View rootView = inflater.inflate(R.layout.fragment_add_new_family_visit3, container, false);
-			final String family_id = getArguments().getString("family_id");
-			
-			final DetailedFamilyVisit dfv = ((AddNewFamilyVisitActivity)getActivity()).dfv;
-			
-			return rootView;
-		}
-	}
 }

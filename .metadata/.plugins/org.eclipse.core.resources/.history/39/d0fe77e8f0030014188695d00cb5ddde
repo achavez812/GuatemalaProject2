@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical">   
+	    <Spinner
+	        android:id="@+id/family_visit1_parent1_marital_status"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="20dp"/>
+
+     	<TextView 
+         	android:id="@+id/family_visit1_father_lives_with_text"
+         	android:layout_width="wrap_content"
+         	android:layout_height="wrap_content"
+         	android:gravity="center"
+			android:marginTop="20dp"
+         	android:textSize="30sp"
+         	android:text="Does the father live with the family?"/>
+	     
+	     <RadioGroup
+	         android:id="@+id/family_visit1_family_visit1_father_lives_with"
+	         android:textSize="30sp"
+	         android:layout_width="match_parent"
+	         android:layout_height="wrap_content"
+	         android:layout_centerHorizontal="true"
+	         android:layout_below="@+id/family_visit1_father_lives_with_text"
+	         android:tag="Father Lives With"
+	         android:layout_marginBottom="20dp"
+	         android:layout_marginLeft="20dp" 
+	         >
+	         <RadioButton 
+	             android:id="@+id/yes_father_lives_with"
+	             android:layout_width="wrap_content"
+	             android:layout_height="wrap_content"
+	             android:text="Yes"/>
+	         <RadioButton 
+	             android:id="@+id/no_father_lives_with"
+	             android:layout_width="wrap_content"
+	             android:layout_height="wrap_content"
+	             android:text="No"/>
+	    </RadioGroup>       
+	    
+	  	<Spinner
+	        android:id="@+id/family_visit1_fathers_job"
+	        android:textSize="30sp"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_margin="20dp"
+	        android:layout_centerHorizontal="true"
+	        android:layout_below="@+id/family_visit1_family_visit1_father_lives_with"
+	        android:hint="Fathers job?" />
+	            
+	
+	     <TextView android:id="@+id/family_visit1_igss_text"
+	         android:text="Does the family have an IGSS?"
+	         android:layout_width="wrap_content"
+	         android:layout_height="wrap_content"
+	         android:textSize="20sp"
+	         android:layout_marginTop="20dp"
+	         android:layout_marginLeft="20dp" 
+	         android:layout_below="@+id/family_visit1_fathers_job"
+	         android:layout_alignParentLeft="true"/>
+	     <RadioGroup
+	         android:id="@+id/family_visit1_igss"
+	         android:textSize="30sp"
+	         android:layout_width="match_parent"
+	         android:layout_height="wrap_content"
+	         android:layout_centerHorizontal="true"
+	         android:layout_below="@+id/family_visit1_igss_text"
+	         android:tag="IGSS"
+	         android:layout_marginBottom="20dp"
+	         android:layout_marginLeft="20dp" 
+	         >
+	         <RadioButton 
+	             android:id="@+id/yes_igss"
+	             android:layout_width="wrap_content"
+	             android:layout_height="wrap_content"
+	             android:text="Yes"/>
+	         <RadioButton 
+	             android:id="@+id/no_igss"
+	             android:layout_width="wrap_content"
+	             android:layout_height="wrap_content"
+	             android:text="No"/>
+	    </RadioGroup>
+	
+	</LinearLayout>
+</ScrollView>

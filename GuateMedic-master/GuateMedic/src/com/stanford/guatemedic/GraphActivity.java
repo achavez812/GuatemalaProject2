@@ -3,6 +3,7 @@ package com.stanford.guatemedic;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -19,15 +20,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.GraphView.GraphViewData;
-import com.jjoe64.graphview.GraphViewSeries;
-import com.jjoe64.graphview.LineGraphView;
+import com.androidplot.xy.LineAndPointFormatter;
+import com.androidplot.xy.SimpleXYSeries;
+import com.androidplot.xy.XYPlot;
+import com.androidplot.xy.XYSeries;
 import com.stanford.guatemedic.R.color;
 
 public class GraphActivity extends ActionBarActivity {
@@ -38,7 +38,6 @@ public class GraphActivity extends ActionBarActivity {
 	static int age_weeks = -1;
 	static double weight = -1;
 	static double height = -1;
-	static GraphView graphView;
 	
 	static ArrayList<Integer> weeks_array;
 	static ArrayList<Double> weight_array;
@@ -447,17 +446,7 @@ public class GraphActivity extends ActionBarActivity {
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 			final View rootView = inflater.inflate(R.layout.fragment_graph_right, container,false);
-			
-			graphView = new LineGraphView(getActivity(), "Graph" );
-			graphView.setScalable(true);
-			graphView.setScrollable(true);
-			
-			LinearLayout.LayoutParams layoutParams = 
-					new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-			layoutParams.setMargins(20, 20, 20, 20);
-			
-			LinearLayout layout = (LinearLayout)rootView.findViewById(R.id.graph_linear_layout);
-			layout.addView(graphView, layoutParams);
+
 			
 			final TextView weight_view = (TextView)rootView.findViewById(R.id.tab_weight);
 			final TextView height_view = (TextView)rootView.findViewById(R.id.tab_height);
@@ -472,40 +461,42 @@ public class GraphActivity extends ActionBarActivity {
 					height_view.setBackgroundResource(color.gray_dark);
 					bmi_view.setBackgroundResource(color.gray_dark);
 					if (sex != null) {
-						//graphView.setHorizontalLabels(new String[] {"Age (weeks)"});
-						//graphView.setVerticalLabels(new String [] {"Weight (kgs)"});
-						graphView.removeAllSeries();
 						if (sex.equals("Female")) {
-							graphView.setTitle("Female: Age(weeks) vs. Weight(kgs)");
-							for (int i = 0; i < female_weight_data.length; i++) {
-								double[] row = female_weight_data[i];
-								GraphViewData[] graph_data = new GraphViewData[row.length];
-								for (int j = 0; j < row.length; j++) {
-									graph_data[j] = new GraphViewData(convertMonthsToWeeks(x_weight_values[j]), row[j]);
-								}
-								graphView.addSeries(new GraphViewSeries(graph_data));
-							}
-							
-							
+							XYPlot plot;
+							plot = (XYPlot) rootView.findViewById(R.id.mySimpleXYPlot);
+							 
+					        // Create a couple arrays of y-values to plot:
+					        Number[] series1Numbers = {1, 8, 5, 2, 7, 4};
+					        Number[] series2Numbers = {4, 6, 3, 8, 2, 10};
+					 
+					        // Turn the above arrays into XYSeries':
+					        XYSeries series1 = new SimpleXYSeries(
+					                Arrays.asList(series1Numbers),          // SimpleXYSeries takes a List so turn our array into a List
+					                SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, // Y_VALS_ONLY means use the element index as the x value
+					                "Series1");                             // Set the display title of the series
+					 
+					        // same as above
+					        XYSeries series2 = new SimpleXYSeries(Arrays.asList(series2Numbers), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Series2");
+					 
+					        // Create a formatter to use for drawing a series using LineAndPointRenderer
+					        // and configure it from xml:
+					        LineAndPointFormatter series1Format = new LineAndPointFormatter(Color.RED, Color.GREEN, Color.BLUE, null);
+					 
+					        // add a new series' to the xyplot:
+					        plot.addSeries(series1, series1Format);
+					 
+					        // same as above:
+					        LineAndPointFormatter series2Format = new LineAndPointFormatter(Color.RED, Color.GREEN, Color.BLUE, null);
+					        plot.addSeries(series2, series2Format);
+					 
+					        // reduce the number of range labels
+					        plot.setTicksPerRangeLabel(3);
+					        plot.getGraphWidget().setDomainLabelOrientation(-45);
 							
 						} else {
-							graphView.setTitle("Male: Age(weeks) vs. Weight(kgs)");
-							for (int i = 0; i < male_weight_data.length; i++) {
-								double[] row = male_weight_data[i];
-								GraphViewData[] graph_data = new GraphViewData[row.length];
-								for (int j = 0; j < row.length; j++) {
-									graph_data[j] = new GraphViewData(convertMonthsToWeeks(x_weight_values[j]), row[j]);
-								}
-								graphView.addSeries(new GraphViewSeries(graph_data));
-							}
+			
 						}
-						GraphViewData[] graph_data = new GraphViewData[weeks_array.size()];
-						for (int i = 0; i < weeks_array.size(); i++) {
-							graph_data[i] = new GraphViewData(weeks_array.get(i), weight_array.get(i));
-						}
-						
-						GraphViewSeries the_data = new GraphViewSeries("Child Data", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(200, 50, 00), 5) , graph_data);
-						graphView.addSeries(the_data);
+
 					} 
 				}
 			});
@@ -520,37 +511,13 @@ public class GraphActivity extends ActionBarActivity {
 					weight_view.setBackgroundResource(color.gray_dark);
 					bmi_view.setBackgroundResource(color.gray_dark);
 					if (sex != null) {
-						//graphView.setHorizontalLabels(new String[] {"Age (weeks)"});
-						//graphView.setVerticalLabels(new String [] {"Height (cms)"});
-						graphView.removeAllSeries();
+
 						if (sex.equals("Female")) {
-							graphView.setTitle("Female: Age(weeks) vs. Height(cms)");
-							for (int i = 0; i < female_height_data.length; i++) {
-								double[] row = female_height_data[i];
-								GraphViewData[] graph_data = new GraphViewData[row.length];
-								for (int j = 0; j < row.length; j++) {
-									graph_data[j] = new GraphViewData(convertMonthsToWeeks(x_height_values[j]), row[j]);
-								}
-								graphView.addSeries(new GraphViewSeries(graph_data));
-							}
+		
 						} else {
-							graphView.setTitle("Male: Age(weeks) vs. Height(cms)");
-							for (int i = 0; i < male_height_data.length; i++) {
-								double[] row = male_height_data[i];
-								GraphViewData[] graph_data = new GraphViewData[row.length];
-								for (int j = 0; j < row.length; j++) {
-									graph_data[j] = new GraphViewData(convertMonthsToWeeks(x_height_values[j]), row[j]);
-								}
-								graphView.addSeries(new GraphViewSeries(graph_data));
-							}
+
 						}	
-						GraphViewData[] graph_data = new GraphViewData[weeks_array.size()];
-						for (int i = 0; i < weeks_array.size(); i++) {
-							graph_data[i] = new GraphViewData(weeks_array.get(i), height_array.get(i));
-						}
-						
-						GraphViewSeries the_data = new GraphViewSeries("Child Data", new GraphViewSeries.GraphViewSeriesStyle(Color.rgb(200, 50, 00), 5) , graph_data);
-						graphView.addSeries(the_data);
+
 						
 					} 
 				}

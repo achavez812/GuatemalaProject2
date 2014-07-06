@@ -120,7 +120,6 @@ public class UploadLoginActivity extends ActionBarActivity{
 				try {
 					JSONArray json_arr = new JSONArray();
 					for (UploadFamily uf : UploadRecordsStore.get(getApplication()).getFamilies())  {
-						Log.i("WTF", uf.getFamily_id());
 						json_arr.put(new JSONObject(uf.getData()));
 					}
 					if (json_arr.length() > 0) {
@@ -135,10 +134,8 @@ public class UploadLoginActivity extends ActionBarActivity{
 								String temp_family_id = obj.getString("temp_family_id");
 								UploadFamily uf = UploadRecordsStore.get(getApplication()).getFamily(temp_family_id);
 								uf.setFamily_id(family_id);
-								Log.i("WTF", uf.getTemp_family_id());
 								ArrayList<String> child_ids = UploadRecordsStore.get(getApplication()).getFamily(temp_family_id).getChild_ids();
 								for (String child_id : child_ids) {
-									Log.i("WTF","found a matching kid during upload");
 									UploadChild uc = UploadRecordsStore.get(getApplication()).getChild(child_id);
 									uc.setFamily_id(family_id);
 								}
@@ -197,9 +194,9 @@ public class UploadLoginActivity extends ActionBarActivity{
 				try {
 					JSONArray json_arr = new JSONArray();
 					for (UploadFamilyVisit ufv : UploadRecordsStore.get(getApplication()).getFamilyVisits())
-						json_arr.put(ufv.getData());
+						json_arr.put(new JSONObject(ufv.getData()));
 					for (UploadChildVisit ucv : UploadRecordsStore.get(getApplication()).getChildVisits())
-						json_arr.put(ucv.getData());
+						json_arr.put(new JSONObject(ucv.getData()));
 					if (json_arr.length() > 0) {
 						Map<String, String> headerMap = new HashMap<String, String>();
 						headerMap.put("Authorization", auth_key);

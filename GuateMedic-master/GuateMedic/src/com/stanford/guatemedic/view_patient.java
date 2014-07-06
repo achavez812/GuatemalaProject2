@@ -1,4 +1,5 @@
 package com.stanford.guatemedic;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -16,12 +17,12 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout.LayoutParams;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.widget.AdapterView;
@@ -37,6 +38,7 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GraphView.GraphViewData;
 import com.jjoe64.graphview.GraphViewSeries;
 import com.jjoe64.graphview.LineGraphView;
+
 public class view_patient extends ActionBarActivity{
 	private TextView mDateDisplay;
     private int mYear;

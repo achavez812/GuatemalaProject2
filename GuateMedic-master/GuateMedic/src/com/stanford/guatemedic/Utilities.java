@@ -81,8 +81,10 @@ public class Utilities {
 	 * 			  This can be null
 	 *            Mapping from Key -> Value for Headers
 	 * @return The response from the HTTP Request 
-	 * 		   Will return null if there was an issue
+	 * 		   Will return null if an exception is thrown
+	 * 	   	   Will return "-1" if status code does not equal 200  
 	 */
+	
 	public static String getRequest(String urlString, Map<String, String> headerMap) {
 		try {
 			URL url = new URL(urlString);
@@ -94,13 +96,9 @@ public class Utilities {
 				}
 			}
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
-			Log.i("WTF", "about to read input stream");
 			InputStream in = connection.getInputStream();
-			Log.i("WTF", "done reading input stream");
-
 			if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
-				Log.i("WTF", "bad response");
-				return null;
+				return "-1";
 			}
 			int bytesRead = 0;
 			byte[] buffer = new byte[1024];
@@ -111,8 +109,6 @@ public class Utilities {
 			connection.disconnect();
 			return new String(out.toByteArray());
 		} catch(IOException e) {
-			Log.i("WTF", "EXCEPTION");
-			Log.i("WTF", e.toString());
 			return null;
 		}
 	}
@@ -144,7 +140,8 @@ public class Utilities {
 	 * 			  This can be null
 	 *            The body of the POST Request as a JSON String
 	 * @return The response from the HTTP Request 
-	 * 		   Will return null if there was an issue
+	 * 		   Will return null if an exception is thrown
+	 * 	   	   Will return "-1" if status code does not equal 200  
 	 */
 	public static String postRequest(String urlString, Map<String, String> headerMap, String jsonBody) {
 		try {
@@ -161,12 +158,19 @@ public class Utilities {
 		    }
 		    HttpResponse response = httpclient.execute(httppost);
 		    if (response.getStatusLine().getStatusCode() != 200) {
-		    	return null;
+		    	return "-1";
 		    }
 		    return EntityUtils.toString(response.getEntity());
 		} catch (IOException e) {
-			e.printStackTrace();
 			return null;
 		} 
+	}
+	
+	public static double kilogramsToPounds(double kilograms) {
+		return kilograms * 2.2046;
+	}
+	
+	public static double poundsToKilograms(double pounds) {
+		return pounds / 2.2046;
 	}
 }

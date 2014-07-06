@@ -105,12 +105,14 @@ public class DownloadLoginActivity extends ActionBarActivity {
 
 			private boolean showLoading;
 			private String auth_key;
+			private boolean has_internet;
 			private boolean success;
 			ProgressDialog dialog;
 			
 			public HandleDownloadLoginTask(boolean showLoading) {
 				super();
 				success = true;
+				has_internet = true;
 				this.showLoading = showLoading;
 				dialog = new ProgressDialog(getActivity());
 				dialog.setMessage("Loading");
@@ -120,7 +122,7 @@ public class DownloadLoginActivity extends ActionBarActivity {
 			protected Void doInBackground(String... params) {
 				String json_body = params[0];
 				String response = Utilities.postRequest("https://guatemedic.herokuapp.com/login", null, json_body);
-				if (response != null) {
+				if (response != null && !response.equals("-1")) {
 					try {
 						JSONObject json_response = new JSONObject(response);
 						if (json_response.getString("status").equals("success")) {
@@ -129,13 +131,22 @@ public class DownloadLoginActivity extends ActionBarActivity {
 							headerMap.put("Authorization", auth_key);
 							String data = Utilities.getRequest("https://guatemedic.herokuapp.com/profiles", headerMap);
 							if (data == null) 
+								has_internet = false;
+							else if (data.equals("-1")) 
 								success = false;
 							else
 								BasicRecordsStore.load(auth_key, data);
-						}		
+						} else {
+							success = false;
+						}
 					} catch (JSONException e) {
 						e.printStackTrace();
 					}
+				} else if (response == null) {
+					success = false;
+					has_internet = false;
+				} else { //result is "-1"
+					success = false;
 				}
 				return null;
 			}
@@ -152,7 +163,10 @@ public class DownloadLoginActivity extends ActionBarActivity {
 				if (showLoading) {
 					dialog.dismiss();
 				}
-				if (auth_key == null) {
+				
+				if (!has_internet) {
+					Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_LONG).show();
+				} else if (auth_key == null) {
 					Toast.makeText(getActivity(), "Invalid Login", Toast.LENGTH_LONG).show();
 				} else if (!success) {
 					Toast.makeText(getActivity(), "Download Failure", Toast.LENGTH_LONG).show();

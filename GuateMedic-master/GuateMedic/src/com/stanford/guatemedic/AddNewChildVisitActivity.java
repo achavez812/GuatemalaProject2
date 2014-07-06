@@ -1,5 +1,8 @@
 package com.stanford.guatemedic;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -13,6 +16,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -24,23 +29,20 @@ public class AddNewChildVisitActivity extends ActionBarActivity {
 	private AddNewChildVisitFragment3 frag3_childvisit;
 	private AddNewChildVisitFragment4 frag4_childvisit;
 	private AddNewChildVisitFragment5 frag5_childvisit;
+	
+	private static String child_id;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_new_child_visit);
 
 		Spinner spinner = (Spinner) findViewById(R.id.child_visit_spinner);
-		// Create an ArrayAdapter using the string array and a default spinner
-		// layout
-		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-				this, R.array.child_visit_array,
-				android.R.layout.simple_spinner_item);
-		// Specify the layout to use when the list of choices appears
+
+		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.child_visit_array, android.R.layout.simple_spinner_dropdown_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		// Apply the adapter to the spinner
 		spinner.setAdapter(adapter);
 
-		final String child_id = getIntent().getStringExtra("child_id");
+		child_id = getIntent().getStringExtra("child_id");
 		dcv = new DetailedChildVisit(child_id);
 		frag1_childvisit = AddNewChildVisitFragment1.newInstance(child_id);
 		frag2_childvisit = AddNewChildVisitFragment2.newInstance(child_id);
@@ -54,23 +56,17 @@ public class AddNewChildVisitActivity extends ActionBarActivity {
 				// using
 				String item = (String) parent.getItemAtPosition(pos);
 				if (item.equals("Category 1")) {
-					getSupportFragmentManager().beginTransaction()
-							.replace(R.id.container, frag1_childvisit).commit();
+					getSupportFragmentManager().beginTransaction().replace(R.id.container, frag1_childvisit).commit();
 				} else if (item.equals("Category 2")) {
-					getSupportFragmentManager().beginTransaction()
-							.replace(R.id.container, frag2_childvisit).commit();
+					getSupportFragmentManager().beginTransaction().replace(R.id.container, frag2_childvisit).commit();
 				} else if (item.equals("Category 3")) {
-					getSupportFragmentManager().beginTransaction()
-							.replace(R.id.container, frag3_childvisit).commit();
+					getSupportFragmentManager().beginTransaction().replace(R.id.container, frag3_childvisit).commit();
 				} else if (item.equals("Category 4")) {
-					getSupportFragmentManager().beginTransaction()
-							.replace(R.id.container, frag4_childvisit).commit();
-				} else if (item.equals("Category 5")) {
-					getSupportFragmentManager().beginTransaction()
-							.replace(R.id.container, frag5_childvisit).commit();
+					getSupportFragmentManager().beginTransaction().replace(R.id.container, frag4_childvisit).commit();
+				} else if (item.equals("Category 5")){
+					getSupportFragmentManager().beginTransaction().replace(R.id.container, frag5_childvisit).commit();
 				} else {
-					Toast.makeText(getApplication(), "Error", Toast.LENGTH_LONG)
-							.show();
+					Toast.makeText(getApplication(), "Error", Toast.LENGTH_LONG).show();
 				}
 
 			}
@@ -91,8 +87,34 @@ public class AddNewChildVisitActivity extends ActionBarActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
 		if (id == R.id.action_addchildvisit_submit) {
-			DetailedRecordsStore.get(getApplication()).addNewChildVisit(
-					dcv.toJSONObject());
+			try {
+				JSONObject obj = new JSONObject();
+				obj.put("child_id", child_id);
+				obj.put("received_all_vaccines", dcv.getReceived_all_vaccines());
+				obj.put("types_of_vaccines_received", dcv.getType_of_vaccines_received());
+				obj.put("has_chronic_disease_or_disability", dcv.getHas_chronic_disease_or_disability());
+				obj.put("type_of_chronic_disease_or_disability", dcv.getType_of_chronic_disease_or_disability());
+				obj.put("is_currently_breastfed", dcv.getIs_currently_breastfed());
+				obj.put("is_only_breastfed", dcv.getIs_only_breastfed());
+				obj.put("how_long_only_breastfed", dcv.getHow_long_only_breastfed());
+				obj.put("child_age_when_stopped_breastfeeding", dcv.getChild_age_when_stopped_breastfeeding());
+				obj.put("weight_in_pounds", dcv.getWeight_in_pounds());
+				obj.put("height_in_centimeters", dcv.getHeight_in_centimeters());
+				obj.put("num_times_incaparina_past_week", dcv.getNum_times_incaparina_past_week());
+				obj.put("num_times_vegetables_or_fruits_past_week", dcv.getNum_times_vegetables_or_fruits_past_week());
+				obj.put("num_times_herbs_past_week", dcv.getNum_times_herbs_past_week());
+				obj.put("num_times_diarrhea_past_week", dcv.getNum_times_herbs_past_week());
+				obj.put("num_times_vomit_past_week", dcv.getNum_times_vomit_past_week());
+				obj.put("num_times_cough_past_week", dcv.getNum_times_cough_past_week());
+				obj.put("num_times_fever_past_week", dcv.getNum_times_fever_past_week());
+				obj.put("num_times_other_illness_past_week", dcv.getNum_times_other_illness_past_week());
+				obj.put("illness_description", dcv.getIllness_description());
+				obj.put("age_last_received_deparasiting_medicine", dcv.getAge_last_received_deparasiting_medicine());
+				DetailedRecordsStore.get(getApplication()).addNewChildVisit(obj);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -123,8 +145,8 @@ public class AddNewChildVisitActivity extends ActionBarActivity {
 
 			EditText weight_field = (EditText) rootView
 					.findViewById(R.id.child_visit1_weight);
-			if (dcv.getWeight() != 0)
-				weight_field.setText("" + dcv.getWeight());
+			if (dcv.getWeight_in_pounds() != 0)
+				weight_field.setText("" + dcv.getWeight_in_pounds());
 			weight_field.addTextChangedListener(new TextWatcher() {
 
 				@Override
@@ -145,9 +167,9 @@ public class AddNewChildVisitActivity extends ActionBarActivity {
 						int before, int count) {
 					// TODO Auto-generated method stub
 					if (s.length() > 0)
-						dcv.setWeight(Float.parseFloat(s.toString()));
+						dcv.setWeight_in_pounds(Float.parseFloat(s.toString()));
 					else
-						dcv.setWeight(0);
+						dcv.setWeight_in_pounds(0);
 
 				}
 
@@ -155,8 +177,8 @@ public class AddNewChildVisitActivity extends ActionBarActivity {
 
 			EditText height_field = (EditText) rootView
 					.findViewById(R.id.child_visit1_height);
-			if (dcv.getHeight() != 0)
-				height_field.setText("" + dcv.getHeight());
+			if (dcv.getHeight_in_centimeters() != 0)
+				height_field.setText("" + dcv.getHeight_in_centimeters());
 			height_field.addTextChangedListener(new TextWatcher() {
 
 				@Override
@@ -177,9 +199,9 @@ public class AddNewChildVisitActivity extends ActionBarActivity {
 						int before, int count) {
 					// TODO Auto-generated method stub
 					if (s.length() > 0)
-						dcv.setHeight(Float.parseFloat(s.toString()));
+						dcv.setHeight_in_centimeters(Float.parseFloat(s.toString()));
 					else
-						dcv.setHeight(0);
+						dcv.setHeight_in_centimeters(0);
 
 				}
 
@@ -291,6 +313,98 @@ public class AddNewChildVisitActivity extends ActionBarActivity {
 						}
 					});
 			
+			RadioGroup radiobreastfedGroup1 = (RadioGroup) rootView.findViewById(R.id.child_visit2_is_currently_breastfed);
+			int selectedId_does_breastfeed = radiobreastfedGroup1.getCheckedRadioButtonId();
+			RadioButton is_currently_breastfed = (RadioButton) rootView.findViewById(selectedId_does_breastfeed);
+			String is_currently_breastfed_string = is_currently_breastfed.getText().toString();
+			
+
+			if(is_currently_breastfed_string.trim().equals("Yes")){
+				dcv.setIs_currently_breastfed(2);
+			}else if(is_currently_breastfed_string.trim().equals("No")){
+				dcv.setIs_currently_breastfed(1);
+			}else {
+				dcv.setIs_only_breastfed(0);
+			}
+			
+			RadioGroup radiobreastfedGroup2 = (RadioGroup) rootView.findViewById(R.id.child_visit2_is_only_breastfed);
+			int selectedId_does_only_breastfeed = radiobreastfedGroup2.getCheckedRadioButtonId();
+			RadioButton does_only_breastfeed = (RadioButton) rootView.findViewById(selectedId_does_only_breastfeed);
+			String does_only_breastfeed_string = does_only_breastfeed.getText().toString();
+			
+
+			if(does_only_breastfeed_string.trim().equals("Yes")){
+				dcv.setIs_currently_breastfed(2);
+			}else if(does_only_breastfeed_string.trim().equals("No")){
+				dcv.setIs_currently_breastfed(1);
+			}else {
+				dcv.setIs_only_breastfed(0);
+			}
+			
+			EditText how_long_only_breastfed_field = (EditText) rootView
+					.findViewById(R.id.child_visit2_how_long_only_breastfed);
+			if (dcv.getHow_long_only_breastfed() != 0)
+				how_long_only_breastfed_field.setText("" + dcv.getHow_long_only_breastfed());
+			how_long_only_breastfed_field.addTextChangedListener(new TextWatcher() {
+
+				@Override
+				public void afterTextChanged(Editable arg0) {
+					// TODO Auto-generated method stub
+
+				}
+
+				@Override
+				public void beforeTextChanged(CharSequence s, int start,
+						int count, int after) {
+					// TODO Auto-generated method stub
+
+				}
+
+				@Override
+				public void onTextChanged(CharSequence s, int start,
+						int before, int count) {
+					// TODO Auto-generated method stub
+					if (s.length() > 0)
+						dcv.setHow_long_only_breastfed(Float.parseFloat(s.toString()));
+					else
+						dcv.setHow_long_only_breastfed(0);
+
+				}
+
+			});
+			
+			EditText child_age_when_stopped_breastfeeding_field = (EditText) rootView
+					.findViewById(R.id.child_visit2_how_long_only_breastfed);
+			if (dcv.getChild_age_when_stopped_breastfeeding() != 0)
+				child_age_when_stopped_breastfeeding_field.setText("" + dcv.getChild_age_when_stopped_breastfeeding());
+			child_age_when_stopped_breastfeeding_field.addTextChangedListener(new TextWatcher() {
+
+				@Override
+				public void afterTextChanged(Editable arg0) {
+					// TODO Auto-generated method stub
+
+				}
+
+				@Override
+				public void beforeTextChanged(CharSequence s, int start,
+						int count, int after) {
+					// TODO Auto-generated method stub
+
+				}
+
+				@Override
+				public void onTextChanged(CharSequence s, int start,
+						int before, int count) {
+					// TODO Auto-generated method stub
+					if (s.length() > 0)
+						dcv.setChild_age_when_stopped_breastfeeding(Float.parseFloat(s.toString()));
+					else
+						dcv.setChild_age_when_stopped_breastfeeding(0);
+
+				}
+
+			});
+			
 			return rootView;
 		}
 	}
@@ -371,13 +485,7 @@ public class AddNewChildVisitActivity extends ActionBarActivity {
 					createFirstTime1=1;
 				}
 			});			
-			
-			
-			
-			
-			
-			
-			
+				
 			//preset vaccination information if is vaccinated selected
 			/*RadioGroup is_vaccinated = (RadioGroup) rootView.findViewById(R.id.child_visit3_has_chronic_disease_or_disability);
 			Integer selectedId_vacc = is_vaccinated.getCheckedRadioButtonId();
@@ -420,6 +528,130 @@ public class AddNewChildVisitActivity extends ActionBarActivity {
 							createFirstTime2=1;
 						}
 					});
+			
+			RadioGroup radioVaccinationGroup = (RadioGroup) rootView.findViewById(R.id.child_visit3_did_receive_vaccinations);
+			int selectedId_did_receive_vaccinations = radioVaccinationGroup.getCheckedRadioButtonId();
+			RadioButton did_receive_vaccinations = (RadioButton) rootView.findViewById(selectedId_did_receive_vaccinations);
+			String did_receive_vaccinations_string = did_receive_vaccinations.getText().toString();
+			
+
+			if(did_receive_vaccinations_string.trim().equals("Yes")){
+				dcv.setReceived_all_vaccines(2);
+			}else if(did_receive_vaccinations_string.trim().equals("No")){
+				dcv.setReceived_all_vaccines(1);
+			}else {
+				dcv.setReceived_all_vaccines(0);
+			}
+			
+			RadioGroup radioChronicGroup = (RadioGroup) rootView.findViewById(R.id.child_visit3_has_chronic_disease_or_disability_text);
+			int selectedId_chronic_disease_or_disability = radioChronicGroup.getCheckedRadioButtonId();
+			RadioButton has_chronic_disease_or_disability = (RadioButton) rootView.findViewById(selectedId_chronic_disease_or_disability);
+			String has_chronic_disease_or_disability_string = has_chronic_disease_or_disability.getText().toString();
+			
+
+			if(has_chronic_disease_or_disability_string.trim().equals("Yes")){
+				dcv.setHas_chronic_disease_or_disability(2);
+			}else if(has_chronic_disease_or_disability_string.trim().equals("No")){
+				dcv.setHas_chronic_disease_or_disability(1);
+			}else {
+				dcv.setHas_chronic_disease_or_disability(0);
+			}
+			
+			EditText vaccination_information_field = (EditText) rootView
+					.findViewById(R.id.child_visit3_vaccination_information);
+			if (dcv.getType_of_vaccines_received() != null)
+				vaccination_information_field.setText("" + dcv.getType_of_vaccines_received());
+			vaccination_information_field.addTextChangedListener(new TextWatcher() {
+
+				@Override
+				public void afterTextChanged(Editable arg0) {
+					// TODO Auto-generated method stub
+
+				}
+
+				@Override
+				public void beforeTextChanged(CharSequence s, int start,
+						int count, int after) {
+					// TODO Auto-generated method stub
+
+				}
+
+				@Override
+				public void onTextChanged(CharSequence s, int start,
+						int before, int count) {
+					// TODO Auto-generated method stub
+					if (s.length() > 0)
+						dcv.setType_of_vaccines_received(s.toString());
+					else
+						dcv.setType_of_vaccines_received(null);
+
+				}
+
+			});
+			
+			EditText chronic_information_field = (EditText) rootView
+					.findViewById(R.id.child_visit3_chronic_disease_or_disability_information);
+			if (dcv.getType_of_chronic_disease_or_disability() != null)
+				chronic_information_field.setText("" + dcv.getType_of_chronic_disease_or_disability());
+			chronic_information_field.addTextChangedListener(new TextWatcher() {
+
+				@Override
+				public void afterTextChanged(Editable arg0) {
+					// TODO Auto-generated method stub
+
+				}
+
+				@Override
+				public void beforeTextChanged(CharSequence s, int start,
+						int count, int after) {
+					// TODO Auto-generated method stub
+
+				}
+
+				@Override
+				public void onTextChanged(CharSequence s, int start,
+						int before, int count) {
+					// TODO Auto-generated method stub
+					if (s.length() > 0)
+						dcv.setType_of_vaccines_received(s.toString());
+					else
+						dcv.setType_of_vaccines_received(null);
+
+				}
+
+			});
+			
+			EditText deparasiting_age_field = (EditText) rootView
+					.findViewById(R.id.child_visit3_age_last_received_deparasiting_medicine);
+			if (dcv.getAge_last_received_deparasiting_medicine() != 0)
+				deparasiting_age_field.setText("" + dcv.getAge_last_received_deparasiting_medicine());
+			deparasiting_age_field.addTextChangedListener(new TextWatcher() {
+
+				@Override
+				public void afterTextChanged(Editable arg0) {
+					// TODO Auto-generated method stub
+
+				}
+
+				@Override
+				public void beforeTextChanged(CharSequence s, int start,
+						int count, int after) {
+					// TODO Auto-generated method stub
+
+				}
+
+				@Override
+				public void onTextChanged(CharSequence s, int start,
+						int before, int count) {
+					// TODO Auto-generated method stub
+					if (s.length() > 0)
+						dcv.setAge_last_received_deparasiting_medicine(Float.parseFloat(s.toString()));
+					else
+						dcv.setAge_last_received_deparasiting_medicine(0);
+
+				}
+
+			});
 			
 			return rootView;
 		}
@@ -520,6 +752,72 @@ public class AddNewChildVisitActivity extends ActionBarActivity {
 						}
 
 					});
+			
+			EditText num_times_vegetables_or_fruits_week_field = (EditText) rootView
+					.findViewById(R.id.child_visit4_num_times_vegetables_or_fruits_past_week);
+			if (dcv.getNum_times_vegetables_or_fruits_past_week() != 0)
+				num_times_vegetables_or_fruits_week_field.setText(""
+						+ dcv.getNum_times_vegetables_or_fruits_past_week());
+			num_times_vegetables_or_fruits_week_field
+					.addTextChangedListener(new TextWatcher() {
+
+						@Override
+						public void afterTextChanged(Editable arg0) {
+							// TODO Auto-generated method stub
+
+						}
+
+						@Override
+						public void beforeTextChanged(CharSequence s,
+								int start, int count, int after) {
+							// TODO Auto-generated method stub
+
+						}
+
+						@Override
+						public void onTextChanged(CharSequence s, int start,
+								int before, int count) {
+							// TODO Auto-generated method stub
+							if (s.length() > 0)
+								dcv.setNum_times_vegetables_or_fruits_past_week(Integer
+										.parseInt(s.toString()));
+							else
+								dcv.setNum_times_vegetables_or_fruits_past_week(0);
+
+						}
+
+					});
+
+			return rootView;
+		}
+	}
+	
+	public static class AddNewChildVisitFragment5 extends Fragment {
+		private static View rootView;
+		private static int createFirstTime1;
+		private static int createFirstTime2;
+		public AddNewChildVisitFragment5() {
+
+		}
+
+		public static AddNewChildVisitFragment5 newInstance(String child_id) {
+			
+			AddNewChildVisitFragment5 f = new AddNewChildVisitFragment5();
+			Bundle args = new Bundle();
+			args.putString("child_id", child_id);
+			f.setArguments(args);
+			
+			return f;
+		}
+
+		public View onCreateView(LayoutInflater inflater, ViewGroup container,
+				Bundle savedInstanceState) {
+			rootView = inflater.inflate(R.layout.fragment_add_new_child_visit5,
+					container, false);
+			final String child_id = getArguments().getString("child_id");
+
+			final DetailedChildVisit dcv = ((AddNewChildVisitActivity) getActivity()).dcv;
+
 
 			EditText num_times_diarrhea_past_week_field = (EditText) rootView
 					.findViewById(R.id.child_visit4_num_times_diarrhea_past_week);
@@ -729,31 +1027,6 @@ public class AddNewChildVisitActivity extends ActionBarActivity {
 						}
 
 					});
-
-			return rootView;
-		}
-	}
-
-	public static class AddNewChildVisitFragment5 extends Fragment {
-		private static View rootView;
-
-		public AddNewChildVisitFragment5() {
-
-		}
-
-		public static AddNewChildVisitFragment5 newInstance(String child_id) {
-			AddNewChildVisitFragment5 f = new AddNewChildVisitFragment5();
-			Bundle args = new Bundle();
-			args.putString("child_id", child_id);
-			f.setArguments(args);
-			return f;
-		}
-
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			rootView = inflater.inflate(R.layout.fragment_add_new_child_visit5,
-					container, false);
-			final String child_id = getArguments().getString("child_id");
 
 			return rootView;
 		}

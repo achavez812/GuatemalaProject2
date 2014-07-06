@@ -8,6 +8,7 @@ import java.io.Writer;
 import java.util.UUID;
 
 import android.content.Context;
+import android.util.Log;
 
 public class GuatemedicWriter {
 	
@@ -26,7 +27,7 @@ public class GuatemedicWriter {
 		try {			
 			String filename = filename_prefix + filename_suffix;
 			OutputStream out = mContext.openFileOutput(filename, Context.MODE_PRIVATE);
-			writer = new OutputStreamWriter(out);
+			writer = new OutputStreamWriter(out, "UTF-8");
 			writer.write(data);
 		} catch (IOException e) {
 			e.printStackTrace();
