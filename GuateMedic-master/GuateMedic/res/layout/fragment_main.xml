@@ -51,6 +51,5 @@
 	        android:layout_marginBottom="120dp"
 	        android:text="DESCARGAR" />
 
-	</LinearLayout>
-
+</LinearLayout>
 </ScrollView>

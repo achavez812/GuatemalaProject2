@@ -176,7 +176,6 @@ public class ViewFamilyListActivity extends ActionBarActivity {
 				
 				TextView familyTitle = (TextView)convertView.findViewById(R.id.list_item_title);
 				familyTitle.setText(family.getParent1_name());
-
 				TextView subtitle = (TextView)convertView.findViewById(R.id.list_item_subtitle);
 				if (num_children == 1)
 					subtitle.setText(num_children + " Niño");
