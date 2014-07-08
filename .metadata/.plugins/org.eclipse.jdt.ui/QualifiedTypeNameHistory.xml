@@ -27,10 +27,10 @@
 <fullyQualifiedTypeName name="android.view.View"/>
 <fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
 <fullyQualifiedTypeName name="com.stanford.guatemedic.R.id"/>
-<fullyQualifiedTypeName name="android.support.v4.app.NotificationCompat.Builder"/>
 <fullyQualifiedTypeName name="android.support.v4.text.BidiFormatter.Builder"/>
 <fullyQualifiedTypeName name="android.util.Log"/>
 <fullyQualifiedTypeName name="android.app.AlertDialog.Builder"/>
 <fullyQualifiedTypeName name="android.widget.LinearLayout.LayoutParams"/>
 <fullyQualifiedTypeName name="android.widget.AdapterView.OnItemClickListener"/>
+<fullyQualifiedTypeName name="android.support.v4.app.NotificationCompat.Builder"/>
 </qualifiedTypeNameHistroy>

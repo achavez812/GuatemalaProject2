@@ -2,12 +2,10 @@ package com.stanford.guatemedic;
 
 public class ChildDataStore {
 	
-	//Every 16 days
 	public static Number[][] male_weight_kg_graph_data = {
 		
 	};
 	
-	//
 	public static Number[][] male_weight_lb_graph_data = {
 		
 	};
