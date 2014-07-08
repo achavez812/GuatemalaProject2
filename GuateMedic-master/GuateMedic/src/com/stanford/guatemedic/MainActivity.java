@@ -156,7 +156,7 @@ public class MainActivity extends ActionBarActivity {
         }
     }
     
->>>>>>> 77f6a1e9675f70e56e6d245beac8490acf600a0c
+
     /**
      * @param activity The corresponding {@link Activity} requesting the foreground dispatch.
      * @param adapter The {@link NfcAdapter} used for the foreground dispatch.
