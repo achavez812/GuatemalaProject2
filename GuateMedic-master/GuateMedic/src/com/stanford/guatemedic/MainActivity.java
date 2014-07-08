@@ -58,6 +58,7 @@ public class MainActivity extends ActionBarActivity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+<<<<<<< HEAD
 		/*
 		mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
 		if (mNfcAdapter != null) { // this device has NFC
@@ -94,6 +95,43 @@ public class MainActivity extends ActionBarActivity {
 //	/*
 //	@Override
 //    protected void onResume() {
+=======
+		
+		/*mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
+		if (mNfcAdapter != null) { // this device has NFC
+			handleIntent(getIntent());
+		}*/
+	}
+	
+	@Override
+	public void onBackPressed() {
+		
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+
+		// Inflate the menu; this adds items to the action bar if it is present.
+		//getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+		if (id == R.id.action_download) {
+			Toast.makeText(getApplicationContext(), "Settings Click", Toast.LENGTH_LONG).show();
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+//	@Override
+//    /*protected void onResume() {
+>>>>>>> 50befe68fdd9f5820add5cc48d361f55b61d33f8
 //        super.onResume();
 //         
 //        /**
@@ -102,7 +140,11 @@ public class MainActivity extends ActionBarActivity {
 //         */
 //        setupForegroundDispatch(this, mNfcAdapter);
 //    }
+<<<<<<< HEAD
 //	
+=======
+	
+>>>>>>> 50befe68fdd9f5820add5cc48d361f55b61d33f8
 //	@Override
 //    protected void onPause() {
 //        /**
@@ -124,7 +166,11 @@ public class MainActivity extends ActionBarActivity {
 //         */
 //        handleIntent(intent);
 //    }
+<<<<<<< HEAD
 //    
+=======
+    
+>>>>>>> 50befe68fdd9f5820add5cc48d361f55b61d33f8
 //    private void handleIntent(Intent intent) {
 //    	String action = intent.getAction();
 //        if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action)) {
@@ -154,10 +200,17 @@ public class MainActivity extends ActionBarActivity {
 //        }
 //    }
 //    
+<<<<<<< HEAD
 //    /**
 //     * @param activity The corresponding {@link Activity} requesting the foreground dispatch.
 //     * @param adapter The {@link NfcAdapter} used for the foreground dispatch.
 //     */
+=======
+    /**
+     * @param activity The corresponding {@link Activity} requesting the foreground dispatch.
+     * @param adapter The {@link NfcAdapter} used for the foreground dispatch.
+     */
+>>>>>>> 50befe68fdd9f5820add5cc48d361f55b61d33f8
 //    public static void setupForegroundDispatch(final Activity activity, NfcAdapter adapter) {
 //        final Intent intent = new Intent(activity.getApplicationContext(), activity.getClass());
 //        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -179,15 +232,24 @@ public class MainActivity extends ActionBarActivity {
 //         
 //        adapter.enableForegroundDispatch(activity, pendingIntent, filters, techList);
 //    }
+<<<<<<< HEAD
 // 
 //    /**
 //     * @param activity The corresponding {@link BaseActivity} requesting to stop the foreground dispatch.
 //     * @param adapter The {@link NfcAdapter} used for the foreground dispatch.
 //     */
+=======
+ 
+    /**
+     * @param activity The corresponding {@link BaseActivity} requesting to stop the foreground dispatch.
+     * @param adapter The {@link NfcAdapter} used for the foreground dispatch.
+     */
+>>>>>>> 50befe68fdd9f5820add5cc48d361f55b61d33f8
 //    public static void stopForegroundDispatch(final Activity activity, NfcAdapter adapter) {
 //        adapter.disableForegroundDispatch(activity);
 //    }
 //    
+<<<<<<< HEAD
 //    /**
 //     * Background task for reading the data. Do not block the UI thread while reading. 
 //     */
@@ -230,6 +292,50 @@ public class MainActivity extends ActionBarActivity {
 //             * bit_5..0 length of IANA language code
 //             */
 //     
+=======
+    /**
+     * Background task for reading the data. Do not block the UI thread while reading. 
+     */
+  /*  private class NdefReaderTask extends AsyncTask<Tag, Void, String> {
+     
+        @Override
+        protected String doInBackground(Tag... params) {
+            Tag tag = params[0];
+             
+            Ndef ndef = Ndef.get(tag);
+            if (ndef == null) {
+                // NDEF is not supported by this Tag. 
+                return null;
+            }
+     
+            NdefMessage ndefMessage = ndef.getCachedNdefMessage();
+     
+            NdefRecord[] records = ndefMessage.getRecords();
+            for (NdefRecord ndefRecord : records) {
+                if (ndefRecord.getTnf() == NdefRecord.TNF_WELL_KNOWN && Arrays.equals(ndefRecord.getType(), NdefRecord.RTD_TEXT)) {
+                    try {
+                        return readText(ndefRecord);
+                    } catch (UnsupportedEncodingException e) {
+                        Log.e(TAG, "Unsupported Encoding", e);
+                    }
+                }
+            }
+     
+            return null;
+        }
+         
+        private String readText(NdefRecord record) throws UnsupportedEncodingException {
+            /*
+             * See NFC forum specification for "Text Record Type Definition" at 3.2.1 
+             * 
+             * http://www.nfc-forum.org/specs/
+             * 
+             * bit_7 defines encoding
+             * bit_6 reserved for future use, must be 0
+             * bit_5..0 length of IANA language code
+             */
+     
+>>>>>>> 50befe68fdd9f5820add5cc48d361f55b61d33f8
 //            byte[] payload = record.getPayload();
 //     
 //            // Get the Text Encoding
@@ -255,7 +361,11 @@ public class MainActivity extends ActionBarActivity {
 //            }
 //        }
 //    }
+<<<<<<< HEAD
 //	*/
+=======
+	
+>>>>>>> 50befe68fdd9f5820add5cc48d361f55b61d33f8
 	/**
 	 * A placeholder fragment containing a simple view.
 	 */
