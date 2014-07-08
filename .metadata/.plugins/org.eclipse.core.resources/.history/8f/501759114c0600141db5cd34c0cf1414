@@ -156,11 +156,17 @@ public class MainActivity extends ActionBarActivity {
 //        }
 //    }
 //    
-
+<<<<<<< HEAD
+//    /**
+//     * @param activity The corresponding {@link Activity} requesting the foreground dispatch.
+//     * @param adapter The {@link NfcAdapter} used for the foreground dispatch.
+//     */
+=======
     /**
      * @param activity The corresponding {@link Activity} requesting the foreground dispatch.
      * @param adapter The {@link NfcAdapter} used for the foreground dispatch.
      */
+>>>>>>> 50befe68fdd9f5820add5cc48d361f55b61d33f8
 //    public static void setupForegroundDispatch(final Activity activity, NfcAdapter adapter) {
 //        final Intent intent = new Intent(activity.getApplicationContext(), activity.getClass());
 //        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
