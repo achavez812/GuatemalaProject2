@@ -219,7 +219,7 @@ public class BasicRecordsStore {
 			this.context1 = context1;
 			this.context2 = context2;
 			dialog = new ProgressDialog(context1);
-			dialog.setMessage("Loading");
+			dialog.setMessage("Los Datos Son De Carga");
 		}
 
 		@Override
@@ -277,7 +277,7 @@ public class BasicRecordsStore {
 			}
 			if (success) {
 				Intent i = new Intent(context1, MainActivity.class);
-				Toast.makeText(context2, "Successful Download", Toast.LENGTH_LONG).show();
+				Toast.makeText(context2, "DESCARGAR EXITOSA", Toast.LENGTH_LONG).show();
 				context1.startActivity(i);
 			} 
 		}

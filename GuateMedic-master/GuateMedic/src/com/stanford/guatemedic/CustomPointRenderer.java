@@ -47,6 +47,7 @@ public class CustomPointRenderer<FormatterType extends LineAndPointFormatter> ex
     private void drawSeries(Canvas canvas, RectF plotArea, XYSeries series, LineAndPointFormatter formatter) throws PlotRenderException {
         PointF p = null;
         XYPlot plot = getPlot();
+        
         int size = series.size();
 
         for (int i = 0; i < size; i++) {

@@ -10,6 +10,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.NFC"/>
 
     <application
         android:allowBackup="true"
@@ -26,6 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
         <activity
             android:name="com.stanford.guatemedic.DownloadLoginActivity"
             android:screenOrientation="portrait"
@@ -105,7 +107,13 @@
         <activity
             android:name="com.stanford.guatemedic.NFCActivity"
             android:label="NFC Tag Stuff" />
-        
-    </application>
+
+        <intent-filter>
+    		<action android:name="android.nfc.action.NDEF_DISCOVERED"/>
+    		<category android:name="android.intent.category.DEFAULT"/>
+    		<data android:mimeType="text/plain"/>
+		</intent-filter>
+
+        </application>
 
 </manifest>

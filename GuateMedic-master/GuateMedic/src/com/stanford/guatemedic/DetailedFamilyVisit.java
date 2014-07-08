@@ -12,14 +12,14 @@ public class DetailedFamilyVisit {
 	private String visit_date;
 	private String promoter_id;
 	
-	private int parent1_marital_status; // Together, Married, Widowed, Single
+	private int parent1_marital_status; // INCLUDE THIS
 	private int does_father_live_with; //boolean
 	private int num_pregnancies;
 	private int num_children_alive;
 	private int num_children_dead;
 	private String how_children_died; //Age and why died?
-	private int num_children_under_5;
-	private int num_people_in_household;
+	private int num_children_under_5; //INCLUDE THIS
+	private int num_people_in_household; //INCLUDE THIS
 	
 	private int fathers_job; //Should this be a String instead
 	private int has_igss; //Should this be a String instead

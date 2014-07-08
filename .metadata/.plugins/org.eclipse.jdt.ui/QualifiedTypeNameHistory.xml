@@ -5,7 +5,6 @@
 <fullyQualifiedTypeName name="com.stanford.guatemedic.R.style"/>
 <fullyQualifiedTypeName name="com.stanford.guatemedic.R.styleable"/>
 <fullyQualifiedTypeName name="android.widget.LinearLayout"/>
-<fullyQualifiedTypeName name="android.widget.LinearLayout.LayoutParams"/>
 <fullyQualifiedTypeName name="android.support.v7.app.ActionBar"/>
 <fullyQualifiedTypeName name="android.app.ActionBar"/>
 <fullyQualifiedTypeName name="android.app.FragmentTransaction"/>
@@ -14,7 +13,6 @@
 <fullyQualifiedTypeName name="android.R.color"/>
 <fullyQualifiedTypeName name="com.stanford.guatemedic.R.color"/>
 <fullyQualifiedTypeName name="android.app.DialogFragment"/>
-<fullyQualifiedTypeName name="android.app.AlertDialog.Builder"/>
 <fullyQualifiedTypeName name="android.support.v4.app.DialogFragment"/>
 <fullyQualifiedTypeName name="android.widget.RadioButton"/>
 <fullyQualifiedTypeName name="com.stanford.guatemedic.R"/>
@@ -28,6 +26,11 @@
 <fullyQualifiedTypeName name="android.support.v4.app.ListFragment"/>
 <fullyQualifiedTypeName name="android.view.View"/>
 <fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
-<fullyQualifiedTypeName name="android.util.Log"/>
 <fullyQualifiedTypeName name="com.stanford.guatemedic.R.id"/>
+<fullyQualifiedTypeName name="android.support.v4.app.NotificationCompat.Builder"/>
+<fullyQualifiedTypeName name="android.support.v4.text.BidiFormatter.Builder"/>
+<fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="android.app.AlertDialog.Builder"/>
+<fullyQualifiedTypeName name="android.widget.LinearLayout.LayoutParams"/>
+<fullyQualifiedTypeName name="android.widget.AdapterView.OnItemClickListener"/>
 </qualifiedTypeNameHistroy>
