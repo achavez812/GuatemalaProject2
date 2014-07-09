@@ -146,9 +146,9 @@ public class ViewFamilyActivity extends ActionBarActivity{
 			TextView num_children_under_5_field = (TextView)findViewById(R.id.view_family_num_children_under_5);
 			int num_children_under_5 = visit.getNum_children_under_5();
 			if (num_children_under_5 >= 0) {
-				num_children_under_5_field.setText("Ñinos menos 5: " + num_children_under_5);
+				num_children_under_5_field.setText("Niños menos 5: " + num_children_under_5);
 			} else {
-				num_children_under_5_field.setText("Ñinos menos 5: Desconocido");
+				num_children_under_5_field.setText("Niños menos 5: Desconocido");
 			}
 			
 			TextView num_people_in_household_field = (TextView)findViewById(R.id.view_family_num_people_in_household);
@@ -172,7 +172,7 @@ public class ViewFamilyActivity extends ActionBarActivity{
 			marital_status_field.setText("Estado Civil: Desconocido" );
 
 			TextView num_children_under_5_field = (TextView)findViewById(R.id.view_family_num_children_under_5);
-			num_children_under_5_field.setText("Ñinos menos 5: Desconocido");
+			num_children_under_5_field.setText("Niños menos 5: Desconocido");
 
 			TextView num_people_in_household_field = (TextView)findViewById(R.id.view_family_num_people_in_household);
 			num_people_in_household_field.setText("Personas en Casa: Desconocido");

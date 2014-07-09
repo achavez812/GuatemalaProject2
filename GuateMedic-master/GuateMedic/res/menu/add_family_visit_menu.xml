@@ -4,7 +4,7 @@
      
       <item
         android:id="@+id/action_addfamilyvisit_submit"
-        android:title="SOMETER"
+        android:title="guardar"
         yourapp:showAsAction="always"/>
     
 

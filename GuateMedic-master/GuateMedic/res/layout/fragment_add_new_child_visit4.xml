@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="25sp"
-		    android:text="¿Cuantos Veces a la Semana ...?" />
+		    android:text="¿Cuantas Veces a la Semana ...?" />
 	
 		<EditText
         	android:id="@+id/child_visit4_num_times_incaparina_past_week"

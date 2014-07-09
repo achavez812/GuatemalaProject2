@@ -260,7 +260,7 @@ public class AddNewChildActivity extends ActionBarActivity {
 					if (selectedId != -1) {
 						RadioButton gender_field = (RadioButton)rootView.findViewById(selectedId);
 						String gender_string = gender_field.getText().toString().trim();
-						if (gender_string.equals("Ñino")) gender = 1;
+						if (gender_string.equals("Niño")) gender = 1;
 						else if (gender_string.equals("Ñina")) gender = 2;
 					}
 

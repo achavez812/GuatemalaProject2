@@ -79,11 +79,11 @@
         <activity
             android:name="com.stanford.guatemedic.AddNewChildActivity"
             android:screenOrientation="portrait"
-            android:label="Añadir Un Ñino" />
+            android:label="Añadir Un Niño" />
         <activity
             android:name="com.stanford.guatemedic.AddNewChildVisitActivity"
             android:screenOrientation="portrait"
-            android:label="Añadir Una Visita del Ñino" />
+            android:label="Añadir Una Visita del Niño" />
         <activity
             android:name="com.stanford.guatemedic.ViewFamily"
             android:screenOrientation="portrait"
@@ -92,12 +92,12 @@
         <activity
             android:name="com.stanford.guatemedic.UploadLoginActivity"
             android:screenOrientation="portrait"
-            android:label="Cargar Registros" />
+            android:label="Enviar Registros" />
         
         <activity
             android:name="com.stanford.guatemedic.UploadResultsActivity"
             android:screenOrientation="portrait"
-            android:label="Cargar Registros" />
+            android:label="Enviar Registros" />
         
         <activity
             android:name="com.stanford.guatemedic.GraphActivity"

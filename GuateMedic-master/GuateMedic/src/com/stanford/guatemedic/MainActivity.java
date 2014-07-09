@@ -294,8 +294,8 @@ public class MainActivity extends ActionBarActivity {
 			final Button upload_download_button = (Button)rootView.findViewById(R.id.main_upload_download_button);
 			if (gmr.hasDownloadedData()) {
 				if (gmr.isUploadNeeded()) {
-					upload_download_button.setText("CARGAR");
-					notes.setText("Registros han sido creado. Por favor carga cuando hay un conexión al Internet.");
+					upload_download_button.setText("Enviar");
+					notes.setText("Registros han sido creado. Por favor envíe cuando hay un conexión al Internet.");
 				} else {
 					upload_download_button.setText("DESCARGAR");
 					notes.setText("Hay registros descargados. Puedes descargar mas cuando hay un conexión al Internet.");

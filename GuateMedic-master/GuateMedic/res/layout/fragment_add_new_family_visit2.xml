@@ -30,7 +30,7 @@
 			android:ellipsize="start"
             android:inputType="number"
             android:textSize="30sp" 
-            android:hint="¿Cuántos Ñinos Viven?" />
+            android:hint="¿Cuántos Niños Viven?" />
 
         <EditText
             android:id="@+id/family_visit2_num_children_dead"
@@ -41,7 +41,7 @@
 			android:ellipsize="start"
             android:inputType="number"
             android:textSize="30sp" 
-            android:hint="¿Cuántos Ñinos Han Muerto?" />
+            android:hint="¿Cuántos Niños Han Muerto?" />
 
         <EditText
             android:id="@+id/family_visit2_death_information"
@@ -62,7 +62,7 @@
 			android:ellipsize="start"
             android:inputType="number"
             android:textSize="30sp" 
-            android:hint="¿Cuántos Ñinos Menores de 5 Años?" />
+            android:hint="¿Cuántos Niños Menores de 5 Años?" />
 
         <EditText
             android:id="@+id/family_visit2_num_people_in_household"

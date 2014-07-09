@@ -23,7 +23,7 @@
         android:gravity="center"
         android:layout_marginTop="20dp"
         android:textSize="30sp"
-        android:hint="Nombe de la Madre"
+        android:hint="nombre de la Madre"
         />
     
     <EditText

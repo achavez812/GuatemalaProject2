@@ -192,11 +192,6 @@ public class GraphActivity extends ActionBarActivity {
 		int index = (int)(age_days / 3); //every three days of data
 		double mean = mean_data[index].doubleValue();
 		double sd = standard_deviations[index].doubleValue();
-		Log.i("WTF", "Age in days: " + age_days);
-		Log.i("WTF", "Weight: " + weight);
-		Log.i("WTF", "Mean: " + mean);
-		Log.i("WTF", "SD: " + sd);
-		Log.i("WTF?", "Z: " + (weight-mean)/sd);
 		return (weight - mean) / sd;
 
 	}
@@ -265,9 +260,9 @@ public class GraphActivity extends ActionBarActivity {
 			
 			TextView sex_field = (TextView)rootView.findViewById(R.id.graph_child_sex);
 			if (gender == 1) {
-				sex_field.setText("Ñino");
+				sex_field.setText("Niño");
 			} else if (gender == 2) {
-				sex_field.setText("Ñino");
+				sex_field.setText("Niño");
 			} else if (gender == 0) {
 				sex_field.setText("No Sexo");
 			}

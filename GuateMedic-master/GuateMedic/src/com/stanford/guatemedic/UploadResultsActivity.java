@@ -69,13 +69,13 @@ public class UploadResultsActivity extends ActionBarActivity {
 
 			
 			TextView textview1 = (TextView)rootView.findViewById(R.id.upload_results_textview1);
-			textview1.setText("Successful Upload");
+			textview1.setText("Enviar Exitosa");
 			
 			TextView textview2 = (TextView)rootView.findViewById(R.id.upload_results_textview2);
-			textview2.setText("New Families: " + num_new_families);
+			textview2.setText("Familias Nuevas: " + num_new_families);
 			
 			TextView textview3 = (TextView)rootView.findViewById(R.id.upload_results_textview3);
-			textview3.setText("New Children: " + num_new_children);
+			textview3.setText("Ni" + num_new_children);
 			
 			TextView textview4 = (TextView)rootView.findViewById(R.id.upload_results_textview4);
 			textview4.setText("New Family Visits: " + num_new_family_visits);
