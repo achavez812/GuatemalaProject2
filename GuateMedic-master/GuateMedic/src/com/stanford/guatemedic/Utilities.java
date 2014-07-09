@@ -216,7 +216,7 @@ public class Utilities {
 	}
 	
 	//This only handles String dates formatted correctly
-	public static int getAge(String birth_date) {
+	public static int getAgeInYears(String birth_date) {
 		String current_date = formatDate(getTodayString());
 		Log.i("WTF", current_date);
 		int year1 = Integer.parseInt(current_date.substring(0,4));
@@ -231,6 +231,40 @@ public class Utilities {
 		int days = day1 - day2;
 		
 		return (int)(years + months/12.0 + days/365.0);
+	}
+	
+	public static double getAgeInMonths(String birth_date) {
+		String current_date = formatDate(getTodayString());
+		Log.i("WTF", current_date);
+		int year1 = Integer.parseInt(current_date.substring(0,4));
+		int year2 = Integer.parseInt(birth_date.substring(0, 4));
+		int month1 = Integer.parseInt(current_date.substring(5, 7));
+		int month2 = Integer.parseInt(birth_date.substring(5, 7));
+		int day1 = Integer.parseInt(current_date.substring(8, 10));
+		int day2 = Integer.parseInt(birth_date.substring(8, 10));
+		
+		int years = year1 - year2;
+		int months = month1 - month2;
+		int days = day1 - day2;
+		
+		return years*12.0 + months + days/30.4167;
+	}
+	
+	public static int getAgeInDays(String birth_date) {
+		String current_date = formatDate(getTodayString());
+		Log.i("WTF", current_date);
+		int year1 = Integer.parseInt(current_date.substring(0,4));
+		int year2 = Integer.parseInt(birth_date.substring(0, 4));
+		int month1 = Integer.parseInt(current_date.substring(5, 7));
+		int month2 = Integer.parseInt(birth_date.substring(5, 7));
+		int day1 = Integer.parseInt(current_date.substring(8, 10));
+		int day2 = Integer.parseInt(birth_date.substring(8, 10));
+		
+		int years = year1 - year2;
+		int months = month1 - month2;
+		int days = day1 - day2;
+		
+		return (int)(years * 365.2 + months * 30.4167 + days);
 	}
 	
 	public static Number[] truncateArray(Number[] array, int values) {

@@ -2,6 +2,8 @@ package com.stanford.guatemedic;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import android.util.Log;
+
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -122,6 +124,7 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 				//Log.d("Working","WorkingTag"+AddNewFamilyVisitFragment2.num_pregnancies_put);
 				obj.put("how_children_died", AddNewFamilyVisitFragment2.children_death_information_put);	
 				//Log.d("Working","WorkingTag"+AddNewFamilyVisitFragment2.children_death_information_put);
+				Log.i("WTF", "CHECK");
 				DetailedRecordsStore.get(getApplication()).addNewFamilyVisit(obj);
 				
 				Intent i = new Intent(getApplication(), ViewFamilyActivity.class);
@@ -238,34 +241,39 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 			//Lives With Father?
 			RadioGroup radioFatherLivesWithGroup = (RadioGroup) rootView.findViewById(R.id.family_visit1_father_lives_with);
 			int selectedId_father = radioFatherLivesWithGroup.getCheckedRadioButtonId();
-			RadioButton father_lives_with = (RadioButton) rootView.findViewById(selectedId_father);
-			String father_lives_with_string=father_lives_with.getText().toString();
-			
-
-			if(father_lives_with_string.trim().equals("Sí")){
-				father_lives_with_put=1;
-			}else if(father_lives_with_string.trim().equals("No")){
-				father_lives_with_put=2;
-			}else {
-				father_lives_with_put=0;
+			if (selectedId_father == -1) {
+				father_lives_with_put = 0;
+			} else {
+				RadioButton father_lives_with = (RadioButton) rootView.findViewById(selectedId_father);
+				String father_lives_with_string=father_lives_with.getText().toString();
+				
+	
+				if(father_lives_with_string.trim().equals("Sí")){
+					father_lives_with_put=2;
+				}else if(father_lives_with_string.trim().equals("No")){
+					father_lives_with_put=1;
+				}else {
+					father_lives_with_put=0;
+				}
 			}
 			
 			//IGSS?
 			RadioGroup radioFamilyIGSSGroup=(RadioGroup) rootView.findViewById(R.id.family_visit1_igss);
 			int selectedId_IGSS=radioFamilyIGSSGroup.getCheckedRadioButtonId();
-			RadioButton IGSS_family=(RadioButton) rootView.findViewById(selectedId_IGSS);
-			String IGSS_family_string=IGSS_family.getText().toString();
-			
-
-			if(IGSS_family_string.trim().equals("Sí")){
-				IGSS_family_put=1;
-			}else if(IGSS_family_string.trim().equals("No")){
-				IGSS_family_put=2;
-			}else {
-				IGSS_family_put=0;
+			if (selectedId_IGSS == -1) {
+				IGSS_family_put = 0;
+			} else {
+				RadioButton IGSS_family=(RadioButton) rootView.findViewById(selectedId_IGSS);
+				String IGSS_family_string=IGSS_family.getText().toString();
+	
+				if(IGSS_family_string.trim().equals("Sí")){
+					IGSS_family_put=2;
+				}else if(IGSS_family_string.trim().equals("No")){
+					IGSS_family_put=1;
+				}else {
+					IGSS_family_put=0;
+				}			
 			}
-						
-			
 			
 		}
 	}
@@ -486,44 +494,49 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 		}
 		public void convertValuesFrag2(){
 			//Number of Pregnancies
-			String num_pregnancies_string=((EditText)(rootView.findViewById(R.id.family_visit2_num_pregnancies))).getText().toString();
-			if (num_pregnancies_string.isEmpty())
+			try {
+				String num_pregnancies_string=((EditText)rootView.findViewById(R.id.family_visit2_num_pregnancies)).getText().toString();
+				num_pregnancies_put = Integer.parseInt(num_pregnancies_string);
+			} catch (NumberFormatException | NullPointerException e) {
 				num_pregnancies_put = -1;
-			else
-				num_pregnancies_put=Integer.parseInt(num_pregnancies_string);
+			}
+				
 			
-			//Number of Children Alive
-			String num_children_alive_string=((EditText)(rootView.findViewById(R.id.family_visit2_num_children_alive))).getText().toString();
-			if (num_children_alive_string.isEmpty())
+			try {
+				String num_children_alive_string=((EditText)(rootView.findViewById(R.id.family_visit2_num_children_alive))).getText().toString();
+				num_children_alive_put = Integer.parseInt(num_children_alive_string);
+			} catch (NumberFormatException | NullPointerException e) {
 				num_children_alive_put = -1;
-			else
-				num_children_alive_put=Integer.parseInt(num_children_alive_string);
+			}
 			
-			//Number of Children Dead
-			String num_children_dead_string=((EditText)(rootView.findViewById(R.id.family_visit2_num_children_dead))).getText().toString();
-			if (num_children_dead_string.isEmpty())
+			try {
+				String num_children_dead_string=((EditText)(rootView.findViewById(R.id.family_visit2_num_children_dead))).getText().toString();
+				num_children_dead_put = Integer.parseInt(num_children_dead_string);
+			} catch (NumberFormatException | NullPointerException e) {
 				num_children_dead_put = -1;
-			else
-				num_children_dead_put=Integer.parseInt(num_children_dead_string);
-			
+			}
+
 			//Death Information 
-			String children_death_information_string=((EditText)(rootView.findViewById(R.id.family_visit2_death_information))).getText().toString();
-			children_death_information_put=children_death_information_string;
+			try {
+				String children_death_information_string=((EditText)(rootView.findViewById(R.id.family_visit2_death_information))).getText().toString();
+				children_death_information_put=children_death_information_string;
+			} catch (NullPointerException e) {
+				children_death_information_put = "";
+			}
 			
-			//Number of children under 5
-			String num_children_under_5_string=((EditText)(rootView.findViewById(R.id.family_visit2_num_children_under_5))).getText().toString();
-			if (num_children_under_5_string.isEmpty())
+			try {
+				String num_children_under_5_string=((EditText)(rootView.findViewById(R.id.family_visit2_num_children_under_5))).getText().toString();
+				num_children_under_5_put = Integer.parseInt(num_children_under_5_string);
+			} catch (NumberFormatException | NullPointerException e) {
 				num_children_under_5_put = -1;
-			else
-				num_children_under_5_put=Integer.parseInt(num_children_under_5_string);
+			}
 			
-			//Number of People in household
-			String num_people_in_household_string=((EditText)(rootView.findViewById(R.id.family_visit2_num_people_in_household))).getText().toString();
-			if (num_people_in_household_string.isEmpty())
+			try {
+				String num_people_in_household_string=((EditText)(rootView.findViewById(R.id.family_visit2_num_people_in_household))).getText().toString();
+				num_people_in_household_put = Integer.parseInt(num_people_in_household_string);
+			} catch (NumberFormatException | NullPointerException e) {
 				num_people_in_household_put = -1;
-			else
-				num_people_in_household_put=Integer.parseInt(num_people_in_household_string);
-			
+			}
 			
 		}
 	}

@@ -251,7 +251,7 @@ public class MainActivity extends ActionBarActivity {
         @Override
         protected void onPostExecute(String result) {
             if (result != null) {
-				Intent i = new Intent(getApplication(), view_patient.class);
+				Intent i = new Intent(getApplication(), GraphActivity.class);
 				// should check if result is in the right format (C followed by int)
 				i.putExtra("child_id", result);
 				startActivity(i);

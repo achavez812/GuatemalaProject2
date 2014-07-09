@@ -347,45 +347,45 @@ public class DetailedRecordsStore {
 	private void parseChildVisit(DetailedChildVisit dcv, JSONObject json) {		
 		try {
 			dcv.setVisit_date(json.getString("visit_date"));
-			if (json.has("received_all_vaccines"))
+			if (json.has("received_all_vaccines") && !json.getString("received_all_vaccines").equals(""))
 				dcv.setReceived_all_vaccines(Integer.parseInt(json.getString("received_all_vaccines")));
 			if (json.has("type_of_vaccines_received"))
 				dcv.setType_of_vaccines_received(json.getString("types_of_vaccines_received"));
-			if (json.has("chronic_disease_or_disability"))
+			if (json.has("chronic_disease_or_disability") && !json.getString("chronic_disease_or_disability").equals(""))
 				dcv.setHas_chronic_disease_or_disability(Integer.parseInt(json.getString("chronic_disease_or_disability")));
 			if (json.has("type_of_chronic_disease_or_disability"))
 				dcv.setType_of_chronic_disease_or_disability(json.getString("type_of_chronic_disease_or_disability"));
-			if (json.has("currently_breastfed"))
-				dcv.setIs_currently_breastfed(Integer.parseInt(json.getString("currently_breastfed")));
-			if (json.has("only_breastfed"))
-				dcv.setIs_only_breastfed(Integer.parseInt(json.getString("only_breastfed")));
-			if (json.has("how_long_only_breastfed"))
+			if (json.has("is_currently_breastfed") && !json.getString("is_currently_breastfed").equals(""))
+				dcv.setIs_currently_breastfed(Integer.parseInt(json.getString("is_currently_breastfed")));
+			if (json.has("is_only_breastfed") && !json.getString("is_only_breastfed").equals(""))
+				dcv.setIs_only_breastfed(Integer.parseInt(json.getString("is_only_breastfed")));
+			if (json.has("how_long_only_breastfed") && !json.getString("how_long_only_breastfed").equals(""))
 				dcv.setHow_long_only_breastfed(Float.parseFloat(json.getString("how_long_only_breastfed")));
-			if (json.has("child_age_when_stoppped_breastfeeding"))
+			if (json.has("child_age_when_stoppped_breastfeeding") && !json.getString("child_age_when_stoppped_breastfeeding").equals(""))
 				dcv.setChild_age_when_stopped_breastfeeding(Float.parseFloat(json.getString("child_age_when_stoppped_breastfeeding")));
-			if (json.has("weight_in_pounds"))
+			if (json.has("weight_in_pounds") && !json.getString("weight_in_pounds").equals(""))
 				dcv.setWeight_in_pounds(Float.parseFloat(json.getString("weight_in_pounds")));
-			if (json.has("height_in_centimeters"))
+			if (json.has("height_in_centimeters") && !json.getString("height_in_centimeters").equals(""))
 				dcv.setHeight_in_centimeters(Float.parseFloat(json.getString("height_in_centimeters")));
-			if (json.has("num_times_incaparina_past_week"))
+			if (json.has("num_times_incaparina_past_week") && !json.getString("num_times_incaparina_past_week").equals(""))
 				dcv.setNum_times_incaparina_past_week(Integer.parseInt(json.getString("num_times_incaparina_past_week")));
-			if (json.has("num_times_vegetables_or_fruits_past_week"))
+			if (json.has("num_times_vegetables_or_fruits_past_week") && !json.getString("num_times_vegetables_or_fruits_past_week").equals(""))
 				dcv.setNum_times_vegetables_or_fruits_past_week(Integer.parseInt(json.getString("num_times_vegetables_or_fruits_past_week")));
-			if (json.has("num_times_herbs_past_week"))
+			if (json.has("num_times_herbs_past_week") && !json.getString("num_times_herbs_past_week").equals(""))
 				dcv.setNum_times_herbs_past_week(Integer.parseInt(json.getString("num_times_herbs_past_week")));
-			if (json.has("num_times_diarrhea_past_week"))
+			if (json.has("num_times_diarrhea_past_week") && !json.getString("num_times_diarrhea_past_week").equals(""))
 				dcv.setNum_times_diarrhea_past_week(Integer.parseInt(json.getString("num_times_diarrhea_past_week")));
-			if (json.has("num_times_vomit_past_week"))
+			if (json.has("num_times_vomit_past_week") && !json.getString("num_times_vomit_past_week").equals(""))
 				dcv.setNum_times_vomit_past_week(Integer.parseInt(json.getString("num_times_vomit_past_week")));
-			if (json.has("num_times_cough_past_week"))
+			if (json.has("num_times_cough_past_week") && !json.getString("num_times_cough_past_week").equals(""))
 				dcv.setNum_times_cough_past_week(Integer.parseInt(json.getString("num_times_cough_past_week")));
-			if (json.has("num_times_fever_past_week"))
+			if (json.has("num_times_fever_past_week") && !json.getString("num_times_fever_past_week").equals(""))
 				dcv.setNum_times_fever_past_week(Integer.parseInt(json.getString("num_times_fever_past_week")));
-			if (json.has("num_times_other_illness_past_week"))
+			if (json.has("num_times_other_illness_past_week") && !json.getString("num_times_other_illness_past_week").equals(""))
 				dcv.setNum_times_other_illness_past_week(Integer.parseInt(json.getString("num_times_other_illness_past_week")));
 			if (json.has("illness_description")) //FIGURE THIS OUT
 				dcv.setIllness_description(json.getString("illness_description"));
-			if (json.has("age_last_received_deparasiting_medicine"))
+			if (json.has("age_last_received_deparasiting_medicine") && !json.getString("age_last_received_deparasiting_medicine").equals(""))
 				dcv.setAge_last_received_deparasiting_medicine(Float.parseFloat(json.getString("age_last_received_deparasiting_medicine")));
 			//All the malnutrition grade scales
 			//siblings older than 5

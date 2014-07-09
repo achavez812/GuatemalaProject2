@@ -582,7 +582,7 @@ public class AddNewChildVisitActivity extends ActionBarActivity {
 				String has_chronic_disease_or_disability_string = has_chronic_disease_or_disability.getText().toString();
 				
 	
-				if(has_chronic_disease_or_disability_string.trim().equals("Yes")){
+				if(has_chronic_disease_or_disability_string.trim().equals("Sí")){
 					dcv.setHas_chronic_disease_or_disability(2);
 				}else if(has_chronic_disease_or_disability_string.trim().equals("No")){
 					dcv.setHas_chronic_disease_or_disability(1);

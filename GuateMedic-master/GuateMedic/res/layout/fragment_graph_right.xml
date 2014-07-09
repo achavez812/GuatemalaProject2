@@ -57,7 +57,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             androidPlot.title="A Simple XY Plot"
-            androidPlot.domainLabel="Edad (semanas)"
+            androidPlot.domainLabel="Edad (meses)"
             androidPlot.rangeLabel="Peso/Talla"
             androidPlot.titleWidget.labelPaint.textSize="@dimen/title_font_size"
             androidPlot.domainLabelWidget.labelPaint.textSize="@dimen/domain_label_font_size"

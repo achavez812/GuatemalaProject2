@@ -78,7 +78,7 @@ public class ViewFamilyActivity extends ActionBarActivity{
 		TextView mother_dob_field = (TextView)findViewById(R.id.view_family_parent1_dob_field);
 		if (!family.getParent1_dob().isEmpty()) {
 			String formatted_mother_dob = Utilities.formatDate(family.getParent1_dob());
-			mother_dob_field.setText(formatted_mother_dob + " (" + Utilities.getAge(formatted_mother_dob) + " años)");
+			mother_dob_field.setText(formatted_mother_dob + " (" + Utilities.getAgeInYears(formatted_mother_dob) + " años)");
 		} else
 			mother_dob_field.setText("Edad desconocida");
 		
@@ -91,7 +91,7 @@ public class ViewFamilyActivity extends ActionBarActivity{
 		TextView father_dob_field = (TextView)findViewById(R.id.view_family_parent2_dob_field);
 		if (!family.getParent2_dob().isEmpty()) {
 			String formatted_father_dob = Utilities.formatDate(family.getParent2_dob());
-			father_dob_field.setText(formatted_father_dob + " (" + Utilities.getAge(formatted_father_dob) + " años)");
+			father_dob_field.setText(formatted_father_dob + " (" + Utilities.getAgeInYears(formatted_father_dob) + " años)");
 		} else
 			father_dob_field.setText("Edad desconocida");
 		
@@ -108,7 +108,7 @@ public class ViewFamilyActivity extends ActionBarActivity{
 					father_lives_with_field.setText("Vive con familia");
 				} 
 			} else {
-				father_lives_with_field.setText("Información desconocida");
+				father_lives_with_field.setText("Vive con familia desconocida");
 			}
 			
 			TextView father_occupation_field = (TextView)findViewById(R.id.view_family_parent2_occupation_field);
@@ -126,17 +126,56 @@ public class ViewFamilyActivity extends ActionBarActivity{
 					
 				}
 			} else {
-				father_occupation_field.setText("Información desconocida");
+				father_occupation_field.setText("Ocupación desconocido");
+			}
+			
+			TextView marital_status_field = (TextView)findViewById(R.id.view_family_marital_status);
+			int marital_status = visit.getParent1_marital_status();
+			if (marital_status == 1) {
+				marital_status_field.setText("Estado Civil: Unida");
+			} else if (marital_status == 2) {
+				marital_status_field.setText("Estado Civil: Casada");
+			} else if (marital_status == 3) {
+				marital_status_field.setText("Estado Civil: Viuda");
+			} else if (marital_status == 4) {
+				marital_status_field.setText("Estado Civil: Soltera");
+			} else {
+				marital_status_field.setText("Estado Civil: Desconocido" );
+			}
+			
+			TextView num_children_under_5_field = (TextView)findViewById(R.id.view_family_num_children_under_5);
+			int num_children_under_5 = visit.getNum_children_under_5();
+			if (num_children_under_5 >= 0) {
+				num_children_under_5_field.setText("Ñinos menos 5: " + num_children_under_5);
+			} else {
+				num_children_under_5_field.setText("Ñinos menos 5: Desconocido");
+			}
+			
+			TextView num_people_in_household_field = (TextView)findViewById(R.id.view_family_num_people_in_household);
+			int num_people_in_household = visit.getNum_people_in_household();
+			if (num_people_in_household >= 0) {
+				num_people_in_household_field.setText("Personas en Casa: " + num_people_in_household);
+			} else {
+				num_people_in_household_field.setText("Personas en Casa: Desconocido");
 			}
 			
 			
 			
 		} else {
 			TextView father_lives_with_field = (TextView)findViewById(R.id.view_family_parent2_lives_with_family_field);
-			father_lives_with_field.setText("Información desconocida");
+			father_lives_with_field.setText("Vive con familia desconocida");
 			
 			TextView father_occupation_field = (TextView)findViewById(R.id.view_family_parent2_occupation_field);
-			father_occupation_field.setText("Información desconocida");
+			father_occupation_field.setText("Ocupación desconocido");
+			
+			TextView marital_status_field = (TextView)findViewById(R.id.view_family_marital_status);
+			marital_status_field.setText("Estado Civil: Desconocido" );
+
+			TextView num_children_under_5_field = (TextView)findViewById(R.id.view_family_num_children_under_5);
+			num_children_under_5_field.setText("Ñinos menos 5: Desconocido");
+
+			TextView num_people_in_household_field = (TextView)findViewById(R.id.view_family_num_people_in_household);
+			num_people_in_household_field.setText("Personas en Casa: Desconocido");
 
 		}
 		

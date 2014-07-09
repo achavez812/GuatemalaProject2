@@ -1390,12 +1390,12 @@ containing a value of this type.
         public static final int view_exam_date=0x7f050080;
         public static final int view_family_add_child_button=0x7f05005c;
         public static final int view_family_child_list_header=0x7f05006c;
-        public static final int view_family_has_igss=0x7f050068;
         public static final int view_family_info_cont=0x7f05010a;
         public static final int view_family_log_new_visit=0x7f05006b;
         public static final int view_family_marital_status=0x7f050067;
         public static final int view_family_name=0x7f050048;
-        public static final int view_family_num_pregnancies=0x7f050069;
+        public static final int view_family_num_children_under_5=0x7f050068;
+        public static final int view_family_num_people_in_household=0x7f050069;
         public static final int view_family_parent1_dob_field=0x7f050061;
         public static final int view_family_parent1_header=0x7f05005f;
         public static final int view_family_parent1_name_field=0x7f050060;

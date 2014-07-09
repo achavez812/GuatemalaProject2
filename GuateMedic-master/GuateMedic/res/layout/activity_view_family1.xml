@@ -115,24 +115,23 @@
 	                android:id="@+id/view_family_marital_status"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:textSize="21sp"
+					android:textSize="19sp"
 					android:text="Family Field 1" />
 	            
 	            <TextView
-	                android:id="@+id/view_family_has_igss"
+	                android:id="@+id/view_family_num_children_under_5"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:textSize="21sp"
+					android:textSize="19sp"
 					android:text="Family Field 2" />
 	            
 	            <TextView
-	                android:id="@+id/view_family_num_pregnancies"
+	                android:id="@+id/view_family_num_people_in_household"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:textSize="21sp"
+					android:textSize="19sp"
 					android:text="Family Field 3" />
 	        
-	            
 	            
 	            <Button 
 	                android:id="@+id/view_family_view_past_visits"

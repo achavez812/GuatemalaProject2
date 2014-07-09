@@ -541,12 +541,12 @@ int id useLogo 0x7f050003
 int id view_exam_date 0x7f050080
 int id view_family_add_child_button 0x7f05005c
 int id view_family_child_list_header 0x7f05006c
-int id view_family_has_igss 0x7f050068
 int id view_family_info_cont 0x7f05010a
 int id view_family_log_new_visit 0x7f05006b
 int id view_family_marital_status 0x7f050067
 int id view_family_name 0x7f050048
-int id view_family_num_pregnancies 0x7f050069
+int id view_family_num_children_under_5 0x7f050068
+int id view_family_num_people_in_household 0x7f050069
 int id view_family_parent1_dob_field 0x7f050061
 int id view_family_parent1_header 0x7f05005f
 int id view_family_parent1_name_field 0x7f050060
