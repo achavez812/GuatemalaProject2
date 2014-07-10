@@ -55,7 +55,7 @@
         android:layout_marginTop="10dp"
         android:textStyle="bold"       
         android:textSize="18sp" 
-        android:text="Child Visit:"
+        android:text="Última Visita:"
         />
 
     <TextView

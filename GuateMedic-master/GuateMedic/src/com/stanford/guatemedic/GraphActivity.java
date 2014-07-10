@@ -1,5 +1,9 @@
 package com.stanford.guatemedic;
 
+import java.text.DecimalFormat;
+import java.text.FieldPosition;
+import java.text.Format;
+import java.text.ParsePosition;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -31,6 +35,7 @@ import com.androidplot.xy.LineAndPointFormatter;
 import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYSeries;
+import com.androidplot.xy.XYStepMode;
 import com.stanford.guatemedic.R.color;
 
 public class GraphActivity extends ActionBarActivity {
@@ -299,7 +304,7 @@ public class GraphActivity extends ActionBarActivity {
 						if (weight_z_score == -10)
 							weight_z_score_field.setText("El niño is mayor de 5 años.");
 						else
-							weight_z_score_field.setText("Peso z-score: " + weight_z_score);
+							weight_z_score_field.setText("Grado (Peso): " + weight_z_score);
 						
 					} 
 					if (child_age_in_weeks_height.length > 0) {
@@ -309,7 +314,7 @@ public class GraphActivity extends ActionBarActivity {
 						double height_z_score = Utilities.round(calculate_height_z_score(height, 0, gender), 2);
 						TextView height_z_score_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_height_z_score);
 						if (height_z_score != -10)
-							height_z_score_field.setText("Talla z-score: " + height_z_score);
+							height_z_score_field.setText("Grado (Talla): " + height_z_score);
 					}
 					
 				} else {
@@ -345,10 +350,10 @@ public class GraphActivity extends ActionBarActivity {
 							
 				if (weight_z_score != -10) {
 					TextView weight_z_score_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_weight_z_score);
-					weight_z_score_field.setText("Peso z-score: " + weight_z_score);
+					weight_z_score_field.setText("Grado (Peso): " + weight_z_score);
 					
 					TextView height_z_score_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_height_z_score);
-					height_z_score_field.setText("Talla z-score: " + height_z_score);
+					height_z_score_field.setText("Grado (Talla): " + height_z_score);
 				}
 
 				TextView other_score_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_other_score);
@@ -361,8 +366,46 @@ public class GraphActivity extends ActionBarActivity {
 			return rootView;
 		}
 	}
+	
+	
+	
+//	class GraphYLabelFormat extends Format {
+//
+//		final String[] yLabels = {"Jan", "Feb", "Mar", "Apr", "May"};
+//		
+//	    @Override
+//	    public StringBuffer format(Object arg0, StringBuffer arg1, FieldPosition arg2) {
+//	        int parsedInt = Math.round(Float.parseFloat(arg0.toString()));
+//	        String labelString = yLabels[parsedInt];
+//	        arg1.append(labelString);
+//	        return arg1;
+//	    }
+//
+//	    @Override
+//	    public Object parseObject(String arg0, ParsePosition arg1) {
+//	        return java.util.Arrays.asList(yLabels).indexOf(arg0);
+//	    }
+//	}
 
 	public static class GraphFragmentRight extends Fragment {
+		
+		class GraphXLabelFormat extends Format {
+
+			final String[] xLabels = {"Jan", "Feb", "Mar", "Apr", "May"};
+			
+		    @Override
+		    public StringBuffer format(Object arg0, StringBuffer arg1, FieldPosition arg2) {
+		        int parsedInt = Math.round(Float.parseFloat(arg0.toString()));
+		        String labelString = xLabels[parsedInt];
+		        arg1.append(labelString);
+		        return arg1;
+		    }
+
+		    @Override
+		    public Object parseObject(String arg0, ParsePosition arg1) {
+		        return java.util.Arrays.asList(xLabels).indexOf(arg0);
+		    }
+		}
 		
 		int selected;
 		int sex;
@@ -418,9 +461,8 @@ public class GraphActivity extends ActionBarActivity {
 			final View rootView = inflater.inflate(R.layout.fragment_graph_right, container,false);
 			plot = (XYPlot) rootView.findViewById(R.id.mySimpleXYPlot);
 			
-			//final CustomPointRenderer<LineAndPointFormatter> cpr = new CustomPointRenderer<LineAndPointFormatter>(plot);
-			//cpr.setWidth(50);
-	        plot.getLegendWidget().setTableModel(new DynamicTableModel(3, 3));
+			
+	        plot.getLegendWidget().setTableModel(new DynamicTableModel(1, 4));
 	 
 	        // adjust the legend size so there is enough room
 	        // to draw the new legend grid:
@@ -436,7 +478,7 @@ public class GraphActivity extends ActionBarActivity {
 	        // adjust the padding of the legend widget to look a little nicer:
 	        plot.getLegendWidget().setPadding(10, 10, 10, 10);       
 
-	        plot.getLegendWidget().setSize(new SizeMetrics(130, SizeLayoutType.ABSOLUTE, 330, SizeLayoutType.ABSOLUTE));
+	        plot.getLegendWidget().setSize(new SizeMetrics(130, SizeLayoutType.ABSOLUTE, 70, SizeLayoutType.ABSOLUTE));
 
 	       //plot.disableAllMarkup();
 	        plot.getLegendWidget().position(25,
@@ -447,7 +489,6 @@ public class GraphActivity extends ActionBarActivity {
 			
 			final TextView weight_view = (TextView)rootView.findViewById(R.id.tab_weight);
 			final TextView height_view = (TextView)rootView.findViewById(R.id.tab_height);
-			final TextView other_view = (TextView)rootView.findViewById(R.id.tab_other);
 			
 			weight_view.setOnClickListener(new View.OnClickListener() {
 				
@@ -456,7 +497,6 @@ public class GraphActivity extends ActionBarActivity {
 					plot.clear();
 					weight_view.setBackgroundResource(color.gray_medium);
 					height_view.setBackgroundResource(color.gray_dark);
-					other_view.setBackgroundResource(color.gray_dark);
 
 					plot.setRangeLabel("Peso (libras)");
 					
@@ -467,31 +507,48 @@ public class GraphActivity extends ActionBarActivity {
 						data = ChildDataStoreGraph.female_weight_lb_graph_data;
 					}
 					Number[] x_array = makeXArray(data[0].length, 0.526);
-					for (int i = 1; i < data.length -1; i++)  {
-						XYSeries series = new SimpleXYSeries(Arrays.asList(x_array), Arrays.asList(data[i])," " + (-4 + i) + "z");
+					for (int i = data.length-2; i > 0; i--)  {
 						LineAndPointFormatter seriesFormat = null;
-						if (i == 1) //z-score = -3
+						XYSeries series = null;
+						if (i == 1){ //z-score = -3
+							series = new SimpleXYSeries(Arrays.asList(x_array), Arrays.asList(data[i]), " 3");
 							seriesFormat = new LineAndPointFormatter(Color.rgb(128, 0, 0), Color.rgb(128, 0, 0), null, null);
-						else if (i == 2)// z-score = -2
+						}else if (i == 2){// z-score = -2
+							series = new SimpleXYSeries(Arrays.asList(x_array), Arrays.asList(data[i]), " 2");
 							seriesFormat = new LineAndPointFormatter(Color.rgb(220, 20, 60), Color.rgb(220, 20, 60), null, null);
-						else if (i == 3) //z-score = -1
+						}else if (i == 3){ //z-score = -1
+							series = new SimpleXYSeries(Arrays.asList(x_array), Arrays.asList(data[i]), " 1");
 							seriesFormat = new LineAndPointFormatter(Color.rgb(255, 127, 80), Color.rgb(255, 127, 80), null, null);
-						else if (i == 4) //z-score = 0
+						}else if (i == 4){ //z-score = 0
+							series = new SimpleXYSeries(Arrays.asList(x_array), Arrays.asList(data[i]), " 0");
 							seriesFormat = new LineAndPointFormatter(Color.rgb(255, 160, 122), Color.rgb(255, 160, 122), null, null);
+						}
 						plot.addSeries(series, seriesFormat);
+						
+					
 					}
 					if ((child_age_in_weeks_weight[child_age_in_weeks_weight.length - 1]).doubleValue() < 260.0) {
 						Number[] child_x_array = convertArray(child_age_in_weeks_weight, 0.23);
-						XYSeries series = new SimpleXYSeries(Arrays.asList(child_x_array), Arrays.asList(child_weight), "Child");
+						XYSeries series = new SimpleXYSeries(Arrays.asList(child_x_array), Arrays.asList(child_weight), null);
 						LineAndPointFormatter seriesFormat = new LineAndPointFormatter(Color.BLACK, Color.BLUE, null, null);
+						//CustomPointRenderer<LineAndPointFormatter> cpr = new CustomPointRenderer<LineAndPointFormatter>(plot);
 						plot.addSeries(series, seriesFormat);
 					}
 					//XYSeries series = new SimpleXYSeries(Arrays.asList(data[0]), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "");
 			        //plot.addSeries(series, cpr.getFormatter(series));
-			        // reduce the number of range labels
-			        plot.setTicksPerRangeLabel(3);
+					plot.setTitle("");
+					plot.setRangeBottomMax(3);
+					plot.setDomainLeftMin(0);
+			        plot.setTicksPerRangeLabel(2);
+			        plot.setTicksPerDomainLabel(6);
 			        plot.getGraphWidget().setDomainLabelOrientation(-45);
-					plot.redraw();
+					plot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 1);
+					plot.setDomainValueFormat(new DecimalFormat(""));
+					plot.setRangeStep(XYStepMode.INCREMENT_BY_VAL, 1);
+					plot.setRangeValueFormat(new DecimalFormat(""));
+			        plot.redraw();
+
+					
 					
 				} 
 				
@@ -503,7 +560,6 @@ public class GraphActivity extends ActionBarActivity {
 					plot.clear();
 					height_view.setBackgroundResource(color.gray_medium);
 					weight_view.setBackgroundResource(color.gray_dark);
-					other_view.setBackgroundResource(color.gray_dark);
 
 					plot.setRangeLabel("Talla (cm)");
 					
@@ -514,17 +570,22 @@ public class GraphActivity extends ActionBarActivity {
 						data = ChildDataStoreGraph.female_height_cm_graph_data;
 					}
 					Number[] x_array = makeXArray(data[0].length, 0.526);
-					for (int i = 1; i < data.length -1; i++)  {
-						XYSeries series = new SimpleXYSeries(Arrays.asList(x_array), Arrays.asList(data[i])," " + (-4 + i) + "z");
+					for (int i = data.length-2; i > 0; i--)  {
+						XYSeries series = null;
 						LineAndPointFormatter seriesFormat = null;
-						if (i == 1) //z-score = -3
+						if (i == 1) { //z-score = -3
+							series = new SimpleXYSeries(Arrays.asList(x_array), Arrays.asList(data[i]), " 3");
 							seriesFormat = new LineAndPointFormatter(Color.rgb(128, 0, 0), Color.rgb(128, 0, 0), null, null);
-						else if (i == 2)// z-score = -2
+						} else if (i == 2) {// z-score = -2
+							series = new SimpleXYSeries(Arrays.asList(x_array), Arrays.asList(data[i]), " 2");
 							seriesFormat = new LineAndPointFormatter(Color.rgb(220, 20, 60), Color.rgb(220, 20, 60), null, null);
-						else if (i == 3) //z-score = -1
+						} else if (i == 3) {//z-score = -1
+							series = new SimpleXYSeries(Arrays.asList(x_array), Arrays.asList(data[i]), " 1");
 							seriesFormat = new LineAndPointFormatter(Color.rgb(255, 127, 80), Color.rgb(255, 127, 80), null, null);
-						else if (i == 4) //z-score = 0
+						} else if (i == 4) { //z-score = 0
+							series = new SimpleXYSeries(Arrays.asList(x_array), Arrays.asList(data[i]), " 0");
 							seriesFormat = new LineAndPointFormatter(Color.rgb(255, 160, 122), Color.rgb(255, 160, 122), null, null);
+						}
 						plot.addSeries(series, seriesFormat);
 					}
 					if ((child_age_in_weeks_height[child_age_in_weeks_height.length - 1]).doubleValue() < 260.0) {
@@ -532,34 +593,31 @@ public class GraphActivity extends ActionBarActivity {
 						XYSeries series = new SimpleXYSeries(Arrays.asList(child_x_array), Arrays.asList(child_height), "Child");
 						LineAndPointFormatter seriesFormat = new LineAndPointFormatter(Color.BLACK, Color.BLUE, null, null);
 						plot.addSeries(series, seriesFormat);
+						
 					}
 				
-					
-			     // reduce the number of range labels
-			        plot.setTicksPerRangeLabel(3);
+					plot.setTitle("");
+					plot.setRangeBottomMax(40);
+					plot.setDomainLeftMin(0);
+			        plot.setTicksPerRangeLabel(2);
+			        plot.setTicksPerDomainLabel(6);
 			        plot.getGraphWidget().setDomainLabelOrientation(-45);
-					plot.redraw();
-				}
-			});
-		
-			other_view.setOnClickListener(new View.OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
+					plot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 1);
+					plot.setDomainValueFormat(new DecimalFormat(""));
+					plot.setRangeStep(XYStepMode.INCREMENT_BY_VAL, 5);
+					plot.setRangeValueFormat(new DecimalFormat(""));
+			        plot.redraw();
 
-					other_view.setBackgroundResource(color.gray_medium);
-					height_view.setBackgroundResource(color.gray_dark);
-					weight_view.setBackgroundResource(color.gray_dark);
 				}
 			});
-		
-		
+				
 			if (selected == 1) weight_view.performClick();
 			else if (selected == 2) height_view.performClick();
-			else if (selected == 3) other_view.performClick();
 			
 			return rootView;
 		}
+	
+
 		
 	}
 }
