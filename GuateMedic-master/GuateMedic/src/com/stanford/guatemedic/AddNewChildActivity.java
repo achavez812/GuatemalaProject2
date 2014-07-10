@@ -4,8 +4,11 @@ import java.util.Calendar;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -37,7 +40,6 @@ public class AddNewChildActivity extends ActionBarActivity {
 
 		setContentView(R.layout.activity_add_new_child);
 		getActionBar().setHomeButtonEnabled(true);
-
 		family_id = getIntent().getStringExtra("family_id");
 		if (savedInstanceState == null) {
 
@@ -52,10 +54,40 @@ public class AddNewChildActivity extends ActionBarActivity {
 	
 	@Override
 	public void onBackPressed() {
-		Intent i = new Intent(getApplication(), ViewFamilyActivity.class);
-		i.putExtra("family_id", family_id);
-		startActivity(i);
-	}
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+				this);
+ 
+		// set title
+		alertDialogBuilder.setTitle("Alerta");
+ 
+			// set dialog message
+		alertDialogBuilder
+			.setMessage("Vas a perder este información si dejes este pagina.")
+			.setCancelable(false)
+			.setPositiveButton("Dejar Esta Pagina",new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog,int id) {
+					// if this button is clicked, close
+					// current activity
+					
+					Intent i = new Intent(getApplication(), ViewFamilyActivity.class);
+					i.putExtra("family_id", family_id);
+					startActivity(i);
+				}
+			  })
+			.setNegativeButton("Quedar en Esta Pagina",new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog,int id) {
+					// if this button is clicked, just close
+					// the dialog box and do nothing
+					dialog.cancel();
+				}
+			});
+ 
+			// create alert dialog
+			AlertDialog alertDialog = alertDialogBuilder.create();
+ 
+				// show it
+			alertDialog.show();
+		}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -88,7 +120,6 @@ public class AddNewChildActivity extends ActionBarActivity {
 	public static class AddNewChildFragment extends Fragment {
 
 		public AddNewChildFragment() {
-
 		}
 
 		public static AddNewChildFragment newInstance(String family_id) {
@@ -315,12 +346,13 @@ public class AddNewChildActivity extends ActionBarActivity {
 						obj.put("birth_weight", birth_weight);
 						obj.put("birth_height", birth_height);
 						obj.put("youngest_sibling_dob", youngest_sibling_dob);
-						DetailedRecordsStore.get(getActivity().getApplication()).addNewChild(obj);
+						String child_id = DetailedRecordsStore.get(getActivity().getApplication()).addNewChild(obj);
 						// Go to activity of this family
-
-						Intent i = new Intent(getActivity(), ViewFamilyActivity.class);
-						i.putExtra("family_id", family_id);
-						startActivity(i);
+						if (child_id != null) {
+							Intent i = new Intent(getActivity(), AddNewChildVisitActivity.class);
+							i.putExtra("child_id", child_id);
+							startActivity(i);
+						}
 						
 					} catch (JSONException e) {
 

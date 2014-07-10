@@ -114,7 +114,7 @@ public class DetailedRecordsStore {
 	//Creates a temporary id for family
 	//Writes it to local storage
 	//Adds it to DetailedRecordsStore
-	public void addNewFamily(JSONObject obj) {
+	public String addNewFamily(JSONObject obj) {
 		try {
 			String village = obj.getString("village");
 			String random_id = generateRandomId();
@@ -135,12 +135,14 @@ public class DetailedRecordsStore {
 				Log.i("WTF", "Family save successful");
 			
 			parseFamily(obj);
+			return random_id;
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 	
-	public void addNewChild(JSONObject obj) {
+	public String addNewChild(JSONObject obj) {
 		try {
 			String family_id = obj.getString("family_id");
 			String random_id = generateRandomId();
@@ -160,10 +162,12 @@ public class DetailedRecordsStore {
 			if (gw.saveNewChild(obj.toString()))
 				Log.i("WTF", "Child save successful");
 			
-			parseChild(family_id, obj);			
+			parseChild(family_id, obj);		
+			return random_id;
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 	
 	public void addNewChildVisit(JSONObject obj) {

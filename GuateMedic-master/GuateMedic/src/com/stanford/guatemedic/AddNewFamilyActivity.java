@@ -5,9 +5,11 @@ import java.util.Calendar;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -21,15 +23,18 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class AddNewFamilyActivity extends ActionBarActivity {
+	
+	static String village;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_new_family);
 		getActionBar().setHomeButtonEnabled(true);
 
-		String village = getIntent().getStringExtra("village");
+		village = getIntent().getStringExtra("village");
 		if (savedInstanceState == null) {
 			getSupportFragmentManager()
 					.beginTransaction()
@@ -37,6 +42,44 @@ public class AddNewFamilyActivity extends ActionBarActivity {
 							AddNewFamilyFragment.newInstance(village)).commit();
 		}
 	}
+	
+	@Override
+	public void onBackPressed() {
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+				this);
+ 
+		// set title
+		alertDialogBuilder.setTitle("Alerta");
+ 
+			// set dialog message
+		alertDialogBuilder
+			.setMessage("Vas a perder este información si dejes este pagina.")
+			.setCancelable(false)
+			.setPositiveButton("Dejar Esta Pagina",new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog,int id) {
+					// if this button is clicked, close
+					// current activity
+					
+					Intent i = new Intent(getApplication(), ViewFamilyListActivity.class);
+					i.putExtra("village_name", village);
+					startActivity(i);
+				}
+			  })
+			.setNegativeButton("Quedar en Esta Pagina",new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog,int id) {
+					// if this button is clicked, just close
+					// the dialog box and do nothing
+					dialog.cancel();
+				}
+			});
+ 
+			// create alert dialog
+			AlertDialog alertDialog = alertDialogBuilder.create();
+ 
+				// show it
+			alertDialog.show();
+	}
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -132,13 +175,13 @@ public class AddNewFamilyActivity extends ActionBarActivity {
 			final String village = getArguments().getString("village");
 			
 			TextView textview = (TextView)rootView.findViewById(R.id.add_new_family_textview);
-			textview.setText("Village: " + village);
+			textview.setText("Comunidad: " + village);
 
 
 			
 			EditText mother_dob_field=(EditText)rootView.findViewById(R.id.add_new_family_parent1_dob);
+			/*
 			mother_dob_field.setOnClickListener(new View.OnClickListener() {
-
 				@Override
 				public void onClick(View v) {
 					
@@ -148,10 +191,12 @@ public class AddNewFamilyActivity extends ActionBarActivity {
 					
 				}
 			});
+			*/
 
 			EditText father_dob_field=(EditText)rootView.findViewById(R.id.add_new_family_parent2_dob);
+			/*
 			father_dob_field.setOnClickListener(new View.OnClickListener() {
-
+				
 				@Override
 				public void onClick(View v) {
 					
@@ -161,8 +206,9 @@ public class AddNewFamilyActivity extends ActionBarActivity {
 					
 
 				}
+				
 			});
-
+			*/
 					
 			Button button = (Button) rootView
 					.findViewById(R.id.add_new_family_button);
@@ -174,19 +220,29 @@ public class AddNewFamilyActivity extends ActionBarActivity {
 					String parent1_name = parent1_name_field.getText()
 							.toString();
 
-					EditText parent1_dob_field = (EditText) getActivity()
-							.findViewById(R.id.add_new_family_parent1_dob);
-					String parent1_dob = parent1_dob_field.getText().toString();
+					int parent1_dob = 0;
+					try {
+						String parent1_dob_field = ((EditText)getActivity().findViewById(R.id.add_new_family_parent1_dob)).getText().toString();
+						parent1_dob = Integer.parseInt(parent1_dob_field);
+					} catch(NumberFormatException | NullPointerException e) {
+						parent1_dob = 0;
+						
+					}
 
 					EditText parent2_name_field = (EditText) getActivity()
 							.findViewById(R.id.add_new_family_parent2_name);
 					String parent2_name = parent2_name_field.getText()
 							.toString();
 
-					EditText parent2_dob_field = (EditText) getActivity()
-							.findViewById(R.id.add_new_family_parent2_dob);
-					String parent2_dob = parent2_dob_field.getText().toString();
-
+					int parent2_dob = 0;
+					try {
+						String parent2_dob_field = ((EditText)getActivity().findViewById(R.id.add_new_family_parent2_dob)).getText().toString();
+						parent2_dob = Integer.parseInt(parent2_dob_field);
+					} catch (NumberFormatException | NullPointerException e) {
+						parent2_dob = 0;
+					}
+					
+					String family_id = "";
 					//Some of these may be empty strings
 					try {
 						JSONObject obj = new JSONObject();
@@ -195,18 +251,22 @@ public class AddNewFamilyActivity extends ActionBarActivity {
 						obj.put("parent1_dob", parent1_dob);
 						obj.put("parent2_name", parent2_name);
 						obj.put("parent2_dob", parent2_dob);
-						DetailedRecordsStore
+						family_id = DetailedRecordsStore
 								.get(getActivity().getApplication())
 								.addNewFamily(obj);
 					} catch (JSONException e) {
 						e.printStackTrace();
 					}
 
-					// Go to activity of this family
-					Intent i = new Intent(getActivity(),
-							ViewFamilyListActivity.class);
-					i.putExtra("village_name", village);
-					startActivity(i);
+					if (parent1_name.equals("")) {
+						Toast.makeText(getActivity(), "Necesitas incluir el nombre de la madre", Toast.LENGTH_LONG).show();
+					} else {
+						// Go to activity of this family
+						Intent i = new Intent(getActivity(),
+								AddNewFamilyVisitActivity.class);
+						i.putExtra("family_id", family_id);
+						startActivity(i);
+					}
 				}
 			});
 

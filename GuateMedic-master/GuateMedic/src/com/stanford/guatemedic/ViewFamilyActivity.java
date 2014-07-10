@@ -27,7 +27,7 @@ public class ViewFamilyActivity extends ActionBarActivity{
 		getActionBar().setHomeButtonEnabled(true);
 		
 		family_id = getIntent().getStringExtra("family_id");
-		
+		/*
 		Button view_visits_button = (Button)findViewById(R.id.view_family_view_past_visits);
 		view_visits_button.setOnClickListener(new OnClickListener(){
 			
@@ -37,7 +37,7 @@ public class ViewFamilyActivity extends ActionBarActivity{
 				
 			}
 		});
-		
+		*/
 		Button log_visit_button = (Button)findViewById(R.id.view_family_log_new_visit);
 		log_visit_button.setOnClickListener(new OnClickListener(){
 			
@@ -76,9 +76,13 @@ public class ViewFamilyActivity extends ActionBarActivity{
 			mother_name_field.setText("Nombre desconocido");
 		
 		TextView mother_dob_field = (TextView)findViewById(R.id.view_family_parent1_dob_field);
-		if (!family.getParent1_dob().isEmpty()) {
-			String formatted_mother_dob = Utilities.formatDate(family.getParent1_dob());
-			mother_dob_field.setText(formatted_mother_dob + " (" + Utilities.getAgeInYears(formatted_mother_dob) + " años)");
+		if (!family.getParent1_dob().isEmpty() && !family.getParent1_dob().equals("0")) {
+			if (family.getParent1_dob().length() > 3) {
+				String formatted_mother_dob = Utilities.formatDate(family.getParent1_dob());
+				mother_dob_field.setText(Utilities.getAgeInYears(formatted_mother_dob) + " años");
+			} else {
+				mother_dob_field.setText(family.getParent1_dob() + " años");
+			}
 		} else
 			mother_dob_field.setText("Edad desconocida");
 		
@@ -89,9 +93,13 @@ public class ViewFamilyActivity extends ActionBarActivity{
 			father_name_field.setText("Nombre desconocido");
 		
 		TextView father_dob_field = (TextView)findViewById(R.id.view_family_parent2_dob_field);
-		if (!family.getParent2_dob().isEmpty()) {
-			String formatted_father_dob = Utilities.formatDate(family.getParent2_dob());
-			father_dob_field.setText(formatted_father_dob + " (" + Utilities.getAgeInYears(formatted_father_dob) + " años)");
+		if (!family.getParent2_dob().isEmpty() && !family.getParent2_dob().equals("0")) {
+			if (family.getParent2_dob().length() > 3) {
+				String formatted_father_dob = Utilities.formatDate(family.getParent2_dob());
+				father_dob_field.setText(Utilities.getAgeInYears(formatted_father_dob) + " años");
+			} else {
+				father_dob_field.setText(family.getParent2_dob() + " años");
+			}
 		} else
 			father_dob_field.setText("Edad desconocida");
 		

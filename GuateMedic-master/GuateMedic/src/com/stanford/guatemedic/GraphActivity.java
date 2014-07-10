@@ -190,6 +190,8 @@ public class GraphActivity extends ActionBarActivity {
 		}
 		
 		int index = (int)(age_days / 3); //every three days of data
+		if (index > mean_data.length)
+			return -10;
 		double mean = mean_data[index].doubleValue();
 		double sd = standard_deviations[index].doubleValue();
 		return (weight - mean) / sd;
@@ -210,6 +212,8 @@ public class GraphActivity extends ActionBarActivity {
 		}
 		
 		int index = (int)(age_days / 3);
+		if (index > mean_data.length)
+			return -10;
 		double mean = mean_data[index].doubleValue();
 		double sd = standard_deviations[index].doubleValue();
 		
@@ -292,7 +296,10 @@ public class GraphActivity extends ActionBarActivity {
 						weight_field.setText("Peso: " + weight + " libras");
 						double weight_z_score = Utilities.round(calculate_weight_z_score(weight, 0, gender), 2);
 						TextView weight_z_score_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_weight_z_score);
-						weight_z_score_field.setText("Peso z-score: " + weight_z_score);
+						if (weight_z_score == -10)
+							weight_z_score_field.setText("El niño is mayor de 5 años.");
+						else
+							weight_z_score_field.setText("Peso z-score: " + weight_z_score);
 						
 					} 
 					if (child_age_in_weeks_height.length > 0) {
@@ -301,7 +308,8 @@ public class GraphActivity extends ActionBarActivity {
 						height_field.setText("Talla: " + height + " cm");
 						double height_z_score = Utilities.round(calculate_height_z_score(height, 0, gender), 2);
 						TextView height_z_score_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_height_z_score);
-						height_z_score_field.setText("Talla z-score: " + height_z_score);
+						if (height_z_score != -10)
+							height_z_score_field.setText("Talla z-score: " + height_z_score);
 					}
 					
 				} else {
@@ -316,8 +324,12 @@ public class GraphActivity extends ActionBarActivity {
 				double age_in_years = age_in_months / 12;
 				double weight = child_weight[child_weight.length -1].doubleValue();
 				double height = child_height[child_height.length - 1].doubleValue();
-				double weight_z_score = Utilities.round(calculate_weight_z_score(weight, age_in_days, gender), 2);
-				double height_z_score = Utilities.round(calculate_height_z_score(height, age_in_days, gender), 2);
+				double weight_z_score = -10;
+				double height_z_score = -10;
+				if (age_in_days < 1850) {
+					weight_z_score = Utilities.round(calculate_weight_z_score(weight, age_in_days, gender), 2);
+					height_z_score = Utilities.round(calculate_height_z_score(height, age_in_days, gender), 2);
+				}
 				
 				
 				visit_header_field.setText("Child Visit (" + formatted_visit_date + ")"); //Format visit date
@@ -331,11 +343,13 @@ public class GraphActivity extends ActionBarActivity {
 				TextView height_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_height);
 				height_field.setText("Talla: " + height + " cm");
 							
-				TextView weight_z_score_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_weight_z_score);
-				weight_z_score_field.setText("Peso z-score: " + weight_z_score);
-				
-				TextView height_z_score_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_height_z_score);
-				height_z_score_field.setText("Talla z-score: " + height_z_score);
+				if (weight_z_score != -10) {
+					TextView weight_z_score_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_weight_z_score);
+					weight_z_score_field.setText("Peso z-score: " + weight_z_score);
+					
+					TextView height_z_score_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_height_z_score);
+					height_z_score_field.setText("Talla z-score: " + height_z_score);
+				}
 
 				TextView other_score_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_other_score);
 				
@@ -466,11 +480,12 @@ public class GraphActivity extends ActionBarActivity {
 							seriesFormat = new LineAndPointFormatter(Color.rgb(255, 160, 122), Color.rgb(255, 160, 122), null, null);
 						plot.addSeries(series, seriesFormat);
 					}
-					
-					Number[] child_x_array = convertArray(child_age_in_weeks_weight, 0.23);
-					XYSeries series = new SimpleXYSeries(Arrays.asList(child_x_array), Arrays.asList(child_weight), "Child");
-					LineAndPointFormatter seriesFormat = new LineAndPointFormatter(Color.BLACK, Color.BLUE, null, null);
-					plot.addSeries(series, seriesFormat);
+					if ((child_age_in_weeks_weight[child_age_in_weeks_weight.length - 1]).doubleValue() < 260.0) {
+						Number[] child_x_array = convertArray(child_age_in_weeks_weight, 0.23);
+						XYSeries series = new SimpleXYSeries(Arrays.asList(child_x_array), Arrays.asList(child_weight), "Child");
+						LineAndPointFormatter seriesFormat = new LineAndPointFormatter(Color.BLACK, Color.BLUE, null, null);
+						plot.addSeries(series, seriesFormat);
+					}
 					//XYSeries series = new SimpleXYSeries(Arrays.asList(data[0]), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "");
 			        //plot.addSeries(series, cpr.getFormatter(series));
 			        // reduce the number of range labels
@@ -512,11 +527,12 @@ public class GraphActivity extends ActionBarActivity {
 							seriesFormat = new LineAndPointFormatter(Color.rgb(255, 160, 122), Color.rgb(255, 160, 122), null, null);
 						plot.addSeries(series, seriesFormat);
 					}
-					
-					Number[] child_x_array = convertArray(child_age_in_weeks_height, 0.23);
-					XYSeries series = new SimpleXYSeries(Arrays.asList(child_x_array), Arrays.asList(child_height), "Child");
-					LineAndPointFormatter seriesFormat = new LineAndPointFormatter(Color.BLACK, Color.BLUE, null, null);
-					plot.addSeries(series, seriesFormat);
+					if ((child_age_in_weeks_height[child_age_in_weeks_height.length - 1]).doubleValue() < 260.0) {
+						Number[] child_x_array = convertArray(child_age_in_weeks_height, 0.23);
+						XYSeries series = new SimpleXYSeries(Arrays.asList(child_x_array), Arrays.asList(child_height), "Child");
+						LineAndPointFormatter seriesFormat = new LineAndPointFormatter(Color.BLACK, Color.BLUE, null, null);
+						plot.addSeries(series, seriesFormat);
+					}
 				
 					
 			     // reduce the number of range labels

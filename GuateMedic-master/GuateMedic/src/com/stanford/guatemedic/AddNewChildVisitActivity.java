@@ -3,6 +3,8 @@ package com.stanford.guatemedic;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -80,9 +82,39 @@ public class AddNewChildVisitActivity extends ActionBarActivity {
 	
 	@Override
 	public void onBackPressed() {
-		Intent i = new Intent(getApplication(), GraphActivity.class);
-		i.putExtra("child_id", child_id);
-		startActivity(i);
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+				this);
+ 
+		// set title
+		alertDialogBuilder.setTitle("Alerta");
+ 
+			// set dialog message
+		alertDialogBuilder
+			.setMessage("Vas a perder este información si dejes este pagina.")
+			.setCancelable(false)
+			.setPositiveButton("Dejar Esta Pagina",new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog,int id) {
+					// if this button is clicked, close
+					// current activity
+					
+					Intent i = new Intent(getApplication(), GraphActivity.class);
+					i.putExtra("child_id", child_id);
+					startActivity(i);
+				}
+			  })
+			.setNegativeButton("Quedar en Esta Pagina",new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog,int id) {
+					// if this button is clicked, just close
+					// the dialog box and do nothing
+					dialog.cancel();
+				}
+			});
+ 
+			// create alert dialog
+			AlertDialog alertDialog = alertDialogBuilder.create();
+ 
+				// show it
+			alertDialog.show();
 	}
 
 	@Override

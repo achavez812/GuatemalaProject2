@@ -16,12 +16,13 @@
 	  	
 	    <TextView 
 	        android:id="@+id/main_page_textview"
+	        android:gravity="center"
 	        android:textSize="30sp"
 	        android:layout_marginTop="100dp"
 	        android:layout_marginBottom="60dp"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="Bienvenido Promotor" />
+	        android:text="Bienvenido Promotores de Salud - Rural San Lucas Toliman" />
 	    
 	    <TextView
 	        android:id="@+id/main_page_notes"

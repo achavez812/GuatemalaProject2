@@ -2,9 +2,10 @@ package com.stanford.guatemedic;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import android.util.Log;
-
-
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -27,14 +28,15 @@ import android.widget.Toast;
 public class AddNewFamilyVisitActivity extends ActionBarActivity {
 	
 	DetailedFamilyVisit dfv;
-	private String family_id;
-	private  AddNewFamilyVisitFragment1 frag1_instance;
-	private  AddNewFamilyVisitFragment2 frag2_instance;	
+	private static String family_id;
+	private AddNewFamilyVisitFragment1 frag1_instance;
+	private AddNewFamilyVisitFragment2 frag2_instance;	
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_new_family_visit);
 		getActionBar().setHomeButtonEnabled(true);
+		family_id = getIntent().getStringExtra("family_id");
 		frag1_instance=AddNewFamilyVisitFragment1.newInstance(family_id);
 		frag2_instance=AddNewFamilyVisitFragment2.newInstance(family_id);
 		
@@ -44,7 +46,7 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner.setAdapter(adapter);
 		
-		family_id = getIntent().getStringExtra("family_id");
+		
 		dfv = new DetailedFamilyVisit(family_id);
 		
 		spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -79,9 +81,39 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 	
 	@Override
 	public void onBackPressed() {
-		Intent i = new Intent(getApplication(), ViewFamilyActivity.class);
-		i.putExtra("family_id", family_id);
-		startActivity(i);
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+				this);
+ 
+		// set title
+		alertDialogBuilder.setTitle("Alerta");
+ 
+			// set dialog message
+		alertDialogBuilder
+			.setMessage("Vas a perder este información si dejes este pagina.")
+			.setCancelable(false)
+			.setPositiveButton("Dejar Esta Pagina",new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog,int id) {
+					// if this button is clicked, close
+					// current activity
+					
+					Intent i = new Intent(getApplication(), ViewFamilyActivity.class);
+					i.putExtra("family_id", family_id);
+					startActivity(i);
+				}
+			  })
+			.setNegativeButton("Quedar en Esta Pagina",new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog,int id) {
+					// if this button is clicked, just close
+					// the dialog box and do nothing
+					dialog.cancel();
+				}
+			});
+ 
+			// create alert dialog
+			AlertDialog alertDialog = alertDialogBuilder.create();
+ 
+				// show it
+			alertDialog.show();
 	}
 	
 	public boolean onCreateOptionsMenu(Menu menu) {

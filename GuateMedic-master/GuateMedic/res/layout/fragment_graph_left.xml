@@ -29,14 +29,14 @@
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:textSize="17sp"
-		        android:text="Male"/>
+		        android:text=""/>
 	
 		    <TextView
 		        android:id="@+id/graph_child_dob"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:textSize="17sp"
-		        android:text="08/12/1992"/>
+		        android:text=""/>
 		    
 		    <Button
 		        android:id="@+id/graph_view_details_button"
@@ -89,7 +89,7 @@
         android:layout_height="wrap_content"
         android:textSize="17sp"
         android:textStyle="italic"  
-        android:text="Peso z-score: "
+        android:text=""
         />
     
     <TextView
@@ -98,7 +98,7 @@
         android:layout_height="wrap_content"
         android:textSize="17sp"
         android:textStyle="italic"   
-        android:text="Talla z-score: "
+        android:text=""
         />
     
     <TextView
@@ -107,7 +107,7 @@
         android:layout_height="wrap_content"
         android:textSize="17sp"
         android:textStyle="italic"  
-        android:text="Otro score: "
+        android:text=""
         />
     
     <TextView
@@ -117,7 +117,7 @@
         android:textSize="18sp"
         android:layout_marginTop="10dp"
         android:textStyle="bold"  
-        android:text="Recomendación"
+        android:text="Recomendación:"
         />
     
 	 <TextView
