@@ -18,7 +18,6 @@ public class DBController  extends SQLiteOpenHelper {
     }
 
 	
-	
 // This function will be called on load and will create database and its tables
 	@Override
 	public void onCreate(SQLiteDatabase database) {

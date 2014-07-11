@@ -111,7 +111,7 @@ public class DetailedFamily {
 		String visit_date = family_visit.getVisit_date(); //Date of visit being added
 		for (int i = 0; i < family_visits.size(); i++) {
 			int value = visit_date.compareTo(family_visits.get(i).getVisit_date());
-			if (value > 0) {
+			if (value < 0) {
 				family_visits.add(i, family_visit); //Shifts everything over
 				return;
 			} else if (value == 0) //Should never happen

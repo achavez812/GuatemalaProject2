@@ -1,4 +1,0 @@
-GuateMedic
-==========
-
-Guatemala Medic Project

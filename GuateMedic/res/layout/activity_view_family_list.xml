@@ -10,7 +10,7 @@
     android:layout_marginBottom="20dp">
     <EditText
         android:id="@+id/search_bar_families"
-    	android:hint="Search Families"
+    	android:hint="Buscar Familias"
     	android:layout_width="match_parent"
     	android:layout_height="wrap_content"
     	android:drawableRight="@drawable/ic_action_search"  

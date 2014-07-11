@@ -39,7 +39,6 @@ public class DetailedRecordsStore {
 		gfr = new GuatemedicReader(c);
 		processDownloadedFiles();
 		processNewFiles();
-
 	}
 	
 	public static void load(Context c) {
@@ -115,7 +114,7 @@ public class DetailedRecordsStore {
 	//Creates a temporary id for family
 	//Writes it to local storage
 	//Adds it to DetailedRecordsStore
-	public void addNewFamily(JSONObject obj) {
+	public String addNewFamily(JSONObject obj) {
 		try {
 			String village = obj.getString("village");
 			String random_id = generateRandomId();
@@ -136,12 +135,14 @@ public class DetailedRecordsStore {
 				Log.i("WTF", "Family save successful");
 			
 			parseFamily(obj);
+			return random_id;
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 	
-	public void addNewChild(JSONObject obj) {
+	public String addNewChild(JSONObject obj) {
 		try {
 			String family_id = obj.getString("family_id");
 			String random_id = generateRandomId();
@@ -161,7 +162,55 @@ public class DetailedRecordsStore {
 			if (gw.saveNewChild(obj.toString()))
 				Log.i("WTF", "Child save successful");
 			
-			parseChild(family_id, obj);			
+			parseChild(family_id, obj);		
+			return random_id;
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public void addNewChildVisit(JSONObject obj) {
+		try {
+			String child_id = obj.getString("child_id");
+			String random_id = generateRandomId();
+			String current_date = Utilities.getTodayString();
+			
+			DetailedChildVisit dcv = new DetailedChildVisit(child_id);
+			
+			obj.put("temp_child_id", child_id);
+			obj.put("visit_id", random_id);
+			obj.put("visit_date", current_date);
+			obj.put("promoter_id", "NULL"); //Figure this out
+			
+			GuatemedicWriter gw = new GuatemedicWriter(context);
+			if (gw.saveNewChildVisit(obj.toString()))
+				Log.i("WTF", "Child Visit save successful");
+			parseChildVisit(dcv, obj);
+			getChild(child_id).addChild_visit(dcv);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void addNewFamilyVisit(JSONObject obj) {
+		try {
+			String family_id = obj.getString("family_id");
+			String random_id = generateRandomId();
+			String current_date = Utilities.getTodayString();
+			
+			DetailedFamilyVisit dfv = new DetailedFamilyVisit(family_id);
+			
+			obj.put("temp_family_id", family_id);
+			obj.put("visit_id", random_id);
+			obj.put("visit_date", current_date);
+			obj.put("promoter_id", "NULL");
+			
+			GuatemedicWriter gw = new GuatemedicWriter(context);
+			if (gw.saveNewFamilyVisit(obj.toString()))
+				Log.i("WTF", "Family Visit save successful");
+			parseFamilyVisit(dfv, obj);
+			getFamily(family_id).addFamily_visit(dfv);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -210,25 +259,25 @@ public class DetailedRecordsStore {
 		try {
 			dfv.setVisit_date(json.getString("visit_date"));
 			if (json.has("parent1_marital_status")) 
-				dfv.setParent1_marital_status(json.getString("parent1_marital_status"));
-			if (json.has("father_lives_with")) 
-				dfv.setFather_lives_with(Integer.parseInt(json.getString("father_lives_with")));
+				dfv.setParent1_marital_status(Integer.parseInt(json.getString("parent1_marital_status")));
+			if (json.has("does_father_live_with")) 
+				dfv.setDoes_father_live_with(Integer.parseInt(json.getString("does_father_live_with")));
 			if (json.has("num_pregnancies")) 
 				dfv.setNum_pregnancies(Integer.parseInt(json.getString("num_pregnancies")));
 			if (json.has("num_children_alive"))
 				dfv.setNum_children_alive(Integer.parseInt(json.getString("num_children_alive")));
 			if (json.has("num_children_dead"))
 				dfv.setNum_children_dead(Integer.parseInt(json.getString("num_children_dead")));
-			if (json.has("how_died")) 
-				dfv.setChildren_death_information(json.getString("how_died"));
+			if (json.has("how_children_died")) 
+				dfv.setHow_children_died(json.getString("how_children_died"));
 			if (json.has("num_children_under_5"))
 				dfv.setNum_children_under_5(Integer.parseInt(json.getString("num_children_under_5")));
 			if (json.has("num_people_in_household"))
 				dfv.setNum_people_in_household(Integer.parseInt(json.getString("num_people_in_household")));
 			if (json.has("fathers_job"))
 				dfv.setFathers_job(Integer.parseInt(json.getString("fathers_job")));
-			if (json.has("igss"))
-				dfv.setIGSS(Integer.parseInt(json.getString("igss")));
+			if (json.has("has_igss"))
+				dfv.setHas_igss(Integer.parseInt(json.getString("has_igss")));
 			if (json.has("promoter_id"))
 				dfv.setPromoter_id(json.getString("promoter_id"));
 		} catch (JSONException e) {
@@ -254,29 +303,33 @@ public class DetailedRecordsStore {
 				return;
 			if (json_child.has("name"))
 				dc.setName(json_child.getString("name"));
-			if (json_child.has("gender"))
-				//dc.setGender(Integer.parseInt(json_child.getString("gender")));
-			if (json_child.has("dob"))
+			if (json_child.has("gender")) {
+				if (json_child.getString("gender").isEmpty())
+					dc.setGender(0);
+				else
+					dc.setGender(Integer.parseInt(json_child.getString("gender")));
+			}
+			if (json_child.has("dob") && !json_child.getString("dob").isEmpty())
 				dc.setDob(json_child.getString("dob"));
-			if (json_child.has("type_of_birth"))
-				//dc.setType_of_birth(Integer.parseInt(json_child.getString("type_of_birth")));
-			if (json_child.has("num_children_in_same_pregnancy"))
-				//dc.setNum_children_in_same_pregnancy(Integer.parseInt(json_child.getString("num_children_in_same_pregnancy")));
-			if (json_child.has("months_gestated"))
-				//dc.setMonths_gestated(Float.parseFloat(json_child.getString("months_gestated")));
-			if (json_child.has("prenatal_care")) 
-				//dc.setPrenatal_care(Integer.parseInt(json_child.getString("prenatal_care")));
-			if (json_child.has("birth_weight"))
-				//dc.setBirth_weight(Float.parseFloat(json_child.getString("birth_weight")));
-			if (json_child.has("birth_height"))
-				//dc.setBirth_height(Float.parseFloat(json_child.getString("birth_height")));
-			if (json_child.has("youngest_sibling_dob"))
+			if (json_child.has("type_of_birth") && !json_child.getString("type_of_birth").isEmpty())
+				dc.setType_of_birth(Integer.parseInt(json_child.getString("type_of_birth")));
+			if (json_child.has("num_children_in_same_pregnancy") && !json_child.getString("num_children_in_same_pregnancy").isEmpty())
+				dc.setNum_children_in_same_pregnancy(Integer.parseInt(json_child.getString("num_children_in_same_pregnancy")));
+			if (json_child.has("months_gestated") && !json_child.getString("months_gestated").isEmpty())
+				dc.setMonths_gestated(Float.parseFloat(json_child.getString("months_gestated")));
+			if (json_child.has("received_prenatal_care") && !json_child.getString("received_prenatal_care").isEmpty()) 
+				dc.setReceived_prenatal_care(Integer.parseInt(json_child.getString("received_prenatal_care")));
+			if (json_child.has("birth_weight") && !json_child.getString("birth_weight").isEmpty())
+				dc.setBirth_weight(Float.parseFloat(json_child.getString("birth_weight")));
+			if (json_child.has("birth_height") && !json_child.getString("birth_height").isEmpty())
+				dc.setBirth_height(Float.parseFloat(json_child.getString("birth_height")));
+			if (json_child.has("youngest_sibling_dob") && !json_child.getString("youngest_sibling_dob").isEmpty())
 				dc.setYoungest_sibling_dob(json_child.getString("youngest_sibling_dob"));
 			if (json_child.has("date_created"))
 				dc.setDate_created(json_child.getString("date_created"));
 			if (json_child.has("date_last_modified"))
 				dc.setDate_last_modified(json_child.getString("date_last_modified"));
-			if (json_child.has("promoter_id"))
+			if (json_child.has("promoter_id") && !json_child.getString("promoter_id").isEmpty())
 				dc.setPromoter_id(json_child.getString("promoter_id"));
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -298,52 +351,52 @@ public class DetailedRecordsStore {
 	private void parseChildVisit(DetailedChildVisit dcv, JSONObject json) {		
 		try {
 			dcv.setVisit_date(json.getString("visit_date"));
-			if (json.has("received_all_vaccines"))
-				dcv.setDid_receive_vaccinations(Integer.parseInt(json.getString("received_all_vaccines")));
+			if (json.has("received_all_vaccines") && !json.getString("received_all_vaccines").equals(""))
+				dcv.setReceived_all_vaccines(Integer.parseInt(json.getString("received_all_vaccines")));
 			if (json.has("type_of_vaccines_received"))
-				dcv.setVaccination_information(json.getString("types_of_vaccines_received"));
-			if (json.has("chronic_disease_or_disability"))
+				dcv.setType_of_vaccines_received(json.getString("types_of_vaccines_received"));
+			if (json.has("chronic_disease_or_disability") && !json.getString("chronic_disease_or_disability").equals(""))
 				dcv.setHas_chronic_disease_or_disability(Integer.parseInt(json.getString("chronic_disease_or_disability")));
 			if (json.has("type_of_chronic_disease_or_disability"))
-				dcv.setChronic_disease_or_disability_information(json.getString("type_of_chronic_disease_or_disability"));
-			if (json.has("currently_breastfed"))
-				dcv.setIs_currently_breastfed(Integer.parseInt("currently_breastfed"));
-			if (json.has("only_breastfed"))
-				dcv.setIs_only_breastfed(Integer.parseInt(json.getString("only_breastfed")));
-			if (json.has("how_long_only_breastfed"))
+				dcv.setType_of_chronic_disease_or_disability(json.getString("type_of_chronic_disease_or_disability"));
+			if (json.has("is_currently_breastfed") && !json.getString("is_currently_breastfed").equals(""))
+				dcv.setIs_currently_breastfed(Integer.parseInt(json.getString("is_currently_breastfed")));
+			if (json.has("is_only_breastfed") && !json.getString("is_only_breastfed").equals(""))
+				dcv.setIs_only_breastfed(Integer.parseInt(json.getString("is_only_breastfed")));
+			if (json.has("how_long_only_breastfed") && !json.getString("how_long_only_breastfed").equals(""))
 				dcv.setHow_long_only_breastfed(Float.parseFloat(json.getString("how_long_only_breastfed")));
-			if (json.has("child_age_when_stoppped_breastfeeding"))
-				dcv.setChild_age_when_stopped_breastfeeding(Float.parseFloat("child_age_when_stoppped_breastfeeding"));
-			if (json.has("weight_in_kilos"))
-				dcv.setWeight(Float.parseFloat("weight_in_kilos"));
-			if (json.has("height_in_centimeters"))
-				dcv.setHeight(Float.parseFloat("height_in_centimeters"));
-			if (json.has("num_times_incaparina_past_week"))
+			if (json.has("child_age_when_stoppped_breastfeeding") && !json.getString("child_age_when_stoppped_breastfeeding").equals(""))
+				dcv.setChild_age_when_stopped_breastfeeding(Float.parseFloat(json.getString("child_age_when_stoppped_breastfeeding")));
+			if (json.has("weight_in_pounds") && !json.getString("weight_in_pounds").equals(""))
+				dcv.setWeight_in_pounds(Float.parseFloat(json.getString("weight_in_pounds")));
+			if (json.has("height_in_centimeters") && !json.getString("height_in_centimeters").equals(""))
+				dcv.setHeight_in_centimeters(Float.parseFloat(json.getString("height_in_centimeters")));
+			if (json.has("num_times_incaparina_past_week") && !json.getString("num_times_incaparina_past_week").equals(""))
 				dcv.setNum_times_incaparina_past_week(Integer.parseInt(json.getString("num_times_incaparina_past_week")));
-			if (json.has("num_times_vegetables_or_fruits_past_week"))
+			if (json.has("num_times_vegetables_or_fruits_past_week") && !json.getString("num_times_vegetables_or_fruits_past_week").equals(""))
 				dcv.setNum_times_vegetables_or_fruits_past_week(Integer.parseInt(json.getString("num_times_vegetables_or_fruits_past_week")));
-			if (json.has("num_times_herbs_past_week"))
+			if (json.has("num_times_herbs_past_week") && !json.getString("num_times_herbs_past_week").equals(""))
 				dcv.setNum_times_herbs_past_week(Integer.parseInt(json.getString("num_times_herbs_past_week")));
-			if (json.has("num_times_diarrhea_past_week"))
+			if (json.has("num_times_diarrhea_past_week") && !json.getString("num_times_diarrhea_past_week").equals(""))
 				dcv.setNum_times_diarrhea_past_week(Integer.parseInt(json.getString("num_times_diarrhea_past_week")));
-			if (json.has("num_times_vomit_past_week"))
+			if (json.has("num_times_vomit_past_week") && !json.getString("num_times_vomit_past_week").equals(""))
 				dcv.setNum_times_vomit_past_week(Integer.parseInt(json.getString("num_times_vomit_past_week")));
-			if (json.has("num_times_cough_past_week"))
+			if (json.has("num_times_cough_past_week") && !json.getString("num_times_cough_past_week").equals(""))
 				dcv.setNum_times_cough_past_week(Integer.parseInt(json.getString("num_times_cough_past_week")));
-			if (json.has("num_times_fever_past_week"))
+			if (json.has("num_times_fever_past_week") && !json.getString("num_times_fever_past_week").equals(""))
 				dcv.setNum_times_fever_past_week(Integer.parseInt(json.getString("num_times_fever_past_week")));
-			if (json.has("num_times_other_illness_past_week"))
+			if (json.has("num_times_other_illness_past_week") && !json.getString("num_times_other_illness_past_week").equals(""))
 				dcv.setNum_times_other_illness_past_week(Integer.parseInt(json.getString("num_times_other_illness_past_week")));
 			if (json.has("illness_description")) //FIGURE THIS OUT
 				dcv.setIllness_description(json.getString("illness_description"));
-			if (json.has("age_last_received_deparasiting_medicine"))
+			if (json.has("age_last_received_deparasiting_medicine") && !json.getString("age_last_received_deparasiting_medicine").equals(""))
 				dcv.setAge_last_received_deparasiting_medicine(Float.parseFloat(json.getString("age_last_received_deparasiting_medicine")));
 			//All the malnutrition grade scales
 			//siblings older than 5
 			if (json.has("receiving_supplements"))
 				dcv.setReceiving_supplements(Integer.parseInt(json.getString("receiving_supplements")));
 			if (json.has("why_receiving_supplements"))
-				dcv.setWhy_receiving_supplements(Integer.parseInt("why_receiving_supplements"));
+				dcv.setWhy_receiving_supplements(Integer.parseInt(json.getString("why_receiving_supplements")));
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -477,7 +530,6 @@ public class DetailedRecordsStore {
 	}
 	
 	private void processNewFamilyFiles() {
-		Log.i("WTF", "Processing new family files");
 		ArrayList<File> files = gfr.getNewFamilyFiles();
 		for (File f : files) {
 			Log.i("WTF", "	Process a file");
@@ -511,6 +563,7 @@ public class DetailedRecordsStore {
 			String data = gfr.getStringData(f);
 			try {
 				JSONObject obj = new JSONObject(data);
+				addFamilyVisit(getFamily(obj.getString("family_id")), obj);
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
@@ -523,6 +576,7 @@ public class DetailedRecordsStore {
 			String data = gfr.getStringData(f);
 			try {
 				JSONObject obj = new JSONObject(data);
+				addChildVisit(getChild(obj.getString("child_id")), obj);
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
@@ -574,11 +628,11 @@ public class DetailedRecordsStore {
 	}
 	
 	private void processDownloadedFiles() {
-		ArrayList<File> files = getDummyData(); //REMOVE LATER
-		//ArrayList<File> files = gfr.getDownloadedFiles();
+		//ArrayList<File> files = getDummyData(); //REMOVE LATER
+		ArrayList<File> files = gfr.getDownloadedFiles();
 		for (File f : files) {
-			String data = getDummyStringData(f); //REMOVE LATER
-			//String data = gfr.getStringData(f);
+			//String data = getDummyStringData(f); //REMOVE LATER
+			String data = gfr.getStringData(f);
 			try {
 				JSONObject json_data = new JSONObject(data);
 				JSONArray records = json_data.getJSONArray("records");

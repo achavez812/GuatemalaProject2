@@ -15,7 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -27,11 +26,18 @@ public class ViewVillageListActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_view_village_list);
+		getActionBar().setHomeButtonEnabled(true);
 
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, new ViewVillageListFragment()).commit();
 		}
+	}
+	
+	@Override
+	public void onBackPressed() {
+		Intent i = new Intent(getApplication(), MainActivity.class);
+		startActivity(i);
 	}
 
 	
@@ -49,8 +55,9 @@ public class ViewVillageListActivity extends ActionBarActivity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_download) {
-
+		if (id == android.R.id.home) {
+			Intent i = new Intent(getApplication(), MainActivity.class);
+			startActivity(i);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -186,7 +193,6 @@ public class ViewVillageListActivity extends ActionBarActivity {
 		                        Log.d("Something","Something2");
 		                    }
 		                } 
-		               Log.d("Work","Work"+results.values.toString());
 		                return results;
 		            }
 		        };
@@ -199,12 +205,14 @@ public class ViewVillageListActivity extends ActionBarActivity {
 				}
 				
 				DetailedVillage village = (DetailedVillage) getItem(position);
-				String villageName = village.getVillage_name();
+				String village_name = village.getVillage_name();
+				int num_families = DetailedRecordsStore.get(getActivity().getApplication()).getFamilies(village_name).size();
 				
 				TextView villageTitle = (TextView)convertView.findViewById(R.id.list_item_title);
-				villageTitle.setText(villageName);
+				villageTitle.setText(village_name);
 				
-				
+				TextView subtitle = (TextView)convertView.findViewById(R.id.list_item_subtitle);
+				subtitle.setText(num_families + " Familias");
 				
 				return convertView;
 				

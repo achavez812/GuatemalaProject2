@@ -1,5 +1,10 @@
 package com.stanford.guatemedic;
 
+import java.lang.reflect.Field;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class DetailedFamilyVisit {
 	
 	private String family_id;
@@ -7,16 +12,17 @@ public class DetailedFamilyVisit {
 	private String visit_date;
 	private String promoter_id;
 	
-	private String parent1_marital_status; // Together, Married, Widowed, Single
-	private int father_lives_with; //boolean
+	private int parent1_marital_status; // INCLUDE THIS
+	private int does_father_live_with; //boolean
 	private int num_pregnancies;
 	private int num_children_alive;
 	private int num_children_dead;
-	private String children_death_information; //Age and why died?
-	private int num_children_under_5;
-	private int num_people_in_household;
+	private String how_children_died; //Age and why died?
+	private int num_children_under_5; //INCLUDE THIS
+	private int num_people_in_household; //INCLUDE THIS
+	
 	private int fathers_job; //Should this be a String instead
-	private int IGSS; //Should this be a String instead
+	private int has_igss; //Should this be a String instead
 
 	public DetailedFamilyVisit(String family_id) {
 		this.family_id = family_id;
@@ -39,20 +45,20 @@ public class DetailedFamilyVisit {
 		this.visit_date = visit_date;
 	}
 
-	public String getParent1_marital_status() {
+	public int getParent1_marital_status() {
 		return parent1_marital_status;
 	}
 
-	public void setParent1_marital_status(String parent1_marital_status) {
+	public void setParent1_marital_status(int parent1_marital_status) {
 		this.parent1_marital_status = parent1_marital_status;
 	}
 
-	public int getFather_lives_with() {
-		return father_lives_with;
+	public int getDoes_father_lives_with() {
+		return does_father_live_with;
 	}
 
-	public void setFather_lives_with(int father_lives_with) {
-		this.father_lives_with = father_lives_with;
+	public void setDoes_father_live_with(int does_father_live_with) {
+		this.does_father_live_with = does_father_live_with;
 	}
 
 	public int getNum_pregnancies() {
@@ -79,12 +85,12 @@ public class DetailedFamilyVisit {
 		this.num_children_dead = num_children_dead;
 	}
 
-	public String getChildren_death_information() {
-		return children_death_information;
+	public String getHow_children_died() {
+		return how_children_died;
 	}
 
-	public void setChildren_death_information(String children_death_information) {
-		this.children_death_information = children_death_information;
+	public void setHow_children_died(String how_children_died) {
+		this.how_children_died = how_children_died;
 	}
 
 	public int getNum_children_under_5() {
@@ -111,12 +117,12 @@ public class DetailedFamilyVisit {
 		this.fathers_job = fathers_job;
 	}
 
-	public int getIGSS() {
-		return IGSS;
+	public int getHas_igss() {
+		return has_igss;
 	}
 
-	public void setIGSS(int IGSS) {
-		this.IGSS = IGSS;
+	public void setHas_igss(int igss) {
+		this.has_igss = has_igss;
 	}
 
 	public String getTemp_family_id() {
@@ -129,6 +135,19 @@ public class DetailedFamilyVisit {
 
 	public void setPromoter_id(String promoter_id) {
 		this.promoter_id = promoter_id;
+	}
+	public JSONObject toJSONObject() {
+		JSONObject obj = new JSONObject();
+		try {
+			Field[] fields = DetailedFamilyVisit.class.getDeclaredFields();
+			for (Field field : fields) {
+				if (field.get(this) != null)
+					obj.put(field.getName(), field.get(this).toString());
+			}
+		} catch (JSONException | IllegalAccessException | IllegalArgumentException e) {
+			e.printStackTrace();
+		}
+		return obj;
 	}
 
 }

@@ -18,7 +18,7 @@
     <string name="add_child_button_text">Add Child</string>
     <string name="title_activity_add_family">Create Family</string>
     <string name="title_activity_add_child">Create Child</string>
-    
+
     <!-- Creating family/child -->
     <string name="parent1_header">Parent 1</string>
     <string name="parent2_header">Parent 2</string>
@@ -32,10 +32,8 @@
     <string name="months_gestated_hint">Months Gestated</string>
     <string name="prenatal_control_hint">Prenatal Control</string>
     <string name="birth_weight_hint">Birth Weight</string>
-    
     <string name="make_family_button">Create Family</string>
     <string name="make_child_button">Create Child</string>
-    
     <string name="title_activity_home_page">GuatemalaMedic</string>
     <string name="home_load_db">Load Database</string>
     <string name="home_take_survey">Survey</string>
@@ -65,22 +63,79 @@
     <string name="patients">Patients</string>
     <string name="menugeneral">GenMen</string>
     <string name="gesttime">Gestation Time #Weeks</string>
+
     <string-array name="employment_array">
         <item>Farmer</item>
         <item>Teacher</item>
         <item>Other</item>
         <item>Father Occupation</item>
     </string-array>
- 
+    
     <string-array name="br_array">
         <item>Yes</item>
         <item>No</item>
-        <item>Breastfeeding Information</item>
+        <item>Breastfeeding Information(Not Set)</item>
     </string-array>
-    
     <string-array name="t_of_b_array">
         <item>Normal</item>
-        <item>Caesarean</item>
-        <item>Type of Birth</item>
+        <item>Cesaria</item>
+        <item>¿Qué Tipo de Parto?</item>
     </string-array>
+        <string-array name="prenatal_array">
+         <item>Sí</item>
+         <item>No</item>
+         <item>¿Tenia la Madre Control Prenatal?</item>
+     </string-array>   
+          <string-array name="same_pregernating_array">
+         <item>Solo Uno</item>
+         <item>Gemelos</item>
+         <item>Trillizos</item>
+        <item>¿Cuántos Niños en este Parto?</item>
+     </string-array>
+    <string-array name="child_visit_array">
+        <item>Categoría 1</item>
+        <item>Categoría 2</item>
+        <item>Categoría 3</item>
+        <item>Categoría 4</item>
+        <item>Categoría 5</item>
+    </string-array>
+    <string-array name="family_visit_array">
+        <item>Categoría 1</item>
+        <item>Categoría 2</item>
+    </string-array>
+	<string-array name="marital_status_array">
+	    <item>Casada</item>
+	    <item>Unida</item>
+	    <item>Soltera</item>
+	    <item>Viuda</item>
+	    <item>Estado Civil</item>
+	</string-array>
+	<string-array name="fathers_job">
+	    <item>Fijo</item>
+	    <item>Comerciante</item>
+	    <item>Agricultor (Propio)</item>
+	    <item>Agricultor (Ajeno)</item>
+	    <item>Otro</item>
+	    <item>Ocupación del Padre</item>
+	</string-array>
+	<string-array name="month_options">
+	    <item>January</item>
+	    <item>February</item>
+	    <item>March</item>
+	    <item>April</item>
+	    <item>May</item>
+	    <item>June</item>
+	    <item>July</item>
+	    <item>August</item>
+	    <item>September</item>
+	    <item>October</item>
+	    <item>November</item>
+	    <item>December</item>
+	</string-array>
+
+
+	
+	
+        <string name="title_activity_view_family">ViewFamily</string>
+
 </resources>

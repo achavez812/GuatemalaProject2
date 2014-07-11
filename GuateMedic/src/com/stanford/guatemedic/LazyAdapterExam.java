@@ -2,9 +2,6 @@ package com.stanford.guatemedic;
 
 import java.util.ArrayList;
 import java.util.HashMap;
- 
-
-import com.stanford.guatemedic.view_patient;
 
 import android.app.Activity;
 import android.content.Context;
@@ -14,7 +11,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
  
 public class LazyAdapterExam extends BaseAdapter {

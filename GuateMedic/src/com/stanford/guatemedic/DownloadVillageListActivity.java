@@ -1,34 +1,28 @@
 package com.stanford.guatemedic;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ExecutionException;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.content.Intent;
-import android.os.AsyncTask;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
 public class DownloadVillageListActivity extends ActionBarActivity {
-	
+		
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_download_village_list);
+		getActionBar().setHomeButtonEnabled(true);
 
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
@@ -37,10 +31,16 @@ public class DownloadVillageListActivity extends ActionBarActivity {
 	}
 
 	@Override
+	public void onBackPressed() {
+		Intent i = new Intent(getApplication(), MainActivity.class);
+		startActivity(i);
+	}
+	
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.download_button, menu);
 		return true;
 	}
 
@@ -50,87 +50,48 @@ public class DownloadVillageListActivity extends ActionBarActivity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_download) {
-			try {
-				new HandleDownloadRecordsTask(true).execute().get();
-				Intent i = new Intent(this, MainActivity.class);
-				startActivity(i);
-			} catch (InterruptedException | ExecutionException e) {
-				e.printStackTrace();
-			}
+		if (id == android.R.id.home) {
+			Intent i = new Intent(getApplication(), MainActivity.class);
+			startActivity(i);
 			return true;
 		}
-		return super.onOptionsItemSelected(item);
-	}
-	
-	private class HandleDownloadRecordsTask extends AsyncTask<Void, Void, Void> {
-		
-		private boolean showLoading;
-		private boolean success;
-		
-		public HandleDownloadRecordsTask(boolean showLoading) {
-			super();
-			this.showLoading = showLoading;
+		if (id == R.id.action_download) {
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+			BasicRecordsStore.get().DownloadData(DownloadVillageListActivity.this, getApplication());
+			return true;
 		}
+		if (id == R.id.action_selectall) {
+			for (BasicVillage bv : BasicRecordsStore.get().getVillages()) {
+				bv.setCheckboxSelected(true);
+				for (BasicFamily bf : BasicRecordsStore.get().getFamilies(bv.getName())) {
+					bf.setCheckboxSelected(true);
+					for (BasicChild bc : BasicRecordsStore.get().getChildren(bf.getFamily_id()))
+						bc.setCheckboxSelected(true);
+				}
+			}
+			getSupportFragmentManager().beginTransaction().replace(R.id.container, new DownloadVillageListFragment()).commit();
 
-		@Override
-		protected Void doInBackground(Void... params) {
-			try {
-				JSONArray json_array = new JSONArray();
-				for (BasicVillage village : BasicRecordsStore.get().getVillages()) {
-					if (village.isCheckboxSelected()) {
-						for (BasicFamily family : BasicRecordsStore.get().getFamilies(village.getName())) {
-							if (family.isCheckboxSelected()) {
-								for (BasicChild child :BasicRecordsStore.get().getChildren(family.getFamily_id())) {
-									if (child.isCheckboxSelected()) {
-										json_array.put(child.getChild_id());
-									}
-								}
-							}
+		}
+		if (id == R.id.action_unselectall) {
+			for (BasicVillage bv : BasicRecordsStore.get().getVillages()) {
+				if (bv.isCheckboxSelected()) {
+					bv.setCheckboxSelected(false);
+					for (BasicFamily bf : BasicRecordsStore.get().getFamilies(bv.getName())) {
+						if (bf.isCheckboxSelected()) {
+							bf.setCheckboxSelected(false);
+							for (BasicChild bc : BasicRecordsStore.get().getChildren(bf.getFamily_id()))
+								bc.setCheckboxSelected(false);
 						}
 					}
 				}
-				JSONObject obj = new JSONObject();
-				obj.put("child_ids", json_array);
-				Map<String, String> headerMap = new HashMap<String, String>();
-				headerMap.put("Authorization", BasicRecordsStore.get().getAuthKey());
-				String response = Utilities.postRequest("https://guatemedic.herokuapp.com/records", headerMap, obj.toString());
-				if (response == null) {
-					success = false;
-				} else {
-					GuatemedicWriter gfw = new GuatemedicWriter(getApplication());
-					if (gfw.saveDownloads(response)) {
-						DetailedRecordsStore.load(getApplication());
-						success = true;
-					} else {
-
-						success = false;
-					}
-				}
-			} catch (JSONException e) {
-				e.printStackTrace();
 			}
-			return null;
+			getSupportFragmentManager().beginTransaction().replace(R.id.container, new DownloadVillageListFragment()).commit();
+
 		}
 		
-		@Override
-		protected void onPreExecute() {
-			if (showLoading) {
-				//Display loading bar
-			}
-		}
-		
-		@Override
-		protected void onPostExecute(Void result) {
-			if (showLoading) {
-				//Dismiss loading bar
-			}
-			if (success) {
-			} 
-		}
-
-	
+		return super.onOptionsItemSelected(item);
 	}
+	
 
 	/**
 	 * A placeholder fragment containing a simple view.
@@ -138,7 +99,6 @@ public class DownloadVillageListActivity extends ActionBarActivity {
 	public static class DownloadVillageListFragment extends ListFragment {
 
 		public DownloadVillageListFragment() {
-			
 		}
 
 		private ArrayList<BasicVillage> villages;
@@ -154,7 +114,6 @@ public class DownloadVillageListActivity extends ActionBarActivity {
 		public void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
 			//getActivity().setTitle(R.string.villages_title);
-			
 			villages = BasicRecordsStore.get().getVillages();
 			VillageAdapter adapter = new VillageAdapter(villages);
 			setListAdapter(adapter);
@@ -202,13 +161,16 @@ public class DownloadVillageListActivity extends ActionBarActivity {
 				village.setCheckboxSelected(numFamilies != 0);
 				
 				TextView villageSubtitle = (TextView)convertView.findViewById(R.id.list_item_subtitle);
-				String subtitleText = numChildren + "/" + totalChildren + " Children from " + numFamilies + " Families";
+				String subtitleText = numChildren + "/" + totalChildren + " Niños de " + numFamilies + " Familias";
 				villageSubtitle.setText(subtitleText);
 				
 				CheckBox checkbox = (CheckBox)convertView.findViewById(R.id.list_item_checkbox);
 				checkbox.setChecked(village.isCheckboxSelected());
-				checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				checkbox.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View buttonView) {
+						boolean isChecked = ((CheckBox)buttonView).isChecked();
 						View v = (View)buttonView.getParent();
 						BasicVillage theVillage = villages.get(position);
 						String villageName = theVillage.getName();
@@ -230,18 +192,16 @@ public class DownloadVillageListActivity extends ActionBarActivity {
 						}
 						
 						if (isChecked) {
-							String subtitleText = numChildren + "/" + numChildren + " Children from " + numFamilies + " Families";
+							String subtitleText = numChildren + "/" + numChildren + " Niños de " + numFamilies + " Familias";
 							((TextView)v.findViewById(R.id.list_item_subtitle)).setText(subtitleText);
 							
 						} else {
-							String subtitleText = 0 + "/" + numChildren + " Children from 0 Families";
+							String subtitleText = 0 + "/" + numChildren + " Niños de 0 Familias";
 							((TextView)v.findViewById(R.id.list_item_subtitle)).setText(subtitleText);
 						}
-
 					}
 				});
-				
-				
+			
 				return convertView;
 				
 			}

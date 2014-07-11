@@ -21,20 +21,32 @@ import android.widget.ListView;
 import android.widget.TextView;
 public class ViewChildListActivity extends ActionBarActivity {
 	
-	String family_id;
+	private static String family_id;
+	private static String village;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 	
 		setContentView(R.layout.activity_view_child_list);
+		getActionBar().setHomeButtonEnabled(true);
+
 		
 		family_id = getIntent().getStringExtra("family_id");
+		village = getIntent().getStringExtra("village");
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, ViewChildListFragment.newInstance(family_id)).commit();
 		}
 	
 	}
+	
+	@Override
+	public void onBackPressed() {
+		Intent i = new Intent(getApplication(), ViewFamilyListActivity.class);
+		i.putExtra("village_name", village);
+		startActivity(i);
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -49,11 +61,24 @@ public class ViewChildListActivity extends ActionBarActivity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
+		if (id == android.R.id.home) {
+			Intent i = new Intent(getApplication(), MainActivity.class);
+			startActivity(i);
+			return true;
+		}
 		if (id == R.id.action_addchild) {
 			Intent i = new Intent(getApplication(), AddNewChildActivity.class);
 			i.putExtra("family_id", family_id);
 			startActivity(i);
 			return true;
+		}else if(id== R.id.viewfamilyinfor2) {
+			Intent i= new Intent(getApplication(), view_family.class);
+			i.putExtra("family_id", family_id);
+			startActivity(i);
+		} else if (id == R.id.familyvist) {
+			Intent i = new Intent(getApplication(), AddNewFamilyVisitActivity.class);
+			i.putExtra("family_id", family_id);
+			startActivity(i);
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -137,8 +162,7 @@ public class ViewChildListActivity extends ActionBarActivity {
 		@Override
 		public void onListItemClick(ListView l, View v, int position, long id) {
 			Intent intent=new Intent(getActivity(), view_patient.class);
-			String child_id = ((TextView)v.findViewById(R.id.list_item_title)).getText().toString();
-			intent.putExtra("child_id", child_id);
+			intent.putExtra("child_id", children.get(position).getChild_id());
 			startActivity(intent);
 		}
 		
@@ -208,8 +232,7 @@ public class ViewChildListActivity extends ActionBarActivity {
 				String child_id = child.getChild_id();
 				
 				TextView childTitle = (TextView)convertView.findViewById(R.id.list_item_title);
-				childTitle.setText(child_id);
-
+				childTitle.setText(child.getName());
 				return convertView;
 				
 			}

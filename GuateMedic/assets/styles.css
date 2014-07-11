@@ -51,7 +51,7 @@ button{
 radiobutton{
 	background-color:transparent; 
 	color:#000000;
-	font-size: 12px;
+	font-size: 20px;
 }
 
 /*
@@ -60,18 +60,18 @@ radiobutton{
 }
 */
 
-#patientdetails {
+#patientdetails, #familydetails {
 	background-color:#e5edf0;
 	margin-left: 10%;
 	margin-right: 10%;
 	margin-top: 5%;
 }
-#view_patient_name{
+#view_patient_name, #view_family_name {
 	font-size: 20px;
 	font-weight: bold;
 }
 
-#charts_bar{
+#charts_bar, #visit_info_bar{
 	font-size: 20px;
 	color:#FFFFFF;
 	font-weight: bold;
@@ -88,11 +88,11 @@ radiobutton{
 	padding-bottom: 5px;
 }
 
-#examvisitinfo {
+#examvisitinfo, #examvisitinfo_family {
 	background-color:#e5edf0;
 }
 
-#textView12,#textView13,#textView14,#textView15 {
+#textView12,#textView13,#textView14,#textView15,#examinfotitle, #examinfotitle_table_family {
 	font-weight: bold;
 	font-size: 15px;
 }
@@ -108,3 +108,7 @@ edittext#view_patient_name{
 	background-color: #FFFFFF;
 	opacity: 0.7;
 }	
+#clickfordetails_text {
+	color: #004d6b;
+	font-weight: bold;
+}

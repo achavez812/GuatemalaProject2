@@ -2,71 +2,70 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:gravity="center_horizontal"
+    android:layout_marginLeft="40dp"
+    android:layout_marginRight="40dp"
     android:orientation="vertical" >
     
     <TextView
         android:id="@+id/add_new_family_textview"
-        android:textSize="30sp"
-        android:layout_marginBottom="100dp"
-        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp" />
     
     <EditText
         android:id="@+id/add_new_family_parent1_name"
-        android:textSize="30sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:hint="Mother name"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:textSize="30sp"
+        android:hint="Nombre de la Madre"
         />
     
     <EditText
         android:id="@+id/add_new_family_parent1_dob"
-        android:textSize="30sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:hint="Mother Date of Birth"
+        android:textSize="30sp"
+        android:inputType="number"
+        android:hint="Edad de la Madre en años"
         />
     
     <EditText
         android:id="@+id/add_new_family_parent2_name"
-        android:textSize="30sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:hint="Father name"
+        android:textSize="30sp"
+        android:hint="Nombre del Padre"
         />
     
     <EditText
         android:id="@+id/add_new_family_parent2_dob"
-        android:textSize="30sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:hint="Father Date of Birth"
+        android:textSize="30sp"	
+        android:inputType="number"
+        android:hint="Edad del Padre en años"
         />
     
     <Button
         android:id="@+id/add_new_family_button"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="40dp"
         android:textSize="30sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:paddingTop="15dp"
-        android:paddingRight="15dp"
-        android:paddingLeft="25dp"
-        android:paddingBottom="25dp"
-        android:text="Add Family"
+        android:text="Añadir la Familia"
         />
-        
+ 
 </LinearLayout>

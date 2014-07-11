@@ -1,15 +1,18 @@
 package com.stanford.guatemedic;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,7 +28,7 @@ public class DownloadLoginActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_download_login);
-
+		getActionBar().setHomeButtonEnabled(true);
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, new DownloadLoginFragment()).commit();
@@ -46,8 +49,9 @@ public class DownloadLoginActivity extends ActionBarActivity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_download) {
-			Toast.makeText(getApplicationContext(), "Settings Click", Toast.LENGTH_LONG).show();
+		if (id == android.R.id.home) {
+			Intent i = new Intent(getApplication(), MainActivity.class);
+			startActivity(i);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -61,6 +65,11 @@ public class DownloadLoginActivity extends ActionBarActivity {
 		public DownloadLoginFragment() {
 			
 		}
+		
+		@Override
+		public void onCreate(Bundle savedInstanceState) {
+			super.onCreate(savedInstanceState);
+		}
 
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -70,6 +79,8 @@ public class DownloadLoginActivity extends ActionBarActivity {
 			submit_button.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
+					getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+
 					EditText username_input = (EditText)getActivity().findViewById(R.id.download_login_username_edittext);
 					String username = username_input.getText().toString();
 					
@@ -91,33 +102,51 @@ public class DownloadLoginActivity extends ActionBarActivity {
 		}
 		
 		private class HandleDownloadLoginTask extends AsyncTask<String, Void, Void> {
-			
-			private ProgressDialog dialog;
 
-			
 			private boolean showLoading;
 			private String auth_key;
+			private boolean has_internet;
+			private boolean success;
+			ProgressDialog dialog;
 			
 			public HandleDownloadLoginTask(boolean showLoading) {
 				super();
+				success = true;
+				has_internet = true;
 				this.showLoading = showLoading;
 				dialog = new ProgressDialog(getActivity());
-				dialog.setMessage("Loading");
-
+				dialog.setMessage("Los Datos Son De Carga");
 			}
 
 			@Override
 			protected Void doInBackground(String... params) {
 				String json_body = params[0];
 				String response = Utilities.postRequest("https://guatemedic.herokuapp.com/login", null, json_body);
-				if (response != null) {
+				if (response != null && !response.equals("-1")) {
 					try {
 						JSONObject json_response = new JSONObject(response);
-						if (json_response.getString("status").equals("success"))
+						if (json_response.getString("status").equals("success")) {
 							auth_key = json_response.getString("auth_key");
+							Map<String, String> headerMap = new HashMap<String, String>();
+							headerMap.put("Authorization", auth_key);
+							String data = Utilities.getRequest("https://guatemedic.herokuapp.com/profiles", headerMap);
+							if (data == null) 
+								has_internet = false;
+							else if (data.equals("-1")) 
+								success = false;
+							else
+								BasicRecordsStore.load(auth_key, data);
+						} else {
+							success = false;
+						}
 					} catch (JSONException e) {
 						e.printStackTrace();
 					}
+				} else if (response == null) {
+					success = false;
+					has_internet = false;
+				} else { //result is "-1"
+					success = false;
 				}
 				return null;
 			}
@@ -125,27 +154,26 @@ public class DownloadLoginActivity extends ActionBarActivity {
 			@Override
 			protected void onPreExecute() {
 				if (showLoading) {
-					//Display loading bar
 					dialog.show();
-					
 				}
 			}
 			
 			@Override
 			protected void onPostExecute(Void result) {
 				if (showLoading) {
-					//Dismiss loading bar
 					dialog.dismiss();
-
 				}
-				if (auth_key != null) { //Success
-					Toast.makeText(getActivity(), "Success: " + auth_key, Toast.LENGTH_LONG).show();
-					BasicRecordsStore.load(auth_key);
-					Intent intent = new Intent(getActivity().getApplication(), DownloadVillageListActivity.class);
+				
+				if (!has_internet) {
+					Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_LONG).show();
+				} else if (auth_key == null) {
+					Toast.makeText(getActivity(), "Invalid Login", Toast.LENGTH_LONG).show();
+				} else if (!success) {
+					Toast.makeText(getActivity(), "Download Failure", Toast.LENGTH_LONG).show();
+				} else { //Success
+					Intent intent = new Intent(getActivity(), DownloadVillageListActivity.class);
 					startActivity(intent);
-				} else { //Failure
-					Toast.makeText(getActivity(), "Failure", Toast.LENGTH_LONG).show();
-				}
+				} 
 			}
 		
 		}
