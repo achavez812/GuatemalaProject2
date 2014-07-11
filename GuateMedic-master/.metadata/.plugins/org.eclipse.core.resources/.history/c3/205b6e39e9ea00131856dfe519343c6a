@@ -1,6 +1,0 @@
-package com.example.guatemedic;
-
-public class UploadFamilyVisit {
-	
-	private boolean mUploaded;
-}

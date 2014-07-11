@@ -1,9 +1,0 @@
-package com.example.guatemedic;
-
-public class AddChildActivity extends SingleFragmentActivity {
-	
-	protected Fragment createFragment() {
-		return null;
-	}
-
-}

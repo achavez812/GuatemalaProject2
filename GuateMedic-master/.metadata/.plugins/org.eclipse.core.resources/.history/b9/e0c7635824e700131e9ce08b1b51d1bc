@@ -1,5 +1,0 @@
-package com.example.guatemedic;
-
-public class AuthorizationUploadPageFragment extends Fragment {
-
-}

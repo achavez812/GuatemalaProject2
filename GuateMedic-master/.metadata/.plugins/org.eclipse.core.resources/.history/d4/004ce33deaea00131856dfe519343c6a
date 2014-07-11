@@ -1,9 +1,0 @@
-package com.example.guatemedic;
-
-public class UploadFamilyModification {
-
-	private boolean mUploaded;
-	private String modification_id;
-	private String temp_family_id;
-	private String family_id;
-}
