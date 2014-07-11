@@ -62,10 +62,6 @@ public class MainActivity extends ActionBarActivity {
 		if (mNfcAdapter != null) { // this device has NFC
 			handleIntent(getIntent());
 		}
-//		Intent i = new Intent(this, GraphActivity.class);
-//		i.putExtra("child_id", "C331");
-//		startActivity(i);
-		
 	}
 
 	@Override

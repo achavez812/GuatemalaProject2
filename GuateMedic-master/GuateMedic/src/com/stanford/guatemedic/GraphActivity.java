@@ -271,7 +271,7 @@ public class GraphActivity extends ActionBarActivity {
 			if (gender == 1) {
 				sex_field.setText("Niño");
 			} else if (gender == 2) {
-				sex_field.setText("Niño");
+				sex_field.setText("Niña");
 			} else if (gender == 0) {
 				sex_field.setText("No Sexo");
 			}
@@ -337,7 +337,7 @@ public class GraphActivity extends ActionBarActivity {
 				}
 				
 				
-				visit_header_field.setText("Child Visit (" + formatted_visit_date + ")"); //Format visit date
+				visit_header_field.setText("Última Visita (" + formatted_visit_date + ")"); //Format visit date
 				
 				TextView age_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_age);
 				age_field.setText("Edad: " + Utilities.round(age_in_months, 1) + " meses");
@@ -362,50 +362,12 @@ public class GraphActivity extends ActionBarActivity {
 				recommendation_field.setText("Basado de los datos, recomendamos que el niño..");
 				//Assign variables
 			}
-			
 			return rootView;
 		}
 	}
 	
-	
-	
-//	class GraphYLabelFormat extends Format {
-//
-//		final String[] yLabels = {"Jan", "Feb", "Mar", "Apr", "May"};
-//		
-//	    @Override
-//	    public StringBuffer format(Object arg0, StringBuffer arg1, FieldPosition arg2) {
-//	        int parsedInt = Math.round(Float.parseFloat(arg0.toString()));
-//	        String labelString = yLabels[parsedInt];
-//	        arg1.append(labelString);
-//	        return arg1;
-//	    }
-//
-//	    @Override
-//	    public Object parseObject(String arg0, ParsePosition arg1) {
-//	        return java.util.Arrays.asList(yLabels).indexOf(arg0);
-//	    }
-//	}
 
 	public static class GraphFragmentRight extends Fragment {
-		
-		class GraphXLabelFormat extends Format {
-
-			final String[] xLabels = {"Jan", "Feb", "Mar", "Apr", "May"};
-			
-		    @Override
-		    public StringBuffer format(Object arg0, StringBuffer arg1, FieldPosition arg2) {
-		        int parsedInt = Math.round(Float.parseFloat(arg0.toString()));
-		        String labelString = xLabels[parsedInt];
-		        arg1.append(labelString);
-		        return arg1;
-		    }
-
-		    @Override
-		    public Object parseObject(String arg0, ParsePosition arg1) {
-		        return java.util.Arrays.asList(xLabels).indexOf(arg0);
-		    }
-		}
 		
 		int selected;
 		int sex;
@@ -547,9 +509,6 @@ public class GraphActivity extends ActionBarActivity {
 					plot.setRangeStep(XYStepMode.INCREMENT_BY_VAL, 1);
 					plot.setRangeValueFormat(new DecimalFormat(""));
 			        plot.redraw();
-
-					
-					
 				} 
 				
 			});
@@ -616,9 +575,6 @@ public class GraphActivity extends ActionBarActivity {
 			
 			return rootView;
 		}
-	
-
-		
 	}
 }
 
