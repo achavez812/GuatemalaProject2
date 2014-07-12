@@ -349,7 +349,7 @@ public class AddNewChildActivity extends ActionBarActivity {
 						String child_id = DetailedRecordsStore.get(getActivity().getApplication()).addNewChild(obj);
 						// Go to activity of this family
 						if (child_id != null) {
-							Intent i = new Intent(getActivity(), AddNewChildVisitActivity.class);
+							Intent i = new Intent(getActivity(), AddNewChildVisitSinglePageActivity.class);
 							i.putExtra("child_id", child_id);
 							startActivity(i);
 						}
