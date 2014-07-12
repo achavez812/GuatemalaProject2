@@ -107,6 +107,10 @@
         <activity
             android:name="com.stanford.guatemedic.NFCActivity"
             android:label="NFC Tag Stuff" />
+        
+        <activity
+            android:name="com.stanford.guatemedic.AddNewChildVisitSinglePageActivity"
+            android:label="Visita del Niño" />
 
         <intent-filter>
     		<action android:name="android.nfc.action.NDEF_DISCOVERED"/>

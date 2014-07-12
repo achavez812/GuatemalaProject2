@@ -297,81 +297,7 @@ public class AddNewChildVisitActivity extends ActionBarActivity {
 
 			final DetailedChildVisit dcv = ((AddNewChildVisitActivity) getActivity()).dcv;
 			
-			if(createFirstTime1==1){
-				rootView.findViewById(R.id.child_visit2_is_only_breastfed).setVisibility(View.GONE);
-				rootView.findViewById(R.id.child_visit2_is_only_breastfed_text).setVisibility(View.GONE);
-				rootView.findViewById(R.id.child_visit2_how_long_only_breastfed).setVisibility(View.GONE);
-				rootView.findViewById(R.id.child_visit2_age_when_stopped_breastfeeding).setVisibility(View.GONE);
-			}
 			
-			
-			if(createFirstTime1==0){
-				rootView.findViewById(R.id.child_visit2_age_when_stopped_breastfeeding).setVisibility(View.VISIBLE);
-			}
-			if(createFirstTime2==1){
-				rootView.findViewById(R.id.child_visit2_how_long_only_breastfed).setVisibility(View.GONE);
-			}
-			
-			rootView.findViewById(R.id.yes_breastfed).setOnClickListener(
-					new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							getView().findViewById(
-									R.id.child_visit2_is_only_breastfed)
-									.setVisibility(View.VISIBLE);
-							getView().findViewById(
-									R.id.child_visit2_is_only_breastfed_text)
-									.setVisibility(View.VISIBLE);
-							getView().findViewById(R.id.child_visit2_age_when_stopped_breastfeeding).setVisibility(View.GONE);
-							if(createFirstTime2==0){
-								rootView.findViewById(R.id.child_visit2_how_long_only_breastfed).setVisibility(View.VISIBLE);
-							}
-							createFirstTime1=0;
-						}
-					});
-
-			rootView.findViewById(R.id.yes_only_breastfed).setOnClickListener(
-					new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							getView().findViewById(
-									R.id.child_visit2_how_long_only_breastfed)
-									.setVisibility(View.VISIBLE);
-							createFirstTime2=0;
-						}
-					});
-			rootView.findViewById(R.id.no_only_breastfed).setOnClickListener(
-					new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							getView().findViewById(
-									R.id.child_visit2_how_long_only_breastfed)
-									.setVisibility(View.GONE);
-							createFirstTime2=1;
-						}
-					});
-			rootView.findViewById(R.id.no_breastfed).setOnClickListener(
-					new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							getView().findViewById(
-									R.id.child_visit2_is_only_breastfed)
-									.setVisibility(View.GONE);
-							getView().findViewById(
-									R.id.child_visit2_is_only_breastfed_text)
-									.setVisibility(View.GONE);
-							getView().findViewById(
-									R.id.child_visit2_how_long_only_breastfed)
-									.setVisibility(View.GONE);
-							getView()
-									.findViewById(
-											R.id.child_visit2_age_when_stopped_breastfeeding)
-									.setVisibility(View.VISIBLE);
-							
-							createFirstTime1=1;
-						
-						}
-					});
 			
 			RadioGroup radiobreastfedGroup1 = (RadioGroup) rootView.findViewById(R.id.child_visit2_is_currently_breastfed);
 			int selectedId_does_breastfeed = radiobreastfedGroup1.getCheckedRadioButtonId();
@@ -406,65 +332,13 @@ public class AddNewChildVisitActivity extends ActionBarActivity {
 						.findViewById(R.id.child_visit2_how_long_only_breastfed);
 				if (dcv.getHow_long_only_breastfed() != 0)
 					how_long_only_breastfed_field.setText("" + dcv.getHow_long_only_breastfed());
-				how_long_only_breastfed_field.addTextChangedListener(new TextWatcher() {
-
-					@Override
-					public void afterTextChanged(Editable arg0) {
-						// TODO Auto-generated method stub
-
-					}
-
-					@Override
-					public void beforeTextChanged(CharSequence s, int start,
-							int count, int after) {
-						// TODO Auto-generated method stub
-
-					}
-
-					@Override
-					public void onTextChanged(CharSequence s, int start,
-							int before, int count) {
-						// TODO Auto-generated method stub
-						if (s.length() > 0)
-							dcv.setHow_long_only_breastfed(Float.parseFloat(s.toString()));
-						else
-							dcv.setHow_long_only_breastfed(0);
-
-					}
-
-				});
+	
 				
 				EditText child_age_when_stopped_breastfeeding_field = (EditText) rootView
 						.findViewById(R.id.child_visit2_how_long_only_breastfed);
 				if (dcv.getChild_age_when_stopped_breastfeeding() != 0)
 					child_age_when_stopped_breastfeeding_field.setText("" + dcv.getChild_age_when_stopped_breastfeeding());
-				child_age_when_stopped_breastfeeding_field.addTextChangedListener(new TextWatcher() {
 
-					@Override
-					public void afterTextChanged(Editable arg0) {
-						// TODO Auto-generated method stub
-
-					}
-
-					@Override
-					public void beforeTextChanged(CharSequence s, int start,
-							int count, int after) {
-						// TODO Auto-generated method stub
-
-					}
-
-					@Override
-					public void onTextChanged(CharSequence s, int start,
-							int before, int count) {
-						// TODO Auto-generated method stub
-						if (s.length() > 0)
-							dcv.setChild_age_when_stopped_breastfeeding(Float.parseFloat(s.toString()));
-						else
-							dcv.setChild_age_when_stopped_breastfeeding(0);
-
-					}
-
-				});
 			}
 			
 			

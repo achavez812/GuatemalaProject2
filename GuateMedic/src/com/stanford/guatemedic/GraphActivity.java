@@ -153,7 +153,7 @@ public class GraphActivity extends ActionBarActivity {
 			return true;
 		}
 		if (id == R.id.action_addvisit) {
-			Intent i = new Intent(getApplication(), AddNewChildVisitActivity.class);
+			Intent i = new Intent(getApplication(), AddNewChildVisitSinglePageActivity.class);
 			i.putExtra("child_id", child_id);
 			startActivity(i);
 			return true;

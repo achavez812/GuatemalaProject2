@@ -62,6 +62,8 @@ public class MainActivity extends ActionBarActivity {
 		if (mNfcAdapter != null) { // this device has NFC
 			handleIntent(getIntent());
 		}
+
+		
 	}
 
 	@Override
