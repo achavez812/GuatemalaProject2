@@ -58,7 +58,6 @@ public class GraphActivity extends ActionBarActivity {
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction().add(R.id.left_content, GraphFragmentLeft.newInstance(child_id)).commit();
 			getSupportFragmentManager().beginTransaction().add(R.id.right_content, GraphFragmentRight.newInstance(child_id)).commit();
-
 		}
 	}
 	
@@ -437,28 +436,14 @@ public class GraphActivity extends ActionBarActivity {
 			}
 		}
 
+		
+		
+		
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 			final View rootView = inflater.inflate(R.layout.fragment_graph_right, container,false);
 			plot = (XYPlot) rootView.findViewById(R.id.mySimpleXYPlot);
-	        plot.getLegendWidget().setTableModel(new DynamicTableModel(1, 4));
-	 
-	        // add a semi-transparent black background to the legend
-	        // so it's easier to see overlaid on top of our plot:
-	        Paint bgPaint = new Paint();
-	        bgPaint.setColor(Color.BLACK);
-	        bgPaint.setStyle(Paint.Style.FILL);
-	        bgPaint.setAlpha(140);
-	        plot.getLegendWidget().setBackgroundPaint(bgPaint);
-	 
-	        // adjust the padding of the legend widget to look a little nicer:
-	        plot.getLegendWidget().setPadding(10, 10, 10, 10);       
-	        plot.getLegendWidget().setSize(new SizeMetrics(130, SizeLayoutType.ABSOLUTE, 70, SizeLayoutType.ABSOLUTE));
-	        plot.getLegendWidget().position(25,
-	                XLayoutStyle.ABSOLUTE_FROM_RIGHT,
-	                90,
-	                YLayoutStyle.ABSOLUTE_FROM_BOTTOM,
-	                AnchorPosition.RIGHT_BOTTOM);
+	        addLegend();
 			
 			final TextView weight_view = (TextView)rootView.findViewById(R.id.tab_weight);
 			final TextView height_view = (TextView)rootView.findViewById(R.id.tab_height);
@@ -537,6 +522,25 @@ public class GraphActivity extends ActionBarActivity {
 			if (selected == 1) weight_view.performClick();
 			else if (selected == 2) height_view.performClick();
 			return rootView;
+		}
+
+		private void addLegend() {
+			plot.getLegendWidget().setTableModel(new DynamicTableModel(1, 4));
+	 
+	        // add a semi-transparent black background to the legend
+	        // so it's easier to see overlaid on top of our plot:
+	        Paint bgPaint = new Paint();
+	        bgPaint.setColor(Color.BLACK);
+	        bgPaint.setStyle(Paint.Style.FILL);
+	        bgPaint.setAlpha(140);
+	        plot.getLegendWidget().setBackgroundPaint(bgPaint);
+	 
+	        // adjust the padding of the legend widget to look a little nicer:
+	        plot.getLegendWidget().setPadding(15, 15, 15, 15);       
+	        plot.getLegendWidget().setSize(new SizeMetrics(220, SizeLayoutType.ABSOLUTE, 90, SizeLayoutType.ABSOLUTE));
+	        plot.getLegendWidget().position(90, XLayoutStyle.ABSOLUTE_FROM_RIGHT,
+	                120, YLayoutStyle.ABSOLUTE_FROM_BOTTOM,
+	                AnchorPosition.RIGHT_BOTTOM);
 		}
 	}
 }
