@@ -78,7 +78,7 @@ public class ViewFamilyActivity extends ActionBarActivity{
 		TextView mother_dob_field = (TextView)findViewById(R.id.view_family_parent1_dob_field);
 		if (!family.getParent1_dob().isEmpty() && !family.getParent1_dob().equals("0")) {
 			if (family.getParent1_dob().length() > 3) {
-				String formatted_mother_dob = Utilities.formatDate(family.getParent1_dob());
+				String formatted_mother_dob = Utilities.oldFormatDateMethod(family.getParent1_dob());
 				mother_dob_field.setText(Utilities.getAgeInYears(formatted_mother_dob) + " años");
 			} else {
 				mother_dob_field.setText(family.getParent1_dob() + " años");
@@ -95,7 +95,7 @@ public class ViewFamilyActivity extends ActionBarActivity{
 		TextView father_dob_field = (TextView)findViewById(R.id.view_family_parent2_dob_field);
 		if (!family.getParent2_dob().isEmpty() && !family.getParent2_dob().equals("0")) {
 			if (family.getParent2_dob().length() > 3) {
-				String formatted_father_dob = Utilities.formatDate(family.getParent2_dob());
+				String formatted_father_dob = Utilities.oldFormatDateMethod(family.getParent2_dob());
 				father_dob_field.setText(Utilities.getAgeInYears(formatted_father_dob) + " años");
 			} else {
 				father_dob_field.setText(family.getParent2_dob() + " años");

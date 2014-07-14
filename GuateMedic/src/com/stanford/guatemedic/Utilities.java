@@ -177,9 +177,20 @@ public class Utilities {
 		return pounds / 2.2046;
 	}
 	
-	public static String formatDate(String old_date) {
+	//TODO: get rid of this method and replace it with new method below
+	public static String oldFormatDateMethod(String old_date) {
 		String new_date = old_date.replace('-', '/');
 		return new_date.substring(0, 10);
+	}
+	
+	/***
+	 * Changes a formatted date string between the backend version and the display version 
+	 * @param YYYY-MM-DD
+	 * @return DD/MM/YYYY
+	 */
+	public static String formatDateForDisplay(String old_date) {
+		String new_date = old_date.replace('-', '/');
+		return new_date.substring(8,10) + new_date.substring(4, 8) + new_date.substring(0,4);
 	}
 	
 	public static double convertMonthsToWeeks(double months) {
@@ -217,7 +228,7 @@ public class Utilities {
 	
 	//This only handles String dates formatted correctly
 	public static int getAgeInYears(String birth_date) {
-		String current_date = formatDate(getTodayString());
+		String current_date = oldFormatDateMethod(getTodayString());
 		Log.i("WTF", current_date);
 		int year1 = Integer.parseInt(current_date.substring(0,4));
 		int year2 = Integer.parseInt(birth_date.substring(0, 4));
@@ -234,7 +245,7 @@ public class Utilities {
 	}
 	
 	public static double getAgeInMonths(String birth_date) {
-		String current_date = formatDate(getTodayString());
+		String current_date = oldFormatDateMethod(getTodayString());
 		Log.i("WTF", current_date);
 		int year1 = Integer.parseInt(current_date.substring(0,4));
 		int year2 = Integer.parseInt(birth_date.substring(0, 4));
@@ -251,7 +262,7 @@ public class Utilities {
 	}
 	
 	public static int getAgeInDays(String birth_date) {
-		String current_date = formatDate(getTodayString());
+		String current_date = oldFormatDateMethod(getTodayString());
 		Log.i("WTF", current_date);
 		int year1 = Integer.parseInt(current_date.substring(0,4));
 		int year2 = Integer.parseInt(birth_date.substring(0, 4));
