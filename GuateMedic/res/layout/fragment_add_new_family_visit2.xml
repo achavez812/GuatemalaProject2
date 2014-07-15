@@ -75,6 +75,7 @@
             android:textSize="30sp" 
             android:hint="¿Cuántos Personas Viven en la Casa?" />
 
+
     </LinearLayout>
 
 </ScrollView>
