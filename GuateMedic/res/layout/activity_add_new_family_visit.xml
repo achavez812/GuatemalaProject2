@@ -1,21 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:layout_margin="20dp">
     
     <!-- Add in basic information about family (at least names) -->
-    
-    <Spinner
-	    android:id="@+id/family_visit_spinner"
-	    android:layout_marginTop="10dp"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
     
     <FrameLayout
 	    android:id="@+id/container"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content" />
     
-
-</LinearLayout>
+    <FrameLayout
+	    android:id="@+id/container2"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" />
+    
+    <Button 
+        android:layout_width="250dp"
+        android:layout_height="60dp" 
+        android:id="@+id/save_family_visit"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Guardar"/>
+    </LinearLayout>
+</ScrollView>
