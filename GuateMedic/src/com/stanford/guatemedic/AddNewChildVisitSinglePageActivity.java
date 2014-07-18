@@ -199,7 +199,7 @@ public class AddNewChildVisitSinglePageActivity extends ActionBarActivity {
 			
 			Button button = (Button)rootView.findViewById(R.id.single_child_visit_submit_button);
 			button.setOnClickListener(new View.OnClickListener() {
-				
+			//hello	
 				@Override
 				public void onClick(View arg0) {
 					try {
