@@ -3,7 +3,6 @@ package com.stanford.guatemedic;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.util.Log;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,19 +11,17 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 public class AddNewFamilyVisitActivity extends ActionBarActivity {
 
@@ -146,70 +143,63 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 		return true;
 	}
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		int id = item.getItemId();
-		if (id == android.R.id.home) {
-			Intent i = new Intent(getApplication(), MainActivity.class);
-			startActivity(i);
-			return true;
-		}
-		if (id == R.id.action_addfamilyvisit_submit) {
-
-			frag1_instance.convertValuesFrag1();
-			frag2_instance.convertValuesFrag2();
-			JSONObject obj = new JSONObject();
-			try {
-				obj.put("family_id", family_id);
-				obj.put("does_father_live_with",
-						AddNewFamilyVisitFragment1.father_lives_with_put);
-				// Log.d("Working","WorkingTag"+AddNewFamilyVisitFragment1.father_lives_with_put);
-				obj.put("parent1_marital_status",
-						AddNewFamilyVisitFragment1.parent1_marital_status_put);
-				// Log.d("Working","WorkingTag"+AddNewFamilyVisitFragment1.parent1_marital_status_put);
-				obj.put("fathers_job",
-						AddNewFamilyVisitFragment1.father_occu_put);
-				// Log.d("Working","WorkingTag"+AddNewFamilyVisitFragment1.father_occu_put);
-				obj.put("has_igss", AddNewFamilyVisitFragment1.IGSS_family_put);
-				// Log.d("Working","WorkingTag"+AddNewFamilyVisitFragment1.IGSS_family_put);
-				obj.put("num_children_alive",
-						AddNewFamilyVisitFragment2.num_children_alive_put);
-				// Log.d("Working","WorkingTag"+AddNewFamilyVisitFragment2.num_children_alive_put);
-				obj.put("num_children_dead",
-						AddNewFamilyVisitFragment2.num_children_dead_put);
-				// Log.d("Working","WorkingTag"+AddNewFamilyVisitFragment2.num_children_dead_put);
-				obj.put("num_children_under_5",
-						AddNewFamilyVisitFragment2.num_children_under_5_put);
-				// Log.d("Working","WorkingTag"+AddNewFamilyVisitFragment2.num_children_under_5_put);
-				obj.put("num_people_in_household",
-						AddNewFamilyVisitFragment2.num_people_in_household_put);
-				// Log.d("Working","WorkingTag"+AddNewFamilyVisitFragment2.num_people_in_household_put);
-				obj.put("num_pregnancies",
-						AddNewFamilyVisitFragment2.num_pregnancies_put);
-				// Log.d("Working","WorkingTag"+AddNewFamilyVisitFragment2.num_pregnancies_put);
-				obj.put("how_children_died",
-						AddNewFamilyVisitFragment2.children_death_information_put);
-				// Log.d("Working","WorkingTag"+AddNewFamilyVisitFragment2.children_death_information_put);
-				Log.i("WTF", "CHECK");
-				DetailedRecordsStore.get(getApplication()).addNewFamilyVisit(
-						obj);
-
-				Intent i = new Intent(getApplication(),
-						ViewFamilyActivity.class);
-				i.putExtra("family_id", family_id);
-				startActivity(i);
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			// DetailedRecordsStore.get(getApplication()).addNewFamilyVisit(obj);
-			// DetailedRecordsStore.get(getApplication()).addNewChildVisit(dfv.toJSONObject());
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
-
+	/*
+	 * @Override public boolean onOptionsItemSelected(MenuItem item) { int id =
+	 * item.getItemId(); if (id == android.R.id.home) { Intent i = new
+	 * Intent(getApplication(), MainActivity.class); startActivity(i); return
+	 * true; } if (id == R.id.action_addfamilyvisit_submit) {
+	 * 
+	 * frag1_instance.convertValuesFrag1(); frag2_instance.convertValuesFrag2();
+	 * JSONObject obj = new JSONObject(); try { obj.put("family_id", family_id);
+	 * obj.put("does_father_live_with",
+	 * AddNewFamilyVisitFragment1.father_lives_with_put); //
+	 * Log.d("Working","WorkingTag"
+	 * +AddNewFamilyVisitFragment1.father_lives_with_put);
+	 * obj.put("parent1_marital_status",
+	 * AddNewFamilyVisitFragment1.parent1_marital_status_put); //
+	 * Log.d("Working"
+	 * ,"WorkingTag"+AddNewFamilyVisitFragment1.parent1_marital_status_put);
+	 * obj.put("fathers_job", AddNewFamilyVisitFragment1.father_occu_put); //
+	 * Log.d("Working","WorkingTag"+AddNewFamilyVisitFragment1.father_occu_put);
+	 * obj.put("has_igss", AddNewFamilyVisitFragment1.IGSS_family_put); //
+	 * Log.d("Working","WorkingTag"+AddNewFamilyVisitFragment1.IGSS_family_put);
+	 * obj.put("num_children_alive",
+	 * AddNewFamilyVisitFragment2.num_children_alive_put); //
+	 * Log.d("Working","WorkingTag"
+	 * +AddNewFamilyVisitFragment2.num_children_alive_put);
+	 * obj.put("num_children_dead",
+	 * AddNewFamilyVisitFragment2.num_children_dead_put); //
+	 * Log.d("Working","WorkingTag"
+	 * +AddNewFamilyVisitFragment2.num_children_dead_put);
+	 * obj.put("num_children_under_5",
+	 * AddNewFamilyVisitFragment2.num_children_under_5_put); //
+	 * Log.d("Working","WorkingTag"
+	 * +AddNewFamilyVisitFragment2.num_children_under_5_put);
+	 * obj.put("num_people_in_household",
+	 * AddNewFamilyVisitFragment2.num_people_in_household_put); //
+	 * Log.d("Working"
+	 * ,"WorkingTag"+AddNewFamilyVisitFragment2.num_people_in_household_put);
+	 * obj.put("num_pregnancies",
+	 * AddNewFamilyVisitFragment2.num_pregnancies_put); //
+	 * Log.d("Working","WorkingTag"
+	 * +AddNewFamilyVisitFragment2.num_pregnancies_put);
+	 * obj.put("how_children_died",
+	 * AddNewFamilyVisitFragment2.children_death_information_put); //
+	 * Log.d("Working"
+	 * ,"WorkingTag"+AddNewFamilyVisitFragment2.children_death_information_put);
+	 * Log.i("WTF", "CHECK");
+	 * DetailedRecordsStore.get(getApplication()).addNewFamilyVisit( obj);
+	 * 
+	 * Intent i = new Intent(getApplication(), ViewFamilyActivity.class);
+	 * i.putExtra("family_id", family_id); startActivity(i); } catch
+	 * (JSONException e) { // TODO Auto-generated catch block
+	 * e.printStackTrace(); }
+	 * 
+	 * // DetailedRecordsStore.get(getApplication()).addNewFamilyVisit(obj); //
+	 * DetailedRecordsStore
+	 * .get(getApplication()).addNewChildVisit(dfv.toJSONObject()); return true;
+	 * } return super.onOptionsItemSelected(item); }
+	 */
 	public static class AddNewFamilyVisitFragment1 extends Fragment {
 		private static int parent1_marital_status_put;
 		private static int father_lives_with_put;
