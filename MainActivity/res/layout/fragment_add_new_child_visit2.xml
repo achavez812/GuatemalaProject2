@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    
+    <LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:gravity="center_horizontal"
+	    android:padding="20dp"
+	    android:orientation="vertical">
+	    
+	 	<TextView android:id="@+id/child_visit2_is_currently_breastfed_text"
+	  		android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	       	android:layout_marginTop="20dp"
+	       	android:textSize="20sp"
+	        android:text="¿El Niño TODAVÍA está Mamando?"/>
+	     
+ 		<LinearLayout
+	  		android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="10dp"
+	        android:gravity="center_horizontal"    
+	        android:orientation="horizontal" >
+	
+	    	<RadioGroup 
+	    	    android:id="@+id/child_visit2_is_currently_breastfed"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:orientation="horizontal">
+			    
+			    <RadioButton android:id="@+id/yes_breastfed"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginRight="10dp"
+			        android:text="Sí"/>
+			    
+			    <RadioButton android:id="@+id/no_breastfed"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="No"/>
+			    
+			</RadioGroup>
+			
+		</LinearLayout>
+	
+	  	<TextView android:id="@+id/child_visit2_is_only_breastfed_text"
+	   		android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	       	android:layout_marginTop="20dp"
+	       	android:textSize="20sp"
+	       	android:visibility="gone"
+	        android:text="¿Esta Comiendo Solo Pecho?"/>
+	  	
+	 	<LinearLayout
+	  		android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="10dp"
+	        android:gravity="center_horizontal" 
+	        android:visibility="gone"   
+	        android:orientation="horizontal" >
+	
+	    	<RadioGroup 
+	    	    android:id="@+id/child_visit2_is_only_breastfed"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:orientation="horizontal">
+			    
+			    <RadioButton android:id="@+id/yes_only_breastfed"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginRight="10dp"
+			        android:text="Sí"/>
+			    
+			    <RadioButton android:id="@+id/no_only_breastfed"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="No"/>
+			    
+			</RadioGroup>
+			
+		</LinearLayout>
+	        
+          
+     	<EditText
+	        android:id="@+id/child_visit2_how_long_only_breastfed"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:layout_marginTop="20dp"
+	        android:ellipsize="start"
+	        android:inputType="numberDecimal"
+	        android:textSize="20sp"
+	        android:visibility="gone"
+	        android:hint="¿Por Cuántos Meses le Dio Solo Pecho?" />
+      
+     	<EditText
+	        android:id="@+id/child_visit2_age_when_stopped_breastfeeding"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:layout_marginTop="20dp"
+	        android:ellipsize="start"
+	        android:inputType="numberDecimal"
+	        android:textSize="20sp"
+	        android:visibility="gone"
+	        android:hint="¿A Que Edad Dejó de Mamar?" />
+
+	</LinearLayout>
+</ScrollView> 

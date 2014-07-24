@@ -1,0 +1,77 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="10dp" >
+
+    <EditText
+        android:id="@+id/exam_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="16dp"
+        android:layout_toRightOf="@+id/textView1"
+        android:ems="10"
+        android:hint="Exam date" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/exam_date"
+        android:layout_alignBottom="@+id/exam_date"
+        android:layout_alignParentLeft="true"
+        android:text="Exam date :" />
+
+    <EditText
+        android:id="@+id/patientweight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/exam_date"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/exam_date"
+        android:layout_marginTop="14dp"
+        android:ems="10"
+        android:hint="Weight" />
+
+    <EditText
+        android:id="@+id/patientheight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/patientweight"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/patientweight"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="Height" />
+
+    <TextView
+        android:id="@+id/weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/patientweight"
+        android:layout_alignBottom="@+id/patientweight"
+        android:layout_alignParentLeft="true"
+        android:text="Weight :" />
+
+    <TextView
+        android:id="@+id/height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/patientheight"
+        android:layout_alignBottom="@+id/patientheight"
+        android:layout_alignParentLeft="true"
+        android:text="Height :" />
+
+    <Button
+        android:id="@+id/add_examinfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/patientheight"
+        android:layout_below="@+id/patientheight"
+        android:text="Add" />
+
+</RelativeLayout>

@@ -1,0 +1,212 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="wrap_content"
+    android:layout_height="fill_parent"
+    android:scrollbars="none">
+
+	<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+ 
+
+
+    
+		<RelativeLayout
+    	android:id="@+id/familydetails"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content" 
+    	android:padding="30dp"
+    	android:layout_margin="20dp">
+    
+			<Button
+        	android:id="@+id/edit_family_detail"
+        	android:layout_width="100dp"
+        	android:layout_height="wrap_content"
+			android:layout_alignParentLeft="true"
+			android:layout_centerVertical="true"
+        	android:text="EDIT"/>
+
+
+    		<TextView
+        	android:id="@+id/view_family_name"
+        	android:layout_marginLeft="14dp"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_toRightOf="@+id/edit_family_detail"
+        	android:layout_alignParentTop="true"
+        	android:text="TextView" />
+	    
+	    <!-- Labels start here -->
+		
+    	
+    	
+ 
+  
+
+	
+    	
+    		<TextView 
+    	    android:id="@+id/mother_name_text"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"
+    	    android:layout_below="@+id/view_family_name" 
+    	    android:layout_alignLeft="@+id/view_family_name"
+    	    android:text="Mother Name: "
+    	    />
+    	<TextView 
+    	    android:id="@+id/mother_dob_text"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"
+    	    android:layout_below="@+id/mother_name_text" 
+    	    android:layout_alignLeft="@+id/view_family_name"
+    	    android:text="Mother Date of Birth: "
+    	    />
+    	
+    	<TextView 
+    	    android:id="@+id/father_name_text"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"
+    	    android:layout_below="@+id/mother_dob_text"
+    	    android:layout_alignLeft="@+id/view_family_name"
+    	    android:text="Father Name: "/>
+    	
+    	<TextView 
+    	    android:id="@+id/father_dob_text"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"
+    	    android:layout_below="@+id/father_name_text"
+    	    android:layout_alignLeft="@+id/view_family_name"
+    	    android:text="Father Date of Birth: "/>
+    	
+    	
+	    
+	    <TextView
+	        android:id="@+id/mother_name"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+        	android:layout_toRightOf="@+id/mother_name_text"
+	        android:layout_below="@+id/view_family_name"
+	        android:text="TextView" />
+	   
+	    <TextView
+	        android:id="@+id/mother_dob"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+        	android:layout_toRightOf="@+id/mother_dob_text"
+	        android:layout_below="@+id/mother_name"
+	        android:text="TextView" />
+
+	    <TextView
+	        android:id="@+id/father_name"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+        	android:layout_toRightOf="@+id/father_name_text"
+	        android:layout_below="@+id/mother_dob"
+	        android:text="TextView" />
+	     
+	    <TextView 
+	        android:id="@+id/father_dob"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_toRightOf="@+id/father_dob_text"
+	        android:layout_below="@+id/father_name"
+	        android:text="TextView"
+	        /> 
+	  
+
+	</RelativeLayout>
+
+	
+
+    	
+	<LinearLayout
+	    android:background="#004d6b" 
+	    android:id="@+id/visit_info_bar"
+	    android:paddingTop="10dp"
+	    android:paddingBottom="10dp"
+	    android:paddingRight="30dp"
+	    android:paddingLeft="30dp"
+	    android:layout_margin="20dp"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/familydetails">
+		<TextView
+	    	android:id="@+id/visits_title"
+	    	android:layout_weight="7"
+	    	android:layout_width="0dp"
+	    	android:layout_height="wrap_content"
+	    	android:text="Family Visit Information"
+	    	android:layout_centerVertical="true"/>
+		
+	    <Button
+        	android:id="@+id/add_exam_info_family"
+	    	android:layout_weight="4"
+	    	android:layout_width="0dp"
+        	android:layout_height="wrap_content"
+        	android:text="ADD EXAM VISIT"
+        	
+        	/>
+	    
+	</LinearLayout>
+	
+
+     
+    
+	<RelativeLayout
+	    android:layout_below="@+id/visit_info_bar"
+	    android:padding="30dp"
+	    android:layout_margin="20dp"
+		android:id="@+id/examvisitinfo_family"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="40dp">
+	    
+	    <LinearLayout
+	        android:id="@+id/examinfotitle_table_family"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content">
+	       	
+	       	<TextView
+        		android:id="@+id/id_val_family_visit"
+        		android:layout_weight="1.5"
+        		android:layout_width="0dp"
+        		android:layout_height="wrap_content"
+        		android:text="ID" />
+	       	
+	       	<TextView
+        		android:id="@+id/date_val_family_visit"
+        		android:layout_weight="3"
+        		android:layout_width="0dp"
+        		android:layout_height="wrap_content"
+        		android:text="Exam Date" />
+   
+    		<TextView
+        		android:id="@+id/some_val_family_visit"
+        		android:layout_weight="3"
+        		android:layout_width="0dp"
+        		android:layout_height="wrap_content"
+        		android:text="Some Value" />
+
+    		<TextView
+        		android:id="@+id/some_val2_family_visit"
+        		android:layout_weight="3"
+        		android:layout_width="0dp"
+        		android:layout_height="wrap_content"
+        		android:text="Some Value" />
+		</LinearLayout>
+		
+    	<ListView
+        	android:id="@+id/examdetailsfamily"
+        	android:layout_width="match_parent"
+        	android:layout_height="185dp"
+        	android:layout_below="@+id/examinfotitle_table_family"
+        	android:layout_marginTop="16dp"/>
+	</RelativeLayout>
+	
+	<TextView
+	    android:visibility="invisible"
+	    android:layout_below="@+id/bottom_footer"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	 />
+</RelativeLayout>
+</ScrollView>
