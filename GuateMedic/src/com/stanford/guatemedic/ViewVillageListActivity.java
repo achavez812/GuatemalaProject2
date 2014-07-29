@@ -176,7 +176,7 @@ public class ViewVillageListActivity extends ActionBarActivity {
 		                    filt.clear();
 		                    for(int i = 0; i < lData.size(); i++) {
 		                        DetailedVillage m = lData.get(i);
-		                        if((m.getVillage_name().toLowerCase()).contains(constraint))
+		                        if((m.getName().toLowerCase()).contains(constraint))
 		                        	{
 		                            filt.add(m);
 		                        	}
@@ -205,7 +205,7 @@ public class ViewVillageListActivity extends ActionBarActivity {
 				}
 				
 				DetailedVillage village = (DetailedVillage) getItem(position);
-				String village_name = village.getVillage_name();
+				String village_name = village.getName();
 				int num_families = DetailedRecordsStore.get(getActivity().getApplication()).getFamilies(village_name).size();
 				
 				TextView villageTitle = (TextView)convertView.findViewById(R.id.list_item_title);

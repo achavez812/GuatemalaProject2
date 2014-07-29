@@ -132,6 +132,19 @@
 	    <item>November</item>
 	    <item>December</item>
 	</string-array>
+	<string name="authorization_string">Autorización</string>
+	<string name="username_string">Nombre de Usuario</string>
+	<string name="password_string">Contraseña</string>
+	<string name="continue_button_text">SEGUIR"</string>
+	
+	<string name="view_records_button_text">REGISTROS</string>
+	<string name="sync_records_button_text">SINCRONIZAR</string>
+	<string name="download_records_button_text">DESCARGAR</string>
+	
+	<string name="download_communities_header_text">Por favor selecta cuales comunidades quieres descargar. Estas comunidades van a sustituir a los actualmente descargados.</string>
+	<string name="search_string">Buscar</string>
+	
+	
 
 
 	

@@ -10,11 +10,11 @@ import java.util.UUID;
 import android.content.Context;
 import android.util.Log;
 
-public class GuatemedicWriter {
+public class GuatemedicFileWriter {
 	
 	private Context mContext;
 	
-	public GuatemedicWriter(Context c) {
+	public GuatemedicFileWriter(Context c) {
 		mContext = c;
 	}
 	

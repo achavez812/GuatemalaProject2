@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
@@ -28,7 +29,7 @@ public class DetailedRecordsStore {
 	
 	private Context context;
 	
-	private GuatemedicReader gfr;
+	private GuatemedicFileReader gfr;
 
 	private DetailedRecordsStore(Context c) {
 		context = c;
@@ -36,7 +37,7 @@ public class DetailedRecordsStore {
 		villages = new ArrayList<DetailedVillage>();
 		families = new HashMap<String, ArrayList<DetailedFamily>>();
 		children = new HashMap<String, ArrayList<DetailedChild>>();
-		gfr = new GuatemedicReader(c);
+		gfr = new GuatemedicFileReader(c);
 		processDownloadedFiles();
 		processNewFiles();
 	}
@@ -52,19 +53,30 @@ public class DetailedRecordsStore {
 	}
 	
 	public ArrayList<DetailedVillage> getVillages() {
-		return villages;
+		return (ArrayList<DetailedVillage>)villages.clone();
 	}
 	
 	public DetailedVillage getVillage(String village_name) {
 		for (DetailedVillage dv : villages) {
-			if (dv.getVillage_name().equals(village_name))
+			if (dv.getName().equals(village_name))
 				return dv;
 		}
 		return null;
 	}	
 	
+	public ArrayList<DetailedVillage> getMatchingVillages(String str) {
+		if (str.isEmpty()) {
+			return (ArrayList<DetailedVillage>)villages.clone();
+		} ArrayList<DetailedVillage> matchingCommunities = new ArrayList<DetailedVillage>();
+		for (DetailedVillage community : villages) {
+			if (community.getName().toLowerCase(Locale.getDefault()).contains(str.toLowerCase(Locale.getDefault())))
+				matchingCommunities.add(community);
+		}
+		return matchingCommunities;
+	}
+	
 	public ArrayList<DetailedFamily> getFamilies(String village_name) {
-		return families.get(village_name);
+		return (ArrayList<DetailedFamily>)families.get(village_name).clone();
 	}
 	
 	public DetailedFamily getFamily(String village_name, String family_id) {
@@ -86,7 +98,7 @@ public class DetailedRecordsStore {
 	}
 	
 	public ArrayList<DetailedChild> getChildren(String family_id) {
-		return children.get(family_id);
+		return (ArrayList<DetailedChild>)children.get(family_id).clone();
 	}
 	
 	public DetailedChild getChild(String family_id, String child_id) {
@@ -130,7 +142,7 @@ public class DetailedRecordsStore {
 			obj.put("date_last_modified", current_date);
 			obj.put("promoter_id", "NULL"); //Figure this out
 			
-			GuatemedicWriter gw = new GuatemedicWriter(context);
+			GuatemedicFileWriter gw = new GuatemedicFileWriter(context);
 			if (gw.saveNewFamily(obj.toString()))
 				Log.i("WTF", "Family save successful");
 			
@@ -158,7 +170,7 @@ public class DetailedRecordsStore {
 			obj.put("date_last_modified", current_date);
 			obj.put("promoter_id", "NULL"); //Figure this out
 			
-			GuatemedicWriter gw = new GuatemedicWriter(context);
+			GuatemedicFileWriter gw = new GuatemedicFileWriter(context);
 			if (gw.saveNewChild(obj.toString()))
 				Log.i("WTF", "Child save successful");
 			
@@ -183,7 +195,7 @@ public class DetailedRecordsStore {
 			obj.put("visit_date", current_date);
 			obj.put("promoter_id", "NULL"); //Figure this out
 			
-			GuatemedicWriter gw = new GuatemedicWriter(context);
+			GuatemedicFileWriter gw = new GuatemedicFileWriter(context);
 			if (gw.saveNewChildVisit(obj.toString()))
 				Log.i("WTF", "Child Visit save successful");
 			parseChildVisit(dcv, obj);
@@ -206,7 +218,7 @@ public class DetailedRecordsStore {
 			obj.put("visit_date", current_date);
 			obj.put("promoter_id", "NULL");
 			
-			GuatemedicWriter gw = new GuatemedicWriter(context);
+			GuatemedicFileWriter gw = new GuatemedicFileWriter(context);
 			if (gw.saveNewFamilyVisit(obj.toString()))
 				Log.i("WTF", "Family Visit save successful");
 			parseFamilyVisit(dfv, obj);
@@ -451,7 +463,7 @@ public class DetailedRecordsStore {
 
 	private void processVillage(String village_name) {
 		for (DetailedVillage village : villages) {
-			if (village.getVillage_name().equals(village_name)) 
+			if (village.getName().equals(village_name)) 
 				return;
 		}
 		villages.add(new DetailedVillage(village_name));
