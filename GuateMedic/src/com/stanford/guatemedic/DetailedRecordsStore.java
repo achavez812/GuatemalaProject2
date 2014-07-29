@@ -118,7 +118,7 @@ public class DetailedRecordsStore {
 		try {
 			String village = obj.getString("village");
 			String random_id = generateRandomId();
-			String current_date = Utilities.getTodayString();
+			String current_date = DateTimeUtilities.getCurrentDateTimeString();
 			
 			DetailedFamily df = new DetailedFamily(village, random_id);
 			families.get(village).add(df);
@@ -146,7 +146,7 @@ public class DetailedRecordsStore {
 		try {
 			String family_id = obj.getString("family_id");
 			String random_id = generateRandomId();
-			String current_date = Utilities.getTodayString();
+			String current_date = DateTimeUtilities.getCurrentDateTimeString();
 			
 			DetailedChild dc = new DetailedChild(family_id, random_id);
 			children.get(family_id).add(dc);
@@ -174,7 +174,7 @@ public class DetailedRecordsStore {
 		try {
 			String child_id = obj.getString("child_id");
 			String random_id = generateRandomId();
-			String current_date = Utilities.getTodayString();
+			String current_date = DateTimeUtilities.getCurrentDateTimeString();
 			
 			DetailedChildVisit dcv = new DetailedChildVisit(child_id);
 			
@@ -197,7 +197,7 @@ public class DetailedRecordsStore {
 		try {
 			String family_id = obj.getString("family_id");
 			String random_id = generateRandomId();
-			String current_date = Utilities.getTodayString();
+			String current_date = DateTimeUtilities.getCurrentDateTimeString();
 			
 			DetailedFamilyVisit dfv = new DetailedFamilyVisit(family_id);
 			

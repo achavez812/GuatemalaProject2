@@ -31,7 +31,7 @@ public class DownloadChildListActivity extends ActionBarActivity {
 		village = getIntent().getStringExtra("village");
 		String parent1_name =  BasicRecordsStore.get().getFamily(family_id).getParent1_name();
 		if (parent1_name == null) BasicRecordsStore.get().getFamily(family_id).setParent1_name("");
-		setTitle("Ni√±os de " + BasicRecordsStore.get().getFamily(family_id).getParent1_name());
+		setTitle("Niños de " + BasicRecordsStore.get().getFamily(family_id).getParent1_name());
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, DownloadChildListFragment.newInstance(family_id)).commit();

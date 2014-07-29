@@ -125,7 +125,7 @@ public class UploadLoginActivity extends ActionBarActivity{
 					if (json_arr.length() > 0) {
 						Map<String, String> headerMap = new HashMap<String, String>();
 						headerMap.put("Authorization", auth_key);
-						String response = Utilities.postRequest("https://guatemedic.herokuapp.com/createFamily", headerMap, json_arr.toString());
+						String response = HttpUtilities.postRequest("https://guatemedic.herokuapp.com/createFamily", headerMap, json_arr.toString());
 						if (response != null) {
 							JSONArray response_array = new JSONArray(response);
 							for (int i = 0; i < response_array.length(); i++) {
@@ -164,7 +164,7 @@ public class UploadLoginActivity extends ActionBarActivity{
 						Log.i("WTF", json_arr.toString());
 						Map<String, String> headerMap = new HashMap<String, String>();
 						headerMap.put("Authorization", auth_key);
-						String response = Utilities.postRequest("https://guatemedic.herokuapp.com/createChild", headerMap, json_arr.toString());
+						String response = HttpUtilities.postRequest("https://guatemedic.herokuapp.com/createChild", headerMap, json_arr.toString());
 						if (response != null) {
 							JSONArray response_array = new JSONArray(response);
 							for (int i = 0; i < response_array.length(); i++) {
@@ -200,7 +200,7 @@ public class UploadLoginActivity extends ActionBarActivity{
 					if (json_arr.length() > 0) {
 						Map<String, String> headerMap = new HashMap<String, String>();
 						headerMap.put("Authorization", auth_key);
-						String response = Utilities.postRequest("https://guatemedic.herokuapp.com/addVisits", headerMap, json_arr.toString());
+						String response = HttpUtilities.postRequest("https://guatemedic.herokuapp.com/addVisits", headerMap, json_arr.toString());
 						if (response != null) {
 							//Success
 							JSONObject obj = new JSONObject(response);
@@ -223,7 +223,7 @@ public class UploadLoginActivity extends ActionBarActivity{
 			@Override
 			protected Void doInBackground(String... params) {
 				String json_body = params[0];
-				String response = Utilities.postRequest("https://guatemedic.herokuapp.com/login", null, json_body);
+				String response = HttpUtilities.postRequest("https://guatemedic.herokuapp.com/login", null, json_body);
 				if (response != null) {
 					try {
 						JSONObject json_response = new JSONObject(response);

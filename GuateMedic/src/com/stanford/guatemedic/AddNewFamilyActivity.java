@@ -53,7 +53,7 @@ public class AddNewFamilyActivity extends ActionBarActivity {
  
 			// set dialog message
 		alertDialogBuilder
-			.setMessage("Vas a perder este informaci√≥n si dejes este pagina.")
+			.setMessage("Vas a perder este información si dejes este pagina.")
 			.setCancelable(false)
 			.setPositiveButton("Dejar Esta Pagina",new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog,int id) {

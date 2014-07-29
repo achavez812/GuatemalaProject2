@@ -96,7 +96,7 @@ public class GraphActivity extends ActionBarActivity {
 				child_age_in_weeks_weight = new Number[1];
 				child_weight = new Number[1];
 				child_age_in_weeks_weight[0] = 0;
-				child_weight[0] = Utilities.round(birth_weight, 2);
+				child_weight[0] = GeneralUtilities.round(birth_weight, 2);
 				birth_weight_plus = 1;
 			} else {
 				child_age_in_weeks_weight = new Number[0];
@@ -106,7 +106,7 @@ public class GraphActivity extends ActionBarActivity {
 				child_age_in_weeks_height = new Number[1];
 				child_height = new Number[1];
 				child_age_in_weeks_height[0] = 0;
-				child_height[0] = Utilities.round(birth_height, 2);
+				child_height[0] = GeneralUtilities.round(birth_height, 2);
 				birth_height_plus = 1;
 			} else {
 				child_height = new Number[0];
@@ -118,11 +118,12 @@ public class GraphActivity extends ActionBarActivity {
 			String visit_date = visit.getVisit_date();
 			double weight = visit.getWeight_in_pounds();
 			double height = visit.getHeight_in_centimeters();
-			double age_in_weeks = Utilities.convertMonthsToWeeks(Utilities.timeBetween(Utilities.oldFormatDateMethod(date_of_birth), Utilities.oldFormatDateMethod(visit_date)));
-			child_age_in_weeks_weight[i + birth_weight_plus] = Utilities.round(age_in_weeks, 1);
-			child_age_in_weeks_height[i + birth_height_plus] = Utilities.round(age_in_weeks, 1);
-			child_weight[i + birth_weight_plus] = Utilities.round(weight, 2); //convert here
-			child_height[i + birth_height_plus] = Utilities.round(height, 2); //convert here
+			int time_between = (int)DateTimeUtilities.timeBetweenInDays(date_of_birth, visit_date);	
+			double age_in_weeks = DateTimeUtilities.convertDaysToWeeks(time_between);
+			child_age_in_weeks_weight[i + birth_weight_plus] = GeneralUtilities.round(age_in_weeks, 1);
+			child_age_in_weeks_height[i + birth_height_plus] = GeneralUtilities.round(age_in_weeks, 1);
+			child_weight[i + birth_weight_plus] = GeneralUtilities.round(weight, 2); //convert here
+			child_height[i + birth_height_plus] = GeneralUtilities.round(height, 2); //convert here
 		}
 	}
 	
@@ -257,15 +258,15 @@ public class GraphActivity extends ActionBarActivity {
 			
 			TextView sex_field = (TextView)rootView.findViewById(R.id.graph_child_sex);
 			if (gender == 1) {
-				sex_field.setText("Niño");
+				sex_field.setText("Ni�o");
 			} else if (gender == 2) {
-				sex_field.setText("Niña");
+				sex_field.setText("Ni�a");
 			} else if (gender == 0) {
 				sex_field.setText("No Sexo");
 			}
 			
 			if (dob != null && !dob.isEmpty()) {
-				String formatted_dob = Utilities.formatDateForDisplay(dob);
+				String formatted_dob = DateTimeUtilities.formatDateForDisplay(dob);
 				TextView dob_field = (TextView)rootView.findViewById(R.id.graph_child_dob);
 				dob_field.setText(formatted_dob);
 			} else {
@@ -280,17 +281,17 @@ public class GraphActivity extends ActionBarActivity {
 			TextView visit_header_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_header);
 			if (dcv == null) { 
 				if (child_age_in_weeks_weight.length > 0 || child_age_in_weeks_height.length > 0) {
-					visit_header_field.setText("Visita de Nacimiento (" + Utilities.formatDateForDisplay(child.getDate_created()) + ")");
+					visit_header_field.setText("Visita de Nacimiento (" + DateTimeUtilities.formatDateForDisplay(child.getDate_created()) + ")");
 					TextView age_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_age);
 					age_field.setText("Edad: " + 0 + " semanas");
 					if (child_age_in_weeks_weight.length > 0) {
 						double weight = child_weight[0].doubleValue();
 						TextView weight_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_weight);
 						weight_field.setText("Peso: " + weight + " libras");
-						double weight_z_score = Utilities.round(calculate_weight_z_score(weight, 0, gender), 2);
+						double weight_z_score = GeneralUtilities.round(calculate_weight_z_score(weight, 0, gender), 2);
 						TextView weight_z_score_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_weight_z_score);
 						if (weight_z_score == -10)
-							weight_z_score_field.setText("El niño is mayor de 5 años.");
+							weight_z_score_field.setText("El ni�o is mayor de 5 a�os.");
 						else
 							weight_z_score_field.setText("Grado " + weight_z_score + " de peso");
 						
@@ -299,7 +300,7 @@ public class GraphActivity extends ActionBarActivity {
 						double height = child_height[0].doubleValue();
 						TextView height_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_height);
 						height_field.setText("Talla: " + height + " cm");
-						double height_z_score = Utilities.round(calculate_height_z_score(height, 0, gender), 2);
+						double height_z_score = GeneralUtilities.round(calculate_height_z_score(height, 0, gender), 2);
 						TextView height_z_score_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_height_z_score);
 						if (height_z_score != -10)
 							height_z_score_field.setText("Grado " + height_z_score + " de talla");
@@ -310,7 +311,7 @@ public class GraphActivity extends ActionBarActivity {
 				}
 			} else {
 				String visit_date = dcv.getVisit_date();
-				String formatted_visit_date = Utilities.formatDateForDisplay(visit_date);
+				String formatted_visit_date = DateTimeUtilities.formatDateForDisplay(DateTimeUtilities.getCurrentDateTimeString());
 				double age_in_weeks = child_age_in_weeks_weight[child_age_in_weeks_weight.length - 1].doubleValue(); //days
 				double age_in_days = age_in_weeks * 7;
 				double age_in_months = age_in_days / 30.4167;
@@ -320,7 +321,7 @@ public class GraphActivity extends ActionBarActivity {
 				visit_header_field.setText("Última Visita (" + formatted_visit_date + ")"); //Format visit date
 				
 				TextView age_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_age);
-				age_field.setText("Edad: " + Utilities.round(age_in_months, 1) + " meses");
+				age_field.setText("Edad: " + GeneralUtilities.round(age_in_months, 1) + " meses");
 				
 				TextView weight_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_weight);
 				weight_field.setText("Peso: " + weight + " libras");
@@ -328,8 +329,8 @@ public class GraphActivity extends ActionBarActivity {
 				TextView height_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_height);
 				height_field.setText("Talla: " + height + " cm");
 
-				double weight_z_score = Utilities.round(calculate_weight_z_score(weight, age_in_days, gender), 2);
-				double height_z_score = Utilities.round(calculate_height_z_score(height, age_in_days, gender), 2);
+				double weight_z_score = GeneralUtilities.round(calculate_weight_z_score(weight, age_in_days, gender), 2);
+				double height_z_score = GeneralUtilities.round(calculate_height_z_score(height, age_in_days, gender), 2);
 				if (weight_z_score != -10 && height_z_score != -10) {
 					String weight_grade = getGradeFromZScore(weight_z_score);
 					String height_grade = getGradeFromZScore(height_z_score);
@@ -342,7 +343,7 @@ public class GraphActivity extends ActionBarActivity {
 				}
 				
 				TextView recommendation_field = (TextView)rootView.findViewById(R.id.graph_child_reccomendation_info);
-				recommendation_field.setText("Basado de los datos, recomendamos que el niño..");
+				recommendation_field.setText("Basado de los datos, recomendamos que el ni�o..");
 				//Assign variables
 			}
 			return rootView;
@@ -389,7 +390,8 @@ public class GraphActivity extends ActionBarActivity {
 			DetailedChild child = DetailedRecordsStore.get(getActivity()).getChild(child_id);
 			String dob = child.getDob();
 			if (dob != null && !dob.isEmpty()) {
-				age_in_months = Utilities.getAgeInMonths(Utilities.oldFormatDateMethod(dob));
+				int age_in_days = (int)DateTimeUtilities.getCurrentAgeInDays(dob);
+				age_in_months = DateTimeUtilities.convertDaysToMonths(age_in_days);
 			} else {
 				age_in_months = -1;
 			}

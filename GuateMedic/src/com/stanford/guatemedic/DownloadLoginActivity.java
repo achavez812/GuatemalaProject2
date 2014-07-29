@@ -121,7 +121,7 @@ public class DownloadLoginActivity extends ActionBarActivity {
 			@Override
 			protected Void doInBackground(String... params) {
 				String json_body = params[0];
-				String response = Utilities.postRequest("https://guatemedic.herokuapp.com/login", null, json_body);
+				String response = HttpUtilities.postRequest("https://guatemedic.herokuapp.com/login", null, json_body);
 				if (response != null && !response.equals("-1")) {
 					try {
 						JSONObject json_response = new JSONObject(response);
@@ -129,7 +129,7 @@ public class DownloadLoginActivity extends ActionBarActivity {
 							auth_key = json_response.getString("auth_key");
 							Map<String, String> headerMap = new HashMap<String, String>();
 							headerMap.put("Authorization", auth_key);
-							String data = Utilities.getRequest("https://guatemedic.herokuapp.com/profiles", headerMap);
+							String data = HttpUtilities.getRequest("https://guatemedic.herokuapp.com/profiles", headerMap);
 							if (data == null) 
 								has_internet = false;
 							else if (data.equals("-1")) 

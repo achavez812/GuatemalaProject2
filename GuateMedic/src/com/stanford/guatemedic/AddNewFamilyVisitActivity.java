@@ -108,7 +108,7 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 		// set dialog message
 		alertDialogBuilder
 				.setMessage(
-						"Vas a perder este informaci√≥n si dejes este pagina.")
+						"Vas a perder este información si dejes este pagina.")
 				.setCancelable(false)
 				.setPositiveButton("Dejar Esta Pagina",
 						new DialogInterface.OnClickListener() {
@@ -220,15 +220,15 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 		}
 
 		public void onCreate(Bundle savedInstanceState) {
-			Utilities utilityObj = new Utilities();
-			utilityObj.loadNativeCSS();
+			//Utilities utilityObj = new Utilities();
+			//utilityObj.loadNativeCSS();
 			super.onCreate(savedInstanceState);
 		}
 
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			Utilities utilityObj = new Utilities();
-			utilityObj.loadNativeCSS();
+			//Utilities utilityObj = new Utilities();
+			//utilityObj.loadNativeCSS();
 			rootView = inflater.inflate(
 					R.layout.fragment_add_new_family_visit1, container, false);
 
@@ -318,7 +318,7 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 				String father_lives_with_string = father_lives_with.getText()
 						.toString();
 
-				if (father_lives_with_string.trim().equals("S√≠")) {
+				if (father_lives_with_string.trim().equals("Sí")) {
 					father_lives_with_put = 2;
 				} else if (father_lives_with_string.trim().equals("No")) {
 					father_lives_with_put = 1;
@@ -339,7 +339,7 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 						.findViewById(selectedId_IGSS);
 				String IGSS_family_string = IGSS_family.getText().toString();
 
-				if (IGSS_family_string.trim().equals("S√≠")) {
+				if (IGSS_family_string.trim().equals("Sí")) {
 					IGSS_family_put = 2;
 				} else if (IGSS_family_string.trim().equals("No")) {
 					IGSS_family_put = 1;
@@ -365,8 +365,8 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 		}
 
 		public void onCreate(Bundle savedInstanceState) {
-			Utilities utilityObj = new Utilities();
-			utilityObj.loadNativeCSS();
+		//	Utilities utilityObj = new Utilities();
+			//utilityObj.loadNativeCSS();
 			super.onCreate(savedInstanceState);
 		}
 
@@ -380,8 +380,8 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			Utilities utilityObj = new Utilities();
-			utilityObj.loadNativeCSS();
+		//	Utilities utilityObj = new Utilities();
+			//utilityObj.loadNativeCSS();
 			rootView = inflater.inflate(
 					R.layout.fragment_add_new_family_visit2, container, false);
 			final String family_id = getArguments().getString("family_id");

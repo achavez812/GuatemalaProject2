@@ -243,7 +243,7 @@ public class BasicRecordsStore {
 				obj.put("child_ids", json_array);
 				Map<String, String> headerMap = new HashMap<String, String>();
 				headerMap.put("Authorization", BasicRecordsStore.get().getAuthKey());
-				String response = Utilities.postRequest("https://guatemedic.herokuapp.com/records", headerMap, obj.toString());
+				String response = HttpUtilities.postRequest("https://guatemedic.herokuapp.com/records", headerMap, obj.toString());
 				if (response == null) {
 					success = false;
 				} else {

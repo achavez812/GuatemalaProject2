@@ -297,20 +297,20 @@ public class MainActivity extends ActionBarActivity {
 			if (gmr.hasDownloadedData()) {
 				if (gmr.isUploadNeeded()) {
 					upload_download_button.setText("ENVIAR");
-					notes.setText("Registros han sido creado. Por favor env√≠e cuando hay un conexi√≥n al Internet.");
+					notes.setText("Registros han sido creado. Por favor envíe cuando hay un conexión al Internet.");
 				} else {
 					upload_download_button.setText("DESCARGAR");
-					notes.setText("Hay registros descargados. Puedes descargar mas cuando hay un conexi√≥n al Internet.");
+					notes.setText("Hay registros descargados. Puedes descargar mas cuando hay un conexión al Internet.");
 				}
 			} else {
 				upload_download_button.setText("DESCARGAR");
-				notes.setText("No hay registros descargados. Puedes descargar cuando hay un conexi√≥n al Internet.");
+				notes.setText("No hay registros descargados. Puedes descargar cuando hay un conexión al Internet.");
 			}
 
 			upload_download_button.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					if (Utilities.hasInternetConnection(getActivity().getApplication())) {
+					if (HttpUtilities.hasInternetConnection(getActivity().getApplication())) {
 						if (upload_download_button.getText().equals("DESCARGAR")) {
 							Intent intent = new Intent(getActivity().getApplication(), DownloadLoginActivity.class);
 							startActivity(intent);
@@ -319,7 +319,7 @@ public class MainActivity extends ActionBarActivity {
 							startActivity(intent);
 						}
 					} else {
-						Toast.makeText(getActivity(), "NO CONEXI√ìN AL INTERNET", Toast.LENGTH_LONG).show();
+						Toast.makeText(getActivity(), "NO CONEXIÓN AL INTERNET", Toast.LENGTH_LONG).show();
 					}
 				}
 			});
