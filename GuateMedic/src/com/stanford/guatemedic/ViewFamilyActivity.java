@@ -79,9 +79,9 @@ public class ViewFamilyActivity extends ActionBarActivity{
 		if (!family.getParent1_dob().isEmpty() && !family.getParent1_dob().equals("0")) {
 			if (family.getParent1_dob().length() > 3) {
 				int mother_age = (int)DateTimeUtilities.getCurrentAgeInDays(family.getParent1_dob());
-				mother_dob_field.setText((int)DateTimeUtilities.convertDaysToYears(mother_age) + " a杘s");
+				mother_dob_field.setText((int)DateTimeUtilities.convertDaysToYears(mother_age) + " a贸os");
 			} else {
-				mother_dob_field.setText(family.getParent1_dob() + " a杘s");
+				mother_dob_field.setText(family.getParent1_dob() + " a贸os");
 			}
 		} else
 			mother_dob_field.setText("Edad desconocida");
@@ -96,9 +96,9 @@ public class ViewFamilyActivity extends ActionBarActivity{
 		if (!family.getParent2_dob().isEmpty() && !family.getParent2_dob().equals("0")) {
 			if (family.getParent2_dob().length() > 3) {
 				int father_age = (int)DateTimeUtilities.getCurrentAgeInDays(family.getParent2_dob());
-				father_dob_field.setText((int)DateTimeUtilities.convertDaysToYears(father_age) + " a杘s");
+				father_dob_field.setText((int)DateTimeUtilities.convertDaysToYears(father_age) + " a贸os");
 			} else {
-				father_dob_field.setText(family.getParent2_dob() + " a杘s");
+				father_dob_field.setText(family.getParent2_dob() + " a贸os");
 			}
 		} else
 			father_dob_field.setText("Edad desconocida");
@@ -134,7 +134,7 @@ public class ViewFamilyActivity extends ActionBarActivity{
 					
 				}
 			} else {
-				father_occupation_field.setText("Ocupaci梟 desconocido");
+				father_occupation_field.setText("Ocupaci贸n desconocido");
 			}
 			
 			TextView marital_status_field = (TextView)findViewById(R.id.view_family_marital_status);
@@ -154,9 +154,9 @@ public class ViewFamilyActivity extends ActionBarActivity{
 			TextView num_children_under_5_field = (TextView)findViewById(R.id.view_family_num_children_under_5);
 			int num_children_under_5 = visit.getNum_children_under_5();
 			if (num_children_under_5 >= 0) {
-				num_children_under_5_field.setText("Ni杘s menos 5: " + num_children_under_5);
+				num_children_under_5_field.setText("Ni帽os menos 5: " + num_children_under_5);
 			} else {
-				num_children_under_5_field.setText("Ni杘s menos 5: Desconocido");
+				num_children_under_5_field.setText("Ni帽os menos 5: Desconocido");
 			}
 			
 			TextView num_people_in_household_field = (TextView)findViewById(R.id.view_family_num_people_in_household);
@@ -174,13 +174,13 @@ public class ViewFamilyActivity extends ActionBarActivity{
 			father_lives_with_field.setText("Vive con familia desconocida");
 			
 			TextView father_occupation_field = (TextView)findViewById(R.id.view_family_parent2_occupation_field);
-			father_occupation_field.setText("Ocupaci梟 desconocido");
+			father_occupation_field.setText("Ocupaci贸n desconocido");
 			
 			TextView marital_status_field = (TextView)findViewById(R.id.view_family_marital_status);
 			marital_status_field.setText("Estado Civil: Desconocido" );
 
 			TextView num_children_under_5_field = (TextView)findViewById(R.id.view_family_num_children_under_5);
-			num_children_under_5_field.setText("Ni杘s menos 5: Desconocido");
+			num_children_under_5_field.setText("Ni帽os menos 5: Desconocido");
 
 			TextView num_people_in_household_field = (TextView)findViewById(R.id.view_family_num_people_in_household);
 			num_people_in_household_field.setText("Personas en Casa: Desconocido");
@@ -200,8 +200,8 @@ public class ViewFamilyActivity extends ActionBarActivity{
 	
 	@Override
 	public void onBackPressed() {
-		Intent i = new Intent(getApplication(), ViewFamilyListActivity.class);
-		i.putExtra("village_name", DetailedRecordsStore.get(getApplication()).getFamily(family_id).getVillage_name());
+		Intent i = new Intent(getApplication(), ViewProfilesActivity.class);
+		i.putExtra("community", DetailedRecordsStore.get(getApplication()).getFamily(family_id).getVillage_name());
 		startActivity(i);
 	}
 	

@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.ListFragment;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -66,7 +67,8 @@ public class DownloadCommunitiesActivity extends ActionBarActivity {
 	
 	@Override
 	public void onBackPressed() {
-		
+		Intent i = new Intent(getApplication(), HomePageActivity.class);
+		startActivity(i);
 		super.onBackPressed();
 	}
 	

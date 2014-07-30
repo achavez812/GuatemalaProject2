@@ -22,14 +22,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@+id/list_item_checkbox"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:paddingLeft="4dp"
         android:paddingRight="4dp" />
     
-
+    <TextView
+        android:id="@+id/list_item_subtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/list_item_title"
+        android:layout_toLeftOf="@+id/list_item_checkbox"
+        android:textSize="16sp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:paddingTop="4dp" />
         
 
 </RelativeLayout>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Guatemala Medic</string>
+    <string name="app_name">Tijax</string>
     <string name="villages_title">Villages</string>
     <string name="families_title">Families</string>
     <string name="children_title">Children</string>
@@ -132,16 +132,21 @@
 	    <item>November</item>
 	    <item>December</item>
 	</string-array>
+	
 	<string name="authorization_string">Autorización</string>
 	<string name="username_string">Nombre de Usuario</string>
 	<string name="password_string">Contraseña</string>
-	<string name="continue_button_text">SEGUIR"</string>
+	<string name="continue_button_text">Seguir"</string>
+	<string name="cancel_button_text">Cancelar</string>
 	
+	<!-- HomePageActivity -->
+	<string name="home_page_welcome1">Bienvenido Promotores de Salud</string>
+	<string name="home_page_welcome2">Rural San Lucas Toliman</string>
 	<string name="view_records_button_text">REGISTROS</string>
 	<string name="sync_records_button_text">SINCRONIZAR</string>
 	<string name="download_records_button_text">DESCARGAR</string>
 	
-	<string name="download_communities_header_text">Por favor selecta cuales comunidades quieres descargar. Estas comunidades van a sustituir a los actualmente descargados.</string>
+	<string name="download_communities_header_text">Por favor selecta cuales comunidades quieres descargar.</string>
 	<string name="search_string">Buscar</string>
 	
 	

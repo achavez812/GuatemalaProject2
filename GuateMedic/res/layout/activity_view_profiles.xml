@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <LinearLayout
+        android:id="@+id/view_profiles_tab_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#FF000000"
+        android:gravity="center_horizontal" >
+
+	    <TextView 
+	        android:id="@+id/view_profiles_all_tab"
+	        android:layout_width="200dp"
+	        android:layout_height="80dp"
+	        android:layout_weight="1"
+	        android:gravity="center"
+	        android:background="#FFAA11AA"
+	        android:layout_marginRight="1dp"
+	        android:textStyle="bold"
+	        android:textSize="30sp"
+	        android:text="All" />
+	    
+	    <TextView
+	        android:id="@+id/view_profiles_in_progress_tab"
+	        android:layout_width="200dp"
+	        android:layout_height="80dp"
+	        android:layout_weight="1"
+	        android:gravity="center"
+	        android:background="#FFAA11AA"
+	        android:layout_marginLeft="1dp"
+	        android:textStyle="bold"
+	        android:textSize="30sp"
+	        android:text="In Progress" />
+         
+    </LinearLayout>
+    
+    
+    <LinearLayout 
+        android:id="@+id/view_profiles_all_filter"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone" >
+        
+        
+    </LinearLayout>
+    
+    <EditText 
+        android:id="@+id/view_profiles_search"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:hint="Search" />
+    
+    <FrameLayout 
+        android:id="@+id/container"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" />
+    
+
+</LinearLayout>

@@ -18,7 +18,7 @@ public class MainActivity extends ActionBarActivity {
 		
 		
 		//Figure this out later
-		Intent i = new Intent(getApplication(), MainAuthorizationActivity.class);
+		Intent i = new Intent(getApplication(), ViewAuthorizationActivity.class);
 		startActivity(i);
 		
 		getActionBar().setHomeButtonEnabled(true);

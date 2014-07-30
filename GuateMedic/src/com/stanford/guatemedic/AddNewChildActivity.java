@@ -62,7 +62,7 @@ public class AddNewChildActivity extends ActionBarActivity {
  
 			// set dialog message
 		alertDialogBuilder
-			.setMessage("Vas a perder este información si dejes este pagina.")
+			.setMessage("Vas a perder este informaci√≥n si dejes este pagina.")
 			.setCancelable(false)
 			.setPositiveButton("Dejar Esta Pagina",new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog,int id) {
@@ -291,7 +291,7 @@ public class AddNewChildActivity extends ActionBarActivity {
 					if (selectedId != -1) {
 						RadioButton gender_field = (RadioButton)rootView.findViewById(selectedId);
 						String gender_string = gender_field.getText().toString().trim();
-						if (gender_string.equals("Niño")) gender = 1;
+						if (gender_string.equals("Ni√±o")) gender = 1;
 						else if (gender_string.equals("√ëina")) gender = 2;
 					}
 
@@ -315,7 +315,7 @@ public class AddNewChildActivity extends ActionBarActivity {
 					Spinner prenatal_care_field = (Spinner) rootView.findViewById(R.id.add_new_child_prenatal_care);
 					String received_prenatal_care_string = prenatal_care_field.getSelectedItem().toString();
 					int received_prenatal_care = 0;
-					if (received_prenatal_care_string.equals("Sí")) received_prenatal_care = 2;
+					if (received_prenatal_care_string.equals("S√≥")) received_prenatal_care = 2;
 					else if (received_prenatal_care_string.equals("No")) received_prenatal_care = 1;
 
 					EditText birth_weight_field = (EditText) rootView.findViewById(R.id.add_new_child_birth_weight);

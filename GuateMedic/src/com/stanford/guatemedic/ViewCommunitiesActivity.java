@@ -3,6 +3,7 @@ package com.stanford.guatemedic;
 import java.util.ArrayList;
 
 import android.app.ListFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
@@ -46,7 +47,8 @@ public class ViewCommunitiesActivity extends ActionBarActivity {
 	
 	@Override
 	public void onBackPressed() {
-		
+		Intent i = new Intent(getApplication(), HomePageActivity.class);
+		startActivity(i);
 		super.onBackPressed();
 	}
 	
@@ -101,6 +103,10 @@ public class ViewCommunitiesActivity extends ActionBarActivity {
 		@Override
 		public void onListItemClick(ListView l, View v, int position, long id) {
 			//Start new activity
+			DetailedVillage community = communities.get(position);
+			Intent i = new Intent(getActivity(), ViewProfilesActivity.class);
+			i.putExtra("community", community.getName());
+			startActivity(i);
 		}
 		
 		private class CommunityAdapter extends ArrayAdapter<DetailedVillage> {

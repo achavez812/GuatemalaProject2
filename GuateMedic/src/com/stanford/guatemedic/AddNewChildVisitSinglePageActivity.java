@@ -48,7 +48,7 @@ public class AddNewChildVisitSinglePageActivity extends ActionBarActivity {
  
 			// set dialog message
 		alertDialogBuilder
-			.setMessage("Vas a perder este información si dejes este pagina.")
+			.setMessage("Vas a perder este informaci√≥n si dejes este pagina.")
 			.setCancelable(false)
 			.setPositiveButton("Dejar Esta Pagina",new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog,int id) {
@@ -121,7 +121,7 @@ public class AddNewChildVisitSinglePageActivity extends ActionBarActivity {
 			 * String child_name = child.getName(); TextView child_name_field =
 			 * (TextView)rootView.findViewById(R.id.
 			 * single_child_visit_child_name_textview);
-			 * child_name_field.setText("Nombre del Niño: " + child_name);
+			 * child_name_field.setText("Nombre del Ni√±o: " + child_name);
 			 */
 			
 			if(createFirstTime1==1){
@@ -195,7 +195,7 @@ public class AddNewChildVisitSinglePageActivity extends ActionBarActivity {
 
 			double child_age = GeneralUtilities.round(DateTimeUtilities.convertDaysToMonths((int)DateTimeUtilities.getCurrentAgeInDays(child.getDob())), 1);
 			TextView child_age_field = (TextView) rootView.findViewById(R.id.single_child_visit_child_age_textview);
-			child_age_field.setText("Edad del Niño: " + child_age + " meses");
+			child_age_field.setText("Edad del Ni√±o: " + child_age + " meses");
 			
 			Button button = (Button)rootView.findViewById(R.id.single_child_visit_submit_button);
 			button.setOnClickListener(new View.OnClickListener() {
