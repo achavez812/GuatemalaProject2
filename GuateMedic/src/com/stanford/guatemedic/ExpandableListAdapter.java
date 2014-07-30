@@ -49,12 +49,11 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
 			form_button.setVisibility(View.GONE);
 			child_title.setText(child_id);
 			
-			layout.setOnTouchListener(new View.OnTouchListener() {
+			layout.setOnClickListener(new View.OnClickListener() {
 				
 				@Override
-				public boolean onTouch(View arg0, MotionEvent arg1) {
+				public void onClick(View arg0) {
 					Toast.makeText(context, child_id, Toast.LENGTH_LONG).show();
-					return false;
 				}
 			});
 		} else {
@@ -62,14 +61,13 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
 			DetailedChild child = DetailedRecordsStore.get(context).getChild(child_id);
 			child_title.setText(child.getName());
 			
-			layout.setOnTouchListener(new View.OnTouchListener() {
+			layout.setOnClickListener(new View.OnClickListener() {
 				
 				@Override
-				public boolean onTouch(View arg0, MotionEvent arg1) {
+				public void onClick(View arg0) {
 					Intent i = new Intent(context, GraphActivity.class);
 					i.putExtra("child_id", child_id);
 					context.startActivity(i);
-					return false;
 				}
 			});
 			
