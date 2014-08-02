@@ -81,7 +81,6 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 					obj.put("how_children_died",
 							AddNewFamilyVisitFragment2.children_death_information_put);
 					// Log.d("Working","WorkingTag"+AddNewFamilyVisitFragment2.children_death_information_put);
-					Log.i("WTF", "CHECK");
 					DetailedRecordsStore.get(getApplication())
 							.addNewFamilyVisit(obj);
 
@@ -187,7 +186,6 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 	 * AddNewFamilyVisitFragment2.children_death_information_put); //
 	 * Log.d("Working"
 	 * ,"WorkingTag"+AddNewFamilyVisitFragment2.children_death_information_put);
-	 * Log.i("WTF", "CHECK");
 	 * DetailedRecordsStore.get(getApplication()).addNewFamilyVisit( obj);
 	 * 
 	 * Intent i = new Intent(getApplication(), ViewFamilyActivity.class);
@@ -250,15 +248,15 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 			// EditText father_lives_with_field =
 			// (EditText)rootView.findViewById(R.id.family_visit1_father_lives_with);
 
-			Spinner fathers_job_field = (Spinner) rootView
-					.findViewById(R.id.family_visit1_fathers_job);
-			ArrayAdapter<String> adapter_father_job = new ArrayAdapter<String>(
-					getActivity(), R.layout.spinner_item, getResources()
-							.getStringArray(R.array.fathers_job));
-			adapter_father_job
-					.setDropDownViewResource(R.layout.spinner_dropdown_item);
-			fathers_job_field.setAdapter(adapter_father_job);
-			fathers_job_field.setSelection(adapter_father_job.getCount() - 1);
+//			Spinner fathers_job_field = (Spinner) rootView
+//					.findViewById(R.id.family_visit1_fathers_job);
+//			ArrayAdapter<String> adapter_father_job = new ArrayAdapter<String>(
+//					getActivity(), R.layout.spinner_item, getResources()
+//							.getStringArray(R.array.fathers_job));
+//			adapter_father_job
+//					.setDropDownViewResource(R.layout.spinner_dropdown_item);
+//			fathers_job_field.setAdapter(adapter_father_job);
+//			fathers_job_field.setSelection(adapter_father_job.getCount() - 1);
 
 			// EditText igss_field =
 			// (EditText)rootView.findViewById(R.id.family_visit1_igss);

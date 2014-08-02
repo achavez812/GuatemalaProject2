@@ -86,11 +86,12 @@
          <item>No</item>
          <item>¿Tenia la Madre Control Prenatal?</item>
      </string-array>   
-          <string-array name="same_pregernating_array">
-         <item>Solo Uno</item>
-         <item>Gemelos</item>
-         <item>Trillizos</item>
-        <item>¿Cuántos Niños en este Parto?</item>
+          <string-array name="type_of_pregnancy_array">
+         <item>Solo Uno y Normal</item>
+         <item>Solo Uno y Cesaria</item>
+         <item>Gemelos y Normal</item>
+         <item>Gemelos y Cesaria</item>
+        <item>Toca Para Escoger</item>
      </string-array>
     <string-array name="child_visit_array">
         <item>Categoría 1</item>
@@ -108,15 +109,15 @@
 	    <item>Unida</item>
 	    <item>Soltera</item>
 	    <item>Viuda</item>
-	    <item>Estado Civil</item>
+	    <item>Toca Para Escoger</item>
 	</string-array>
-	<string-array name="fathers_job">
+	<string-array name="father_job_array">
 	    <item>Fijo</item>
 	    <item>Comerciante</item>
 	    <item>Agricultor (Propio)</item>
 	    <item>Agricultor (Ajeno)</item>
 	    <item>Otro</item>
-	    <item>Ocupación del Padre</item>
+	    <item>Toca Para Escoger</item>
 	</string-array>
 	<string-array name="month_options">
 	    <item>January</item>

@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="#FF000000"
+        android:paddingBottom="2dp"
         android:gravity="center_horizontal" >
 
 	    <TextView 
@@ -18,11 +19,11 @@
 	        android:layout_height="80dp"
 	        android:layout_weight="1"
 	        android:gravity="center"
-	        android:background="#FFAA11AA"
+	        android:background="#FF999999"
 	        android:layout_marginRight="1dp"
 	        android:textStyle="bold"
 	        android:textSize="30sp"
-	        android:text="All" />
+	        android:text="Todos" />
 	    
 	    <TextView
 	        android:id="@+id/view_profiles_in_progress_tab"
@@ -30,11 +31,12 @@
 	        android:layout_height="80dp"
 	        android:layout_weight="1"
 	        android:gravity="center"
-	        android:background="#FFAA11AA"
+	        android:background="#FFD9D9D9"
+	        android:textColor="#FFA19F91"
 	        android:layout_marginLeft="1dp"
 	        android:textStyle="bold"
 	        android:textSize="30sp"
-	        android:text="In Progress" />
+	        android:text="En Curso" />
          
     </LinearLayout>
     
@@ -53,8 +55,11 @@
         android:id="@+id/view_profiles_search"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:textSize="24sp"
-        android:hint="Search" />
+        android:focusable="false"
+        android:hint="Buscar" />
     
     <FrameLayout 
         android:id="@+id/container"

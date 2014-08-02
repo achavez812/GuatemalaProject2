@@ -9,23 +9,24 @@ import org.json.JSONObject;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.TypedValue;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
-import android.view.inputmethod.InputMethodManager;
+import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 
 public class HomePageActivity extends ActionBarActivity {
 	@Override
@@ -110,9 +111,28 @@ public class HomePageActivity extends ActionBarActivity {
 							login.setCanceledOnTouchOutside(false);
 				            login.setContentView(R.layout.login_dialog);
 				            login.setTitle("Autorización");
-				            Button login_button = (Button)login.findViewById(R.id.login_dialog_submit_button);
-				            Button cancel_button = (Button)login.findViewById(R.id.login_dialog_cancel_button);
-
+				            final Button login_button = (Button)login.findViewById(R.id.login_dialog_submit_button);
+				            final Button cancel_button = (Button)login.findViewById(R.id.login_dialog_cancel_button);
+				            EditText editText = (EditText)login.findViewById(R.id.login_dialog_username);
+				            EditText password_edittext = (EditText)login.findViewById(R.id.login_dialog_password);
+				            password_edittext.setOnEditorActionListener(new OnEditorActionListener() {
+				                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+				                    if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
+				                    	login_button.setSoundEffectsEnabled(false);
+				                    	login_button.performClick();
+				                    }    
+				                    return false;
+				                }
+				            });
+				            editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+				                @Override
+				                public void onFocusChange(View v, boolean hasFocus) {
+				                    if (hasFocus) {
+				                        login.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+				                    }
+				                }
+				            });
+				            editText.requestFocus();
 				            login_button.setOnClickListener(new View.OnClickListener() {
 								
 								@Override
@@ -161,9 +181,28 @@ public class HomePageActivity extends ActionBarActivity {
 							login.setCanceledOnTouchOutside(false);
 				            login.setContentView(R.layout.login_dialog);
 				            login.setTitle("Autorización");
-				            Button login_button = (Button)login.findViewById(R.id.login_dialog_submit_button);
-				            Button cancel_button = (Button)login.findViewById(R.id.login_dialog_cancel_button);
-				            
+				            final Button login_button = (Button)login.findViewById(R.id.login_dialog_submit_button);
+				            final Button cancel_button = (Button)login.findViewById(R.id.login_dialog_cancel_button);
+				            EditText editText = (EditText)login.findViewById(R.id.login_dialog_username);
+				            EditText password_edittext = (EditText)login.findViewById(R.id.login_dialog_password);
+				            password_edittext.setOnEditorActionListener(new OnEditorActionListener() {
+				                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+				                    if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
+				                    	login_button.setSoundEffectsEnabled(false);
+				                    	login_button.performClick();
+				                    }    
+				                    return false;
+				                }
+				            });
+				            editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+				                @Override
+				                public void onFocusChange(View v, boolean hasFocus) {
+				                    if (hasFocus) {
+				                        login.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+				                    }
+				                }
+				            });
+				            editText.requestFocus();
 				            login_button.setOnClickListener(new View.OnClickListener() {
 								
 								@Override
@@ -211,9 +250,28 @@ public class HomePageActivity extends ActionBarActivity {
 							login.setCanceledOnTouchOutside(false);
 				            login.setContentView(R.layout.login_dialog);
 				            login.setTitle("Autorización");
-				            Button login_button = (Button)login.findViewById(R.id.login_dialog_submit_button);
-				            Button cancel_button = (Button)login.findViewById(R.id.login_dialog_cancel_button);
-				            
+				            final Button login_button = (Button)login.findViewById(R.id.login_dialog_submit_button);
+				            final Button cancel_button = (Button)login.findViewById(R.id.login_dialog_cancel_button);
+				            EditText editText = (EditText)login.findViewById(R.id.login_dialog_username);
+				            EditText password_edittext = (EditText)login.findViewById(R.id.login_dialog_password);
+				            password_edittext.setOnEditorActionListener(new OnEditorActionListener() {
+				                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+				                    if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
+				                    	login_button.setSoundEffectsEnabled(false);
+				                    	login_button.performClick();
+				                    }    
+				                    return false;
+				                }
+				            });
+				            editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+				                @Override
+				                public void onFocusChange(View v, boolean hasFocus) {
+				                    if (hasFocus) {
+				                        login.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+				                    }
+				                }
+				            });
+				            editText.requestFocus();
 				            login_button.setOnClickListener(new View.OnClickListener() {
 								
 								@Override

@@ -249,20 +249,20 @@ public class AddNewChildActivity extends ActionBarActivity {
 			adaptert_of_b.setDropDownViewResource(R.layout.spinner_dropdown_item);
 			type_of_birth_field.setAdapter(adaptert_of_b);
 			type_of_birth_field.setSelection(adaptert_of_b.getCount()-1);
-
-			// Prenatal Care
-			Spinner prenatal_care_field = (Spinner) rootView.findViewById(R.id.add_new_child_prenatal_care);
-			ArrayAdapter<String> adapter_prenatal = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, getResources().getStringArray(R.array.prenatal_array));
-			adapter_prenatal.setDropDownViewResource(R.layout.spinner_dropdown_item);
-			prenatal_care_field.setAdapter(adapter_prenatal);
-			prenatal_care_field.setSelection(adapter_prenatal.getCount()-1);
-
-			// In Same pregnancy
-			Spinner num_children_in_same_pregrancy_field = (Spinner) rootView.findViewById(R.id.add_new_child_num_children_in_same_pregnancy);
-			ArrayAdapter<String> adapter_preg = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item,getResources().getStringArray(R.array.same_pregernating_array));
-			adapter_preg.setDropDownViewResource(R.layout.spinner_dropdown_item);
-			num_children_in_same_pregrancy_field.setAdapter(adapter_preg);
-			num_children_in_same_pregrancy_field.setSelection(adapter_preg.getCount()-1);
+//
+//			// Prenatal Care
+//			Spinner prenatal_care_field = (Spinner) rootView.findViewById(R.id.add_new_child_prenatal_care);
+//			ArrayAdapter<String> adapter_prenatal = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, getResources().getStringArray(R.array.prenatal_array));
+//			adapter_prenatal.setDropDownViewResource(R.layout.spinner_dropdown_item);
+//			prenatal_care_field.setAdapter(adapter_prenatal);
+//			prenatal_care_field.setSelection(adapter_prenatal.getCount()-1);
+//
+//			// In Same pregnancy
+//			Spinner num_children_in_same_pregrancy_field = (Spinner) rootView.findViewById(R.id.add_new_child_num_children_in_same_pregnancy);
+//			ArrayAdapter<String> adapter_preg = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item,getResources().getStringArray(R.array.same_pregernating_array));
+//			adapter_preg.setDropDownViewResource(R.layout.spinner_dropdown_item);
+//			num_children_in_same_pregrancy_field.setAdapter(adapter_preg);
+//			num_children_in_same_pregrancy_field.setSelection(adapter_preg.getCount()-1);
 
 			// On Click add
 			Button button = (Button) rootView.findViewById(R.id.add_new_child_button);

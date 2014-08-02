@@ -5,8 +5,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import org.json.JSONArray;
@@ -15,7 +17,6 @@ import org.json.JSONObject;
 
 import android.content.Context;
 import android.os.Environment;
-import android.util.Log;
 
 
 public class DetailedRecordsStore {
@@ -27,6 +28,8 @@ public class DetailedRecordsStore {
 	private Map<String, ArrayList<DetailedFamily>> families;
 	private Map<String, ArrayList<DetailedChild>> children;
 	
+	private Map<String, Set<String>> children_in_progress;
+	
 	private Context context;
 	
 	private GuatemedicFileReader gfr;
@@ -37,6 +40,8 @@ public class DetailedRecordsStore {
 		villages = new ArrayList<DetailedVillage>();
 		families = new HashMap<String, ArrayList<DetailedFamily>>();
 		children = new HashMap<String, ArrayList<DetailedChild>>();
+		children_in_progress = new HashMap<String, Set<String>>();
+		
 		gfr = new GuatemedicFileReader(c);
 		processDownloadedFiles();
 		processNewFiles();
@@ -123,6 +128,18 @@ public class DetailedRecordsStore {
 		return UUID.randomUUID().toString();
 	}
 	
+	public Set<String> getChildrenInProgress(String village) {
+		return children_in_progress.get(village);
+	}
+	
+	public DetailedFamily startNewFamily(String village) {
+		String random_id = generateRandomId();
+		DetailedFamily df = new DetailedFamily(village, random_id);
+		families.get(village).add(df);
+		children.put(random_id, new ArrayList<DetailedChild>());
+		return df;
+	}
+	
 	//Creates a temporary id for family
 	//Writes it to local storage
 	//Adds it to DetailedRecordsStore
@@ -143,8 +160,7 @@ public class DetailedRecordsStore {
 			obj.put("promoter_id", "NULL"); //Figure this out
 			
 			GuatemedicFileWriter gw = new GuatemedicFileWriter(context);
-			if (gw.saveNewFamily(obj.toString()))
-				Log.i("WTF", "Family save successful");
+			if (gw.saveNewFamily(obj.toString())){}
 			
 			parseFamily(obj);
 			return random_id;
@@ -152,6 +168,14 @@ public class DetailedRecordsStore {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public DetailedChild startNewChild(String village, String family_id) {
+		String random_id = generateRandomId();
+		DetailedChild dc = new DetailedChild(family_id, random_id);
+		children.get(family_id).add(dc);
+		children_in_progress.get(village).add(random_id);
+		return dc;
 	}
 	
 	public String addNewChild(JSONObject obj) {
@@ -171,8 +195,7 @@ public class DetailedRecordsStore {
 			obj.put("promoter_id", "NULL"); //Figure this out
 			
 			GuatemedicFileWriter gw = new GuatemedicFileWriter(context);
-			if (gw.saveNewChild(obj.toString()))
-				Log.i("WTF", "Child save successful");
+			if (gw.saveNewChild(obj.toString())){}
 			
 			parseChild(family_id, obj);		
 			return random_id;
@@ -180,6 +203,14 @@ public class DetailedRecordsStore {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public DetailedChildVisit startNewChildVisit(String village, String child_id) {
+		DetailedChildVisit dcv = new DetailedChildVisit(child_id);
+		dcv.setVisit_date(DateTimeUtilities.getCurrentDateTimeString());
+		getChild(child_id).addChild_visit(dcv);
+		children_in_progress.get(village).add(child_id);
+		return dcv;
 	}
 	
 	public void addNewChildVisit(JSONObject obj) {
@@ -196,13 +227,20 @@ public class DetailedRecordsStore {
 			obj.put("promoter_id", "NULL"); //Figure this out
 			
 			GuatemedicFileWriter gw = new GuatemedicFileWriter(context);
-			if (gw.saveNewChildVisit(obj.toString()))
-				Log.i("WTF", "Child Visit save successful");
+			if (gw.saveNewChildVisit(obj.toString())){}
+				
 			parseChildVisit(dcv, obj);
 			getChild(child_id).addChild_visit(dcv);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public DetailedFamilyVisit startNewFamilyVisit(String family_id) {
+		DetailedFamilyVisit dfv = new DetailedFamilyVisit(family_id);
+		dfv.setVisit_date(DateTimeUtilities.getCurrentDateTimeString());
+		getFamily(family_id).addFamily_visit(dfv);
+		return dfv;
 	}
 	
 	public void addNewFamilyVisit(JSONObject obj) {
@@ -219,8 +257,8 @@ public class DetailedRecordsStore {
 			obj.put("promoter_id", "NULL");
 			
 			GuatemedicFileWriter gw = new GuatemedicFileWriter(context);
-			if (gw.saveNewFamilyVisit(obj.toString()))
-				Log.i("WTF", "Family Visit save successful");
+			if (gw.saveNewFamilyVisit(obj.toString())){}
+			
 			parseFamilyVisit(dfv, obj);
 			getFamily(family_id).addFamily_visit(dfv);
 		} catch (JSONException e) {
@@ -468,6 +506,7 @@ public class DetailedRecordsStore {
 		}
 		villages.add(new DetailedVillage(village_name));
 		families.put(village_name, new ArrayList<DetailedFamily>());
+		children_in_progress.put(village_name, new HashSet<String>());
 	}
 	
 	private void processFamily(JSONObject record) {
@@ -544,7 +583,6 @@ public class DetailedRecordsStore {
 	private void processNewFamilyFiles() {
 		ArrayList<File> files = gfr.getNewFamilyFiles();
 		for (File f : files) {
-			Log.i("WTF", "	Process a file");
 			String data = gfr.getStringData(f);
 			try {
 				JSONObject obj = new JSONObject(data);

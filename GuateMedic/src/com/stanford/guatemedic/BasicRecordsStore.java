@@ -173,7 +173,6 @@ public class BasicRecordsStore {
 				}
 				JSONObject obj = new JSONObject();
 				obj.put("child_ids", arr);
-				Log.i("WTF", obj.toString());
 				String response = HttpUtilities.postRequest("https://guatemedic.herokuapp.com/records", headerMap, obj.toString());
 				if (response == null) {
 					success = false;

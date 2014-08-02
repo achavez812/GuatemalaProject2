@@ -1,0 +1,1105 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginLeft="10dp"
+		android:layout_marginRight="10dp"
+		android:paddingBottom="20dp"
+	    android:orientation="vertical" >
+	    
+	    <!-- First thing is name and weight and height -->
+	    <LinearLayout
+	        android:id="@+id/general_form_basic_child_layout"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical" >
+	        
+	        <LinearLayout
+		   	    android:layout_width="match_parent"
+		   	    android:layout_height="wrap_content"
+		   	    android:layout_marginTop="5dp"
+		   	    android:orientation="horizontal" >
+		   	    
+		   	    <TextView
+		   	        android:layout_width="wrap_content"
+		   	        android:layout_height="wrap_content"
+		   	       	android:textSize="24sp"
+		   	        android:text="Nombre del Niño: "/>
+		   	    
+		   	    <EditText
+		   	        android:id="@+id/general_form_child_name_edittext"
+		   	        android:layout_width="0dp"
+		   	        android:layout_weight="1"
+		   	        android:layout_height="wrap_content"
+		   	        android:textSize="24sp" />
+		   	    
+		   	    <TextView
+		   	        android:id="@+id/general_form_child_name_textview"
+		   	        android:layout_width="wrap_content"
+		   	        android:layout_height="wrap_content"
+		   	       	android:textSize="24sp"
+		   	       	android:layout_marginLeft="5dp"
+		   	      	android:visibility="gone" />
+		   	    
+		   	</LinearLayout>
+		   	
+	        <LinearLayout
+		   	    android:layout_width="match_parent"
+		   	    android:layout_height="wrap_content"
+		   	    android:layout_marginTop="5dp"
+		   	    android:orientation="horizontal" >
+		   	    
+		   	    <TextView
+		   	        android:layout_width="wrap_content"
+		   	        android:layout_height="wrap_content"
+		   	       	android:textSize="24sp"
+		   	        android:text="Peso (libras): "/>
+		   	    
+		   	    <EditText
+		   	        android:id="@+id/general_form_weight_edittext"
+		   	        android:layout_width="130dp"
+		   	        android:layout_height="wrap_content"
+		   	        android:textSize="24sp"
+		   	        android:inputType="numberDecimal"
+		   	        android:ellipsize="start" />
+		   	    
+		   	    <TextView
+		   	        android:layout_width="wrap_content"
+		   	        android:layout_height="wrap_content"
+		   	        android:layout_marginLeft="30dp"
+		   	       	android:textSize="24sp"
+		   	        android:text="Talla (cm): "/>
+		   	    
+		   	    <EditText
+		   	        android:id="@+id/general_form_height_edittext"
+		   	        android:layout_width="130dp"
+		   	        android:layout_height="wrap_content"
+		   	        android:textSize="24sp"
+		   	        android:inputType="numberDecimal"
+		   	        android:ellipsize="start" />
+		   	    
+		   	</LinearLayout>
+	        
+	    </LinearLayout>
+	    
+	    <!-- Next is family information
+	    	This is basic fixed family information as well as the family visit information
+	    	This only shows up when a new family is created
+	     -->
+	    <LinearLayout
+	        android:id="@+id/general_form_family_layout"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="5dp"
+	        android:orientation="vertical" >
+	        
+	        <TextView
+	            android:id="@+id/general_form_family_layout_header"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:gravity="center_horizontal"
+	            android:layout_marginTop="5dp"
+	            android:layout_marginBottom="5dp"
+	            android:textSize="30dp"
+	            android:textStyle="bold"
+	            android:text="Información de la Familia" />
+	        
+	        <LinearLayout
+		   	    android:layout_width="match_parent"
+		   	    android:layout_height="wrap_content"
+		   	    android:layout_marginTop="5dp"
+		   	    android:orientation="horizontal" >
+		   	    
+		   	    <TextView
+		   	        android:layout_width="wrap_content"
+		   	        android:layout_height="wrap_content"
+		   	       	android:textSize="24sp"
+		   	        android:text="Nombre de la Madre: "/>
+		   	    
+		   	    <EditText
+		   	        android:id="@+id/general_form_parent1_name_edittext"
+		   	        android:layout_width="0dp"
+		   	        android:layout_weight="1"
+		   	        android:layout_height="wrap_content"
+		   	        android:textSize="24sp" />
+		   	    
+		   	</LinearLayout>
+		   	
+	        <LinearLayout
+		   	    android:layout_width="match_parent"
+		   	    android:layout_height="wrap_content"
+		   	    android:layout_marginTop="5dp"
+		   	    android:orientation="horizontal" >
+		   	    
+		   	    <TextView
+		   	        android:layout_width="wrap_content"
+		   	        android:layout_height="wrap_content"
+		   	       	android:textSize="24sp"
+		   	        android:text="Edad de la Madre (años): "/>
+		   	    
+		   	    <EditText
+		   	        android:id="@+id/general_form_parent1_age_edittext"
+		   	        android:layout_width="130dp"
+		   	        android:layout_height="wrap_content"
+		   	        android:inputType="number"
+		   	        android:ellipsize="start"
+		   	        android:textSize="24sp" />
+		   	    
+		   	</LinearLayout>
+		   	
+	        <LinearLayout
+		   	    android:layout_width="match_parent"
+		   	    android:layout_height="wrap_content"
+		   	    android:layout_marginTop="5dp"
+		   	    android:orientation="horizontal" >
+		   	    
+		   	    <TextView
+		   	        android:layout_width="wrap_content"
+		   	        android:layout_height="wrap_content"
+		   	       	android:textSize="24sp"
+		   	        android:text="Nombre del Padre: "/>
+		   	    
+		   	    <EditText
+		   	        android:id="@+id/general_form_parent2_name_edittext"
+		   	        android:layout_width="0dp"
+		   	        android:layout_weight="1"
+		   	        android:layout_height="wrap_content"
+		   	        android:textSize="24sp" />
+		   	    
+		   	</LinearLayout>
+		   	
+	        <LinearLayout
+		   	    android:layout_width="match_parent"
+		   	    android:layout_height="wrap_content"
+		   	    android:layout_marginTop="5dp"
+		   	    android:orientation="horizontal" >
+		   	    
+		   	    <TextView
+		   	        android:layout_width="wrap_content"
+		   	        android:layout_height="wrap_content"
+		   	       	android:textSize="24sp"
+		   	        android:text="Edad del Padre (años): "/>
+		   	    
+		   	    <EditText
+		   	        android:id="@+id/general_form_parent2_age_edittext"
+		   	        android:layout_width="130dp"
+		   	        android:layout_height="wrap_content"
+		   	        android:inputType="number"
+		   	        android:ellipsize="start"
+		   	        android:textSize="24sp" />
+		   	    
+		   	</LinearLayout>
+		   	
+	        <LinearLayout
+		   	    android:layout_width="match_parent"
+		   	    android:layout_height="wrap_content"
+		   	    android:layout_marginTop="5dp"
+		   	    android:orientation="horizontal" >
+		   	    
+		   	    <TextView
+		   	        android:layout_width="wrap_content"
+		   	        android:layout_height="wrap_content"
+		   	       	android:textSize="24sp"
+		   	        android:text="Estado Civil: "/>
+		   	    
+		   	    <Spinner
+		   	        android:id="@+id/general_form_parent1_marital_status_spinner"
+		   	        android:layout_width="wrap_content"
+		   	        android:layout_height="wrap_content" />
+		   	    
+		   	</LinearLayout>
+		   		
+	     	<LinearLayout
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="10dp"
+		        android:orientation="horizontal" >
+		   	    
+	     	    <TextView 
+		         	android:layout_width="wrap_content"
+		         	android:layout_height="wrap_content"
+		         	android:layout_marginRight="10dp"
+		         	android:textSize="24sp"
+		         	android:text="¿Vive el Padre con la Familia?"/>
+	
+		    	<RadioGroup 
+		    	    android:id="@+id/general_form_father_lives_with_radiogroup"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:orientation="horizontal">
+				    
+				    <RadioButton android:id="@+id/yes_father_lives_with"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_marginRight="15dp"
+				        android:textSize="24sp"
+				        android:text="Sí"/>
+				    
+				    <RadioButton android:id="@+id/no_father_lives_with"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:textSize="24sp"
+				        android:text="No"/>
+				    
+				</RadioGroup>
+				
+			</LinearLayout>
+			
+	     	<LinearLayout
+		   	    android:layout_width="match_parent"
+		   	    android:layout_height="wrap_content"
+		   	    android:layout_marginTop="5dp"
+		   	    android:orientation="horizontal" >
+		   	    
+		   	    <TextView
+		   	        android:layout_width="wrap_content"
+		   	        android:layout_height="wrap_content"
+		   	       	android:textSize="24sp"
+		   	        android:text="Ocupación del Padre: "/>
+		   	    
+		   	    <Spinner
+		   	        android:id="@+id/general_form_father_job_spinner"
+		   	        android:layout_width="wrap_content"
+		   	        android:layout_height="wrap_content" />
+		   	    
+		   	</LinearLayout>
+		   	
+	     	<LinearLayout
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="10dp"
+		        android:orientation="horizontal" >
+		   	    
+	     	    <TextView 
+		         	android:layout_width="wrap_content"
+		         	android:layout_height="wrap_content"
+		         	android:layout_marginRight="10dp"
+		         	android:textSize="24sp"
+		         	android:text="¿Tiene la Familia un IGSS?"/>
+	
+		    	<RadioGroup 
+		    	    android:id="@+id/general_form_igss_radiogroup"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:orientation="horizontal">
+				    
+				    <RadioButton android:id="@+id/yes_igss"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_marginRight="15dp"
+				        android:textSize="24sp"
+				        android:text="Sí"/>
+				    
+				    <RadioButton android:id="@+id/no_igss"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:textSize="24sp"
+				        android:text="No"/>
+				    
+				</RadioGroup>
+				
+			</LinearLayout>
+			
+	     	<LinearLayout
+		   	    android:layout_width="match_parent"
+		   	    android:layout_height="wrap_content"
+		   	    android:layout_marginTop="5dp"
+		   	    android:orientation="horizontal" >
+		   	    
+		   	    <TextView
+		   	        android:layout_width="wrap_content"
+		   	        android:layout_height="wrap_content"
+		   	       	android:textSize="24sp"
+		   	        android:text="¿Cuántos Partos ha Tenido la Madre?"/>
+		   	    
+		   	    <EditText
+		   	        android:id="@+id/general_form_mother_num_pregnancies"
+		   	        android:layout_width="130dp"
+		   	        android:layout_height="wrap_content"
+		   	        android:inputType="number"
+		   	        android:ellipsize="start"
+		   	        android:textSize="24sp" />
+		   	    
+		   	</LinearLayout>
+		   	
+	     	<LinearLayout
+		   	    android:layout_width="match_parent"
+		   	    android:layout_height="wrap_content"
+		   	    android:orientation="horizontal" >
+		   	    
+		   	    <TextView
+		   	        android:layout_width="wrap_content"
+		   	        android:layout_height="wrap_content"
+		   	       	android:textSize="24sp"
+		   	        android:text="¿Cuántos Niños Menores de 5 Años?"/>
+		   	    
+		   	    <EditText
+		   	        android:id="@+id/general_form_num_children_under_5"
+		   	        android:layout_width="130dp"
+		   	        android:layout_height="wrap_content"
+		   	        android:inputType="number"
+		   	        android:ellipsize="start"
+		   	        android:textSize="24sp" />
+		   	    
+		   	</LinearLayout>
+		   	
+	     	<LinearLayout
+		   	    android:layout_width="match_parent"
+		   	    android:layout_height="wrap_content"
+		   	    android:orientation="horizontal" >
+		   	    
+		   	    <TextView
+		   	        android:layout_width="wrap_content"
+		   	        android:layout_height="wrap_content"
+		   	       	android:textSize="24sp"
+		   	        android:text="¿Cuántos Personas Viven en la Casa?"/>
+		   	    
+		   	    <EditText
+		   	        android:id="@+id/general_form_num_people_in_household"
+		   	        android:layout_width="130dp"
+		   	        android:layout_height="wrap_content"
+		   	        android:inputType="number"
+		   	        android:ellipsize="start"
+		   	        android:textSize="24sp" />
+		   	    
+		   	</LinearLayout>
+		   	
+	     	<LinearLayout
+		   	    android:layout_width="match_parent"
+		   	    android:layout_height="wrap_content"
+		   	    android:orientation="horizontal" >
+		   	    
+		   	    <TextView
+		   	        android:layout_width="wrap_content"
+		   	        android:layout_height="wrap_content"
+		   	       	android:textSize="24sp"
+		   	        android:text="¿Cuántos Niños Viven?"/>
+		   	    
+		   	    <EditText
+		   	        android:id="@+id/general_form_num_children_alive"
+		   	        android:layout_width="130dp"
+		   	        android:layout_height="wrap_content"
+		   	        android:inputType="number"
+		   	        android:ellipsize="start"
+		   	        android:textSize="24sp" />
+		   	    
+		   	</LinearLayout>
+		   	
+	     	<LinearLayout
+		   	    android:layout_width="match_parent"
+		   	    android:layout_height="wrap_content"
+		   	    android:orientation="horizontal" >
+		   	    
+		   	    <TextView
+		   	        android:layout_width="wrap_content"
+		   	        android:layout_height="wrap_content"
+		   	       	android:textSize="24sp"
+		   	        android:text="¿Cuántos Niños Han Muerto?"/>
+		   	    
+		   	    <EditText
+		   	        android:id="@+id/general_form_num_children_dead"
+		   	        android:layout_width="130dp"
+		   	        android:layout_height="wrap_content"
+		   	        android:inputType="number"
+		   	        android:ellipsize="start"
+		   	        android:textSize="24sp" />
+
+		   	</LinearLayout>
+		   	
+	     	<TextView
+	   	        android:layout_width="wrap_content"
+	   	        android:layout_height="wrap_content"
+	   	        android:layout_marginTop="5dp"
+	   	       	android:textSize="24sp"
+	   	        android:text="Información Sobre Los Muertos: "/>
+		   	    
+	   	    <EditText
+	   	        android:id="@+id/general_form_death_information"
+	   	        android:layout_width="fill_parent"
+	   	        android:layout_height="wrap_content"
+	   	        android:gravity="top"
+	   	        android:lines="2"
+	   	        android:textSize="24sp" />
+	        
+	    </LinearLayout>
+	    
+	    <!-- Next is the basic fixed child information 
+	    	This only shows up when a new child is created
+	     -->
+	    <LinearLayout
+	        android:id="@+id/general_form_child_layout"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical" >
+	   	    
+	        <TextView
+	            android:id="@+id/general_form_child_layout_header"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:gravity="center_horizontal"
+	            android:layout_marginTop="5dp"
+	            android:layout_marginBottom="5dp"
+	            android:textSize="30dp"
+	            android:textStyle="bold"
+	            android:text="Información del Niño" />
+	        
+	        <LinearLayout
+		   	    android:layout_width="match_parent"
+		   	    android:layout_height="wrap_content"
+		   	    android:orientation="horizontal" >
+		   	    
+		   	    <TextView
+		   	        android:layout_width="wrap_content"
+		   	        android:layout_height="wrap_content"
+		   	       	android:textSize="24sp"
+		   	        android:text="Fecha de Nacimiento: "/>
+		   	    
+		   	    <EditText
+		   	        android:id="@+id/general_form_child_birth_date"
+		   	        android:layout_width="0dp"
+		   	        android:layout_weight="1"
+		   	        android:layout_height="wrap_content"
+		   	        android:textSize="24sp" />
+		   	    
+		   	</LinearLayout>
+		   	
+	        <LinearLayout
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="10dp"
+		        android:orientation="horizontal" >
+		   	    
+	     	    <TextView 
+		         	android:layout_width="wrap_content"
+		         	android:layout_height="wrap_content"
+		         	android:layout_marginRight="10dp"
+		         	android:textSize="24sp"
+		         	android:text="Sexo:"/>
+	
+		    	<RadioGroup 
+		    	    android:id="@+id/general_form_sex_radiogroup"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:orientation="horizontal">
+				    
+				    <RadioButton android:id="@+id/sex_male"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_marginRight="15dp"
+				        android:textSize="24sp"
+				        android:text="Niño"/>
+				    
+				    <RadioButton android:id="@+id/sex_female"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:textSize="24sp"
+				        android:text="Niña"/>
+				    
+				</RadioGroup>
+				
+			</LinearLayout>
+
+	        <LinearLayout
+		   	    android:layout_width="match_parent"
+		   	    android:layout_height="wrap_content"
+		   	    android:layout_marginTop="5dp"
+		   	    android:orientation="horizontal" >
+		   	    
+		   	    <TextView
+		   	        android:layout_width="wrap_content"
+		   	        android:layout_height="wrap_content"
+		   	       	android:textSize="24sp"
+		   	        android:text="Tipo de Parto: "/>
+		   	    
+		   	    <Spinner
+		   	        android:id="@+id/general_form_type_of_pregnancy"
+		   	        android:layout_width="wrap_content"
+		   	        android:layout_height="wrap_content" />
+		   	    
+		   	</LinearLayout>
+		   	
+	        <LinearLayout
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="10dp"
+		        android:orientation="horizontal" >
+		   	    
+	     	    <TextView 
+		         	android:layout_width="wrap_content"
+		         	android:layout_height="wrap_content"
+		         	android:layout_marginRight="10dp"
+		         	android:textSize="24sp"
+		         	android:text="¿Tenía la Madre Control Prenatal?"/>
+	
+		    	<RadioGroup 
+		    	    android:id="@+id/general_form_mother_prenatal_control_radiogroup"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:orientation="horizontal">
+				    
+				    <RadioButton android:id="@+id/yes_mother_prenatal_control"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_marginRight="15dp"
+				        android:textSize="24sp"
+				        android:text="Sí"/>
+				    
+				    <RadioButton android:id="@+id/no_mother_prenatal_control"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:textSize="24sp"
+				        android:text="No"/>
+				    
+				</RadioGroup>
+				
+			</LinearLayout>
+			
+	        <LinearLayout
+		   	    android:layout_width="match_parent"
+		   	    android:layout_height="wrap_content"
+		   	    android:orientation="horizontal" >
+		   	    
+		   	    <TextView
+		   	        android:layout_width="wrap_content"
+		   	        android:layout_height="wrap_content"
+		   	       	android:textSize="24sp"
+		   	        android:text="¿Cuántos Meses Duró el Embarazo?"/>
+		   	    
+		   	    <EditText
+		   	        android:id="@+id/general_form_pregnancy_num_months"
+		   	        android:layout_width="130dp"
+		   	        android:layout_height="wrap_content"
+		   	        android:inputType="number"
+		   	        android:ellipsize="start"
+		   	        android:textSize="24sp" />
+		   	    
+		   	</LinearLayout>
+		   	
+	        <LinearLayout
+		   	    android:layout_width="match_parent"
+		   	    android:layout_height="wrap_content"
+		   	    android:orientation="horizontal" >
+		   	    
+		   	    <TextView
+		   	        android:layout_width="wrap_content"
+		   	        android:layout_height="wrap_content"
+		   	       	android:textSize="24sp"
+		   	        android:text="Peso al Nacer (libras):"/>
+		   	    
+		   	    <EditText
+		   	        android:id="@+id/general_form_birth_weight"
+		   	        android:layout_width="130dp"
+		   	        android:layout_height="wrap_content"
+		   	        android:inputType="numberDecimal"
+		   	        android:ellipsize="start"
+		   	        android:textSize="24sp" />
+		   	    
+		   	</LinearLayout>
+		   	
+	        <LinearLayout
+		   	    android:layout_width="match_parent"
+		   	    android:layout_height="wrap_content"
+		   	    android:orientation="horizontal" >
+		   	    
+		   	    <TextView
+		   	        android:layout_width="wrap_content"
+		   	        android:layout_height="wrap_content"
+		   	       	android:textSize="24sp"
+		   	        android:text="Talla al Nacer (cm):"/>
+		   	    
+		   	    <EditText
+		   	        android:id="@+id/general_form_birth_height"
+		   	        android:layout_width="130dp"
+		   	        android:layout_height="wrap_content"
+		   	        android:inputType="numberDecimal"
+		   	        android:ellipsize="start"
+		   	        android:textSize="24sp" />
+		   	    
+		   	</LinearLayout>
+		   	
+	        <LinearLayout
+		   	    android:layout_width="match_parent"
+		   	    android:layout_height="wrap_content"
+		   	    android:orientation="horizontal" >
+		   	    
+		   	    <TextView
+		   	        android:layout_width="wrap_content"
+		   	        android:layout_height="wrap_content"
+		   	       	android:textSize="24sp"
+		   	        android:text="Edad del Último Niño Cuando Nació Este Niño: "/>
+		   	    
+		   	    <EditText
+		   	        android:id="@+id/general_form_age_of_last_child"
+		   	        android:layout_width="70dp"
+		   	        android:layout_height="wrap_content"
+		   	        android:inputType="number"
+		   	        android:ellipsize="start"
+		   	        android:textSize="24sp" />
+		   	    
+		   	</LinearLayout>
+		   	
+	        <LinearLayout
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="10dp"
+		        android:orientation="horizontal" >
+		   	    
+	     	    <TextView 
+		         	android:layout_width="wrap_content"
+		         	android:layout_height="wrap_content"
+		         	android:layout_marginRight="10dp"
+		         	android:textSize="24sp"
+		         	android:text="¿Tiene Todas Sus Vacunas?"/>
+	
+		    	<RadioGroup 
+		    	    android:id="@+id/general_form_vaccinated_radiogroup"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:orientation="horizontal">
+				    
+				    <RadioButton android:id="@+id/yes_vaccinated"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_marginRight="15dp"
+				        android:textSize="24sp"
+				        android:text="Sí"/>
+				    
+				    <RadioButton android:id="@+id/no_vaccinated"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:textSize="24sp"
+				        android:text="No"/>
+				    
+				</RadioGroup>
+				
+			</LinearLayout>
+			
+	        <LinearLayout
+		   	    android:layout_width="match_parent"
+		   	    android:layout_height="wrap_content"
+		   	    android:orientation="horizontal" >
+		   	    
+		   	    <TextView
+		   	        android:layout_width="wrap_content"
+		   	        android:layout_height="wrap_content"
+		   	       	android:textSize="24sp"
+		   	        android:text="Si No, ¿Cuáles Tiene? "/>
+		   	    
+		   	    <EditText
+		   	        android:id="@+id/general_form_vaccinations_edittext"
+		   	        android:layout_width="0dp"
+		   	        android:layout_weight="1"
+		   	        android:layout_height="wrap_content"
+		   	        android:textSize="24sp" />
+		   	    
+		   	</LinearLayout>
+			
+	        <LinearLayout
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="10dp"
+		        android:orientation="horizontal" >
+		   	    
+	     	    <TextView 
+		         	android:layout_width="wrap_content"
+		         	android:layout_height="wrap_content"
+		         	android:layout_marginRight="10dp"
+		         	android:textSize="24sp"
+		         	android:text="¿Tiene una Enfermedad Crónica?"/>
+	
+		    	<RadioGroup 
+		    	    android:id="@+id/general_form_handicapped_radiogroup"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:orientation="horizontal">
+				    
+				    <RadioButton android:id="@+id/yes_handicapped"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_marginRight="15dp"
+				        android:textSize="24sp"
+				        android:text="Sí"/>
+				    
+				    <RadioButton android:id="@+id/no_handicapped"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:textSize="24sp"
+				        android:text="No"/>
+				    
+				</RadioGroup>
+				
+			</LinearLayout>
+			
+	        <LinearLayout
+		   	    android:layout_width="match_parent"
+		   	    android:layout_height="wrap_content"
+		   	    android:orientation="horizontal" >
+		   	    
+		   	    <TextView
+		   	        android:layout_width="wrap_content"
+		   	        android:layout_height="wrap_content"
+		   	       	android:textSize="24sp"
+		   	        android:text="Sí, ¿Cuál? "/>
+		   	    
+		   	    <EditText
+		   	        android:id="@+id/general_form_handicap_edittext"
+		   	        android:layout_width="0dp"
+		   	        android:layout_weight="1"
+		   	        android:layout_height="wrap_content"
+		   	        android:textSize="24sp" />
+		   	    
+		   	</LinearLayout>
+	        
+	        
+	    </LinearLayout>
+	    
+	    <!-- Last is the child visit information
+	    	This is always there
+	     -->
+	  	<LinearLayout
+	        android:id="@+id/general_form_child_visit_layout"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical" >
+	        
+	        <TextView
+	            android:id="@+id/general_form_child_visit_layout_header"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:gravity="center_horizontal"
+	            android:layout_marginTop="5dp"
+	            android:layout_marginBottom="5dp"
+	            android:textSize="30dp"
+	            android:textStyle="bold"
+	            android:text="Información de la Visita" />
+	        
+	        	<TextView android:id="@+id/child_visit_child_is_currently_breastfed_textview"
+	  		android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	       	android:layout_marginTop="20dp"
+	       	android:textSize="30sp"
+	        android:text="¿El niño TODAVÍA está mamando?"/>
+	     
+ 		<LinearLayout
+	  		android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="20dp"
+	        android:orientation="horizontal" >
+	
+	    	<RadioGroup 
+	    	    android:id="@+id/child_visit_child_is_currently_breastfed_radio"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:orientation="horizontal">
+			    
+			    <RadioButton android:id="@+id/yes_breastfed"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginRight="20dp"
+			        android:textSize="30sp"
+			        android:text="Sí"/>
+			    
+			    <RadioButton android:id="@+id/no_breastfed"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:textSize="30sp"
+			        android:text="No"/>
+			    
+			</RadioGroup>
+			
+		</LinearLayout>
+	
+	  	<TextView android:id="@+id/child_visit_child_is_only_breastfed_textview"
+	   		android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	       	android:layout_marginTop="15dp"
+	       	android:textSize="30sp"
+	       	android:visibility="gone"
+	        android:text="¿Esta comiendo solo pecho?"/>
+	  	
+	 	<LinearLayout
+	  		android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="20dp"
+	        android:orientation="horizontal" >
+	
+	    	<RadioGroup 
+	    	    android:id="@+id/child_visit_child_is_only_breastfed_radio"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:textSize="30sp"
+			    android:orientation="horizontal">
+			    
+			    <RadioButton android:id="@+id/yes_only_breastfed"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginRight="20dp"
+			        android:textSize="30sp"
+			        android:text="Sí"/>
+			    
+			    <RadioButton android:id="@+id/no_only_breastfed"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:textSize="30sp"
+			        android:text="No"/>
+			    
+			</RadioGroup>
+			
+		</LinearLayout>
+	   	
+	   	<TextView
+	   	    android:id="@+id/child_visit_child_how_long_only_breastfed_textview"
+	   	    android:layout_width="match_parent"
+	   	    android:layout_height="match_parent"
+	   	    android:layout_marginTop="15dp"
+	   	    android:textSize="30sp"
+	   	    android:text="¿Por cuántos meses le dio solo pecho al niño?"
+	   	    />
+	   	
+	   	<EditText
+	   	    android:id="@+id/child_visit_child_how_long_only_breastfed_edittext"
+	   	    android:layout_width="match_parent"
+	   	    android:layout_height="wrap_content"
+	   	    android:textSize="30sp"
+	   	    />
+	   	
+	   	<TextView
+	   	    android:id="@+id/child_visit_child_what_age_stopped_breastfeeding_textview"
+	   	    android:layout_width="match_parent"
+	   	    android:layout_height="match_parent"
+	   	    android:layout_marginTop="15dp"
+	   	    android:textSize="30sp"
+	   	    android:text="¿A que edad dejó de mamar el niño?"
+	   	    />
+	   	
+	   	<EditText 
+	   	    android:id="@+id/child_visit_child_what_age_stopped_breastfeeding_edittext"
+	   	    android:layout_width="match_parent"
+	   	    android:layout_height="wrap_content"
+	   	    android:textSize="30sp"
+	   	    />
+	   	
+	   	<TextView 
+	   	    android:layout_width="wrap_content"
+	   	    android:layout_height="wrap_content"
+	   	    android:layout_marginTop="20dp"
+	   	    android:textSize="30sp"
+	   	    android:layout_gravity="left"
+	   	    android:text="¿Cuántas veces a la semana"/>
+	   	
+	   	   	<LinearLayout
+		   	    android:layout_width="match_parent"
+		   	    android:layout_height="wrap_content"
+		   	    android:layout_marginTop="5dp"
+		   	    android:layout_marginLeft="30dp"
+		   	    android:orientation="horizontal" >
+	   	    
+		   	    <TextView
+		   	        android:layout_width="wrap_content"
+		   	        android:layout_height="wrap_content"
+		   	        android:textSize="25sp" 
+		   	        android:text="toma incaparina el niño?  "/>
+		   	    
+		   	    <EditText
+		   	        android:id="@+id/single_child_visit_child_num_times_incaparina_edittext"
+		   	        android:layout_width="100dp"
+		   	        android:layout_height="wrap_content"
+		   	        android:inputType="number"
+		   	        android:textSize="25sp" />
+		   	    
+		   	</LinearLayout>
+		   	
+	   	   	<LinearLayout
+		   	    android:layout_width="match_parent"
+		   	    android:layout_height="wrap_content"
+		   	    android:layout_marginTop="5dp"
+		   	    android:layout_marginLeft="30dp"
+		   	    android:orientation="horizontal" >
+	   	    
+		   	    <TextView
+		   	        android:layout_width="wrap_content"
+		   	        android:layout_height="wrap_content"
+		   	        android:textSize="25sp" 
+		   	        android:text="come verduras y frutas el niño?  "/>
+		   	    
+		   	    <EditText
+		   	        android:id="@+id/single_child_visit_child_num_times_vegetables_and_fruits_edittext"
+		   	        android:layout_width="100dp"
+		   	        android:layout_height="wrap_content"
+		   	        android:inputType="number"
+		   	        android:textSize="25sp" />
+		   	    
+		   	</LinearLayout>
+		   	
+	   	   	<LinearLayout
+		   	    android:layout_width="match_parent"
+		   	    android:layout_height="wrap_content"
+		   	    android:layout_marginTop="5dp"
+		   	    android:layout_marginLeft="30dp"
+		   	    android:orientation="horizontal" >
+	   	    
+		   	    <TextView
+		   	        android:layout_width="wrap_content"
+		   	        android:layout_height="wrap_content"
+		   	        android:textSize="25sp" 
+		   	        android:text="come hierbas el niño?  "/>
+		   	    
+		   	    <EditText
+		   	        android:id="@+id/single_child_visit_child_num_times_diarreah_edittext"
+		   	        android:layout_width="100dp"
+		   	        android:layout_height="wrap_content"
+	   	        android:inputType="number"
+	   	        android:textSize="25sp" />
+	   	    
+	   	</LinearLayout>
+	   	
+		<TextView 
+	   	    android:layout_width="wrap_content"
+	   	    android:layout_height="wrap_content"
+	   	    android:layout_marginTop="20dp"
+	   	    android:textSize="30sp"
+	   	    android:text="En la semana pasada, por cuantos días tuvo su niño estas enfermedades: "/>
+		
+	   	<LinearLayout
+	   	    android:layout_width="match_parent"
+	   	    android:layout_height="wrap_content"
+	   	    android:layout_marginTop="5dp"
+	   	    android:layout_marginLeft="30dp"
+	   	    android:orientation="horizontal" >
+	  	    
+	   	    <TextView
+	   	        android:layout_width="wrap_content"
+	   	        android:layout_height="wrap_content"
+	   	        android:textSize="25sp" 
+	   	        android:text="-Diarrea:  "/>
+	   	    
+	   	    <EditText
+	   	        android:id="@+id/single_child_visit_child_num_times_herbs_edittext"
+	   	        android:layout_width="100dp"
+	   	        android:layout_height="wrap_content"
+	   	        android:layout_marginLeft="10dp"
+	   	        android:inputType="number"
+	   	        android:textSize="25sp" />
+	   	    
+	   	</LinearLayout>
+	   	
+	   	<LinearLayout
+	   	    android:layout_width="match_parent"
+	   	    android:layout_height="wrap_content"
+	   	    android:layout_marginTop="5dp"
+	   	    android:layout_marginLeft="30dp"
+	   	    android:orientation="horizontal" >
+	  	    
+	   	    <TextView
+	   	        android:layout_width="wrap_content"
+	   	        android:layout_height="wrap_content"
+	   	        android:textSize="25sp" 
+	   	        android:text="-Vómitos:  "/>
+	   	    
+	   	    <EditText
+	   	        android:id="@+id/single_child_visit_child_num_times_vomit_edittext"
+	   	        android:layout_width="100dp"
+	   	        android:layout_height="wrap_content"
+	   	        android:layout_marginLeft="10dp"
+	   	        android:inputType="number"
+	   	        android:textSize="25sp" />
+	   	    
+	   	</LinearLayout>
+	   	
+	   	<LinearLayout
+	   	    android:layout_width="match_parent"
+	   	    android:layout_height="wrap_content"
+	   	    android:layout_marginTop="5dp"
+	   	    android:layout_marginLeft="30dp"
+	   	    android:orientation="horizontal" >
+	  	    
+	   	    <TextView
+	   	        android:layout_width="wrap_content"
+	   	        android:layout_height="wrap_content"
+	   	        android:textSize="25sp" 
+	   	        android:text="-Tos:  "/>
+	   	    
+	   	    <EditText
+	   	        android:id="@+id/single_child_visit_child_num_times_cough_edittext"
+	   	        android:layout_width="100dp"
+	   	        android:layout_height="wrap_content"
+	   	        android:layout_marginLeft="10dp"
+	   	        android:inputType="number"
+	   	        android:textSize="25sp" />
+	   	    
+	   	</LinearLayout>
+	   	
+	   	<LinearLayout
+	   	    android:layout_width="match_parent"
+	   	    android:layout_height="wrap_content"
+	   	    android:layout_marginTop="5dp"
+	   	    android:layout_marginLeft="30dp"
+	   	    android:orientation="horizontal" >
+	  	    
+	   	    <TextView
+	   	        android:layout_width="wrap_content"
+	   	        android:layout_height="wrap_content"
+	   	        android:textSize="25sp" 
+	   	        android:text="-Fiebre:  "/>
+	   	    
+	   	    <EditText
+	   	        android:id="@+id/single_child_visit_child_num_times_fever_edittext"
+	   	        android:layout_width="100dp"
+	   	        android:layout_height="wrap_content"
+	   	        android:layout_marginLeft="10dp"
+	   	        android:inputType="number"
+	   	        android:textSize="25sp" />
+	   	    
+	   	</LinearLayout>
+	   	
+	   	   	<LinearLayout
+	   	    android:layout_width="match_parent"
+	   	    android:layout_height="wrap_content"
+	   	    android:layout_marginTop="5dp"
+	   	    android:layout_marginLeft="30dp"
+	   	    android:orientation="horizontal" >
+	  	    
+	   	    <TextView
+	   	        android:layout_width="wrap_content"
+	   	        android:layout_height="wrap_content"
+	   	        android:textSize="25sp" 
+	   	        android:text="-Otro:  "/>
+	   	    
+	   	    <EditText
+	   	        android:id="@+id/single_child_visit_child_num_times_other_edittext"
+	   	        android:layout_width="100dp"
+	   	        android:layout_height="wrap_content"
+	   	        android:layout_marginLeft="10dp"
+	   	        android:inputType="number"
+	   	        android:textSize="25sp" />
+	   	    
+	   	</LinearLayout>
+	   	
+	   	<TextView
+	   	    android:layout_width="wrap_content"
+	   	    android:layout_height="wrap_content"
+	   	    android:layout_marginTop="15dp"
+	   	    android:textSize="30sp" 
+	   	    android:text="¿A que edad recibió su niño desparasitantes?" />
+	   	
+	   	<EditText
+	   	    android:id="@+id/single_child_visit_deparasiting_edittext"
+	   	    android:layout_width="match_parent"
+	   	    android:layout_height="wrap_content"
+	   	    android:textSize="30sp" />
+	        
+
+	    </LinearLayout>
+	    
+	  	
+	    
+	
+	</LinearLayout>
+
+</ScrollView>

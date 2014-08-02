@@ -28,9 +28,7 @@
         android:layout_height="wrap_content" 
         android:layout_width="match_parent" 
         android:textSize="22sp"
-        android:hint="@string/username_string">
-        <requestFocus></requestFocus>
-    </EditText>
+        android:hint="@string/username_string" />
     
     <EditText 
         android:id="@+id/login_dialog_password"
