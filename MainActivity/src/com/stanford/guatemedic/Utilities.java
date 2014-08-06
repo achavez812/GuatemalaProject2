@@ -1,7 +1,7 @@
 
 package com.stanford.guatemedic;
 
-import static com.nativecss.enums.RemoteContentRefreshPeriod.Never;
+//import static com.nativecss.enums.RemoteContentRefreshPeriod.Never;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -27,7 +27,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 
-import com.nativecss.NativeCSS;
+//import com.nativecss.NativeCSS;
 
 
 /**
@@ -119,14 +119,8 @@ public class Utilities {
 	
 	/*Loads Native CSS*/
 	public void loadNativeCSS() {
-    URL css;
-	try {
-		css = new URL("http://10.0.2.2:8000/styles.css");
-		NativeCSS.styleWithCSS("styles.css",css,Never);
-	} catch (MalformedURLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-		}
+	Log.d("nativeCSS","CSS was supposed to be loaded when using Native CSS");
+	
 	}
 	
 	

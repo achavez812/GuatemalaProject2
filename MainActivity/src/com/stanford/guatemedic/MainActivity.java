@@ -1,6 +1,6 @@
 package com.stanford.guatemedic;
 
-import static com.nativecss.enums.RemoteContentRefreshPeriod.Never;
+//import static com.nativecss.enums.RemoteContentRefreshPeriod.Never;
 
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
@@ -31,7 +31,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.nativecss.NativeCSS;
+//import com.nativecss.NativeCSS;
 public class MainActivity extends ActionBarActivity {
 
 	public static final String MIME_TEXT_PLAIN = "text/plain";
