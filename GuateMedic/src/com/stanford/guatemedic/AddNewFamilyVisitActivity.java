@@ -81,7 +81,10 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 					obj.put("how_children_died",
 							AddNewFamilyVisitFragment2.children_death_information_put);
 					// Log.d("Working","WorkingTag"+AddNewFamilyVisitFragment2.children_death_information_put);
+<<<<<<< HEAD
 					Log.i("WTF", "CHECK");
+=======
+>>>>>>> 484601682744aacb0c45f58ddfdcc87c5aac2656
 					DetailedRecordsStore.get(getApplication())
 							.addNewFamilyVisit(obj);
 
@@ -187,7 +190,10 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 	 * AddNewFamilyVisitFragment2.children_death_information_put); //
 	 * Log.d("Working"
 	 * ,"WorkingTag"+AddNewFamilyVisitFragment2.children_death_information_put);
+<<<<<<< HEAD
 	 * Log.i("WTF", "CHECK");
+=======
+>>>>>>> 484601682744aacb0c45f58ddfdcc87c5aac2656
 	 * DetailedRecordsStore.get(getApplication()).addNewFamilyVisit( obj);
 	 * 
 	 * Intent i = new Intent(getApplication(), ViewFamilyActivity.class);
@@ -220,15 +226,25 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 		}
 
 		public void onCreate(Bundle savedInstanceState) {
+<<<<<<< HEAD
 			Utilities utilityObj = new Utilities();
 			utilityObj.loadNativeCSS();
+=======
+			//Utilities utilityObj = new Utilities();
+			//utilityObj.loadNativeCSS();
+>>>>>>> 484601682744aacb0c45f58ddfdcc87c5aac2656
 			super.onCreate(savedInstanceState);
 		}
 
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
+<<<<<<< HEAD
 			Utilities utilityObj = new Utilities();
 			utilityObj.loadNativeCSS();
+=======
+			//Utilities utilityObj = new Utilities();
+			//utilityObj.loadNativeCSS();
+>>>>>>> 484601682744aacb0c45f58ddfdcc87c5aac2656
 			rootView = inflater.inflate(
 					R.layout.fragment_add_new_family_visit1, container, false);
 
@@ -250,6 +266,7 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 			// EditText father_lives_with_field =
 			// (EditText)rootView.findViewById(R.id.family_visit1_father_lives_with);
 
+<<<<<<< HEAD
 			Spinner fathers_job_field = (Spinner) rootView
 					.findViewById(R.id.family_visit1_fathers_job);
 			ArrayAdapter<String> adapter_father_job = new ArrayAdapter<String>(
@@ -259,6 +276,17 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 					.setDropDownViewResource(R.layout.spinner_dropdown_item);
 			fathers_job_field.setAdapter(adapter_father_job);
 			fathers_job_field.setSelection(adapter_father_job.getCount() - 1);
+=======
+//			Spinner fathers_job_field = (Spinner) rootView
+//					.findViewById(R.id.family_visit1_fathers_job);
+//			ArrayAdapter<String> adapter_father_job = new ArrayAdapter<String>(
+//					getActivity(), R.layout.spinner_item, getResources()
+//							.getStringArray(R.array.fathers_job));
+//			adapter_father_job
+//					.setDropDownViewResource(R.layout.spinner_dropdown_item);
+//			fathers_job_field.setAdapter(adapter_father_job);
+//			fathers_job_field.setSelection(adapter_father_job.getCount() - 1);
+>>>>>>> 484601682744aacb0c45f58ddfdcc87c5aac2656
 
 			// EditText igss_field =
 			// (EditText)rootView.findViewById(R.id.family_visit1_igss);
@@ -318,7 +346,11 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 				String father_lives_with_string = father_lives_with.getText()
 						.toString();
 
+<<<<<<< HEAD
 				if (father_lives_with_string.trim().equals("Sí")) {
+=======
+				if (father_lives_with_string.trim().equals("Só")) {
+>>>>>>> 484601682744aacb0c45f58ddfdcc87c5aac2656
 					father_lives_with_put = 2;
 				} else if (father_lives_with_string.trim().equals("No")) {
 					father_lives_with_put = 1;
@@ -339,7 +371,11 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 						.findViewById(selectedId_IGSS);
 				String IGSS_family_string = IGSS_family.getText().toString();
 
+<<<<<<< HEAD
 				if (IGSS_family_string.trim().equals("Sí")) {
+=======
+				if (IGSS_family_string.trim().equals("Só")) {
+>>>>>>> 484601682744aacb0c45f58ddfdcc87c5aac2656
 					IGSS_family_put = 2;
 				} else if (IGSS_family_string.trim().equals("No")) {
 					IGSS_family_put = 1;
@@ -365,8 +401,13 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 		}
 
 		public void onCreate(Bundle savedInstanceState) {
+<<<<<<< HEAD
 			Utilities utilityObj = new Utilities();
 			utilityObj.loadNativeCSS();
+=======
+		//	Utilities utilityObj = new Utilities();
+			//utilityObj.loadNativeCSS();
+>>>>>>> 484601682744aacb0c45f58ddfdcc87c5aac2656
 			super.onCreate(savedInstanceState);
 		}
 
@@ -380,8 +421,13 @@ public class AddNewFamilyVisitActivity extends ActionBarActivity {
 
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
+<<<<<<< HEAD
 			Utilities utilityObj = new Utilities();
 			utilityObj.loadNativeCSS();
+=======
+		//	Utilities utilityObj = new Utilities();
+			//utilityObj.loadNativeCSS();
+>>>>>>> 484601682744aacb0c45f58ddfdcc87c5aac2656
 			rootView = inflater.inflate(
 					R.layout.fragment_add_new_family_visit2, container, false);
 			final String family_id = getArguments().getString("family_id");

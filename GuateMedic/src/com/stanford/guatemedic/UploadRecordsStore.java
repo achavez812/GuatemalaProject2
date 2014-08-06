@@ -20,8 +20,8 @@ public class UploadRecordsStore {
 	
 	private Context context;
 	
-	private GuatemedicReader gmr;
-	private GuatemedicWriter gmw;
+	private GuatemedicFileReader gmr;
+	private GuatemedicFileWriter gmw;
 	
 	private UploadRecordsStore(Context c) {
 		context = c;
@@ -30,8 +30,8 @@ public class UploadRecordsStore {
 		family_visits = new ArrayList<UploadFamilyVisit>();
 		children = new ArrayList<UploadChild>();
 		child_visits = new ArrayList<UploadChildVisit>();
-		gmr = new GuatemedicReader(context);
-		gmw = new GuatemedicWriter(context);
+		gmr = new GuatemedicFileReader(context);
+		gmw = new GuatemedicFileWriter(context);
 		
 		processChildVisits();
 		processFamilyVisits();

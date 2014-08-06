@@ -193,7 +193,7 @@ public class AddNewChildVisitSinglePageActivity extends ActionBarActivity {
 						}
 					});
 
-			double child_age = Utilities.round(Utilities.getAgeInMonths(child.getDob()), 1);
+			double child_age = GeneralUtilities.round(DateTimeUtilities.convertDaysToMonths((int)DateTimeUtilities.getCurrentAgeInDays(child.getDob())), 1);
 			TextView child_age_field = (TextView) rootView.findViewById(R.id.single_child_visit_child_age_textview);
 			child_age_field.setText("Edad del Niño: " + child_age + " meses");
 			

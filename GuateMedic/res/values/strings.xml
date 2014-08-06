@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Guatemala Medic</string>
+    <string name="app_name">Tijax</string>
     <string name="villages_title">Villages</string>
     <string name="families_title">Families</string>
     <string name="children_title">Children</string>
@@ -86,11 +86,12 @@
          <item>No</item>
          <item>¿Tenia la Madre Control Prenatal?</item>
      </string-array>   
-          <string-array name="same_pregernating_array">
-         <item>Solo Uno</item>
-         <item>Gemelos</item>
-         <item>Trillizos</item>
-        <item>¿Cuántos Niños en este Parto?</item>
+          <string-array name="type_of_pregnancy_array">
+         <item>Solo Uno y Normal</item>
+         <item>Solo Uno y Cesaria</item>
+         <item>Gemelos y Normal</item>
+         <item>Gemelos y Cesaria</item>
+        <item>Toca Para Escoger</item>
      </string-array>
     <string-array name="child_visit_array">
         <item>Categoría 1</item>
@@ -108,15 +109,15 @@
 	    <item>Unida</item>
 	    <item>Soltera</item>
 	    <item>Viuda</item>
-	    <item>Estado Civil</item>
+	    <item>Toca Para Escoger</item>
 	</string-array>
-	<string-array name="fathers_job">
+	<string-array name="father_job_array">
 	    <item>Fijo</item>
 	    <item>Comerciante</item>
 	    <item>Agricultor (Propio)</item>
 	    <item>Agricultor (Ajeno)</item>
 	    <item>Otro</item>
-	    <item>Ocupación del Padre</item>
+	    <item>Toca Para Escoger</item>
 	</string-array>
 	<string-array name="month_options">
 	    <item>January</item>
@@ -132,6 +133,24 @@
 	    <item>November</item>
 	    <item>December</item>
 	</string-array>
+	
+	<string name="authorization_string">Autorización</string>
+	<string name="username_string">Nombre de Usuario</string>
+	<string name="password_string">Contraseña</string>
+	<string name="continue_button_text">Seguir"</string>
+	<string name="cancel_button_text">Cancelar</string>
+	
+	<!-- HomePageActivity -->
+	<string name="home_page_welcome1">Bienvenido Promotores de Salud</string>
+	<string name="home_page_welcome2">Rural San Lucas Toliman</string>
+	<string name="view_records_button_text">REGISTROS</string>
+	<string name="sync_records_button_text">SINCRONIZAR</string>
+	<string name="download_records_button_text">DESCARGAR</string>
+	
+	<string name="download_communities_header_text">Por favor selecta cuales comunidades quieres descargar.</string>
+	<string name="search_string">Buscar</string>
+	
+	
 
 
 	

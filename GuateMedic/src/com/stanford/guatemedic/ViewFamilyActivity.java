@@ -78,10 +78,10 @@ public class ViewFamilyActivity extends ActionBarActivity{
 		TextView mother_dob_field = (TextView)findViewById(R.id.view_family_parent1_dob_field);
 		if (!family.getParent1_dob().isEmpty() && !family.getParent1_dob().equals("0")) {
 			if (family.getParent1_dob().length() > 3) {
-				String formatted_mother_dob = Utilities.formatDate(family.getParent1_dob());
-				mother_dob_field.setText(Utilities.getAgeInYears(formatted_mother_dob) + " años");
+				int mother_age = (int)DateTimeUtilities.getCurrentAgeInDays(family.getParent1_dob());
+				mother_dob_field.setText((int)DateTimeUtilities.convertDaysToYears(mother_age) + " aóos");
 			} else {
-				mother_dob_field.setText(family.getParent1_dob() + " años");
+				mother_dob_field.setText(family.getParent1_dob() + " aóos");
 			}
 		} else
 			mother_dob_field.setText("Edad desconocida");
@@ -95,10 +95,10 @@ public class ViewFamilyActivity extends ActionBarActivity{
 		TextView father_dob_field = (TextView)findViewById(R.id.view_family_parent2_dob_field);
 		if (!family.getParent2_dob().isEmpty() && !family.getParent2_dob().equals("0")) {
 			if (family.getParent2_dob().length() > 3) {
-				String formatted_father_dob = Utilities.formatDate(family.getParent2_dob());
-				father_dob_field.setText(Utilities.getAgeInYears(formatted_father_dob) + " años");
+				int father_age = (int)DateTimeUtilities.getCurrentAgeInDays(family.getParent2_dob());
+				father_dob_field.setText((int)DateTimeUtilities.convertDaysToYears(father_age) + " aóos");
 			} else {
-				father_dob_field.setText(family.getParent2_dob() + " años");
+				father_dob_field.setText(family.getParent2_dob() + " aóos");
 			}
 		} else
 			father_dob_field.setText("Edad desconocida");
@@ -200,8 +200,8 @@ public class ViewFamilyActivity extends ActionBarActivity{
 	
 	@Override
 	public void onBackPressed() {
-		Intent i = new Intent(getApplication(), ViewFamilyListActivity.class);
-		i.putExtra("village_name", DetailedRecordsStore.get(getApplication()).getFamily(family_id).getVillage_name());
+		Intent i = new Intent(getApplication(), ViewProfilesActivity.class);
+		i.putExtra("community", DetailedRecordsStore.get(getApplication()).getFamily(family_id).getVillage_name());
 		startActivity(i);
 	}
 	

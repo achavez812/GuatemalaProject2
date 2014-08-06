@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class DetailedFamily {
 	
+	private boolean in_progress = false;
+	
 	private String village_name;
 	private String family_id;
 	private String temp_family_id; //Read only, set in constructor
@@ -26,7 +28,17 @@ public class DetailedFamily {
 		this.family_id = family_id;
 		this.temp_family_id = family_id;
 		
+		this.in_progress = true;
+		
 		family_visits = new ArrayList<DetailedFamilyVisit>();
+	}
+	
+	public boolean isIn_progress() {
+		return in_progress;
+	}
+
+	public void setIn_progress(boolean in_progress) {
+		this.in_progress = in_progress;
 	}
 
 	public String getVillage_name() {

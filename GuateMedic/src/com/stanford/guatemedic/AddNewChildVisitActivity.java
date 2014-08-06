@@ -58,15 +58,15 @@ public class AddNewChildVisitActivity extends ActionBarActivity {
 				// An item was selected. You can retrieve the selected item
 				// using
 				String item = (String) parent.getItemAtPosition(pos);
-				if (item.trim().equals("Categoría 1")) {
+				if (item.trim().equals("Categoróa 1")) {
 					getSupportFragmentManager().beginTransaction().replace(R.id.container, frag1_childvisit).commit();
-				} else if (item.trim().equals("Categoría 2")) {
+				} else if (item.trim().equals("Categoróa 2")) {
 					getSupportFragmentManager().beginTransaction().replace(R.id.container, frag2_childvisit).commit();
-				} else if (item.trim().equals("Categoría 3")) {
+				} else if (item.trim().equals("Categoróa 3")) {
 					getSupportFragmentManager().beginTransaction().replace(R.id.container, frag3_childvisit).commit();
-				} else if (item.trim().equals("Categoría 4")) {
+				} else if (item.trim().equals("Categoróa 4")) {
 					getSupportFragmentManager().beginTransaction().replace(R.id.container, frag4_childvisit).commit();
-				} else if (item.trim().equals("Categoría 5")){
+				} else if (item.trim().equals("Categoróa 5")){
 					getSupportFragmentManager().beginTransaction().replace(R.id.container, frag5_childvisit).commit();
 				} else {
 					Toast.makeText(getApplication(), "Error", Toast.LENGTH_LONG).show();
@@ -306,7 +306,7 @@ public class AddNewChildVisitActivity extends ActionBarActivity {
 				String is_currently_breastfed_string = is_currently_breastfed.getText().toString();
 				
 	
-				if(is_currently_breastfed_string.trim().equals("Sí")){
+				if(is_currently_breastfed_string.trim().equals("Só")){
 					dcv.setIs_currently_breastfed(2);
 				}else if(is_currently_breastfed_string.trim().equals("No")){
 					dcv.setIs_currently_breastfed(1);
@@ -320,7 +320,7 @@ public class AddNewChildVisitActivity extends ActionBarActivity {
 				String does_only_breastfeed_string = does_only_breastfeed.getText().toString();
 				
 	
-				if(does_only_breastfeed_string.trim().equals("Sí")){
+				if(does_only_breastfeed_string.trim().equals("Só")){
 					dcv.setIs_currently_breastfed(2);
 				}else if(does_only_breastfeed_string.trim().equals("No")){
 					dcv.setIs_currently_breastfed(1);
@@ -474,7 +474,7 @@ public class AddNewChildVisitActivity extends ActionBarActivity {
 				String did_receive_vaccinations_string = did_receive_vaccinations.getText().toString();
 				
 	
-				if(did_receive_vaccinations_string.trim().equals("Sí")){
+				if(did_receive_vaccinations_string.trim().equals("Só")){
 					dcv.setReceived_all_vaccines(2);
 				}else if(did_receive_vaccinations_string.trim().equals("No")){
 					dcv.setReceived_all_vaccines(1);
@@ -488,7 +488,7 @@ public class AddNewChildVisitActivity extends ActionBarActivity {
 				String has_chronic_disease_or_disability_string = has_chronic_disease_or_disability.getText().toString();
 				
 	
-				if(has_chronic_disease_or_disability_string.trim().equals("Sí")){
+				if(has_chronic_disease_or_disability_string.trim().equals("Só")){
 					dcv.setHas_chronic_disease_or_disability(2);
 				}else if(has_chronic_disease_or_disability_string.trim().equals("No")){
 					dcv.setHas_chronic_disease_or_disability(1);

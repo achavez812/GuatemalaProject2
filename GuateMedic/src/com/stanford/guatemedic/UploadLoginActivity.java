@@ -125,7 +125,7 @@ public class UploadLoginActivity extends ActionBarActivity{
 					if (json_arr.length() > 0) {
 						Map<String, String> headerMap = new HashMap<String, String>();
 						headerMap.put("Authorization", auth_key);
-						String response = Utilities.postRequest("https://guatemedic.herokuapp.com/createFamily", headerMap, json_arr.toString());
+						String response = HttpUtilities.postRequest("https://guatemedic.herokuapp.com/createFamily", headerMap, json_arr.toString());
 						if (response != null) {
 							JSONArray response_array = new JSONArray(response);
 							for (int i = 0; i < response_array.length(); i++) {
@@ -156,20 +156,17 @@ public class UploadLoginActivity extends ActionBarActivity{
 			
 			private void postChildren() {
 				try {
-					Log.i("WTF", "Added");
 					JSONArray json_arr = new JSONArray();
 					for (UploadChild uc : UploadRecordsStore.get(getApplication()).getChildren()) 
 						json_arr.put(new JSONObject(uc.getData()));
 					if (json_arr.length() > 0) {
-						Log.i("WTF", json_arr.toString());
 						Map<String, String> headerMap = new HashMap<String, String>();
 						headerMap.put("Authorization", auth_key);
-						String response = Utilities.postRequest("https://guatemedic.herokuapp.com/createChild", headerMap, json_arr.toString());
+						String response = HttpUtilities.postRequest("https://guatemedic.herokuapp.com/createChild", headerMap, json_arr.toString());
 						if (response != null) {
 							JSONArray response_array = new JSONArray(response);
 							for (int i = 0; i < response_array.length(); i++) {
 								JSONObject obj = response_array.getJSONObject(i);
-								Log.i("WTF", DetailedRecordsStore.get(getActivity().getApplication()).getFamily(obj.getString("family_id")).getParent1_name());
 								String child_id = obj.getString("child_id");
 								String temp_child_id = obj.getString("temp_child_id");
 								UploadChild uc = UploadRecordsStore.get(getApplication()).getChild(temp_child_id);
@@ -181,7 +178,6 @@ public class UploadLoginActivity extends ActionBarActivity{
 								}
 							} 
 						} else {
-							Log.i("WTF", "Failed to post child");
 							success = false;
 						}
 					}
@@ -200,7 +196,7 @@ public class UploadLoginActivity extends ActionBarActivity{
 					if (json_arr.length() > 0) {
 						Map<String, String> headerMap = new HashMap<String, String>();
 						headerMap.put("Authorization", auth_key);
-						String response = Utilities.postRequest("https://guatemedic.herokuapp.com/addVisits", headerMap, json_arr.toString());
+						String response = HttpUtilities.postRequest("https://guatemedic.herokuapp.com/addVisits", headerMap, json_arr.toString());
 						if (response != null) {
 							//Success
 							JSONObject obj = new JSONObject(response);
@@ -223,7 +219,7 @@ public class UploadLoginActivity extends ActionBarActivity{
 			@Override
 			protected Void doInBackground(String... params) {
 				String json_body = params[0];
-				String response = Utilities.postRequest("https://guatemedic.herokuapp.com/login", null, json_body);
+				String response = HttpUtilities.postRequest("https://guatemedic.herokuapp.com/login", null, json_body);
 				if (response != null) {
 					try {
 						JSONObject json_response = new JSONObject(response);

@@ -65,7 +65,7 @@ public class UploadResultsActivity extends ActionBarActivity {
 			int num_new_family_visits = UploadRecordsStore.get(getApplication()).getFamilyVisits().size();
 			int num_new_child_visits = UploadRecordsStore.get(getApplication()).getChildVisits().size();
 			UploadRecordsStore.get(getApplication()).clear();
-			new GuatemedicWriter(getApplication()).eraseAll();
+			new GuatemedicFileWriter(getApplication()).eraseAll();
 
 			
 			TextView textview1 = (TextView)rootView.findViewById(R.id.upload_results_textview1);

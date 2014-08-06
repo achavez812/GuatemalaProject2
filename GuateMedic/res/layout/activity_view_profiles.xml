@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <LinearLayout
+        android:id="@+id/view_profiles_tab_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#FF000000"
+        android:paddingBottom="2dp"
+        android:gravity="center_horizontal" >
+
+	    <TextView 
+	        android:id="@+id/view_profiles_all_tab"
+	        android:layout_width="200dp"
+	        android:layout_height="80dp"
+	        android:layout_weight="1"
+	        android:gravity="center"
+	        android:background="#FF999999"
+	        android:layout_marginRight="1dp"
+	        android:textStyle="bold"
+	        android:textSize="30sp"
+	        android:text="Todos" />
+	    
+	    <TextView
+	        android:id="@+id/view_profiles_in_progress_tab"
+	        android:layout_width="200dp"
+	        android:layout_height="80dp"
+	        android:layout_weight="1"
+	        android:gravity="center"
+	        android:background="#FFD9D9D9"
+	        android:textColor="#FFA19F91"
+	        android:layout_marginLeft="1dp"
+	        android:textStyle="bold"
+	        android:textSize="30sp"
+	        android:text="En Curso" />
+         
+    </LinearLayout>
+    
+    
+    <LinearLayout 
+        android:id="@+id/view_profiles_all_filter"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone" >
+        
+        
+    </LinearLayout>
+    
+    <EditText 
+        android:id="@+id/view_profiles_search"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:textSize="24sp"
+        android:focusable="false"
+        android:hint="Buscar" />
+    
+    <FrameLayout 
+        android:id="@+id/container"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" />
+    
+
+</LinearLayout>

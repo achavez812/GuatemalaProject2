@@ -10,11 +10,11 @@ import java.util.ArrayList;
 import android.content.Context;
 
 
-public class GuatemedicReader {
+public class GuatemedicFileReader {
 	
 	private Context mContext;
 	
-	public GuatemedicReader(Context c) {
+	public GuatemedicFileReader(Context c) {
 		mContext = c;
 	}
 	

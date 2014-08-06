@@ -8,11 +8,11 @@ public class DetailedVillage {
 		this.village_name = village_name;
 	}
 
-	public String getVillage_name() {
+	public String getName() {
 		return village_name;
 	}
 
-	public void setVillage_name(String village_name) {
+	public void setName(String village_name) {
 		this.village_name = village_name;
 	}
 

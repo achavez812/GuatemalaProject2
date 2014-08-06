@@ -31,6 +31,7 @@ import com.androidplot.ui.SizeLayoutType;
 import com.androidplot.ui.SizeMetrics;
 import com.androidplot.ui.XLayoutStyle;
 import com.androidplot.ui.YLayoutStyle;
+import com.androidplot.util.PixelUtils;
 import com.androidplot.xy.LineAndPointFormatter;
 import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYPlot;
@@ -57,7 +58,6 @@ public class GraphActivity extends ActionBarActivity {
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction().add(R.id.left_content, GraphFragmentLeft.newInstance(child_id)).commit();
 			getSupportFragmentManager().beginTransaction().add(R.id.right_content, GraphFragmentRight.newInstance(child_id)).commit();
-
 		}
 	}
 	
@@ -69,7 +69,6 @@ public class GraphActivity extends ActionBarActivity {
 		if (date_of_birth != null && !date_of_birth.isEmpty()) {
 			double birth_weight = child.getBirth_weight();
 			double birth_height = child.getBirth_height();
-			
 			if (birth_weight != 0) {
 				child_age_in_weeks_weight = new Number[visits.size() + 1];
 				child_weight = new Number[visits.size() + 1];
@@ -80,7 +79,6 @@ public class GraphActivity extends ActionBarActivity {
 				child_age_in_weeks_weight = new Number[visits.size()];
 				child_weight = new Number[visits.size()];
 			}
-			
 			if (birth_height != 0) {
 				child_age_in_weeks_height = new Number[visits.size() + 1];
 				child_height = new Number[visits.size() + 1];
@@ -94,40 +92,38 @@ public class GraphActivity extends ActionBarActivity {
 		} else {
 			double birth_weight = child.getBirth_weight();
 			double birth_height = child.getBirth_height();
-			
 			if (birth_weight != 0) {
 				child_age_in_weeks_weight = new Number[1];
 				child_weight = new Number[1];
 				child_age_in_weeks_weight[0] = 0;
-				child_weight[0] = Utilities.round(birth_weight, 2);
+				child_weight[0] = GeneralUtilities.round(birth_weight, 2);
 				birth_weight_plus = 1;
 			} else {
 				child_age_in_weeks_weight = new Number[0];
 				child_weight = new Number[0];
 			}
-			
 			if (birth_height != 0) {
 				child_age_in_weeks_height = new Number[1];
 				child_height = new Number[1];
 				child_age_in_weeks_height[0] = 0;
-				child_height[0] = Utilities.round(birth_height, 2);
+				child_height[0] = GeneralUtilities.round(birth_height, 2);
 				birth_height_plus = 1;
 			} else {
 				child_height = new Number[0];
 				child_age_in_weeks_height = new Number[0];
 			}
 		}
-		
 		for (int i = 0; i < visits.size(); i++) {
 			DetailedChildVisit visit = visits.get(i);
 			String visit_date = visit.getVisit_date();
 			double weight = visit.getWeight_in_pounds();
 			double height = visit.getHeight_in_centimeters();
-			double age_in_weeks = Utilities.convertMonthsToWeeks(Utilities.timeBetween(Utilities.formatDate(date_of_birth), Utilities.formatDate(visit_date)));
-			child_age_in_weeks_weight[i + birth_weight_plus] = Utilities.round(age_in_weeks, 1);
-			child_age_in_weeks_height[i + birth_height_plus] = Utilities.round(age_in_weeks, 1);
-			child_weight[i + birth_weight_plus] = Utilities.round(weight, 2); //convert here
-			child_height[i + birth_height_plus] = Utilities.round(height, 2); //convert here
+			int time_between = (int)DateTimeUtilities.timeBetweenInDays(date_of_birth, visit_date);	
+			double age_in_weeks = DateTimeUtilities.convertDaysToWeeks(time_between);
+			child_age_in_weeks_weight[i + birth_weight_plus] = GeneralUtilities.round(age_in_weeks, 1);
+			child_age_in_weeks_height[i + birth_height_plus] = GeneralUtilities.round(age_in_weeks, 1);
+			child_weight[i + birth_weight_plus] = GeneralUtilities.round(weight, 2); //convert here
+			child_height[i + birth_height_plus] = GeneralUtilities.round(height, 2); //convert here
 		}
 	}
 	
@@ -166,9 +162,9 @@ public class GraphActivity extends ActionBarActivity {
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 		    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		    // Get the layout inflater
-		    LayoutInflater inflater = getActivity().getLayoutInflater();
 		    
+		    // Get the layout inflater
+		    LayoutInflater inflater = getActivity().getLayoutInflater();  
 		    final View v = inflater.inflate(R.layout.fragment_graph_new_child_dialog, null);
 	
 		    // Inflate and set the layout for the dialog
@@ -179,7 +175,6 @@ public class GraphActivity extends ActionBarActivity {
 		    return builder.create();
 		}
 	}
-	
 	
 	public static double calculate_weight_z_score(double weight, double age_days, int sex) {
 		Number[] mean_data = null;
@@ -193,14 +188,12 @@ public class GraphActivity extends ActionBarActivity {
 			mean_data = ChildDataStoreMean.female_weight_lb_daily_mean_data;
 			standard_deviations = ChildDataStoreSD.female_weight_lb_daily_sd;
 		}
-		
 		int index = (int)(age_days / 3); //every three days of data
 		if (index > mean_data.length)
 			return -10;
 		double mean = mean_data[index].doubleValue();
 		double sd = standard_deviations[index].doubleValue();
 		return (weight - mean) / sd;
-
 	}
 	
 	public static double calculate_height_z_score(double height, double age_days, int sex) {
@@ -228,16 +221,13 @@ public class GraphActivity extends ActionBarActivity {
 	public static double calculate_other_score() {
 		return 0;
 	}
-	
 
 	
 	public static class GraphFragmentLeft extends Fragment {
 		
 		private static String child_id;
 
-		public GraphFragmentLeft() {
-			
-		}
+		public GraphFragmentLeft() {}
 		
 		public static GraphFragmentLeft newInstance(String child_id) {
 			GraphFragmentLeft f = new GraphFragmentLeft();
@@ -251,7 +241,6 @@ public class GraphActivity extends ActionBarActivity {
 		@Override
 		public void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
-			
 			Bundle args = getArguments();
 			this.child_id = args.getString("child_id");
 		}
@@ -271,13 +260,13 @@ public class GraphActivity extends ActionBarActivity {
 			if (gender == 1) {
 				sex_field.setText("Niño");
 			} else if (gender == 2) {
-				sex_field.setText("Niña");
+				sex_field.setText("Nióa");
 			} else if (gender == 0) {
 				sex_field.setText("No Sexo");
 			}
 			
 			if (dob != null && !dob.isEmpty()) {
-				String formatted_dob = Utilities.formatDate(dob);
+				String formatted_dob = DateTimeUtilities.formatDateForDisplay(dob);
 				TextView dob_field = (TextView)rootView.findViewById(R.id.graph_child_dob);
 				dob_field.setText(formatted_dob);
 			} else {
@@ -292,29 +281,29 @@ public class GraphActivity extends ActionBarActivity {
 			TextView visit_header_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_header);
 			if (dcv == null) { 
 				if (child_age_in_weeks_weight.length > 0 || child_age_in_weeks_height.length > 0) {
-					visit_header_field.setText("Visita de Nacimiento (" + Utilities.formatDate(child.getDate_created()) + ")");
+					visit_header_field.setText("Visita de Nacimiento (" + DateTimeUtilities.formatDateForDisplay(child.getDate_created()) + ")");
 					TextView age_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_age);
 					age_field.setText("Edad: " + 0 + " semanas");
 					if (child_age_in_weeks_weight.length > 0) {
 						double weight = child_weight[0].doubleValue();
 						TextView weight_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_weight);
 						weight_field.setText("Peso: " + weight + " libras");
-						double weight_z_score = Utilities.round(calculate_weight_z_score(weight, 0, gender), 2);
+						double weight_z_score = GeneralUtilities.round(calculate_weight_z_score(weight, 0, gender), 2);
 						TextView weight_z_score_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_weight_z_score);
 						if (weight_z_score == -10)
-							weight_z_score_field.setText("El niño is mayor de 5 años.");
+							weight_z_score_field.setText("El niño is mayor de 5 aóos.");
 						else
-							weight_z_score_field.setText("Grado (Peso): " + weight_z_score);
+							weight_z_score_field.setText("Grado " + weight_z_score + " de peso");
 						
 					} 
 					if (child_age_in_weeks_height.length > 0) {
 						double height = child_height[0].doubleValue();
 						TextView height_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_height);
 						height_field.setText("Talla: " + height + " cm");
-						double height_z_score = Utilities.round(calculate_height_z_score(height, 0, gender), 2);
+						double height_z_score = GeneralUtilities.round(calculate_height_z_score(height, 0, gender), 2);
 						TextView height_z_score_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_height_z_score);
 						if (height_z_score != -10)
-							height_z_score_field.setText("Grado (Talla): " + height_z_score);
+							height_z_score_field.setText("Grado " + height_z_score + " de talla");
 					}
 					
 				} else {
@@ -322,41 +311,36 @@ public class GraphActivity extends ActionBarActivity {
 				}
 			} else {
 				String visit_date = dcv.getVisit_date();
-				String formatted_visit_date = Utilities.formatDate(visit_date);
+				String formatted_visit_date = DateTimeUtilities.formatDateForDisplay(DateTimeUtilities.getCurrentDateTimeString());
 				double age_in_weeks = child_age_in_weeks_weight[child_age_in_weeks_weight.length - 1].doubleValue(); //days
 				double age_in_days = age_in_weeks * 7;
 				double age_in_months = age_in_days / 30.4167;
-				double age_in_years = age_in_months / 12;
 				double weight = child_weight[child_weight.length -1].doubleValue();
 				double height = child_height[child_height.length - 1].doubleValue();
-				double weight_z_score = -10;
-				double height_z_score = -10;
-				if (age_in_days < 1850) {
-					weight_z_score = Utilities.round(calculate_weight_z_score(weight, age_in_days, gender), 2);
-					height_z_score = Utilities.round(calculate_height_z_score(height, age_in_days, gender), 2);
-				}
-				
-				
+								
 				visit_header_field.setText("Última Visita (" + formatted_visit_date + ")"); //Format visit date
 				
 				TextView age_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_age);
-				age_field.setText("Edad: " + Utilities.round(age_in_months, 1) + " meses");
+				age_field.setText("Edad: " + GeneralUtilities.round(age_in_months, 1) + " meses");
 				
 				TextView weight_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_weight);
 				weight_field.setText("Peso: " + weight + " libras");
 				
 				TextView height_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_height);
 				height_field.setText("Talla: " + height + " cm");
-							
-				if (weight_z_score != -10) {
-					TextView weight_z_score_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_weight_z_score);
-					weight_z_score_field.setText("Grado (Peso): " + weight_z_score);
-					
-					TextView height_z_score_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_height_z_score);
-					height_z_score_field.setText("Grado (Talla): " + height_z_score);
-				}
 
-				TextView other_score_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_other_score);
+				double weight_z_score = GeneralUtilities.round(calculate_weight_z_score(weight, age_in_days, gender), 2);
+				double height_z_score = GeneralUtilities.round(calculate_height_z_score(height, age_in_days, gender), 2);
+				if (weight_z_score != -10 && height_z_score != -10) {
+					String weight_grade = getGradeFromZScore(weight_z_score);
+					String height_grade = getGradeFromZScore(height_z_score);
+
+					TextView weight_z_score_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_weight_z_score);
+					weight_z_score_field.setText("Grado " + weight_grade + " de peso");
+
+					TextView height_z_score_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_height_z_score);
+					height_z_score_field.setText("Grado " + height_grade+ " de talla");
+				}
 				
 				TextView recommendation_field = (TextView)rootView.findViewById(R.id.graph_child_reccomendation_info);
 				recommendation_field.setText("Basado de los datos, recomendamos que el niño..");
@@ -364,11 +348,22 @@ public class GraphActivity extends ActionBarActivity {
 			}
 			return rootView;
 		}
+
+		private String getGradeFromZScore(double weight_z_score) {
+			if (weight_z_score > -1) return "Normal";
+			if (weight_z_score > -2) return "Primer";
+			if (weight_z_score > -3) return "Segundo";
+			return "Tercer";
+		}
 	}
 	
 
 	public static class GraphFragmentRight extends Fragment {
 		
+		protected static final Integer TERCERO_COLOR = Color.rgb(200, 0, 0);
+		protected static final Integer SEGUNDO_COLOR = Color.rgb(220, 150, 0);
+		protected static final Integer PRIMERO_COLOR = Color.rgb(200, 200, 0);
+		protected static final Integer NORMAL_COLOR = Color.rgb(0, 180, 0);
 		int selected;
 		int sex;
 		double age_in_months;
@@ -380,8 +375,7 @@ public class GraphActivity extends ActionBarActivity {
 		}
 		
 		public static GraphFragmentRight newInstance(String child_id) {
-			GraphFragmentRight f = new GraphFragmentRight();
-			
+			GraphFragmentRight f = new GraphFragmentRight();		
 			Bundle args =  new Bundle();
 			args.putString("child_id", child_id);
 			f.setArguments(args);
@@ -390,14 +384,14 @@ public class GraphActivity extends ActionBarActivity {
 		
 		@Override
 		public void onCreate(Bundle savedInstanceState) {
-			super.onCreate(savedInstanceState);
-			
+			super.onCreate(savedInstanceState);	
 			Bundle args = getArguments();
 			String child_id = args.getString("child_id");
 			DetailedChild child = DetailedRecordsStore.get(getActivity()).getChild(child_id);
 			String dob = child.getDob();
 			if (dob != null && !dob.isEmpty()) {
-				age_in_months = Utilities.getAgeInMonths(Utilities.formatDate(dob));
+				int age_in_days = (int)DateTimeUtilities.getCurrentAgeInDays(dob);
+				age_in_months = DateTimeUtilities.convertDaysToMonths(age_in_days);
 			} else {
 				age_in_months = -1;
 			}
@@ -417,37 +411,38 @@ public class GraphActivity extends ActionBarActivity {
 				newArr[i] = arr[i].doubleValue() * factor;
 			return newArr;
 		}
+		
+		private void addGuideLinesToPlot(Number[][] data) {
+			Number[] x_array = makeXArray(data[0].length, 0.526);
+			for (int i = data.length-2; i > 0; i--)  {
+				XYSeries series = null;
+				LineAndPointFormatter seriesFormat = null;
+				if (i == 1) { //z-score = -3
+					series = new SimpleXYSeries(Arrays.asList(x_array), Arrays.asList(data[i]), " 3");
+					seriesFormat = new LineAndPointFormatter(TERCERO_COLOR, TERCERO_COLOR, null, null);
+				} else if (i == 2) {// z-score = -2		
+					series = new SimpleXYSeries(Arrays.asList(x_array), Arrays.asList(data[i]), " 2");
+					seriesFormat = new LineAndPointFormatter(SEGUNDO_COLOR, SEGUNDO_COLOR, null, null);
+				} else if (i == 3) {//z-score = -1
+					series = new SimpleXYSeries(Arrays.asList(x_array), Arrays.asList(data[i]), " 1");
+					seriesFormat = new LineAndPointFormatter(PRIMERO_COLOR, PRIMERO_COLOR, null, null);
+				} else if (i == 4) { //z-score = 0
+					series = new SimpleXYSeries(Arrays.asList(x_array), Arrays.asList(data[i]), " 0");
+					seriesFormat = new LineAndPointFormatter(NORMAL_COLOR, NORMAL_COLOR, null, null);
+				}
+				seriesFormat.getVertexPaint().setStrokeWidth(PixelUtils.dpToPix(0));
+				plot.addSeries(series, seriesFormat);
+			}
+		}
 
+		
+		
+		
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 			final View rootView = inflater.inflate(R.layout.fragment_graph_right, container,false);
 			plot = (XYPlot) rootView.findViewById(R.id.mySimpleXYPlot);
-			
-			
-	        plot.getLegendWidget().setTableModel(new DynamicTableModel(1, 4));
-	 
-	        // adjust the legend size so there is enough room
-	        // to draw the new legend grid:
-	 
-	        // add a semi-transparent black background to the legend
-	        // so it's easier to see overlaid on top of our plot:
-	        Paint bgPaint = new Paint();
-	        bgPaint.setColor(Color.BLACK);
-	        bgPaint.setStyle(Paint.Style.FILL);
-	        bgPaint.setAlpha(140);
-	        plot.getLegendWidget().setBackgroundPaint(bgPaint);
-	 
-	        // adjust the padding of the legend widget to look a little nicer:
-	        plot.getLegendWidget().setPadding(10, 10, 10, 10);       
-
-	        plot.getLegendWidget().setSize(new SizeMetrics(130, SizeLayoutType.ABSOLUTE, 70, SizeLayoutType.ABSOLUTE));
-
-	       //plot.disableAllMarkup();
-	        plot.getLegendWidget().position(25,
-	                XLayoutStyle.ABSOLUTE_FROM_RIGHT,
-	                90,
-	                YLayoutStyle.ABSOLUTE_FROM_BOTTOM,
-	                AnchorPosition.RIGHT_BOTTOM);
+	        addLegend();
 			
 			final TextView weight_view = (TextView)rootView.findViewById(R.id.tab_weight);
 			final TextView height_view = (TextView)rootView.findViewById(R.id.tab_height);
@@ -459,45 +454,21 @@ public class GraphActivity extends ActionBarActivity {
 					plot.clear();
 					weight_view.setBackgroundResource(color.gray_medium);
 					height_view.setBackgroundResource(color.gray_dark);
-
-					plot.setRangeLabel("Peso (libras)");
-					
+					plot.setRangeLabel("Peso (libras)");	
 					Number[][] data;
 					if (sex == 1) {
 						data = ChildDataStoreGraph.male_weight_lb_graph_data;
 					} else {
 						data = ChildDataStoreGraph.female_weight_lb_graph_data;
 					}
-					Number[] x_array = makeXArray(data[0].length, 0.526);
-					for (int i = data.length-2; i > 0; i--)  {
-						LineAndPointFormatter seriesFormat = null;
-						XYSeries series = null;
-						if (i == 1){ //z-score = -3
-							series = new SimpleXYSeries(Arrays.asList(x_array), Arrays.asList(data[i]), " 3");
-							seriesFormat = new LineAndPointFormatter(Color.rgb(128, 0, 0), Color.rgb(128, 0, 0), null, null);
-						}else if (i == 2){// z-score = -2
-							series = new SimpleXYSeries(Arrays.asList(x_array), Arrays.asList(data[i]), " 2");
-							seriesFormat = new LineAndPointFormatter(Color.rgb(220, 20, 60), Color.rgb(220, 20, 60), null, null);
-						}else if (i == 3){ //z-score = -1
-							series = new SimpleXYSeries(Arrays.asList(x_array), Arrays.asList(data[i]), " 1");
-							seriesFormat = new LineAndPointFormatter(Color.rgb(255, 127, 80), Color.rgb(255, 127, 80), null, null);
-						}else if (i == 4){ //z-score = 0
-							series = new SimpleXYSeries(Arrays.asList(x_array), Arrays.asList(data[i]), " 0");
-							seriesFormat = new LineAndPointFormatter(Color.rgb(255, 160, 122), Color.rgb(255, 160, 122), null, null);
-						}
-						plot.addSeries(series, seriesFormat);
-						
-					
-					}
+					addGuideLinesToPlot(data);
 					if ((child_age_in_weeks_weight[child_age_in_weeks_weight.length - 1]).doubleValue() < 260.0) {
 						Number[] child_x_array = convertArray(child_age_in_weeks_weight, 0.23);
 						XYSeries series = new SimpleXYSeries(Arrays.asList(child_x_array), Arrays.asList(child_weight), null);
 						LineAndPointFormatter seriesFormat = new LineAndPointFormatter(Color.BLACK, Color.BLUE, null, null);
-						//CustomPointRenderer<LineAndPointFormatter> cpr = new CustomPointRenderer<LineAndPointFormatter>(plot);
+						seriesFormat.getVertexPaint().setStrokeWidth(PixelUtils.dpToPix(10));
 						plot.addSeries(series, seriesFormat);
 					}
-					//XYSeries series = new SimpleXYSeries(Arrays.asList(data[0]), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "");
-			        //plot.addSeries(series, cpr.getFormatter(series));
 					plot.setTitle("");
 					plot.setRangeBottomMax(3);
 					plot.setDomainLeftMin(0);
@@ -513,48 +484,27 @@ public class GraphActivity extends ActionBarActivity {
 				
 			});
 			height_view.setOnClickListener(new View.OnClickListener() {
-			
+				
 				@Override
 				public void onClick(View v) {
 					plot.clear();
 					height_view.setBackgroundResource(color.gray_medium);
 					weight_view.setBackgroundResource(color.gray_dark);
-
 					plot.setRangeLabel("Talla (cm)");
-					
 					Number[][] data;
 					if (sex == 1) {
 						data = ChildDataStoreGraph.male_height_cm_graph_data;
 					} else {
 						data = ChildDataStoreGraph.female_height_cm_graph_data;
 					}
-					Number[] x_array = makeXArray(data[0].length, 0.526);
-					for (int i = data.length-2; i > 0; i--)  {
-						XYSeries series = null;
-						LineAndPointFormatter seriesFormat = null;
-						if (i == 1) { //z-score = -3
-							series = new SimpleXYSeries(Arrays.asList(x_array), Arrays.asList(data[i]), " 3");
-							seriesFormat = new LineAndPointFormatter(Color.rgb(128, 0, 0), Color.rgb(128, 0, 0), null, null);
-						} else if (i == 2) {// z-score = -2
-							series = new SimpleXYSeries(Arrays.asList(x_array), Arrays.asList(data[i]), " 2");
-							seriesFormat = new LineAndPointFormatter(Color.rgb(220, 20, 60), Color.rgb(220, 20, 60), null, null);
-						} else if (i == 3) {//z-score = -1
-							series = new SimpleXYSeries(Arrays.asList(x_array), Arrays.asList(data[i]), " 1");
-							seriesFormat = new LineAndPointFormatter(Color.rgb(255, 127, 80), Color.rgb(255, 127, 80), null, null);
-						} else if (i == 4) { //z-score = 0
-							series = new SimpleXYSeries(Arrays.asList(x_array), Arrays.asList(data[i]), " 0");
-							seriesFormat = new LineAndPointFormatter(Color.rgb(255, 160, 122), Color.rgb(255, 160, 122), null, null);
-						}
-						plot.addSeries(series, seriesFormat);
-					}
+					addGuideLinesToPlot(data);
 					if ((child_age_in_weeks_height[child_age_in_weeks_height.length - 1]).doubleValue() < 260.0) {
 						Number[] child_x_array = convertArray(child_age_in_weeks_height, 0.23);
 						XYSeries series = new SimpleXYSeries(Arrays.asList(child_x_array), Arrays.asList(child_height), "Child");
 						LineAndPointFormatter seriesFormat = new LineAndPointFormatter(Color.BLACK, Color.BLUE, null, null);
-						plot.addSeries(series, seriesFormat);
-						
-					}
-				
+						seriesFormat.getVertexPaint().setStrokeWidth(PixelUtils.dpToPix(10));
+						plot.addSeries(series, seriesFormat);	
+					}	
 					plot.setTitle("");
 					plot.setRangeBottomMax(40);
 					plot.setDomainLeftMin(0);
@@ -566,14 +516,30 @@ public class GraphActivity extends ActionBarActivity {
 					plot.setRangeStep(XYStepMode.INCREMENT_BY_VAL, 5);
 					plot.setRangeValueFormat(new DecimalFormat(""));
 			        plot.redraw();
-
 				}
 			});
-				
 			if (selected == 1) weight_view.performClick();
 			else if (selected == 2) height_view.performClick();
-			
 			return rootView;
+		}
+
+		private void addLegend() {
+			plot.getLegendWidget().setTableModel(new DynamicTableModel(1, 4));
+	 
+	        // add a semi-transparent black background to the legend
+	        // so it's easier to see overlaid on top of our plot:
+	        Paint bgPaint = new Paint();
+	        bgPaint.setColor(Color.BLACK);
+	        bgPaint.setStyle(Paint.Style.FILL);
+	        bgPaint.setAlpha(140);
+	        plot.getLegendWidget().setBackgroundPaint(bgPaint);
+	 
+	        // adjust the padding of the legend widget to look a little nicer:
+	        plot.getLegendWidget().setPadding(15, 15, 15, 15);       
+	        plot.getLegendWidget().setSize(new SizeMetrics(220, SizeLayoutType.ABSOLUTE, 90, SizeLayoutType.ABSOLUTE));
+	        plot.getLegendWidget().position(90, XLayoutStyle.ABSOLUTE_FROM_RIGHT,
+	                120, YLayoutStyle.ABSOLUTE_FROM_BOTTOM,
+	                AnchorPosition.RIGHT_BOTTOM);
 		}
 	}
 }

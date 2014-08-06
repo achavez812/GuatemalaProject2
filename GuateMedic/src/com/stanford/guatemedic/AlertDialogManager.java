@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 
 public class AlertDialogManager {
+	
 	/**
      * Function to display simple Alert Dialog
      * @param context - application context
@@ -15,25 +16,21 @@ public class AlertDialogManager {
      * */
     public void showAlertDialog(Context context, String title, String message,
             Boolean status) {
-        AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-  
-        // Setting Dialog Title
-        alertDialog.setTitle(title);
-  
-        // Setting Dialog Message
-        alertDialog.setMessage(message);
-  
-        if(status != null)
-            // Setting alert dialog icon
-            alertDialog.setIcon((status) ? R.drawable.success : R.drawable.denied);
-  
-        // Setting OK Button
-        alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-            }
-        });
-  
-        // Showing Alert Message
-        alertDialog.show();
+    	AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+		alertDialogBuilder.setTitle(title);
+		alertDialogBuilder
+			.setMessage(message)
+			.setCancelable(false)
+			.setNeutralButton("OK",  new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int id) {
+					dialog.cancel();
+				}
+			});
+		if (status != null)
+			alertDialogBuilder.setIcon((status) ? R.drawable.success : R.drawable.denied);
+		
+		AlertDialog alertDialog = alertDialogBuilder.create();
+		alertDialog.show();
     }
+
 }

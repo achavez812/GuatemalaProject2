@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Need to set total width paddingLeft + layout_width + paddingRight programatically -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/login_dialog_layout"
+    android:orientation="vertical" 
+    android:layout_height="match_parent"
+    android:paddingLeft="10dp" 
+    android:paddingRight="10dp"
+    android:paddingBottom="15dp"
+    android:background="#fff" 
+    android:layout_width="350dp"
+    android:paddingTop="5dp" >
+    
+    <TextView
+       android:id="@+id/login_dialog_error"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginLeft="5dp"
+       android:textColor="#FFFF0000"
+       android:visibility="gone"
+       android:textSize="18sp"
+       android:text="Error. Ingrese toda la información."
+    />
+    
+    <EditText 
+        android:id="@+id/login_dialog_username"
+        android:inputType="textVisiblePassword"
+        android:layout_height="wrap_content" 
+        android:layout_width="match_parent" 
+        android:textSize="22sp"
+        android:hint="@string/username_string" />
+    
+    <EditText 
+        android:id="@+id/login_dialog_password"
+        android:inputType="textPassword" 
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" 
+        android:layout_marginTop="5dp"
+        android:textSize="22sp"
+        android:hint="@string/password_string" />
+    
+    <LinearLayout 
+        android:id="@+id/login_dialog_button_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:layout_marginTop="10dp">
+        
+        <Button 
+            android:id="@+id/login_dialog_submit_button"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content" 
+            android:layout_weight="0.5"
+            android:text="@string/continue_button_text" />
+        
+        <Button 
+            android:id="@+id/login_dialog_cancel_button" 
+            android:layout_width="150dp"
+            android:layout_height="wrap_content" 
+            android:layout_weight="0.5"
+            android:text="@string/cancel_button_text" />
+        
+    </LinearLayout>
+    
+</LinearLayout>
