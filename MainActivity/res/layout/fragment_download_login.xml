@@ -43,6 +43,7 @@
         android:layout_height="75dp"
         android:layout_margin="50dp"
         android:padding="20dp"
+        style="@style/ButtonText"
         android:text="CONTINUAR" />
     
 

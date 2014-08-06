@@ -65,6 +65,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginBottom="40dp"
         android:textSize="30sp"
+        style="@style/ButtonText"
         android:text="Añadir la Familia"
         />
  
