@@ -27,6 +27,7 @@
         android:id="@+id/save_family_visit"
         android:layout_gravity="center"
         android:gravity="center"
+        style="@style/ButtonText"
         android:text="Guardar"/>
     </LinearLayout>
 </ScrollView>

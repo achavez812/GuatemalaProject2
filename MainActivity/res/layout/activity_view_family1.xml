@@ -11,6 +11,7 @@
 	    android:layout_width="fill_parent"
 	    android:layout_height="60dp"
 	    android:layout_alignParentBottom="true"
+	    style="@style/ButtonText"
 	    android:text="Añadir un Niño"
 	    />
 	
@@ -147,6 +148,7 @@
 	                android:layout_height="60dp"
 	                android:layout_marginTop="14dp"
 	                android:gravity="center"
+	                style="@style/ButtonText"
 	                android:text="Editar la Familia" />
 	            
 	        </LinearLayout>
