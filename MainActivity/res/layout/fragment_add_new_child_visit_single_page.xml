@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:paddingLeft="10dp"
+	    android:paddingRight="10dp"
+	    android:paddingBottom="50dp"
+	    android:gravity="center_horizontal"
+	    android:orientation="vertical" >
+	    
+	    <!--
+	    <TextView
+	        android:id="@+id/single_child_visit_child_name_textview"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:layout_marginTop="10dp"
+	        android:layout_marginBottom="10dp"
+	        android:textSize="30sp" />
+	    -->
+	   	<TextView 
+	       	android:id="@+id/single_child_visit_child_age_textview"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="10dp"
+	        android:layout_marginBottom="10dp"
+	        android:textSize="30sp" />
+	   	
+	   	<LinearLayout
+	   	    android:layout_width="match_parent"
+	   	    android:layout_height="wrap_content"
+	   	    android:orientation="horizontal" >
+	   	    
+	   	    <TextView
+	   	        android:layout_width="wrap_content"
+	   	        android:layout_height="wrap_content"
+	   	        android:textSize="30sp" 
+	   	        android:text="Peso (libras): "/>
+	   	    
+	   	    <EditText
+	   	        android:id="@+id/single_child_visit_child_weight_edittext"
+	   	        android:layout_width="150dp"
+	   	        android:layout_height="wrap_content"
+	   	        android:inputType="number"
+	   	        android:textSize="30sp" />
+	   	    
+	   	</LinearLayout>
+
+	   	<LinearLayout
+	   	    android:layout_width="match_parent"
+	   	    android:layout_height="wrap_content"
+	   	    android:layout_marginTop="20dp"
+	   	    android:orientation="horizontal" >
+	   	    
+	   	    <TextView
+	   	        android:layout_width="wrap_content"
+	   	        android:layout_height="wrap_content"
+	   	        android:textSize="30sp" 
+	   	        android:text="Talla (cm): "/>
+	   	    
+	   	    <EditText
+	   	        android:id="@+id/single_child_visit_child_height_edittext"
+	   	        android:layout_width="150dp"
+	   	        android:layout_height="wrap_content"
+	   	        android:inputType="number"
+	   	        android:textSize="30sp" />
+	   	    
+	   	</LinearLayout>
+	   	
+	   	<TextView android:id="@+id/child_visit_child_is_currently_breastfed_textview"
+	  		android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	       	android:layout_marginTop="20dp"
+	       	android:textSize="30sp"
+	        android:text="¿El niño TODAVÍA está mamando?"/>
+	     
+ 		<LinearLayout
+	  		android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="20dp"
+	        android:orientation="horizontal" >
+	
+	    	<RadioGroup 
+	    	    android:id="@+id/child_visit_child_is_currently_breastfed_radio"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:orientation="horizontal">
+			    
+			    <RadioButton android:id="@+id/yes_breastfed"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginRight="20dp"
+			        android:textSize="30sp"
+			        android:text="Sí"/>
+			    
+			    <RadioButton android:id="@+id/no_breastfed"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:textSize="30sp"
+			        android:text="No"/>
+			    
+			</RadioGroup>
+			
+		</LinearLayout>
+	
+	  	<TextView android:id="@+id/child_visit_child_is_only_breastfed_textview"
+	   		android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	       	android:layout_marginTop="15dp"
+	       	android:textSize="30sp"
+	       	android:visibility="gone"
+	        android:text="¿Esta comiendo solo pecho?"/>
+	  	
+	 	<LinearLayout
+	  		android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="20dp"
+	        android:orientation="horizontal" >
+	
+	    	<RadioGroup 
+	    	    android:id="@+id/child_visit_child_is_only_breastfed_radio"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:textSize="30sp"
+			    android:orientation="horizontal">
+			    
+			    <RadioButton android:id="@+id/yes_only_breastfed"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginRight="20dp"
+			        android:textSize="30sp"
+			        android:text="Sí"/>
+			    
+			    <RadioButton android:id="@+id/no_only_breastfed"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:textSize="30sp"
+			        android:text="No"/>
+			    
+			</RadioGroup>
+			
+		</LinearLayout>
+	   	
+	   	<TextView
+	   	    android:id="@+id/child_visit_child_how_long_only_breastfed_textview"
+	   	    android:layout_width="match_parent"
+	   	    android:layout_height="match_parent"
+	   	    android:layout_marginTop="15dp"
+	   	    android:textSize="30sp"
+	   	    android:text="¿Por cuántos meses le dio solo pecho al niño?"
+	   	    />
+	   	
+	   	<EditText
+	   	    android:id="@+id/child_visit_child_how_long_only_breastfed_edittext"
+	   	    android:layout_width="match_parent"
+	   	    android:layout_height="wrap_content"
+	   	    android:textSize="30sp"
+	   	    />
+	   	
+	   	<TextView
+	   	    android:id="@+id/child_visit_child_what_age_stopped_breastfeeding_textview"
+	   	    android:layout_width="match_parent"
+	   	    android:layout_height="match_parent"
+	   	    android:layout_marginTop="15dp"
+	   	    android:textSize="30sp"
+	   	    android:text="¿A que edad dejó de mamar el niño?"
+	   	    />
+	   	
+	   	<EditText 
+	   	    android:id="@+id/child_visit_child_what_age_stopped_breastfeeding_edittext"
+	   	    android:layout_width="match_parent"
+	   	    android:layout_height="wrap_content"
+	   	    android:textSize="30sp"
+	   	    />
+	   	
+	   	<TextView 
+	   	    android:layout_width="wrap_content"
+	   	    android:layout_height="wrap_content"
+	   	    android:layout_marginTop="20dp"
+	   	    android:textSize="30sp"
+	   	    android:layout_gravity="left"
+	   	    android:text="¿Cuántas veces a la semana"/>
+	   	
+	   	   	<LinearLayout
+		   	    android:layout_width="match_parent"
+		   	    android:layout_height="wrap_content"
+		   	    android:layout_marginTop="5dp"
+		   	    android:layout_marginLeft="30dp"
+		   	    android:orientation="horizontal" >
+	   	    
+		   	    <TextView
+		   	        android:layout_width="wrap_content"
+		   	        android:layout_height="wrap_content"
+		   	        android:textSize="25sp" 
+		   	        android:text="toma incaparina el niño?  "/>
+		   	    
+		   	    <EditText
+		   	        android:id="@+id/single_child_visit_child_num_times_incaparina_edittext"
+		   	        android:layout_width="100dp"
+		   	        android:layout_height="wrap_content"
+		   	        android:inputType="number"
+		   	        android:textSize="25sp" />
+		   	    
+		   	</LinearLayout>
+		   	
+	   	   	<LinearLayout
+		   	    android:layout_width="match_parent"
+		   	    android:layout_height="wrap_content"
+		   	    android:layout_marginTop="5dp"
+		   	    android:layout_marginLeft="30dp"
+		   	    android:orientation="horizontal" >
+	   	    
+		   	    <TextView
+		   	        android:layout_width="wrap_content"
+		   	        android:layout_height="wrap_content"
+		   	        android:textSize="25sp" 
+		   	        android:text="come verduras y frutas el niño?  "/>
+		   	    
+		   	    <EditText
+		   	        android:id="@+id/single_child_visit_child_num_times_vegetables_and_fruits_edittext"
+		   	        android:layout_width="100dp"
+		   	        android:layout_height="wrap_content"
+		   	        android:inputType="number"
+		   	        android:textSize="25sp" />
+		   	    
+		   	</LinearLayout>
+		   	
+	   	   	<LinearLayout
+		   	    android:layout_width="match_parent"
+		   	    android:layout_height="wrap_content"
+		   	    android:layout_marginTop="5dp"
+		   	    android:layout_marginLeft="30dp"
+		   	    android:orientation="horizontal" >
+	   	    
+		   	    <TextView
+		   	        android:layout_width="wrap_content"
+		   	        android:layout_height="wrap_content"
+		   	        android:textSize="25sp" 
+		   	        android:text="come hierbas el niño?  "/>
+		   	    
+		   	    <EditText
+		   	        android:id="@+id/single_child_visit_child_num_times_diarreah_edittext"
+		   	        android:layout_width="100dp"
+		   	        android:layout_height="wrap_content"
+	   	        android:inputType="number"
+	   	        android:textSize="25sp" />
+	   	    
+	   	</LinearLayout>
+	   	
+		<TextView 
+	   	    android:layout_width="wrap_content"
+	   	    android:layout_height="wrap_content"
+	   	    android:layout_marginTop="20dp"
+	   	    android:textSize="30sp"
+	   	    android:text="En la semana pasada, por cuantos días tuvo su niño estas enfermedades: "/>
+		
+	   	<LinearLayout
+	   	    android:layout_width="match_parent"
+	   	    android:layout_height="wrap_content"
+	   	    android:layout_marginTop="5dp"
+	   	    android:layout_marginLeft="30dp"
+	   	    android:orientation="horizontal" >
+	  	    
+	   	    <TextView
+	   	        android:layout_width="wrap_content"
+	   	        android:layout_height="wrap_content"
+	   	        android:textSize="25sp" 
+	   	        android:text="-Diarrea:  "/>
+	   	    
+	   	    <EditText
+	   	        android:id="@+id/single_child_visit_child_num_times_herbs_edittext"
+	   	        android:layout_width="100dp"
+	   	        android:layout_height="wrap_content"
+	   	        android:layout_marginLeft="10dp"
+	   	        android:inputType="number"
+	   	        android:textSize="25sp" />
+	   	    
+	   	</LinearLayout>
+	   	
+	   	<LinearLayout
+	   	    android:layout_width="match_parent"
+	   	    android:layout_height="wrap_content"
+	   	    android:layout_marginTop="5dp"
+	   	    android:layout_marginLeft="30dp"
+	   	    android:orientation="horizontal" >
+	  	    
+	   	    <TextView
+	   	        android:layout_width="wrap_content"
+	   	        android:layout_height="wrap_content"
+	   	        android:textSize="25sp" 
+	   	        android:text="-Vómitos:  "/>
+	   	    
+	   	    <EditText
+	   	        android:id="@+id/single_child_visit_child_num_times_vomit_edittext"
+	   	        android:layout_width="100dp"
+	   	        android:layout_height="wrap_content"
+	   	        android:layout_marginLeft="10dp"
+	   	        android:inputType="number"
+	   	        android:textSize="25sp" />
+	   	    
+	   	</LinearLayout>
+	   	
+	   	<LinearLayout
+	   	    android:layout_width="match_parent"
+	   	    android:layout_height="wrap_content"
+	   	    android:layout_marginTop="5dp"
+	   	    android:layout_marginLeft="30dp"
+	   	    android:orientation="horizontal" >
+	  	    
+	   	    <TextView
+	   	        android:layout_width="wrap_content"
+	   	        android:layout_height="wrap_content"
+	   	        android:textSize="25sp" 
+	   	        android:text="-Tos:  "/>
+	   	    
+	   	    <EditText
+	   	        android:id="@+id/single_child_visit_child_num_times_cough_edittext"
+	   	        android:layout_width="100dp"
+	   	        android:layout_height="wrap_content"
+	   	        android:layout_marginLeft="10dp"
+	   	        android:inputType="number"
+	   	        android:textSize="25sp" />
+	   	    
+	   	</LinearLayout>
+	   	
+	   	<LinearLayout
+	   	    android:layout_width="match_parent"
+	   	    android:layout_height="wrap_content"
+	   	    android:layout_marginTop="5dp"
+	   	    android:layout_marginLeft="30dp"
+	   	    android:orientation="horizontal" >
+	  	    
+	   	    <TextView
+	   	        android:layout_width="wrap_content"
+	   	        android:layout_height="wrap_content"
+	   	        android:textSize="25sp" 
+	   	        android:text="-Fiebre:  "/>
+	   	    
+	   	    <EditText
+	   	        android:id="@+id/single_child_visit_child_num_times_fever_edittext"
+	   	        android:layout_width="100dp"
+	   	        android:layout_height="wrap_content"
+	   	        android:layout_marginLeft="10dp"
+	   	        android:inputType="number"
+	   	        android:textSize="25sp" />
+	   	    
+	   	</LinearLayout>
+	   	
+	   	   	<LinearLayout
+	   	    android:layout_width="match_parent"
+	   	    android:layout_height="wrap_content"
+	   	    android:layout_marginTop="5dp"
+	   	    android:layout_marginLeft="30dp"
+	   	    android:orientation="horizontal" >
+	  	    
+	   	    <TextView
+	   	        android:layout_width="wrap_content"
+	   	        android:layout_height="wrap_content"
+	   	        android:textSize="25sp" 
+	   	        android:text="-Otro:  "/>
+	   	    
+	   	    <EditText
+	   	        android:id="@+id/single_child_visit_child_num_times_other_edittext"
+	   	        android:layout_width="100dp"
+	   	        android:layout_height="wrap_content"
+	   	        android:layout_marginLeft="10dp"
+	   	        android:inputType="number"
+	   	        android:textSize="25sp" />
+	   	    
+	   	</LinearLayout>
+	   	
+	   	<TextView
+	   	    android:layout_width="wrap_content"
+	   	    android:layout_height="wrap_content"
+	   	    android:layout_marginTop="15dp"
+	   	    android:textSize="30sp" 
+	   	    android:text="¿A que edad recibió su niño desparasitantes?" />
+	   	
+	   	<EditText
+	   	    android:id="@+id/single_child_visit_deparasiting_edittext"
+	   	    android:layout_width="match_parent"
+	   	    android:layout_height="wrap_content"
+	   	    android:textSize="30sp" />
+	   	
+	   	<Button
+	   	    android:id="@+id/single_child_visit_submit_button"
+	   	    android:layout_width="250dp"
+	   	    android:layout_height="60dp"
+	   	    android:layout_marginTop="20dp"
+	   	    android:gravity="center"
+	   	    android:text="Guardar"
+	   	    style="@style/ButtonText"
+	   	    />
+	   	
+	</LinearLayout>
+</ScrollView>
