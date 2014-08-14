@@ -7,7 +7,7 @@ import org.json.JSONObject;
 
 public class DetailedChildVisit {
 	
-	private boolean in_progress = false;
+	private boolean in_progress;
 	
 	private String child_id;
 	private String temp_child_id;
@@ -49,7 +49,7 @@ public class DetailedChildVisit {
 		this.child_id = child_id;
 		this.temp_child_id = child_id;
 		
-		this.in_progress = true;
+		this.in_progress = false;
 	}
 	
 	public boolean isIn_progress() {

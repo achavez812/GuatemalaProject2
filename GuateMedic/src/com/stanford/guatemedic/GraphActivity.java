@@ -258,9 +258,9 @@ public class GraphActivity extends ActionBarActivity {
 			
 			TextView sex_field = (TextView)rootView.findViewById(R.id.graph_child_sex);
 			if (gender == 1) {
-				sex_field.setText("NiÃ±o");
+				sex_field.setText("Ni–o");
 			} else if (gender == 2) {
-				sex_field.setText("NiÃ³a");
+				sex_field.setText("Ni—a");
 			} else if (gender == 0) {
 				sex_field.setText("No Sexo");
 			}
@@ -291,7 +291,7 @@ public class GraphActivity extends ActionBarActivity {
 						double weight_z_score = GeneralUtilities.round(calculate_weight_z_score(weight, 0, gender), 2);
 						TextView weight_z_score_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_weight_z_score);
 						if (weight_z_score == -10)
-							weight_z_score_field.setText("El niÃ±o is mayor de 5 aÃ³os.");
+							weight_z_score_field.setText("El ni–o is mayor de 5 a—os.");
 						else
 							weight_z_score_field.setText("Grado " + weight_z_score + " de peso");
 						
@@ -343,7 +343,7 @@ public class GraphActivity extends ActionBarActivity {
 				}
 				
 				TextView recommendation_field = (TextView)rootView.findViewById(R.id.graph_child_reccomendation_info);
-				recommendation_field.setText("Basado de los datos, recomendamos que el niÃ±o..");
+				recommendation_field.setText("Basado de los datos, recomendamos que el ni–o..");
 				//Assign variables
 			}
 			return rootView;

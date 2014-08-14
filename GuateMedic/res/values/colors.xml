@@ -10,4 +10,6 @@
     <color name="selected_tab_text_color">#FF000000</color>
     <color name="unselected_tab_background_color">#FFD9D9D9</color>
     <color name="unselected_tab_text_color">#FFA19F91</color>
+    
+    <color name="red">#FFFF4747</color>
 </resources>

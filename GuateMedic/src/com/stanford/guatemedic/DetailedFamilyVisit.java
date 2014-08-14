@@ -7,7 +7,7 @@ import org.json.JSONObject;
 
 public class DetailedFamilyVisit {
 	
-	private boolean in_progress = false;
+	private boolean in_progress;
 	
 	private String family_id;
 	private String temp_family_id; //Read only, Set in constructor

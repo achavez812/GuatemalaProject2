@@ -78,7 +78,7 @@ public class DownloadAuthorizationActivity extends ActionBarActivity {
 					String password = password_field.getText().toString();
 					
 					if (username.isEmpty() || password.isEmpty()) {
-						new AlertDialogManager().showAlertDialog(getActivity(), "Alerta", "Por favor llene toda la informaci√≥n.", false);
+						new AlertDialogManager().showAlertDialog(getActivity(), "Alerta", "Por favor llene toda la información.", false);
 					} else {
 						//Check if valid login with backend
 						//Go to new page
@@ -159,11 +159,11 @@ public class DownloadAuthorizationActivity extends ActionBarActivity {
 					dialog.dismiss();
 				
 				if (!has_internet) {
-					new AlertDialogManager().showAlertDialog(getActivity(), "Alert", "No hay una conexi√≥n a Internet.", false);
+					new AlertDialogManager().showAlertDialog(getActivity(), "Alert", "No hay una conexión a Internet.", false);
 				} else if (auth_key == null) {
-					new AlertDialogManager().showAlertDialog(getActivity(), "Alert", "La informaci√≥n ingresada es incorrecto.", false);
+					new AlertDialogManager().showAlertDialog(getActivity(), "Alert", "La información ingresada es incorrecto.", false);
 				} else if (!success) {
-					new AlertDialogManager().showAlertDialog(getActivity(), "Alert", "Occuri√≥ un problema. Trata otra vez.", false);
+					new AlertDialogManager().showAlertDialog(getActivity(), "Alert", "Occurió un problema. Trata otra vez.", false);
 				} else { //Success
 					Intent i = new Intent(getActivity(), DownloadCommunitiesActivity.class);
 					startActivity(i);

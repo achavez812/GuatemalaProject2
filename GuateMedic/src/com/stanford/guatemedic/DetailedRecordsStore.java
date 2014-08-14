@@ -17,6 +17,7 @@ import org.json.JSONObject;
 
 import android.content.Context;
 import android.os.Environment;
+import android.util.Log;
 
 
 public class DetailedRecordsStore {
@@ -129,7 +130,10 @@ public class DetailedRecordsStore {
 	}
 	
 	public Set<String> getChildrenInProgress(String village) {
-		return children_in_progress.get(village);
+		if (children_in_progress.containsKey(village))
+			return children_in_progress.get(village);
+		else
+			return new HashSet<String>();
 	}
 	
 	public DetailedFamily startNewFamily(String village) {
@@ -171,10 +175,15 @@ public class DetailedRecordsStore {
 	}
 	
 	public DetailedChild startNewChild(String village, String family_id) {
+		Log.i("WTF", "Start new Child");
+		if (!children_in_progress.containsKey(village))
+			children_in_progress.put(village, new HashSet<String>());
 		String random_id = generateRandomId();
 		DetailedChild dc = new DetailedChild(family_id, random_id);
+		dc.setIn_progress(true);
 		children.get(family_id).add(dc);
 		children_in_progress.get(village).add(random_id);
+		startNewChildVisit(village, random_id);
 		return dc;
 	}
 	
@@ -206,11 +215,23 @@ public class DetailedRecordsStore {
 	}
 	
 	public DetailedChildVisit startNewChildVisit(String village, String child_id) {
-		DetailedChildVisit dcv = new DetailedChildVisit(child_id);
-		dcv.setVisit_date(DateTimeUtilities.getCurrentDateTimeString());
-		getChild(child_id).addChild_visit(dcv);
+		Log.i("WTF", "Start new Child Visit");
+		Log.i("WTF", "Village: " + village);
+		Log.i("WTF", "Child id: " + child_id);
+		
+		DetailedChild dc = getChild(child_id);
+		
+		if (!children_in_progress.containsKey(village))
+			children_in_progress.put(village, new HashSet<String>());
 		children_in_progress.get(village).add(child_id);
-		return dcv;
+		
+		if (!dc.hasVisit_in_progress()) {
+			DetailedChildVisit dcv = new DetailedChildVisit(child_id);
+			dcv.setIn_progress(true);
+			dcv.setVisit_date(DateTimeUtilities.getCurrentDateTimeString());
+			getChild(child_id).addChild_visit(dcv);
+		}
+		return dc.getLastVisit();
 	}
 	
 	public void addNewChildVisit(JSONObject obj) {

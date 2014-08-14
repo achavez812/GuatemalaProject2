@@ -70,7 +70,7 @@ public class SyncAuthorizationActivity extends ActionBarActivity {
 					String password = password_field.getText().toString();
 					
 					if (username.isEmpty() || password.isEmpty()) {
-						new AlertDialogManager().showAlertDialog(getActivity(), "Alerta", "Por favor llene toda la informaci√≥n.", false);
+						new AlertDialogManager().showAlertDialog(getActivity(), "Alerta", "Por favor llene toda la información.", false);
 					} else {
 						//Check if valid login with backend
 						//AsyncTask that uploads and re-downloads same communities

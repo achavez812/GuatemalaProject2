@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class DetailedFamily {
 	
-	private boolean in_progress = false;
+	private boolean in_progress;
 	
 	private String village_name;
 	private String family_id;

@@ -2,9 +2,11 @@ package com.stanford.guatemedic;
 
 import java.util.ArrayList;
 
+import android.util.Log;
+
 public class DetailedChild {
 	
-	private boolean in_progress = false;
+	private boolean in_progress;
 	
 	private String family_id;
 	private String temp_family_id;
@@ -35,8 +37,8 @@ public class DetailedChild {
 		this.child_id = child_id;
 		this.temp_child_id = child_id;
 		
-		in_progress = true;
-		
+		this.in_progress = false;
+				
 		child_visits = new ArrayList<DetailedChildVisit>();
 	}	
 
@@ -184,7 +186,9 @@ public class DetailedChild {
 	//Index 0: Most recent visit
 	public void addChild_visit(DetailedChildVisit child_visit) {
 		String visit_date = child_visit.getVisit_date(); //Date of visit being added
+		Log.i("WTF", "New Visit Date: " + visit_date);
 		for (int i = 0; i < child_visits.size(); i++) {
+			Log.i("WTF", "  Visit Date: " + child_visits.get(i).getVisit_date());
 			int value = visit_date.compareTo(child_visits.get(i).getVisit_date());
 			if (value < 0) {
 				child_visits.add(i, child_visit); //Shifts everything over
@@ -201,6 +205,20 @@ public class DetailedChild {
 				return true;
 		}
 		return false;
+	}
+	
+	public boolean hasVisit_in_progress() {
+		ArrayList<DetailedChildVisit> visits = getChild_visits();
+		if (!visits.isEmpty()) {
+			DetailedChildVisit visit = visits.get(visits.size() - 1);
+			return visit.isIn_progress();
+		}
+		return false;
+	}
+	
+	public DetailedChildVisit getLastVisit() {
+		ArrayList<DetailedChildVisit> visits = getChild_visits();
+		return visits.get(visits.size() - 1);
 	}
 	
 	public ArrayList<DetailedChildVisit> getChild_visits() {

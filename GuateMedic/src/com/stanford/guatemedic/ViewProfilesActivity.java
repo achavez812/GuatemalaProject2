@@ -9,6 +9,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -117,7 +118,7 @@ public class ViewProfilesActivity extends ActionBarActivity {
 				ArrayList<DetailedChild> the_children = DetailedRecordsStore.get(getActivity().getApplication()).getChildren(family_id);
 				for (DetailedChild child : the_children)
 					children_array.add(child.getChild_id());
-				children_array.add("+A√±adir un Nuevo Ni√±o");
+				children_array.add("+Añadir un Nuevo Niño");
 			}
 		}
 		
@@ -158,6 +159,7 @@ public class ViewProfilesActivity extends ActionBarActivity {
 			community = args.getString("community");
 			
 			Set<String> children_set = DetailedRecordsStore.get(getActivity().getApplication()).getChildrenInProgress(community);
+			Log.i("WTF", "" + children_set.size());
 			for (String child_id : children_set) {
 				DetailedChild child = DetailedRecordsStore.get(getActivity().getApplication()).getChild(child_id);
 				String family_id = child.getFamily_id();

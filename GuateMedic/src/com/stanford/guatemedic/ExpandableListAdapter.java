@@ -21,17 +21,15 @@ import android.widget.Toast;
 public class ExpandableListAdapter extends BaseExpandableListAdapter{
 	
 	private Activity context;
-	private Map<String, ArrayList<String>> children;
-	private ArrayList<String> families;
-	static private int family_focused = 0;
-	static private boolean keyboard = false;
 	private static String village;
+	private ArrayList<String> families;
+	private Map<String, ArrayList<String>> children;
 	
 	public ExpandableListAdapter(Activity context, String village, ArrayList<String> families, Map<String, ArrayList<String>> children) {
 		this.context = context;
 		this.children = children;
 		this.families = families;
-		this.village = village;
+		ExpandableListAdapter.village = village;
 	}
 	
 	public Object getChild(int familyPosition, int childPosition) {
@@ -47,100 +45,102 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
 	}
 	
 	public View getChildView(final int familyPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-		final String child_id = (String)getChild(familyPosition, childPosition);
-		final String family_id = (String)getGroup(familyPosition);
+		String child_id = (String)getChild(familyPosition, childPosition);
+		String family_id = (String)getGroup(familyPosition);
 		if (convertView == null) {
 			Log.i("WTF", "Inflating new child_all_item layout.");
 			LayoutInflater inflater = context.getLayoutInflater();
 			convertView = inflater.inflate(R.layout.child_all_item, null);
 		}
+		
 		final TextView textview = (TextView)convertView.findViewById(R.id.child_all_item_textview);
 		final EditText edittext = (EditText)convertView.findViewById(R.id.child_all_item_edittext);
 		final Button button = (Button)convertView.findViewById(R.id.child_all_item_button);
-		
-		if (child_id.equals("+A√±adir un Nuevo Ni√±o")) {
-			if (textview.getVisibility() == View.VISIBLE) {
-				edittext.setVisibility(View.GONE);
-				button.setVisibility(View.INVISIBLE);
-				textview.setText("+A√±adir un Nuevo Ni√±o");
 				
-				textview.setOnClickListener(new View.OnClickListener() {
-					
-					
-					@Override
-					public void onClick(View v) {
-						// TODO Auto-generated method stub
-						if (textview.getVisibility() == View.VISIBLE && textview.getText().toString().equals("+A√±adir un Nuevo Ni√±o")) {
-							if (!keyboard) {
-								InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-								imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
-								keyboard = true;
-							}
-							textview.setVisibility(View.GONE);
-							edittext.setVisibility(View.VISIBLE);
-							button.setVisibility(View.VISIBLE);
-							button.setText("A√±adir");
-							edittext.clearFocus();
-							edittext.requestFocus();
-						} else {
-							
-						}
-					}
-				});
-			}
-			
-			button.setOnClickListener(new View.OnClickListener() {
-				
-				@Override
-				public void onClick(View arg0) {
-					if (button.getText().toString().equals("A√±adir")) {
-						String new_child = edittext.getText().toString();
-						DetailedChild dc = DetailedRecordsStore.get(context).startNewChild(village, family_id);
-						dc.setName(new_child);
-						setChild(familyPosition, childPosition, dc.getTemp_child_id());
-						edittext.setVisibility(View.GONE);
-						textview.setVisibility(View.VISIBLE);
-						textview.setText(new_child);
-						button.setText("Forma");
-					} else if (button.getText().toString().equals("Forma")) {
-						Intent i = new Intent(context, AddNewGeneralFormActivity.class);
-						i.putExtra("child_id", child_id);
-						context.startActivity(i);
-					}
-				}
-			});
-		} else {
-			DetailedChild child = DetailedRecordsStore.get(context).getChild(child_id);
-			final String child_name = child.getName();
+		if (child_id.equals("+Añadir un Nuevo Niño") && textview.getVisibility() == View.VISIBLE) {
+			Log.i("WTF", "Initial 1  " + child_id);
 			textview.setVisibility(View.VISIBLE);
-			textview.setText(child_name);
+			textview.setText("+Añadir un Nuevo Niño");
+			edittext.setVisibility(View.GONE);
+			button.setVisibility(View.INVISIBLE);
+		} else if (child_id.equals("+Añadir un Nuevo Niño") && edittext.getVisibility() == View.VISIBLE && textview.getVisibility() == View.GONE) {
+			Log.i("WTF", "Initial 2  " + child_id);
+			/*
+			edittext.setVisibility(View.VISIBLE);
+			textview.setVisibility(View.GONE);
+			button.setVisibility(View.VISIBLE);
+			button.setText("Añadir");
+			*/
+			edittext.requestFocus();
+		} else {
+			Log.i("WTF", "Initial 3  " + child_id);
+			DetailedChild child = DetailedRecordsStore.get(context).getChild(child_id);
+			textview.setVisibility(View.VISIBLE);
+			textview.setText(child.getName());
 			edittext.setVisibility(View.GONE);
 			button.setVisibility(View.VISIBLE);
 			button.setText("Forma");
-			textview.setOnClickListener(new View.OnClickListener() {
-				
-				@Override
-				public void onClick(View arg0) {
-					if (child_id.substring(0,1).equals("-")) {
-						Toast.makeText(context, "New Child Click", Toast.LENGTH_LONG).show();
-					} else {
+			if (child.hasVisit_in_progress()) {
+				textview.setBackgroundColor(context.getResources().getColor(R.color.red));
+			}
+		}
+		
+		textview.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				String child_id = (String)getChild(familyPosition, childPosition);
+				String family_id = (String)getGroup(familyPosition);
+				if (child_id.equals("+Añadir un Nuevo Niño")) {
+					Log.i("WTF", "textview 1  " + child_id);
+					edittext.setVisibility(View.VISIBLE);
+					textview.setVisibility(View.GONE);
+					button.setVisibility(View.VISIBLE);
+					button.setText("Añadir");	
+				} else {
+					Log.i("WTF", "textview 2  " + child_id);
+					DetailedChild dc = DetailedRecordsStore.get(context).getChild(child_id);
+					if (!dc.hasVisit_in_progress()) {
 						Intent i = new Intent(context, GraphActivity.class);
 						i.putExtra("child_id", child_id);
 						context.startActivity(i);
+					} else {
+						textview.setBackgroundColor(context.getResources().getColor(R.color.red));
 					}
 				}
-			});
+			}
+		});
+		
+		button.setOnClickListener(new View.OnClickListener() {
 			
-			button.setOnClickListener(new View.OnClickListener() {
-				
-				@Override
-				public void onClick(View arg0) {
+			@Override
+			public void onClick(View v) {
+				String child_id = (String)getChild(familyPosition, childPosition);
+				String family_id = (String)getGroup(familyPosition);
+				if (button.getText().toString().equals("Añadir")) {
+					Log.i("WTF", "button 1");
+					String new_child_name = edittext.getText().toString();
+					DetailedChild dc = DetailedRecordsStore.get(context).startNewChild(village, family_id);
+					dc.setName(new_child_name);
+					setChild(familyPosition, childPosition, dc.getTemp_child_id());
+					edittext.setVisibility(View.GONE);
+					textview.setVisibility(View.VISIBLE);
+					textview.setText(new_child_name);
+					button.setText("Forma");
+					if (dc.hasVisit_in_progress()) {
+						textview.setBackgroundColor(context.getResources().getColor(R.color.red));
+					}
+				} else if (button.getText().toString().equals("Forma")) {
+					Log.i("WTF", "button 2");
+					DetailedChildVisit dcv = DetailedRecordsStore.get(context).startNewChildVisit(village, (String)getChild(familyPosition, childPosition));
 					Intent i = new Intent(context, AddNewGeneralFormActivity.class);
-					i.putExtra("child_id", child_id);
+					i.putExtra("child_id", dcv.getTemp_child_id());
+					i.putExtra("community", village);
 					context.startActivity(i);
 				}
-			});
-		}
+			}
+		});
+		
 		return convertView;
 	}
 	

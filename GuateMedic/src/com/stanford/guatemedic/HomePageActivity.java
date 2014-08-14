@@ -102,68 +102,65 @@ public class HomePageActivity extends ActionBarActivity {
 				public void onClick(View v) {
 					if (uploadNeeded) {
 						new AlertDialogManager().showAlertDialog(getActivity(), "Alerta", "Hay registros que necesitan ser sincronizado. Puedes descargar despues de sincronizando.", null);
-					} else {
-						if (!HttpUtilities.hasInternetConnection(getActivity()))
-							new AlertDialogManager().showAlertDialog(getActivity(), "Alerta", "No hay una conexi√≥n a Internet. Cuando hay una conexi√≥n puedes descargar.", null);
-						else {
-							final Dialog login = new Dialog(getActivity());
-							login.setCancelable(false);
-							login.setCanceledOnTouchOutside(false);
-				            login.setContentView(R.layout.login_dialog);
-				            login.setTitle("Autorizaci√≥n");
-				            final Button login_button = (Button)login.findViewById(R.id.login_dialog_submit_button);
-				            final Button cancel_button = (Button)login.findViewById(R.id.login_dialog_cancel_button);
-				            EditText editText = (EditText)login.findViewById(R.id.login_dialog_username);
-				            EditText password_edittext = (EditText)login.findViewById(R.id.login_dialog_password);
-				            password_edittext.setOnEditorActionListener(new OnEditorActionListener() {
-				                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-				                    if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
-				                    	login_button.setSoundEffectsEnabled(false);
-				                    	login_button.performClick();
-				                    }    
-				                    return false;
-				                }
-				            });
-				            editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-				                @Override
-				                public void onFocusChange(View v, boolean hasFocus) {
-				                    if (hasFocus) {
-				                        login.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-				                    }
-				                }
-				            });
-				            editText.requestFocus();
-				            login_button.setOnClickListener(new View.OnClickListener() {
+					} else {		
+						final Dialog login = new Dialog(getActivity());
+						login.setCancelable(false);
+						login.setCanceledOnTouchOutside(false);
+			            login.setContentView(R.layout.login_dialog);
+			            login.setTitle("Autorización");
+			            final Button login_button = (Button)login.findViewById(R.id.login_dialog_submit_button);
+			            final Button cancel_button = (Button)login.findViewById(R.id.login_dialog_cancel_button);
+			            EditText editText = (EditText)login.findViewById(R.id.login_dialog_username);
+			            EditText password_edittext = (EditText)login.findViewById(R.id.login_dialog_password);
+			            password_edittext.setOnEditorActionListener(new OnEditorActionListener() {
+			                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+			                    if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
+			                    	login_button.setSoundEffectsEnabled(false);
+			                    	login_button.performClick();
+			                    }    
+			                    return false;
+			                }
+			            });
+			            editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+			                @Override
+			                public void onFocusChange(View v, boolean hasFocus) {
+			                    if (hasFocus) {
+			                        login.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+			                    }
+			                }
+			            });
+			            editText.requestFocus();
+			            login_button.setOnClickListener(new View.OnClickListener() {
+							
+							@Override
+							public void onClick(View v) {
+								 String username = ((EditText)login.findViewById(R.id.login_dialog_username)).getText().toString();
+						         String password = ((EditText)login.findViewById(R.id.login_dialog_password)).getText().toString();
+						         if (username.isEmpty() || password.isEmpty())
+						        	 ((TextView)login.findViewById(R.id.login_dialog_error)).setVisibility(View.VISIBLE);
+						         else {
+						        	 Intent i = new Intent(getActivity(), ViewCommunitiesActivity.class);
+						        	 startActivity(i);
+						         }
+							}
+						});
+			            
+			            cancel_button.setOnClickListener(new View.OnClickListener() {
+							
+							@Override
+							public void onClick(View v) {
+								login.dismiss();
 								
-								@Override
-								public void onClick(View v) {
-									 String username = ((EditText)login.findViewById(R.id.login_dialog_username)).getText().toString();
-							         String password = ((EditText)login.findViewById(R.id.login_dialog_password)).getText().toString();
-							         if (username.isEmpty() || password.isEmpty())
-							        	 ((TextView)login.findViewById(R.id.login_dialog_error)).setVisibility(View.VISIBLE);
-							         else {
-							        	 Intent i = new Intent(getActivity(), ViewCommunitiesActivity.class);
-							        	 startActivity(i);
-							         }
-								}
-							});
-				            
-				            cancel_button.setOnClickListener(new View.OnClickListener() {
-								
-								@Override
-								public void onClick(View v) {
-									login.dismiss();
-									
-								}
-							});
-				            
-				            login.show();	
-				            int total_width_dp = 370;
-				            int width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, total_width_dp, getResources().getDisplayMetrics());
-				            login.getWindow().setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT);
-						}
+							}
+						});
+			            
+			            login.show();	
+			            int total_width_dp = 370;
+			            int width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, total_width_dp, getResources().getDisplayMetrics());
+			            login.getWindow().setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT);
 					}
 				}
+				
 			});
 			
 			sync_button.setOnClickListener(new View.OnClickListener() {
@@ -174,13 +171,13 @@ public class HomePageActivity extends ActionBarActivity {
 						new AlertDialogManager().showAlertDialog(getActivity(), "Alerta", "No hay registros para sincronizar.", null);
 					} else {
 						if (!HttpUtilities.hasInternetConnection(getActivity()))
-							new AlertDialogManager().showAlertDialog(getActivity(), "Alerta", "No hay una conexi√≥n a Internet. Cuando hay una conexi√≥n puedes sincronizar.", null);
+							new AlertDialogManager().showAlertDialog(getActivity(), "Alerta", "No hay una conexión a Internet. Cuando hay una conexión puedes sincronizar.", null);
 						else {
 							final Dialog login = new Dialog(getActivity());
 							login.setCancelable(false);
 							login.setCanceledOnTouchOutside(false);
 				            login.setContentView(R.layout.login_dialog);
-				            login.setTitle("Autorizaci√≥n");
+				            login.setTitle("Autorización");
 				            final Button login_button = (Button)login.findViewById(R.id.login_dialog_submit_button);
 				            final Button cancel_button = (Button)login.findViewById(R.id.login_dialog_cancel_button);
 				            EditText editText = (EditText)login.findViewById(R.id.login_dialog_username);
@@ -243,13 +240,13 @@ public class HomePageActivity extends ActionBarActivity {
 						new AlertDialogManager().showAlertDialog(getActivity(), "Alerta", "Hay registros que necesitan ser sincronizado. Puedes descargar despues de sincronizando.", null);
 					} else {
 						if (!HttpUtilities.hasInternetConnection(getActivity()))
-							new AlertDialogManager().showAlertDialog(getActivity(), "Alerta", "No hay una conexi√≥n a Internet. Cuando hay una conexi√≥n puedes descargar.", null);
+							new AlertDialogManager().showAlertDialog(getActivity(), "Alerta", "No hay una conexión a Internet. Cuando hay una conexión puedes descargar.", null);
 						else {
 							final Dialog login = new Dialog(getActivity());
 							login.setCancelable(false);
 							login.setCanceledOnTouchOutside(false);
 				            login.setContentView(R.layout.login_dialog);
-				            login.setTitle("Autorizaci√≥n");
+				            login.setTitle("Autorización");
 				            final Button login_button = (Button)login.findViewById(R.id.login_dialog_submit_button);
 				            final Button cancel_button = (Button)login.findViewById(R.id.login_dialog_cancel_button);
 				            EditText editText = (EditText)login.findViewById(R.id.login_dialog_username);
@@ -392,7 +389,7 @@ public class HomePageActivity extends ActionBarActivity {
 					error_view.setText("Incorrecto. Trata otra vez.");
 				} else if (!success) {
 					error_view.setVisibility(View.VISIBLE);
-					error_view.setText("Occuri√≥ un problema. Trata otra vez.");
+					error_view.setText("Occurió un problema. Trata otra vez.");
 				} else { //Success
 					Intent i = new Intent(getActivity(), DownloadCommunitiesActivity.class);
 					startActivity(i);
