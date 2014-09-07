@@ -44,9 +44,9 @@ public class ViewFamilyActivity extends ActionBarActivity{
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				Intent i = new Intent(getApplication(), AddNewFamilyVisitActivity.class);
-				i.putExtra("family_id", family_id);
-				startActivity(i);
+//				Intent i = new Intent(getApplication(), AddNewFamilyVisitActivity.class);
+//				i.putExtra("family_id", family_id);
+//				startActivity(i);
 				
 			}
 		});

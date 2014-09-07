@@ -82,6 +82,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
 			button.setText("Forma");
 			if (child.hasVisit_in_progress()) {
 				textview.setBackgroundColor(context.getResources().getColor(R.color.red));
+			} else {
+				textview.setBackgroundColor(context.getResources().getColor(R.color.white));
 			}
 		}
 		

@@ -262,10 +262,10 @@ public class AddNewFamilyActivity extends ActionBarActivity {
 						Toast.makeText(getActivity(), "Necesitas incluir el nombre de la madre", Toast.LENGTH_LONG).show();
 					} else {
 						// Go to activity of this family
-						Intent i = new Intent(getActivity(),
-								AddNewFamilyVisitActivity.class);
-						i.putExtra("family_id", family_id);
-						startActivity(i);
+//						Intent i = new Intent(getActivity(),
+//								AddNewFamilyVisitActivity.class);
+//						i.putExtra("family_id", family_id);
+//						startActivity(i);
 					}
 				}
 			});

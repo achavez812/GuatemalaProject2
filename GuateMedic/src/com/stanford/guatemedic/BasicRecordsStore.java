@@ -177,6 +177,10 @@ public class BasicRecordsStore {
 				if (response == null) {
 					success = false;
 				} else {
+					
+					//Here is where I write it to SQLite Database
+					
+					
 					GuatemedicFileWriter fw = new GuatemedicFileWriter(application_context);
 					fw.eraseAll(); //Stuff needs to be uploaded first
 					if (fw.saveDownloads(response)) {
