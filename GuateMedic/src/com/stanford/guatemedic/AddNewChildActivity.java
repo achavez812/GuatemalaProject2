@@ -7,7 +7,6 @@ import org.json.JSONObject;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -62,7 +61,7 @@ public class AddNewChildActivity extends ActionBarActivity {
  
 			// set dialog message
 		alertDialogBuilder
-			.setMessage("Vas a perder este informaci—n si dejes este pagina.")
+			.setMessage("Vas a perder este informaciï¿½n si dejes este pagina.")
 			.setCancelable(false)
 			.setPositiveButton("Dejar Esta Pagina",new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog,int id) {
@@ -291,7 +290,7 @@ public class AddNewChildActivity extends ActionBarActivity {
 					if (selectedId != -1) {
 						RadioButton gender_field = (RadioButton)rootView.findViewById(selectedId);
 						String gender_string = gender_field.getText().toString().trim();
-						if (gender_string.equals("Ni–o")) gender = 1;
+						if (gender_string.equals("Niï¿½o")) gender = 1;
 						else if (gender_string.equals("Ã‘ina")) gender = 2;
 					}
 
@@ -315,7 +314,7 @@ public class AddNewChildActivity extends ActionBarActivity {
 					Spinner prenatal_care_field = (Spinner) rootView.findViewById(R.id.add_new_child_prenatal_care);
 					String received_prenatal_care_string = prenatal_care_field.getSelectedItem().toString();
 					int received_prenatal_care = 0;
-					if (received_prenatal_care_string.equals("S—")) received_prenatal_care = 2;
+					if (received_prenatal_care_string.equals("Sï¿½")) received_prenatal_care = 2;
 					else if (received_prenatal_care_string.equals("No")) received_prenatal_care = 1;
 
 					EditText birth_weight_field = (EditText) rootView.findViewById(R.id.add_new_child_birth_weight);
