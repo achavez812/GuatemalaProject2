@@ -1,11 +1,9 @@
 package com.stanford.guatemedic;
 
 import java.text.DecimalFormat;
-import java.text.FieldPosition;
-import java.text.Format;
-import java.text.ParsePosition;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Locale;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -16,10 +14,10 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -32,7 +30,10 @@ import com.androidplot.ui.SizeMetrics;
 import com.androidplot.ui.XLayoutStyle;
 import com.androidplot.ui.YLayoutStyle;
 import com.androidplot.util.PixelUtils;
+import com.androidplot.util.ValPixConverter;
 import com.androidplot.xy.LineAndPointFormatter;
+import com.androidplot.xy.PointLabelFormatter;
+import com.androidplot.xy.PointLabeler;
 import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYSeries;
@@ -258,9 +259,9 @@ public class GraphActivity extends ActionBarActivity {
 			
 			TextView sex_field = (TextView)rootView.findViewById(R.id.graph_child_sex);
 			if (gender == 1) {
-				sex_field.setText("Ni–o");
+				sex_field.setText("Niï¿½o");
 			} else if (gender == 2) {
-				sex_field.setText("Ni—a");
+				sex_field.setText("Niï¿½a");
 			} else if (gender == 0) {
 				sex_field.setText("No Sexo");
 			}
@@ -291,7 +292,7 @@ public class GraphActivity extends ActionBarActivity {
 						double weight_z_score = GeneralUtilities.round(calculate_weight_z_score(weight, 0, gender), 2);
 						TextView weight_z_score_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_weight_z_score);
 						if (weight_z_score == -10)
-							weight_z_score_field.setText("El ni–o is mayor de 5 a—os.");
+							weight_z_score_field.setText("El niï¿½o is mayor de 5 aï¿½os.");
 						else
 							weight_z_score_field.setText("Grado " + weight_z_score + " de peso");
 						
@@ -343,7 +344,7 @@ public class GraphActivity extends ActionBarActivity {
 				}
 				
 				TextView recommendation_field = (TextView)rootView.findViewById(R.id.graph_child_reccomendation_info);
-				recommendation_field.setText("Basado de los datos, recomendamos que el ni–o..");
+				recommendation_field.setText("Basado de los datos, recomendamos que el niï¿½o..");
 				//Assign variables
 			}
 			return rootView;
@@ -436,8 +437,6 @@ public class GraphActivity extends ActionBarActivity {
 		}
 
 		
-		
-		
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 			final View rootView = inflater.inflate(R.layout.fragment_graph_right, container,false);
@@ -447,85 +446,162 @@ public class GraphActivity extends ActionBarActivity {
 			final TextView weight_view = (TextView)rootView.findViewById(R.id.tab_weight);
 			final TextView height_view = (TextView)rootView.findViewById(R.id.tab_height);
 			
-			weight_view.setOnClickListener(new View.OnClickListener() {
-				
+			plot.setOnTouchListener(new View.OnTouchListener() {
 				@Override
-				public void onClick(View v) {
-					plot.clear();
-					weight_view.setBackgroundResource(color.gray_medium);
-					height_view.setBackgroundResource(color.gray_dark);
-					plot.setRangeLabel("Peso (libras)");	
-					Number[][] data;
-					if (sex == 1) {
-						data = ChildDataStoreGraph.male_weight_lb_graph_data;
-					} else {
-						data = ChildDataStoreGraph.female_weight_lb_graph_data;
+				public boolean onTouch(View v, MotionEvent e) {
+					if (e.getAction() == MotionEvent.ACTION_DOWN) {
+						if (selected == 1) {
+							System.out.println("ONE ONE" + e.getX());
+							drawWeightPlot(weight_view, height_view, e.getX(), e.getY());
+						}
+						if (selected == 2) {
+							System.out.println("TWO TWO" + e.getX());
+							drawHeightPlot(weight_view, height_view, e.getX(), e.getY());
+						}
 					}
-					addGuideLinesToPlot(data);
-					if ((child_age_in_weeks_weight[child_age_in_weeks_weight.length - 1]).doubleValue() < 260.0) {
-						Number[] child_x_array = convertArray(child_age_in_weeks_weight, 0.23);
-						XYSeries series = new SimpleXYSeries(Arrays.asList(child_x_array), Arrays.asList(child_weight), null);
-						LineAndPointFormatter seriesFormat = new LineAndPointFormatter(Color.BLACK, Color.BLUE, null, null);
-						seriesFormat.getVertexPaint().setStrokeWidth(PixelUtils.dpToPix(10));
-						plot.addSeries(series, seriesFormat);
-					}
-					plot.setTitle("");
-					plot.setRangeBottomMax(3);
-					plot.setDomainLeftMin(0);
-			        plot.setTicksPerRangeLabel(2);
-			        plot.setTicksPerDomainLabel(6);
-			        plot.getGraphWidget().setDomainLabelOrientation(-45);
-					plot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 1);
-					plot.setDomainValueFormat(new DecimalFormat(""));
-					plot.setRangeStep(XYStepMode.INCREMENT_BY_VAL, 1);
-					plot.setRangeValueFormat(new DecimalFormat(""));
-			        plot.redraw();
-				} 
-				
-			});
-			height_view.setOnClickListener(new View.OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					plot.clear();
-					height_view.setBackgroundResource(color.gray_medium);
-					weight_view.setBackgroundResource(color.gray_dark);
-					plot.setRangeLabel("Talla (cm)");
-					Number[][] data;
-					if (sex == 1) {
-						data = ChildDataStoreGraph.male_height_cm_graph_data;
-					} else {
-						data = ChildDataStoreGraph.female_height_cm_graph_data;
-					}
-					addGuideLinesToPlot(data);
-					if ((child_age_in_weeks_height[child_age_in_weeks_height.length - 1]).doubleValue() < 260.0) {
-						Number[] child_x_array = convertArray(child_age_in_weeks_height, 0.23);
-						XYSeries series = new SimpleXYSeries(Arrays.asList(child_x_array), Arrays.asList(child_height), "Child");
-						LineAndPointFormatter seriesFormat = new LineAndPointFormatter(Color.BLACK, Color.BLUE, null, null);
-						seriesFormat.getVertexPaint().setStrokeWidth(PixelUtils.dpToPix(10));
-						plot.addSeries(series, seriesFormat);	
-					}	
-					plot.setTitle("");
-					plot.setRangeBottomMax(40);
-					plot.setDomainLeftMin(0);
-			        plot.setTicksPerRangeLabel(2);
-			        plot.setTicksPerDomainLabel(6);
-			        plot.getGraphWidget().setDomainLabelOrientation(-45);
-					plot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 1);
-					plot.setDomainValueFormat(new DecimalFormat(""));
-					plot.setRangeStep(XYStepMode.INCREMENT_BY_VAL, 5);
-					plot.setRangeValueFormat(new DecimalFormat(""));
-			        plot.redraw();
+					return true;
 				}
 			});
+			
+			weight_view.setOnClickListener(new View.OnClickListener() {		
+				@Override
+				public void onClick(View v) {
+					selected = 1;
+					drawWeightPlot(weight_view, height_view, null, null);  
+				}
+			});
+			
+			height_view.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					selected = 2;
+					drawHeightPlot(weight_view, height_view, null, null);
+				}
+			});
+			
 			if (selected == 1) weight_view.performClick();
 			else if (selected == 2) height_view.performClick();
 			return rootView;
 		}
 
+		
+		private void drawWeightPlot(final TextView weight_view,
+				final TextView height_view, final Float clickX, final Float clickY) {
+			plot.clear();
+			weight_view.setBackgroundResource(color.gray_medium);
+			height_view.setBackgroundResource(color.gray_dark);
+			plot.setRangeLabel("Peso (libras)");	
+			Number[][] data;
+			if (sex == 1) {
+				data = ChildDataStoreGraph.male_weight_lb_graph_data;
+			} else {
+				data = ChildDataStoreGraph.female_weight_lb_graph_data;
+			}
+			addGuideLinesToPlot(data);
+			if ((child_age_in_weeks_weight[child_age_in_weeks_weight.length - 1]).doubleValue() < 260.0) {
+				Number[] child_x_array = convertArray(child_age_in_weeks_weight, 0.23);
+				XYSeries series = new SimpleXYSeries(Arrays.asList(child_x_array), Arrays.asList(child_weight), null);
+				PointLabelFormatter plf = new PointLabelFormatter(Color.WHITE, 0, -15);
+				LineAndPointFormatter seriesFormat = new LineAndPointFormatter(Color.BLACK, Color.BLUE, null, plf);
+				seriesFormat.getVertexPaint().setStrokeWidth(PixelUtils.dpToPix(10));
+				final int clickedPoint = getClickedPoint(clickX, clickY, series);
+				seriesFormat.setPointLabeler(new PointLabeler(){
+					@Override
+					public String getLabel(XYSeries series, int index) {
+						Number age = series.getX(index);
+						Number weight = series.getY(index);
+						String label = String.format(Locale.US, "Peso %.0f", weight);
+						return index == clickedPoint ? label : "";
+					}
+				});
+				plot.addSeries(series, seriesFormat);
+			}
+			plot.setTitle("");
+			plot.setRangeBottomMax(3);
+			plot.setDomainLeftMin(0);
+	        plot.setTicksPerRangeLabel(2);
+	        plot.setTicksPerDomainLabel(6);
+	        plot.getGraphWidget().setDomainLabelOrientation(-45);
+			plot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 1);
+			plot.setDomainValueFormat(new DecimalFormat(""));
+			plot.setRangeStep(XYStepMode.INCREMENT_BY_VAL, 1);
+			plot.setRangeValueFormat(new DecimalFormat(""));
+	        plot.redraw();
+		} 
+		
+		private void drawHeightPlot(final TextView weight_view,
+				final TextView height_view, final Float clickX, final Float clickY) {
+			plot.clear();
+			height_view.setBackgroundResource(color.gray_medium);
+			weight_view.setBackgroundResource(color.gray_dark);
+			plot.setRangeLabel("Talla (cm)");
+			Number[][] data;
+			if (sex == 1) {
+				data = ChildDataStoreGraph.male_height_cm_graph_data;
+			} else {
+				data = ChildDataStoreGraph.female_height_cm_graph_data;
+			}
+			addGuideLinesToPlot(data);
+			if ((child_age_in_weeks_height[child_age_in_weeks_height.length - 1]).doubleValue() < 260.0) {
+				Number[] child_x_array = convertArray(child_age_in_weeks_height, 0.23);
+				XYSeries series = new SimpleXYSeries(Arrays.asList(child_x_array), Arrays.asList(child_height), "Child");
+				PointLabelFormatter plf = new PointLabelFormatter(Color.WHITE, 0, -15);
+				LineAndPointFormatter seriesFormat = new LineAndPointFormatter(Color.BLACK, Color.BLUE, null, plf);
+				seriesFormat.getVertexPaint().setStrokeWidth(PixelUtils.dpToPix(10));
+				final int clickedPoint = getClickedPoint(clickX, clickY, series);
+				seriesFormat.setPointLabeler(new PointLabeler(){
+					@Override
+					public String getLabel(XYSeries series, int index) {
+						//Number age = series.getX(index);
+						Number height = series.getY(index);
+						String label = String.format(Locale.US, "Talla %.0f", height);
+						return index == clickedPoint ? label : "";
+					}
+				});
+				plot.addSeries(series, seriesFormat);	
+			}	
+			plot.setTitle("");
+			plot.setRangeBottomMax(40);
+			plot.setDomainLeftMin(0);
+	        plot.setTicksPerRangeLabel(2);
+	        plot.setTicksPerDomainLabel(6);
+	        plot.getGraphWidget().setDomainLabelOrientation(-45);
+			plot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 1);
+			plot.setDomainValueFormat(new DecimalFormat(""));
+			plot.setRangeStep(XYStepMode.INCREMENT_BY_VAL, 5);
+			plot.setRangeValueFormat(new DecimalFormat(""));
+	        plot.redraw();
+		}
+		
+		private int getClickedPoint(Float clickX, Float clickY, XYSeries series) {
+			if (clickX == null || clickY == null) return -1;
+			double maxX = plot.getCalculatedMaxX().doubleValue();
+			double minX = plot.getCalculatedMinX().doubleValue();
+			clickX = Math.max(0, clickX - plot.getGraphWidget().getGridRect().left);
+			System.out.println("CLICK: " + clickX + " maxX " + maxX + " minX " + minX + " width ");
+			double clickedXValue = ValPixConverter.pixToVal(clickX, minX, maxX, plot.getGraphWidget().getGridRect().width(), false);
+			System.out.println("XVALUE: " + clickedXValue);
+			int pointIndex = -1;
+			double minDistance = 0;
+			for (int i = 0; i < series.size(); i++) {
+				double distance = Math.abs(clickedXValue - series.getX(i).doubleValue());
+				if (i == 0) {
+					pointIndex = 0;
+					minDistance = distance;
+				} else {
+					if (distance < minDistance) {
+						pointIndex = i;
+						minDistance = distance;
+					}
+				}
+			}
+			
+			return pointIndex;
+		}
+
 		private void addLegend() {
 			plot.getLegendWidget().setTableModel(new DynamicTableModel(1, 4));
-	 
+
 	        // add a semi-transparent black background to the legend
 	        // so it's easier to see overlaid on top of our plot:
 	        Paint bgPaint = new Paint();
