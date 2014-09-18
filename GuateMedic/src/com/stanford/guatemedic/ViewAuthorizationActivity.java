@@ -70,7 +70,7 @@ public class ViewAuthorizationActivity extends ActionBarActivity {
 					String password = password_field.getText().toString();
 					
 					if (username.isEmpty() || password.isEmpty()) {
-						new AlertDialogManager().showAlertDialog(getActivity(), "Alerta", "Por favor llene toda la información.", false);
+						new AlertDialogManager().showAlertDialog(getActivity(), "Alerta", "Por favor llene toda la informaci√≥n.", false);
 					} else {
 						//Need to check if valid
 						//Store the promoter's information somewhere

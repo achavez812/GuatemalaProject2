@@ -57,19 +57,20 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
 		final EditText edittext = (EditText)convertView.findViewById(R.id.child_all_item_edittext);
 		final Button button = (Button)convertView.findViewById(R.id.child_all_item_button);
 				
-		if (child_id.equals("+Añadir un Nuevo Niño") && textview.getVisibility() == View.VISIBLE) {
+		if (child_id.equals("+A√±adir un Nuevo Ni√±o") && textview.getVisibility() == View.VISIBLE) {
 			Log.i("WTF", "Initial 1  " + child_id);
 			textview.setVisibility(View.VISIBLE);
-			textview.setText("+Añadir un Nuevo Niño");
+			textview.setText("+A√±adir un Nuevo Ni√±o");
 			edittext.setVisibility(View.GONE);
 			button.setVisibility(View.INVISIBLE);
-		} else if (child_id.equals("+Añadir un Nuevo Niño") && edittext.getVisibility() == View.VISIBLE && textview.getVisibility() == View.GONE) {
+			textview.setBackgroundColor(context.getResources().getColor(R.color.white));
+		} else if (child_id.equals("+A√±adir un Nuevo Ni√±o") && edittext.getVisibility() == View.VISIBLE && textview.getVisibility() == View.GONE) {
 			Log.i("WTF", "Initial 2  " + child_id);
 			/*
 			edittext.setVisibility(View.VISIBLE);
 			textview.setVisibility(View.GONE);
 			button.setVisibility(View.VISIBLE);
-			button.setText("Añadir");
+			button.setText("A√±adir");
 			*/
 			edittext.requestFocus();
 		} else {
@@ -93,12 +94,12 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
 			public void onClick(View v) {
 				String child_id = (String)getChild(familyPosition, childPosition);
 				String family_id = (String)getGroup(familyPosition);
-				if (child_id.equals("+Añadir un Nuevo Niño")) {
+				if (child_id.equals("+A√±adir un Nuevo Ni√±o")) {
 					Log.i("WTF", "textview 1  " + child_id);
 					edittext.setVisibility(View.VISIBLE);
 					textview.setVisibility(View.GONE);
 					button.setVisibility(View.VISIBLE);
-					button.setText("Añadir");	
+					button.setText("A√±adir");	
 				} else {
 					Log.i("WTF", "textview 2  " + child_id);
 					DetailedChild dc = DetailedRecordsStore.get(context).getChild(child_id);
@@ -119,7 +120,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
 			public void onClick(View v) {
 				String child_id = (String)getChild(familyPosition, childPosition);
 				String family_id = (String)getGroup(familyPosition);
-				if (button.getText().toString().equals("Añadir")) {
+				if (button.getText().toString().equals("A√±adir")) {
 					Log.i("WTF", "button 1");
 					String new_child_name = edittext.getText().toString();
 					DetailedChild dc = DetailedRecordsStore.get(context).startNewChild(village, family_id);

@@ -118,7 +118,7 @@ public class ViewProfilesActivity extends ActionBarActivity {
 				ArrayList<DetailedChild> the_children = DetailedRecordsStore.get(getActivity().getApplication()).getChildren(family_id);
 				for (DetailedChild child : the_children)
 					children_array.add(child.getChild_id());
-				children_array.add("+Añadir un Nuevo Niño");
+				children_array.add("+A√±adir un Nuevo Ni√±o");
 			}
 		}
 		

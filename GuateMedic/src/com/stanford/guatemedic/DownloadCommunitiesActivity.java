@@ -154,7 +154,7 @@ public class DownloadCommunitiesActivity extends ActionBarActivity {
 				title.setText(name);
 				
 				TextView subtitle = (TextView)convertView.findViewById(R.id.list_item_subtitle);
-				String subtitle_string = community.getNum_children() + " Niños de " + community.getNum_families() + " Familias";
+				String subtitle_string = community.getNum_children() + " Ni√±os de " + community.getNum_families() + " Familias";
 				subtitle.setText(subtitle_string);
 				
 				final CheckBox checkbox = (CheckBox)convertView.findViewById(R.id.list_item_checkbox);

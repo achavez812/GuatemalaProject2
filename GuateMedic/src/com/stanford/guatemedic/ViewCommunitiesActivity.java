@@ -134,7 +134,7 @@ public class ViewCommunitiesActivity extends ActionBarActivity {
 				int num_children = 0;
 				for (DetailedFamily family : families)
 					num_children += drs.getChildren(family.getFamily_id()).size();
-				String subtitle_string = num_children + " Niños de " + num_families + " Familias";
+				String subtitle_string = num_children + " Ni√±os de " + num_families + " Familias";
 				subtitle.setText(subtitle_string);
 				
 				CheckBox checkbox = (CheckBox)convertView.findViewById(R.id.list_item_checkbox);

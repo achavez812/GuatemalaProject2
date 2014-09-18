@@ -42,6 +42,8 @@ import com.stanford.guatemedic.R.color;
 public class GraphActivity extends ActionBarActivity {
 	
     private static String child_id;
+    private static float new_weight;
+    private static float new_height;
     private static Number[] child_age_in_weeks_weight;
     private static Number[] child_age_in_weeks_height;
     private static Number[] child_weight;
@@ -52,6 +54,12 @@ public class GraphActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_graph);
 		getActionBar().setHomeButtonEnabled(true);
 		child_id = getIntent().getStringExtra("child_id");
+		String weight = getIntent().getStringExtra("weight");
+		if (weight != null && !weight.isEmpty())
+			new_weight = Float.parseFloat(weight);
+		String height = getIntent().getStringExtra("height");
+		if (height != null && !height.isEmpty())
+			new_height = Float.parseFloat(height);
 		DetailedChild child = DetailedRecordsStore.get(getApplication()).getChild(child_id);
 		processVisits(child);
 		setTitle(child.getName());
@@ -258,9 +266,9 @@ public class GraphActivity extends ActionBarActivity {
 			
 			TextView sex_field = (TextView)rootView.findViewById(R.id.graph_child_sex);
 			if (gender == 1) {
-				sex_field.setText("Ni�o");
+				sex_field.setText("Niño");
 			} else if (gender == 2) {
-				sex_field.setText("Ni�a");
+				sex_field.setText("Niña");
 			} else if (gender == 0) {
 				sex_field.setText("No Sexo");
 			}
@@ -291,7 +299,7 @@ public class GraphActivity extends ActionBarActivity {
 						double weight_z_score = GeneralUtilities.round(calculate_weight_z_score(weight, 0, gender), 2);
 						TextView weight_z_score_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_weight_z_score);
 						if (weight_z_score == -10)
-							weight_z_score_field.setText("El ni�o is mayor de 5 a�os.");
+							weight_z_score_field.setText("El Niño es mayor de 5 Años.");
 						else
 							weight_z_score_field.setText("Grado " + weight_z_score + " de peso");
 						
@@ -312,10 +320,11 @@ public class GraphActivity extends ActionBarActivity {
 			} else {
 				String visit_date = dcv.getVisit_date();
 				String formatted_visit_date = DateTimeUtilities.formatDateForDisplay(DateTimeUtilities.getCurrentDateTimeString());
+				int length =  child_age_in_weeks_weight.length;
 				double age_in_weeks = child_age_in_weeks_weight[child_age_in_weeks_weight.length - 1].doubleValue(); //days
 				double age_in_days = age_in_weeks * 7;
 				double age_in_months = age_in_days / 30.4167;
-				double weight = child_weight[child_weight.length -1].doubleValue();
+				double weight = child_weight[child_weight.length - 1].doubleValue();
 				double height = child_height[child_height.length - 1].doubleValue();
 								
 				visit_header_field.setText("Última Visita (" + formatted_visit_date + ")"); //Format visit date
@@ -328,8 +337,19 @@ public class GraphActivity extends ActionBarActivity {
 				
 				TextView height_field = (TextView)rootView.findViewById(R.id.graph_last_child_visit_height);
 				height_field.setText("Talla: " + height + " cm");
+				
+				double prev_age_in_weeks = 0;
+				double prev_age_in_days = 0;
+				double prev_weight_z_score = 0;
+				if (length > 2) {
+					prev_age_in_weeks = child_age_in_weeks_weight[child_age_in_weeks_weight.length - 2].doubleValue();
+					prev_age_in_days = prev_age_in_weeks * 7;
+					prev_weight_z_score = GeneralUtilities.round(calculate_weight_z_score(child_weight[child_weight.length - 2].doubleValue(), prev_age_in_days, gender), 2);
+
+				}
 
 				double weight_z_score = GeneralUtilities.round(calculate_weight_z_score(weight, age_in_days, gender), 2);
+				 
 				double height_z_score = GeneralUtilities.round(calculate_height_z_score(height, age_in_days, gender), 2);
 				if (weight_z_score != -10 && height_z_score != -10) {
 					String weight_grade = getGradeFromZScore(weight_z_score);
@@ -342,9 +362,23 @@ public class GraphActivity extends ActionBarActivity {
 					height_z_score_field.setText("Grado " + height_grade+ " de talla");
 				}
 				
+				
+				Predictor predictor = new Predictor();
+				predictor.setAge(age_in_days);
+				predictor.setMonth(Integer.parseInt(formatted_visit_date.substring(3,5)));
+				predictor.setWAZ(weight_z_score, prev_weight_z_score);
+				predictor.setITT(false);
+				double no_value = predictor.predictWAZGain();
+				predictor.setITT(true);
+				double yes_value = predictor.predictWAZGain();
+				
+				double z_yes = GeneralUtilities.round(weight_z_score + yes_value, 3);
+				double z_no = GeneralUtilities.round(weight_z_score + no_value, 3);
+				
 				TextView recommendation_field = (TextView)rootView.findViewById(R.id.graph_child_reccomendation_info);
-				recommendation_field.setText("Basado de los datos, recomendamos que el ni�o..");
+				recommendation_field.setText("Basado de los datos, recomendamos que el Niño..\n" + "Con Suplemento: " + z_yes + "\nSin Suplemento: " + z_no);
 				//Assign variables
+				
 			}
 			return rootView;
 		}

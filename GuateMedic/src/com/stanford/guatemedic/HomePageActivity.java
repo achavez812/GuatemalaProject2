@@ -107,7 +107,7 @@ public class HomePageActivity extends ActionBarActivity {
 						login.setCancelable(false);
 						login.setCanceledOnTouchOutside(false);
 			            login.setContentView(R.layout.login_dialog);
-			            login.setTitle("Autorización");
+			            login.setTitle("Autorizaci√≥n");
 			            final Button login_button = (Button)login.findViewById(R.id.login_dialog_submit_button);
 			            final Button cancel_button = (Button)login.findViewById(R.id.login_dialog_cancel_button);
 			            EditText editText = (EditText)login.findViewById(R.id.login_dialog_username);
@@ -171,13 +171,13 @@ public class HomePageActivity extends ActionBarActivity {
 						new AlertDialogManager().showAlertDialog(getActivity(), "Alerta", "No hay registros para sincronizar.", null);
 					} else {
 						if (!HttpUtilities.hasInternetConnection(getActivity()))
-							new AlertDialogManager().showAlertDialog(getActivity(), "Alerta", "No hay una conexión a Internet. Cuando hay una conexión puedes sincronizar.", null);
+							new AlertDialogManager().showAlertDialog(getActivity(), "Alerta", "No hay una conexi√≥n a Internet. Cuando hay una conexi√≥n puedes sincronizar.", null);
 						else {
 							final Dialog login = new Dialog(getActivity());
 							login.setCancelable(false);
 							login.setCanceledOnTouchOutside(false);
 				            login.setContentView(R.layout.login_dialog);
-				            login.setTitle("Autorización");
+				            login.setTitle("Autorizaci√≥n");
 				            final Button login_button = (Button)login.findViewById(R.id.login_dialog_submit_button);
 				            final Button cancel_button = (Button)login.findViewById(R.id.login_dialog_cancel_button);
 				            EditText editText = (EditText)login.findViewById(R.id.login_dialog_username);
@@ -240,13 +240,13 @@ public class HomePageActivity extends ActionBarActivity {
 						new AlertDialogManager().showAlertDialog(getActivity(), "Alerta", "Hay registros que necesitan ser sincronizado. Puedes descargar despues de sincronizando.", null);
 					} else {
 						if (!HttpUtilities.hasInternetConnection(getActivity()))
-							new AlertDialogManager().showAlertDialog(getActivity(), "Alerta", "No hay una conexión a Internet. Cuando hay una conexión puedes descargar.", null);
+							new AlertDialogManager().showAlertDialog(getActivity(), "Alerta", "No hay una conexi√≥n a Internet. Cuando hay una conexi√≥n puedes descargar.", null);
 						else {
 							final Dialog login = new Dialog(getActivity());
 							login.setCancelable(false);
 							login.setCanceledOnTouchOutside(false);
 				            login.setContentView(R.layout.login_dialog);
-				            login.setTitle("Autorización");
+				            login.setTitle("Autorizaci√≥n");
 				            final Button login_button = (Button)login.findViewById(R.id.login_dialog_submit_button);
 				            final Button cancel_button = (Button)login.findViewById(R.id.login_dialog_cancel_button);
 				            EditText editText = (EditText)login.findViewById(R.id.login_dialog_username);
@@ -389,7 +389,7 @@ public class HomePageActivity extends ActionBarActivity {
 					error_view.setText("Incorrecto. Trata otra vez.");
 				} else if (!success) {
 					error_view.setVisibility(View.VISIBLE);
-					error_view.setText("Occurió un problema. Trata otra vez.");
+					error_view.setText("Occuri√≥ un problema. Trata otra vez.");
 				} else { //Success
 					Intent i = new Intent(getActivity(), DownloadCommunitiesActivity.class);
 					startActivity(i);

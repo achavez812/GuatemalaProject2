@@ -1094,6 +1094,16 @@
 		   	    android:textSize="30sp" />        
 
 	    </LinearLayout>
+	    
+	  	<Button
+	  	    android:id="@+id/general_form_submit_button"
+	  	    android:layout_height="80dp"
+	  	    android:layout_width="220dp"
+	  	    android:textSize="36sp"
+	  	    android:layout_gravity="center_horizontal"
+	  	    android:layout_marginTop="20dp"
+	  	    android:text="Someter"
+	  	    />
 
 	</LinearLayout>
 

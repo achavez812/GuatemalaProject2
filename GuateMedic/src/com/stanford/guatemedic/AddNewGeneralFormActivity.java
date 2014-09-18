@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -102,7 +103,7 @@ public class AddNewGeneralFormActivity extends ActionBarActivity {
 			final View rootView = inflater.inflate(R.layout.fragment_add_new_general_form, container,false);
 			the_view = rootView;
 			child_id = getArguments().getString("child_id");
-			DetailedChild child = DetailedRecordsStore.get(getActivity().getApplication()).getChild(child_id);
+			final DetailedChild child = DetailedRecordsStore.get(getActivity().getApplication()).getChild(child_id);
 			DetailedChildVisit visit = child.getLastVisit();
 			boolean child_in_progress = child.isIn_progress();
 			boolean child_visit_in_progress = child.hasVisit_in_progress();
@@ -207,13 +208,35 @@ public class AddNewGeneralFormActivity extends ActionBarActivity {
 			EditText child_name_edittext = (EditText)rootView.findViewById(R.id.general_form_child_name_edittext);
 			child_name_edittext.setText(child.getName());
 			
-			EditText child_weight_edittext = (EditText)rootView.findViewById(R.id.general_form_weight_edittext);
+			final EditText child_weight_edittext = (EditText)rootView.findViewById(R.id.general_form_weight_edittext);
 			if (visit.getWeight_in_pounds() != 0)
 				child_weight_edittext.setText("" + visit.getWeight_in_pounds());
 			
-			EditText child_height_edittext = (EditText)rootView.findViewById(R.id.general_form_height_edittext);
+			final EditText child_height_edittext = (EditText)rootView.findViewById(R.id.general_form_height_edittext);
 			if (visit.getHeight_in_centimeters() != 0)
 				child_height_edittext.setText("" + visit.getHeight_in_centimeters());
+			
+			
+			
+			Button submit_button = (Button)rootView.findViewById(R.id.general_form_submit_button);
+			submit_button.setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					String weight = child_weight_edittext.getText().toString();
+					String height = child_height_edittext.getText().toString();
+					if (weight != null && height != null && !weight.isEmpty() && !height.isEmpty()) {
+						child.getLastVisit().setWeight_in_pounds(Float.parseFloat(weight));
+						child.getLastVisit().setHeight_in_centimeters(Float.parseFloat(height));
+						Intent i = new Intent(getActivity(), GraphActivity.class);
+						i.putExtra("child_id", child_id);
+						i.putExtra("weight", weight);
+						i.putExtra("height", height);
+						startActivity(i);
+					}		
+				}
+				
+			});
 			
 			return rootView;
 		}
